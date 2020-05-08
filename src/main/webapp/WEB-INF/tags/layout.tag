@@ -79,6 +79,7 @@
 				</div>
 			</div>
 		</div>
+	</div>
 </body>
 
 <script src="js/template/jquery-3.1.1.min.js"></script>
