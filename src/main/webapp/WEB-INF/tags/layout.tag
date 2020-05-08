@@ -1,18 +1,90 @@
 <%@tag description="Overall Page template" pageEncoding="UTF-8"%>
-<%@attribute name="header" fragment="true" %>
-<%@attribute name="footer" fragment="true" %>
+<%@attribute name="header" fragment="true"%>
+<%@attribute name="footer" fragment="true"%>
 <html>
-  <body>
-    <div id="pageheader">
-       <!-- <jsp:invoke fragment="header"/> -->
-       Header
-    </div>
-    <div id="body">
-      <jsp:doBody/>
-    </div>
-    <div id="pagefooter">
-       <!-- <jsp:invoke fragment="footer"/> -->
-       Footer
-    </div>
-  </body>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<title>WebOnes</title>
+
+<link href="css/template/bootstrap.min.css" rel="stylesheet">
+<link href="css/template/animate.css" rel="stylesheet">
+<link href="css/template/style.css" rel="stylesheet">
+<link href="css/fonts/font-awesome/css/font-awesome.min.css"
+	rel="stylesheet">
+</head>
+<body>
+
+	<div id="wrapper">
+		<div id="page-header">
+			<!-- <jsp:invoke fragment="header"/> -->
+			<nav class="navbar-default navbar-static-side" role="navigation">
+				<div class="sidebar-collapse">
+					<ul class="nav" id="side-menu">
+						<li class="nav-header">
+							<div class="dropdown profile-element">
+								<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+									<span class="clear"> <span class="block m-t-xs">
+											<strong class="font-bold">Bienvenido</strong>
+									</span> <span class="text-muted text-xs block">Menu <b
+											class="caret"></b></span>
+								</span>
+								</a>
+								<ul class="dropdown-menu animated fadeInRight m-t-xs">
+									<li><a href="#">Item</a></li>
+								</ul>
+							</div>
+							<div class="logo-element">WO</div>
+						</li>
+						<li><a href="#"><i class="fa fa-laptop"></i> <span
+								class="nav-label">Main page</span> </a></li>
+						<li><a href="#"><i class="fa fa-desktop"></i> <span
+								class="nav-label">Other page</span> </a></li>
+					</ul>
+				</div>
+			</nav>
+		</div>
+		<div id="page-wrapper" class="gray-bg">
+			<div class="row border-bottom">
+				<nav class="navbar navbar-static-top white-bg" role="navigation"
+					style="margin-bottom: 0">
+					<div class="navbar-header">
+						<a class="navbar-minimalize minimalize-styl-2 btn btn-primary "
+							href="#"><i class="fa fa-bars"></i> </a>
+						<form role="search" class="navbar-form-custom" method="post"
+							action="">
+							<div class="form-group">
+								<input type="text" placeholder="Search for something..."
+									class="form-control" name="top-search" id="top-search">
+							</div>
+						</form>
+					</div>
+					<ul class="nav navbar-top-links navbar-right">
+						<li><a href="#" id="registerLink">Register</a></li>
+						<li><a href="#" id="loginLink">Log in</a></li>
+					</ul>
+				</nav>
+			</div>
+			<div id="body">
+				<jsp:doBody />
+			</div>
+		</div>
+		<div id="page-header">
+			<div class="footer">
+				<div class="pull-right">Insumos Medicos</div>
+				<div>
+					<strong>WebOnes</strong> UNLaM - 2020
+				</div>
+			</div>
+		</div>
+</body>
+
+<script src="js/template/jquery-3.1.1.min.js"></script>
+<script src="js/template/bootstrap.min.js"></script>
+<script src="js/template/plugins/metisMenu/metisMenu.min.js"></script>
+<script src="js/template/plugins/pace/pace.min.js"></script>
+<script src="js/template/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="js/template/app/inspinia.js"></script>
 </html>
