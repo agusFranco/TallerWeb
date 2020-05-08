@@ -5,10 +5,33 @@
 <t:layout>
 	<div class="wrapper wrapper-content animated fadeInRight">
 		<div class="row">
-			<div class="col-lg-12">
-				<div class="text-center m-t-lg">
-					<h1>Bienvenido</h1>
-					<small>Hola ${nombre} ${apellido}</small>
+			<div class="col-md-3">
+				<div class="ibox float-e-margins">
+					<div class="ibox-title">
+						<span class="label label-success pull-right">Disponibilidad</span>
+						<h5>Insumos</h5>
+					</div>
+					<div class="ibox-content">
+						<h1 class="no-margins">386,200</h1>
+						<div class="stat-percent font-bold text-success">
+							98% <i class="fa fa-bolt"></i>
+						</div>
+						<small>Total disponibles </small>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="ibox float-e-margins">
+					<div class="ibox-title">
+						<h5>Hospitales</h5>
+					</div>
+					<div class="ibox-content">
+						<h1 class="no-margins">20</h1>
+						<div class="stat-percent font-bold text-success">
+							98% <i class="fa fa-bolt"></i>
+						</div>
+						<small>Total </small>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -238,4 +261,3 @@
 
 	</div>
 </t:layout>
-
