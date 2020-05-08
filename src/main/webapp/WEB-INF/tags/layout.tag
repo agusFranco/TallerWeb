@@ -16,9 +16,8 @@
 	rel="stylesheet">
 </head>
 <body>
-
 	<div id="wrapper">
-		<div id="page-header">
+		<div id="page-nav-header">
 			<!-- <jsp:invoke fragment="header"/> -->
 			<nav class="navbar-default navbar-static-side" role="navigation">
 				<div class="sidebar-collapse">
@@ -70,12 +69,12 @@
 			<div id="body">
 				<jsp:doBody />
 			</div>
-		</div>
-		<div id="page-header">
-			<div class="footer">
-				<div class="pull-right">Insumos Medicos</div>
-				<div>
-					<strong>WebOnes</strong> UNLaM - 2020
+			<div id="page-footer">
+				<div class="footer">
+					<div class="pull-right">Insumos Medicos</div>
+					<div>
+						<strong>WebOnes</strong> UNLaM - 2020
+					</div>
 				</div>
 			</div>
 		</div>
