@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<title>WebOnes</title>
+<title>WebOnes · Insumos Médicos</title>
 
 <link href="css/template/bootstrap.min.css" rel="stylesheet">
 <link href="css/template/animate.css" rel="stylesheet">
@@ -26,8 +26,9 @@
 							<div class="dropdown profile-element">
 								<a data-toggle="dropdown" class="dropdown-toggle" href="#">
 									<span class="clear"> <span class="block m-t-xs">
-											<strong class="font-bold">Bienvenido</strong>
-									</span> <span class="text-muted text-xs block">Menu <b
+											<strong class="font-bold">Bienvenido</strong><br />
+											<strong class="font-bold">"Nombre del usuario"</strong>
+									</span> <span class="text-muted text-xs block">Menú <b
 											class="caret"></b></span>
 								</span>
 								</a>
@@ -37,10 +38,10 @@
 							</div>
 							<div class="logo-element">WO</div>
 						</li>
-						<li><a href="#"><i class="fa fa-laptop"></i> <span
-								class="nav-label">Main page</span> </a></li>
-						<li><a href="#"><i class="fa fa-desktop"></i> <span
-								class="nav-label">Other page</span> </a></li>
+						<li><a href="#"><i class="fa fa-th fa-2x"></i> <span
+								class="nav-label">Página de inicio</span> </a></li>
+						<li><a href="#"><i class="fa fa-map-marker fa-2x"></i> <span
+								class="nav-label">Mapa de distribución</span> </a></li>
 					</ul>
 				</div>
 			</nav>
@@ -55,14 +56,13 @@
 						<form role="search" class="navbar-form-custom" method="post"
 							action="">
 							<div class="form-group">
-								<input type="text" placeholder="Search for something..."
+								<input type="text" placeholder="Buscar..."
 									class="form-control" name="top-search" id="top-search">
 							</div>
 						</form>
 					</div>
 					<ul class="nav navbar-top-links navbar-right">
-						<li><a href="#" id="registerLink">Register</a></li>
-						<li><a href="#" id="loginLink">Log in</a></li>
+						<li><a href="#" id="loginLink">Cerrar Sesión</a></li>
 					</ul>
 				</nav>
 			</div>
