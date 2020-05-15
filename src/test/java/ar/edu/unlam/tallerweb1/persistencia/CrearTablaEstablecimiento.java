@@ -14,22 +14,17 @@ import ar.edu.unlam.tallerweb1.modelo.Establecimientos;
 public class CrearTablaEstablecimiento extends SpringTest {
 
 	@Test
-	@Transactional @Rollback
-	public void crearTablaEstablecimiento()  {
+	@Transactional
+	@Rollback
+	public void crearTablaEstablecimiento() {
 		Establecimientos clinicaCovid19 = new Establecimientos();
 		clinicaCovid19.setCapacidadDelEstablecimiento(100);
 		clinicaCovid19.setIndiceDeRiesgo(10);
 		clinicaCovid19.setNombreDelEstablecimiento("clinicaUNO");
 		final Session session = session();
 		session().save(clinicaCovid19);
-		
+
 		Establecimientos buscado = session.get(Establecimientos.class, 1L);
 		assertThat(buscado).isNotNull();
-		
-		
 	}
-	
-	
-	
-
 }
