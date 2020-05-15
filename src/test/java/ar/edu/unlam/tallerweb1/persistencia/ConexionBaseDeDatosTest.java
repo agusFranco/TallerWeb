@@ -2,6 +2,8 @@ package ar.edu.unlam.tallerweb1.persistencia;
 
 import ar.edu.unlam.tallerweb1.SpringTest;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import ar.edu.unlam.tallerweb1.repositorios.RepositorioUsuarioImpl;
+
 import org.junit.Test;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,6 +29,19 @@ public class ConexionBaseDeDatosTest extends SpringTest {
 		usuario.setPassword("1234");
 		usuario.setRol("ADMIN");
 		session().save(usuario);
+		assertThat(usuario.getId()).isNotNull();
+	}
+	
+	@Test
+	@Transactional
+	@Rollback
+	public void crearUsuarioConRepo() {
+		Usuario usuario = new Usuario();
+		usuario.setEmail("seba@gmail.com");
+		usuario.setPassword("1234");
+		usuario.setRol("ADMIN");
+		RepositorioUsuarioImpl repo = new RepositorioUsuarioImpl(session().getSessionFactory());
+		repo.save(usuario);
 		assertThat(usuario.getId()).isNotNull();
 	}
 }
