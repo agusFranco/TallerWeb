@@ -12,7 +12,8 @@ import ar.edu.unlam.tallerweb1.modelo.Usuario;
 // ser manejado por el framework, debe indicarse en applicationContext que busque en el paquete ar.edu.unlam.tallerweb1.dao
 // para encontrar esta clase.
 @Repository("repositorioUsuario")
-public class RepositorioUsuarioImpl extends RepositorioBaseImpl<Usuario, Integer> implements RepositorioUsuario {
+public class RepositorioUsuarioImpl extends RepositorioBaseImpl<Usuario, Integer> 
+									implements RepositorioUsuario {
 
 	@Autowired
 	public RepositorioUsuarioImpl(SessionFactory sessionFactory) {
@@ -27,7 +28,7 @@ public class RepositorioUsuarioImpl extends RepositorioBaseImpl<Usuario, Integer
 		// invoca a este metodo y se crea un criterio
 		// de busqueda de Usuario donde el email y password sean iguales a los del
 		// objeto recibido como parametro
-		// uniqueResult da error si se encuentran mÃ¡s de un resultado en la busqueda.
+		// uniqueResult da error si se encuentran más de un resultado en la busqueda.
 		final Session session = this.sessionFactory.getCurrentSession();
 
 		return (Usuario) session.createCriteria(Usuario.class).add(Restrictions.eq("email", usuario.getEmail()))
