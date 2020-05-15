@@ -16,7 +16,7 @@ public class RepositorioInsumoImpl extends RepositorioBaseImpl<Insumo, Integer>
 
 //	Debemos crear este método de consultar un insumo por un parámetro de insumo?
 	@Override
-	public Insumo consultarInsumo(Insumo insumo) {
+	public Insumo consultarInsumo(int id) {
 		return null;
 	}
 
