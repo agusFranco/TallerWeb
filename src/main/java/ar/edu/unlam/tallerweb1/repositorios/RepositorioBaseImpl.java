@@ -4,19 +4,21 @@ import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+//Repositorio Genérico
 @Repository("repositorioBase")
 public abstract class RepositorioBaseImpl<TEntity extends Object, TId extends Serializable>
-		implements RepositorioBase<TEntity, TId> {
+												implements RepositorioBase<TEntity, TId> {
 
-	protected Class<TEntity> type;
 	protected SessionFactory sessionFactory;
-
+//	Variable del tipo class de una entity
+	protected Class<TEntity> type;
+	
+	
 	@Autowired
 	public RepositorioBaseImpl(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
@@ -24,28 +26,38 @@ public abstract class RepositorioBaseImpl<TEntity extends Object, TId extends Se
 		this.type = (Class<TEntity>) ((ParameterizedType) type).getActualTypeArguments()[0];
 	}
 
+	
+	
+//	Implementación del método para obtener un objeto de una clase por id
 	public TEntity getById(final TId id) {
 		final Session session = sessionFactory.getCurrentSession();
-		return (TEntity) session.get(this.type, id);
+		TEntity objeto = (TEntity) session.get(this.type, id);
+		return objeto;
 	}
 
+//	Implementación del método para obtener una lista de objetos de una clase
 	public List<TEntity> getAll() {
 		final Session session = sessionFactory.getCurrentSession();
-		return session.createCriteria(this.type).list();
+		List<TEntity> listaObjetos = session.createCriteria(this.type).list();
+		return listaObjetos;
 	}
 
-	public TEntity save(TEntity entity) {
+//	Implementación del método para guardar un objeto de una clase
+//No debería 
+	public TId save(TEntity objeto) {
 		final Session session = sessionFactory.getCurrentSession();
-		return (TEntity) session.save(entity);
+		return (TId) session.save(objeto);
 	}
 
-	public void delete(TEntity entity) {
+//	Implementación del método para borrar un objeto de una clase
+	public void delete(TEntity objeto) {
 		final Session session = sessionFactory.getCurrentSession();
-		session.delete(entity);
+		session.delete(objeto);
 	}
 
-	public void update(TEntity entity) {
+//	Implementación del método para actualizar un objeto de una clase
+	public void update(TEntity objeto) {
 		final Session session = sessionFactory.getCurrentSession();
-		session.update(entity);
+		session.update(objeto);
 	}
 }
