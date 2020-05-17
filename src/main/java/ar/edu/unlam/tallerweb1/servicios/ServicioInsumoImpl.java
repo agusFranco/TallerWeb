@@ -13,21 +13,6 @@ import ar.edu.unlam.tallerweb1.repositorios.RepositorioInsumo;
 @Transactional
 public class ServicioInsumoImpl implements ServicioInsumo {
 
-	private RepositorioInsumo servicioInsumoDao;
 
-	@Autowired
-	public ServicioInsumoImpl(RepositorioInsumo servicioInsumoDao) {
-		this.servicioInsumoDao = servicioInsumoDao;
-	}
-
-	@Override
-	public Insumo consultarInsumo(int id) {
-		return servicioInsumoDao.consultarInsumo(id);
-	}
-
-	@Override
-	public List<Insumo> obtenerTodos() {
-		return servicioInsumoDao.getAll();
-	}
 
 }

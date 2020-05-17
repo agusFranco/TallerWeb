@@ -37,13 +37,13 @@ public class HomeControlador {
 	// Escucha la URL /home por GET, y redirige a una vista.
 	@RequestMapping(path = "/home", method = RequestMethod.GET)
 	public ModelAndView irAHome() {
-		List<Establecimiento> establecimientos = servicioEstablecimiento.obtenerTodos();
+	/*	List<Establecimiento> establecimientos = servicioEstablecimiento.obtenerTodos();
 		List<Insumo> insumos = servicioInsumo.obtenerTodos();
 		
 		// cruce entre establecimientos e insumos
 		Map<Establecimiento,Insumo[]> insumosPorEstablecimiento = null;
 		insumosPorEstablecimiento = servicioDistribucion.AsignarInsumos(establecimientos, insumos);
-		
+		*/
 		return new ModelAndView("home");
 	}	
 			

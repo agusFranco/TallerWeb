@@ -16,7 +16,7 @@ import ar.edu.unlam.tallerweb1.modelo.Insumo;
 public class ServicioDistribucionImpl implements ServicioDistribucion {
 
 	@Override
-	public Map<Establecimiento, Insumo[]> AsignarInsumos(List<Establecimiento> establecimientos, List<Insumo> insumos) {
+	public Map<Establecimiento, List<Insumo>> AsignarInsumos(List<Establecimiento> establecimientos, List<Insumo> insumos) {
 		// TODO Auto-generated method stub
 		return null;
 	}

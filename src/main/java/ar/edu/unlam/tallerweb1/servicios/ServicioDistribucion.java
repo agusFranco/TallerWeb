@@ -8,6 +8,6 @@ import ar.edu.unlam.tallerweb1.modelo.Establecimiento;
 
 public interface ServicioDistribucion {
 
-	public Map<Establecimiento,Insumo[]> AsignarInsumos(List<Establecimiento> establecimientos,List<Insumo> insumos);
+	public Map<Establecimiento,List<Insumo>> AsignarInsumos(List<Establecimiento> establecimientos,List<Insumo> insumos);
 
 }
