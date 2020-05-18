@@ -12,8 +12,7 @@ import ar.edu.unlam.tallerweb1.modelo.Usuario;
 // ser manejado por el framework, debe indicarse en applicationContext que busque en el paquete ar.edu.unlam.tallerweb1.dao
 // para encontrar esta clase.
 @Repository("repositorioUsuario")
-public class RepositorioUsuarioImpl extends RepositorioBaseImpl<Usuario, Integer> 
-									implements RepositorioUsuario {
+public class RepositorioUsuarioImpl extends RepositorioBaseImpl<Usuario, Integer> implements RepositorioUsuario {
 
 	@Autowired
 	public RepositorioUsuarioImpl(SessionFactory sessionFactory) {

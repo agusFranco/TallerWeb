@@ -5,7 +5,6 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 
 import org.hibernate.Session;
@@ -17,13 +16,12 @@ import org.springframework.stereotype.Repository;
 @Repository("repositorioBase")
 @Transactional
 public abstract class RepositorioBaseImpl<TEntity extends Object, TId extends Serializable>
-												implements RepositorioBase<TEntity, TId> {
+		implements RepositorioBase<TEntity, TId> {
 
 	protected SessionFactory sessionFactory;
 //	Variable del tipo class de una entity
 	protected Class<TEntity> type;
-	
-	
+
 	@Autowired
 	public RepositorioBaseImpl(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
@@ -31,14 +29,12 @@ public abstract class RepositorioBaseImpl<TEntity extends Object, TId extends Se
 		this.type = (Class<TEntity>) ((ParameterizedType) type).getActualTypeArguments()[0];
 	}
 
-	
 	public void insertBigData(List<TEntity> items) {
-		//final Session session = sessionFactory.openSession();
+		// final Session session = sessionFactory.openSession();
 		// AGREGAR LOS INSERT MASIVOS DEL OBJETO
-		
+
 	}
-	
-	
+
 //	Implementación del método para obtener un objeto de una clase por id
 	public TEntity getById(final TId id) {
 		final Session session = sessionFactory.getCurrentSession();
