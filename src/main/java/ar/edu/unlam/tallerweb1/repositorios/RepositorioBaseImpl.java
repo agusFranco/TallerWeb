@@ -4,6 +4,10 @@ import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
+
+import javax.annotation.PostConstruct;
+import javax.transaction.Transactional;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +15,7 @@ import org.springframework.stereotype.Repository;
 
 //Repositorio Genérico
 @Repository("repositorioBase")
+@Transactional
 public abstract class RepositorioBaseImpl<TEntity extends Object, TId extends Serializable>
 												implements RepositorioBase<TEntity, TId> {
 
@@ -26,6 +31,12 @@ public abstract class RepositorioBaseImpl<TEntity extends Object, TId extends Se
 		this.type = (Class<TEntity>) ((ParameterizedType) type).getActualTypeArguments()[0];
 	}
 
+	
+	public void insertBigData(List<TEntity> items) {
+		//final Session session = sessionFactory.openSession();
+		// AGREGAR LOS INSERT MASIVOS DEL OBJETO
+		
+	}
 	
 	
 //	Implementación del método para obtener un objeto de una clase por id

@@ -4,10 +4,12 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import ar.edu.unlam.tallerweb1.modelo.Establecimiento;
 import ar.edu.unlam.tallerweb1.modelo.Insumo;
 
+@Repository("repositorioInsumo")
 public class RepositorioInsumoImpl extends RepositorioBaseImpl<Insumo, Integer>
 									implements RepositorioInsumo{
 
