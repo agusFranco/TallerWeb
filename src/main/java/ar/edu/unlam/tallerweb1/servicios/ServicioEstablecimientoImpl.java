@@ -15,6 +15,7 @@ public class ServicioEstablecimientoImpl implements ServicioEstablecimiento {
 
 	private RepositorioEstablecimiento servicioEstablecimientoDao;
 
+//	Inyección de dependencia
 	@Autowired
 	public ServicioEstablecimientoImpl(RepositorioEstablecimiento servicioEstablecimientoDao) {
 		this.servicioEstablecimientoDao = servicioEstablecimientoDao;
@@ -26,15 +27,16 @@ public class ServicioEstablecimientoImpl implements ServicioEstablecimiento {
 	}
 
 	@Override
-	public Establecimiento calcularRiesgo(Establecimiento establecimiento) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public List<Establecimiento> obtenerTodos() {
 		return servicioEstablecimientoDao.getAll();
 	}
+	
+//	DEFINIR
+	@Override
+	public Establecimiento calcularRiesgo(Establecimiento establecimiento) {
+		return null;
+	}
+
 
 	@Override
 	public void insertarDatosMasivos() {

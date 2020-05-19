@@ -23,10 +23,10 @@ public class RepositorioEstablecimientoImpl extends RepositorioBaseImpl<Establec
 		super(sessionFactory);
 	}
 
-	
+//	Inserta Establecimientos a la BDD - MASIVO
 	public void insertarDatosMasivos() {
 		final Session session = sessionFactory.getCurrentSession();
-		// AGREGAR LOS INSERT MASIVOS DEL OBJETO
+
 		List<Establecimiento> listaObjetos = new ArrayList<Establecimiento>();
 		listaObjetos.add(new Establecimiento("Establecimiento Buenos Aires", "Ubicacion 01",10000, 10, "Zona A", "Sebastian"));
 		listaObjetos.add(new Establecimiento("Establecimiento Entre Rios", "Ubicacion 02",20000, 50, "Zona B", "Agustin"));

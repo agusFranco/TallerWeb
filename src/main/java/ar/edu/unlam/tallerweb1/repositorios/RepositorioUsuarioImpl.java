@@ -37,7 +37,8 @@ public class RepositorioUsuarioImpl extends RepositorioBaseImpl<Usuario, Integer
 		return (Usuario) session.createCriteria(Usuario.class).add(Restrictions.eq("email", usuario.getEmail()))
 				.add(Restrictions.eq("password", usuario.getPassword())).uniqueResult();
 	}
-	
+
+//	Inserta usuarios a la BDD - MASIVO
 	public void insertarDatosMasivos() {
 		final Session session = sessionFactory.getCurrentSession();
 		// AGREGAR LOS INSERT MASIVOS DEL OBJETO

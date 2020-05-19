@@ -29,9 +29,9 @@ public class RepositorioInsumoImpl extends RepositorioBaseImpl<Insumo, Integer> 
 //		return (Insumo) session.createCriteria(Insumo.class).add(Restrictions.eq("id", id)).uniqueResult();
 //	}
 	
+//	Inserta insumos a la BDD - MASIVO
 	public void insertarDatosMasivos() {
 		final Session session = sessionFactory.getCurrentSession();
-		// AGREGAR LOS INSERT MASIVOS DEL OBJETO
 		List<Insumo> listaObjetos = new ArrayList<Insumo>();
 		listaObjetos.add(new Insumo("Respiradores Artificiales","Tipo A",2000));
 		listaObjetos.add(new Insumo("Camas de Internación","Tipo A",3000));
@@ -43,6 +43,7 @@ public class RepositorioInsumoImpl extends RepositorioBaseImpl<Insumo, Integer> 
 		}
 	}
 
+//  Retorna la cantidad de insumos disponibles, realiza un SUM del campo 'cantidad'
 	@Override
 	public Long CantTotalInsumos() {
 		final Session session = sessionFactory.getCurrentSession();

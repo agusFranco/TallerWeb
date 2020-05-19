@@ -10,5 +10,6 @@ public interface ServicioInsumo {
 	
 	void insertarDatosMasivos();
 	
+//  Retorna la cantidad de insumos disponibles, realiza un SUM del campo 'cantidad'
 	Long CantTotalInsumos();
 }

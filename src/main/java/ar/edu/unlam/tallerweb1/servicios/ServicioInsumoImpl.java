@@ -33,7 +33,7 @@ public class ServicioInsumoImpl implements ServicioInsumo {
 		return servicioInsumoDao.getAll();
 	}
 
-
+//  Retorna la cantidad de insumos disponibles, realiza un SUM del campo 'cantidad'
 	@Override
 	public Long CantTotalInsumos() {
 		return servicioInsumoDao.CantTotalInsumos();

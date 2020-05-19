@@ -4,6 +4,6 @@ import ar.edu.unlam.tallerweb1.modelo.Insumo;
 
 public interface RepositorioInsumo extends RepositorioBase<Insumo, Integer> {
 
-
+//  Retorna la cantidad de insumos disponibles, realiza un SUM del campo 'cantidad'
 	Long CantTotalInsumos();
 }
