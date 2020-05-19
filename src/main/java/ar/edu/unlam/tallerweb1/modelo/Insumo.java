@@ -15,7 +15,19 @@ public class Insumo {
 	private String tipo;
 	private Integer cantidad;
 
-//	Solo getter de id
+//	Constructor vacío
+	public Insumo() {
+
+	}
+	
+//	Constructor con parámetros
+	public Insumo(String nombre, String tipo, Integer cantidad) {
+		this.nombre = nombre;
+		this.tipo = tipo;
+		this.cantidad = cantidad;
+	}
+
+
 	public Long getId() {
 		return id;
 	}

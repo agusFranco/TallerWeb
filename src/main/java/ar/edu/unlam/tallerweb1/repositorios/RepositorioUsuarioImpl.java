@@ -1,11 +1,15 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import ar.edu.unlam.tallerweb1.modelo.Insumo;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 
 // implelemtacion del repositorio de usuarios, la anotacion @Repository indica a Spring que esta clase es un componente que debe
@@ -32,6 +36,17 @@ public class RepositorioUsuarioImpl extends RepositorioBaseImpl<Usuario, Integer
 
 		return (Usuario) session.createCriteria(Usuario.class).add(Restrictions.eq("email", usuario.getEmail()))
 				.add(Restrictions.eq("password", usuario.getPassword())).uniqueResult();
+	}
+	
+	public void insertarDatosMasivos() {
+		final Session session = sessionFactory.getCurrentSession();
+		// AGREGAR LOS INSERT MASIVOS DEL OBJETO
+		List<Usuario> listaObjetos = new ArrayList<Usuario>();
+		listaObjetos.add(new Usuario("test@test.com","test"));
+
+		for(Usuario objeto : listaObjetos) {
+			session.save(objeto);
+		}
 	}
 
 }

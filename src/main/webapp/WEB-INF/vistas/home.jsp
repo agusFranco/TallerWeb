@@ -47,7 +47,7 @@
 							</a>
 							<ul class="dropdown-menu dropdown-user">
 								<li><a href="./cargar-establecimientos">Cargar Establecimientos</a></li>
-								<li><a href="#">Config option 2</a></li>
+								<li><a href="./cargar-insumos">Cargar Insumos</a></li>
 							</ul>
 							<a class="close-link"> <i class="fa fa-times"></i>
 							</a>

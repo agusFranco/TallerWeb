@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -46,10 +47,26 @@ public class HomeControlador {
 
 	@RequestMapping(path = "/cargar-establecimientos", method = RequestMethod.GET)
 	public ModelAndView cargarEstablecimientos() {
-
+		
+		
 		servicioEstablecimiento.insertarDatosMasivos();
+		ModelMap modelo = new ModelMap();
+		List<Establecimiento> listaEst = servicioEstablecimiento.obtenerTodos();
+		
+		modelo.put("listaEstablecimientos", modelo);
+		
+		return new ModelAndView("home", modelo);
+	}
+
+	@RequestMapping(path = "/cargar-insumos", method = RequestMethod.GET)
+	public ModelAndView cargarInsumos() {
+
+		servicioInsumo.insertarDatosMasivos();
+
+
 		return new ModelAndView("home");
 	}
+	
 	
 //	REVISAR ESTE METODO, INTENTAR HACER ESTE METODO DE CARGA GENERICO
 //	@RequestMapping(path = "/cargar-est", method = RequestMethod.GET)

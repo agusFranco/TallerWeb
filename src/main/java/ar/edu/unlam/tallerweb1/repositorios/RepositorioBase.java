@@ -23,5 +23,7 @@ public interface RepositorioBase<TEntity extends Object, TId extends Serializabl
 
 //	void insertBigData(List<TEntity> items);
 	
+//	Obliga a que cada uno de los repositorio inserte datos masivos, no es genérico.
+	void insertarDatosMasivos();
 
 }

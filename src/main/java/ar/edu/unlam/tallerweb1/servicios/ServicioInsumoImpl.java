@@ -29,8 +29,7 @@ public class ServicioInsumoImpl implements ServicioInsumo {
 
 	@Override
 	public void insertarDatosMasivos() {
-		// TODO Auto-generated method stub
-		
+		servicioInsumoDao.insertarDatosMasivos();
 	}
 	
 //	@Override
