@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.modelo.Establecimiento;
+import ar.edu.unlam.tallerweb1.modelo.Insumo;
 import ar.edu.unlam.tallerweb1.servicios.ServicioDistribucion;
 import ar.edu.unlam.tallerweb1.servicios.ServicioEstablecimiento;
 import ar.edu.unlam.tallerweb1.servicios.ServicioInsumo;
@@ -42,20 +43,20 @@ public class HomeControlador {
 		 * insumosPorEstablecimiento = null; insumosPorEstablecimiento =
 		 * servicioDistribucion.AsignarInsumos(establecimientos, insumos);
 		 */
-		return new ModelAndView("home");
+		
+		ModelMap modelo = new ModelMap();
+		List<Establecimiento> listaEst = servicioEstablecimiento.obtenerTodos();
+		List<Insumo> listaIns =  servicioInsumo.obtenerTodos();
+		modelo.put("listaEstablecimientos", listaEst);
+		modelo.put("listaInsumos",listaIns);
+		return new ModelAndView("home", modelo);
 	}
 
 	@RequestMapping(path = "/cargar-establecimientos", method = RequestMethod.GET)
 	public ModelAndView cargarEstablecimientos() {
 		
-		
 		servicioEstablecimiento.insertarDatosMasivos();
-		ModelMap modelo = new ModelMap();
-		List<Establecimiento> listaEst = servicioEstablecimiento.obtenerTodos();
-		
-		modelo.put("listaEstablecimientos", modelo);
-		
-		return new ModelAndView("home", modelo);
+		return new ModelAndView("home");
 	}
 
 	@RequestMapping(path = "/cargar-insumos", method = RequestMethod.GET)
