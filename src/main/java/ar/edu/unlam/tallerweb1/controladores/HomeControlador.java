@@ -3,6 +3,7 @@ package ar.edu.unlam.tallerweb1.controladores;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.mapping.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -34,38 +35,54 @@ public class HomeControlador {
 	// Escucha la URL /home por GET, y redirige a una vista.
 	@RequestMapping(path = "/home", method = RequestMethod.GET)
 	public ModelAndView irAHome() {
-		/*
-		 * List<Establecimiento> establecimientos =
-		 * servicioEstablecimiento.obtenerTodos(); List<Insumo> insumos =
-		 * servicioInsumo.obtenerTodos();
-		 * 
-		 * // cruce entre establecimientos e insumos Map<Establecimiento,Insumo[]>
-		 * insumosPorEstablecimiento = null; insumosPorEstablecimiento =
-		 * servicioDistribucion.AsignarInsumos(establecimientos, insumos);
-		 */
+//		 cruce entre establecimientos e insumos Map<Establecimiento,Insumo[]>
+//		 insumosPorEstablecimiento = null; insumosPorEstablecimiento =
+//		 servicioDistribucion.AsignarInsumos(establecimientos, insumos);
+//		 
 		
 		ModelMap modelo = new ModelMap();
+		
+		
 		List<Establecimiento> listaEst = servicioEstablecimiento.obtenerTodos();
 		List<Insumo> listaIns =  servicioInsumo.obtenerTodos();
 		modelo.put("listaEstablecimientos", listaEst);
 		modelo.put("listaInsumos",listaIns);
+		
+		Long cantidadEst= servicioEstablecimiento.cantidadItems(listaEst);
+		modelo.put("cantidadEstablecimientos",cantidadEst);
+		
+		Long cantidadIns = servicioInsumo.CantTotalInsumos();
+		modelo.put("cantidadInsumos", cantidadIns);
+		
 		return new ModelAndView("home", modelo);
 	}
 
+//	Carga de Establecimientos - Masiva
+	@RequestMapping(path = "/distribuir-insumos", method = RequestMethod.GET)
+	public ModelAndView distribuirInsumos() {
+		
+		List<Establecimiento> listaEst = servicioEstablecimiento.obtenerTodos();
+		List<Insumo> listaIns =  servicioInsumo.obtenerTodos();
+		
+		ModelMap modelo = new ModelMap();
+		
+		modelo.put("listaDistrib", servicioDistribucion.AsignarInsumos(listaEst, listaIns));
+		
+		return new ModelAndView("redirect:/home", modelo);
+	}	
+	
+//	Carga de Establecimientos - Masiva
 	@RequestMapping(path = "/cargar-establecimientos", method = RequestMethod.GET)
 	public ModelAndView cargarEstablecimientos() {
-		
 		servicioEstablecimiento.insertarDatosMasivos();
-		return new ModelAndView("home");
+		return new ModelAndView("redirect:/home");
 	}
 
+//	Carga de Insumos - Masiva
 	@RequestMapping(path = "/cargar-insumos", method = RequestMethod.GET)
 	public ModelAndView cargarInsumos() {
-
 		servicioInsumo.insertarDatosMasivos();
-
-
-		return new ModelAndView("home");
+		return new ModelAndView("redirect:/home");
 	}
 	
 	

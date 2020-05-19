@@ -5,7 +5,9 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.query.criteria.internal.expression.function.AggregationFunction.SUM;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -39,5 +41,11 @@ public class RepositorioInsumoImpl extends RepositorioBaseImpl<Insumo, Integer> 
 		for(Insumo objeto : listaObjetos) {
 			session.save(objeto);
 		}
+	}
+
+	@Override
+	public Long CantTotalInsumos() {
+		final Session session = sessionFactory.getCurrentSession();
+		return (Long) session.createCriteria(Insumo.class).setProjection(Projections.sum("cantidad")).uniqueResult();
 	}
 }

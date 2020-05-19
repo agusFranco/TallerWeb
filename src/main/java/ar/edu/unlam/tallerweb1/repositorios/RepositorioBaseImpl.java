@@ -10,8 +10,11 @@ import javax.transaction.Transactional;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Projections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import ar.edu.unlam.tallerweb1.modelo.Establecimiento;
 
 //Repositorio Genérico
 @Repository("repositorioBase")
@@ -78,5 +81,9 @@ public abstract class RepositorioBaseImpl<TEntity extends Object, TId extends Se
 		session.update(objeto);
 	}
 	
+	public Long cantidadItems(List<TEntity> listaEntity) {
+		final Session session = this.sessionFactory.getCurrentSession();
+		return (Long) session.createCriteria(this.type).setProjection(Projections.rowCount()).uniqueResult();
+	}
 
 }

@@ -41,14 +41,12 @@ public class ServicioEstablecimientoImpl implements ServicioEstablecimiento {
 		servicioEstablecimientoDao.insertarDatosMasivos();
 	}
 
-
-
-//	@Override
-//	public void llenarTabla2(List<Establecimiento> listaEstaclecimientos) {
-//		servicioEstablecimientoDao.insertBigData(listaEstaclecimientos);
-//		
-//	}
 	
+	@Override
+	public Long cantidadItems(List<Establecimiento> listaEstablecimiento) {
+		return servicioEstablecimientoDao.cantidadItems(listaEstablecimiento);
+	}
+
 	
 
 }

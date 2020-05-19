@@ -6,7 +6,9 @@ import ar.edu.unlam.tallerweb1.modelo.Insumo;
 
 public interface ServicioInsumo {
 
-	public List<Insumo> obtenerTodos();
+	List<Insumo> obtenerTodos();
 	
-	public void insertarDatosMasivos();
+	void insertarDatosMasivos();
+	
+	Long CantTotalInsumos();
 }

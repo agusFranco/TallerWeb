@@ -8,25 +8,10 @@
 			<div class="col-md-3">
 				<div class="ibox float-e-margins">
 					<div class="ibox-title">
-						<span class="label label-success pull-right">Disponibilidad</span>
-						<h5>Insumos</h5>
+						<h5>Establecimientos</h5>
 					</div>
 					<div class="ibox-content">
-						<h1 class="no-margins">386,200</h1>
-						<div class="stat-percent font-bold text-success">
-							98% <i class="fa fa-bolt"></i>
-						</div>
-						<small>Total disponibles </small>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="ibox float-e-margins">
-					<div class="ibox-title">
-						<h5>Hospitales</h5>
-					</div>
-					<div class="ibox-content">
-						<h1 class="no-margins">20</h1>
+						<h1 class="no-margins">${cantidadEstablecimientos}</h1>
 						<div class="stat-percent font-bold text-success">
 							98% <i class="fa fa-bolt"></i>
 						</div>
@@ -34,8 +19,22 @@
 					</div>
 				</div>
 			</div>
+			<div class="col-md-3">
+				<div class="ibox float-e-margins">
+					<div class="ibox-title">
+						<span class="label label-success pull-right">Disponibilidad</span>
+						<h5>Insumos</h5>
+					</div>
+					<div class="ibox-content">
+						<h1 class="no-margins">${cantidadInsumos}</h1>
+						<div class="stat-percent font-bold text-success">
+							98% <i class="fa fa-bolt"></i>
+						</div>
+						<small>Total disponibles </small>
+					</div>
+				</div>
+			</div>
 		</div>
-
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="ibox float-e-margins">
@@ -74,7 +73,8 @@
 							</div>
 							<div class="col-sm-3">
 								<button type="button" class="btn btn-primary btn-block">
-									<strong>Distribuir insumos sobre hospitales</strong>
+									<strong> <a href="./distribuir-insumos">Distribuir
+											insumos sobre Establecimientos</a></strong>
 								</button>
 							</div>
 						</div>
@@ -84,22 +84,22 @@
 									<thead>
 										<tr>
 											<th>#</th>
-											<th>Hospitales</th>
+											<th>Establecimientos</th>
 											<th>Cantidad de Personas Infectadas</th>
 										</tr>
 									</thead>
 									<tbody>
-									<tr>
-										<c:if test="${not empty listaEstablecimientos}">
-											<c:forEach items="${listaEstablecimientos}"
-												var="itemEstablecimiento">
-												<tr>
-													<td>${itemEstablecimiento.getId()}</td>
-													<td>${itemEstablecimiento.getNombre()}</td>
-													<td>${itemEstablecimiento.getIndice()}</td>
-												</tr>
-											</c:forEach>
-										</c:if>
+										<tr>
+											<c:if test="${not empty listaEstablecimientos}">
+												<c:forEach items="${listaEstablecimientos}"
+													var="itemEstablecimiento">
+													<tr>
+														<td>${itemEstablecimiento.getId()}</td>
+														<td>${itemEstablecimiento.getNombre()}</td>
+														<td>${itemEstablecimiento.getIndice()}</td>
+													</tr>
+												</c:forEach>
+											</c:if>
 										</tr>
 									</tbody>
 								</table>
@@ -114,19 +114,18 @@
 										</tr>
 									</thead>
 									<tbody>
-									<tr>
-										<c:if test="${not empty listaInsumos}">
-											<c:forEach items="${listaInsumos}"
-												var="itemInsumo">
-												<tr>
-													<td>${itemInsumo.getId()}</td>
-													<td>${itemInsumo.getNombre()}</td>
-													<td>${itemInsumo.getCantidad()}</td>
-												</tr>
-											</c:forEach>
-										</c:if>
+										<tr>
+											<c:if test="${not empty listaInsumos}">
+												<c:forEach items="${listaInsumos}" var="itemInsumo">
+													<tr>
+														<td>${itemInsumo.getId()}</td>
+														<td>${itemInsumo.getNombre()}</td>
+														<td>${itemInsumo.getCantidad()}</td>
+													</tr>
+												</c:forEach>
+											</c:if>
 										</tr>
-									</tbody>									
+									</tbody>
 								</table>
 							</div>
 						</div>
@@ -136,7 +135,7 @@
 			<div class="col-lg-12">
 				<div class="ibox float-e-margins">
 					<div class="ibox-title">
-						<h5>Distribución de cantidades de insumos a hospitales</h5>
+						<h5>Distribución de cantidades de insumos a Establecimientos</h5>
 						<div class="ibox-tools">
 							<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
 							</a> <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -175,7 +174,7 @@
 									<thead>
 										<tr>
 											<th class="btn-primary">#</th>
-											<th class="btn-primary">Hospitales</th>
+											<th class="btn-primary">Establecimientos</th>
 											<th class="btn-primary">Cantidad de Infectados</th>
 											<th class="btn-primary">Respiradores Artificiales</th>
 											<th class="btn-primary">Camas de Internación</th>
@@ -183,6 +182,7 @@
 											<th class="btn-primary">Artículos de desinfección</th>
 										</tr>
 									</thead>
+
 									<tbody>
 										<tr>
 											<td>1</td>
@@ -214,6 +214,7 @@
 										</tr>
 									</tbody>
 								</table>
+
 							</div>
 						</div>
 

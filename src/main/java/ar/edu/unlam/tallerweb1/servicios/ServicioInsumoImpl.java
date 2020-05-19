@@ -28,15 +28,15 @@ public class ServicioInsumoImpl implements ServicioInsumo {
 		servicioInsumoDao.insertarDatosMasivos();
 	}
 
-
 	@Override
 	public List<Insumo> obtenerTodos() {
 		return servicioInsumoDao.getAll();
 	}
+
+
+	@Override
+	public Long CantTotalInsumos() {
+		return servicioInsumoDao.CantTotalInsumos();
+	}
 	
-//	@Override
-//	public void insertarDatosMasivos() {
-//		List<Insumo> insumos = null;
-//		servicioInsumoDao.insertBigData(insumos);
-//	}
 }
