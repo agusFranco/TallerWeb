@@ -23,13 +23,19 @@ public class ServicioInsumoImpl implements ServicioInsumo {
 	}
 	
 	@Override
-	public Insumo obtenerInsumo(int id) {
+	public Insumo consultarInsumo(int id) {
 		return servicioInsumoDao.getById(id);
 	}
-	
+
 	@Override
 	public void insertarDatosMasivos() {
-		List<Insumo> insumos = null;
-		servicioInsumoDao.insertBigData(insumos);
+		// TODO Auto-generated method stub
+		
 	}
+	
+//	@Override
+//	public void insertarDatosMasivos() {
+//		List<Insumo> insumos = null;
+//		servicioInsumoDao.insertBigData(insumos);
+//	}
 }

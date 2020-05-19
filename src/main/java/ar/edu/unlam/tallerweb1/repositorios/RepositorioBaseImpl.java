@@ -3,6 +3,7 @@ package ar.edu.unlam.tallerweb1.repositorios;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -29,11 +30,20 @@ public abstract class RepositorioBaseImpl<TEntity extends Object, TId extends Se
 		this.type = (Class<TEntity>) ((ParameterizedType) type).getActualTypeArguments()[0];
 	}
 
-	public void insertBigData(List<TEntity> items) {
-		// final Session session = sessionFactory.openSession();
-		// AGREGAR LOS INSERT MASIVOS DEL OBJETO
-
-	}
+//	public void insertBigData(List<TEntity> listaObjetos) {
+//		final Session session = sessionFactory.getCurrentSession();
+//		// AGREGAR LOS INSERT MASIVOS DEL OBJETO
+//		listaObjetos.add((TEntity) new Object());
+//		listaObjetos.add((TEntity) new Object());
+//		listaObjetos.add((TEntity) new Object());
+//		listaObjetos.add((TEntity) new Object());
+//		listaObjetos.add((TEntity) new Object());
+//		listaObjetos.add((TEntity) new Object());
+//		
+//		for(TEntity objeto : listaObjetos) {
+//			session.save(objeto);
+//		}
+//	}
 
 //	Implementación del método para obtener un objeto de una clase por id
 	public TEntity getById(final TId id) {
@@ -67,4 +77,6 @@ public abstract class RepositorioBaseImpl<TEntity extends Object, TId extends Se
 		final Session session = sessionFactory.getCurrentSession();
 		session.update(objeto);
 	}
+	
+
 }

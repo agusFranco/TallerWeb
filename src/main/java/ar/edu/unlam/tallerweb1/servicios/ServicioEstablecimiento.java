@@ -12,4 +12,6 @@ public interface ServicioEstablecimiento {
 	
 	public Establecimiento calcularRiesgo(Establecimiento establecimiento);
 
+	void insertarDatosMasivos();
+	
 }

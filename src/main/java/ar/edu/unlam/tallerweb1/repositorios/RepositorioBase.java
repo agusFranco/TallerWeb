@@ -21,5 +21,7 @@ public interface RepositorioBase<TEntity extends Object, TId extends Serializabl
 //	Actualiza un objeto de una entidad
 	void update(TEntity entity);
 
-	void insertBigData(List<TEntity> items);
+//	void insertBigData(List<TEntity> items);
+	
+
 }

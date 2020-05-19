@@ -9,7 +9,7 @@ import javax.persistence.Id;
 public class Establecimiento {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nombre;
 	private String ubicacion;
@@ -17,6 +17,22 @@ public class Establecimiento {
 	private Integer indice;
 	private String zona;
 	private String responsable;
+
+	public Establecimiento() {
+	}
+	
+	
+	public Establecimiento(String nombre, String ubicacion, Integer capacidad, Integer indice, String zona,
+			String responsable) {
+		this.nombre = nombre;
+		this.ubicacion = ubicacion;
+		this.capacidad = capacidad;
+		this.indice = indice;
+		this.zona = zona;
+		this.responsable = responsable;
+	}
+
+
 
 	public Integer getId() {
 		return id;

@@ -22,7 +22,7 @@ public class ServicioEstablecimientoImpl implements ServicioEstablecimiento {
 
 	@Override
 	public Establecimiento consultarEstablecimiento(int id) {
-		return servicioEstablecimientoDao.consultarEstablecimiento(id);
+		return servicioEstablecimientoDao.getById(id);
 	}
 
 	@Override
@@ -35,5 +35,20 @@ public class ServicioEstablecimientoImpl implements ServicioEstablecimiento {
 	public List<Establecimiento> obtenerTodos() {
 		return servicioEstablecimientoDao.getAll();
 	}
+
+	@Override
+	public void insertarDatosMasivos() {
+		servicioEstablecimientoDao.insertarDatosMasivos();
+	}
+
+
+
+//	@Override
+//	public void llenarTabla2(List<Establecimiento> listaEstaclecimientos) {
+//		servicioEstablecimientoDao.insertBigData(listaEstaclecimientos);
+//		
+//	}
+	
+	
 
 }
