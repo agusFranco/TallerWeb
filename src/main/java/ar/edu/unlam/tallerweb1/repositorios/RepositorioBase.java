@@ -29,5 +29,4 @@ public interface RepositorioBase<TEntity extends Object, TId extends Serializabl
 
 	// Permite obtener la cantidad de Items que tiene la lista
 	Long cantidadItems(List<TEntity> listaEntity);
-
 }
