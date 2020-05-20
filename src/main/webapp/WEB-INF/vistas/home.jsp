@@ -50,6 +50,7 @@
 										<th>#</th>
 										<th>Nombre</th>
 										<th>Responsable</th>
+										<th>Zona</th>
 										<th>Capacidad</th>
 										<th>Indice</th>
 									</tr>
@@ -62,6 +63,7 @@
 												<td>${itemEstablecimiento.getId()}</td>
 												<td>${itemEstablecimiento.getNombre()}</td>
 												<td>${itemEstablecimiento.getResponsable()}</td>
+												<td>${itemEstablecimiento.getZona()}</td>
 												<td>${itemEstablecimiento.getCapacidad()}</td>
 												<td>${itemEstablecimiento.getIndice()}</td>
 											</tr>
