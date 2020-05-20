@@ -40,13 +40,13 @@ public class HomeControlador {
 		ModelMap modelo = new ModelMap();
 
 		// Listas para mostrar en la tabla principal
-		List<Establecimiento> listaEst = servicioEstablecimiento.obtenerTodos();
-		List<Insumo> listaIns = servicioInsumo.obtenerTodos();
-		modelo.put("listaEstablecimientos", listaEst);
-		modelo.put("listaInsumos", listaIns);
+		List<Establecimiento> establecimientos = servicioEstablecimiento.obtenerTodos();
+		List<Insumo> insumos = servicioInsumo.obtenerTodos();
+		modelo.put("listaEstablecimientos", establecimientos);
+		modelo.put("listaInsumos", insumos);
 
 		// Agrego al modelo cartelito con contador de establecimientos
-		Long cantidadEst = servicioEstablecimiento.cantidadItems(listaEst);
+		Long cantidadEst = servicioEstablecimiento.cantidadItems(establecimientos);
 		modelo.put("cantidadEstablecimientos", cantidadEst);
 
 		// Agrego al modelo cartelito con contador de insumos
