@@ -10,6 +10,7 @@
 <title>WebOnes · Insumos Médicos</title>
 
 <link href="css/template/bootstrap.min.css" rel="stylesheet">
+<link href="css/template/datatables.min.css" rel="stylesheet">
 <link href="css/template/animate.css" rel="stylesheet">
 <link href="css/template/style.css" rel="stylesheet">
 <link href="css/fonts/font-awesome/css/font-awesome.min.css"
@@ -26,8 +27,8 @@
 							<div class="dropdown profile-element">
 								<a data-toggle="dropdown" class="dropdown-toggle" href="#">
 									<span class="clear"> <span class="block m-t-xs">
-											<strong class="font-bold">Bienvenido</strong><br />
-											<strong class="font-bold">"Nombre del usuario"</strong>
+											<strong class="font-bold">Bienvenido</strong><br /> <strong
+											class="font-bold">"Nombre del usuario"</strong>
 									</span> <span class="text-muted text-xs block">Menú <b
 											class="caret"></b></span>
 								</span>
@@ -38,9 +39,9 @@
 							</div>
 							<div class="logo-element">WO</div>
 						</li>
-						<li><a href="#"><i class="fa fa-th fa-2x"></i> <span
+						<li><a href="#"><i class="fa fa-th"></i> <span
 								class="nav-label">Página de inicio</span> </a></li>
-						<li><a href="#"><i class="fa fa-map-marker fa-2x"></i> <span
+						<li><a href="#"><i class="fa fa-map-marker"></i> <span
 								class="nav-label">Mapa de distribución</span> </a></li>
 					</ul>
 				</div>
@@ -56,8 +57,8 @@
 						<form role="search" class="navbar-form-custom" method="post"
 							action="">
 							<div class="form-group">
-								<input type="text" placeholder="Buscar..."
-									class="form-control" name="top-search" id="top-search">
+								<input type="text" placeholder="Buscar..." class="form-control"
+									name="top-search" id="top-search">
 							</div>
 						</form>
 					</div>
@@ -86,5 +87,6 @@
 <script src="js/template/plugins/metisMenu/metisMenu.min.js"></script>
 <script src="js/template/plugins/pace/pace.min.js"></script>
 <script src="js/template/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="js/template/plugins/dataTables/datatables.min.js"></script>
 <script src="js/template/app/inspinia.js"></script>
 </html>

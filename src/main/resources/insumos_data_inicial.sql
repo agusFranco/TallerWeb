@@ -2,8 +2,7 @@ use db;
 
 TRUNCATE TABLE `insumo`;
 
-INSERT INTO `insumo` (`id`,`cantidad`,`nombre`,`tipo`) VALUES 
-(1,2012,"Otros 2","Tipo B"),(2,1804,"Respiradores","Tipo C"),(3,1262,"Jeringas","Tipo A"),(4,1580,"Tapa bocas","Tipo D"),(5,1825,"Delantales","Tipo C"),(6,3661,"Camas","Tipo F"),(7,1392,"Otros 2","Tipo A"),(8,2678,"Otros 1","Tipo C"),(9,3894,"Otros 1","Tipo D"),(10,1676,"Otros 1","Tipo D");
+INSERT INTO `insumo` (`id`,`cantidad`,`nombre`,`tipo`) VALUES (1,2012,"Otros 2","Tipo B"),(2,1804,"Respiradores","Tipo C"),(3,1262,"Jeringas","Tipo A"),(4,1580,"Tapa bocas","Tipo D"),(5,1825,"Delantales","Tipo C"),(6,3661,"Camas","Tipo F"),(7,1392,"Otros 2","Tipo A"),(8,2678,"Otros 1","Tipo C"),(9,3894,"Otros 1","Tipo D"),(10,1676,"Otros 1","Tipo D");
 INSERT INTO `insumo` (`id`,`cantidad`,`nombre`,`tipo`) VALUES (11,982,"Otros 1","Tipo C"),(12,1626,"Otros 2","Tipo B"),(13,4656," Otros 3","Tipo D"),(14,2452," Otros 3","Tipo F"),(15,3018,"Otros 2","Tipo A"),(16,4529,"Otros 2","Tipo D"),(17,4259," Otros 3","Tipo C"),(18,4368," Otros 3","Tipo F"),(19,2505," Otros 3","Tipo A"),(20,784,"Otros 2","Tipo C");
 INSERT INTO `insumo` (`id`,`cantidad`,`nombre`,`tipo`) VALUES (21,2191," Otros 3","Tipo F"),(22,4419,"Otros 1","Tipo D"),(23,2561," Otros 3","Tipo F"),(24,3092," Otros 3","Tipo F"),(25,1171,"Otros 1","Tipo F"),(26,2198," Otros 3","Tipo C"),(27,591," Otros 3","Tipo C"),(28,1419," Otros 3","Tipo A"),(29,2077,"Otros 1","Tipo F"),(30,4465,"Otros 1","Tipo A");
 INSERT INTO `insumo` (`id`,`cantidad`,`nombre`,`tipo`) VALUES (31,2408,"Otros 1","Tipo B"),(32,3733,"Otros 2","Tipo D"),(33,2955," Otros 3","Tipo A"),(34,973,"Otros 2","Tipo B"),(35,4007," Otros 3","Tipo D"),(36,1953,"Otros 2","Tipo B"),(37,2701," Otros 3","Tipo A"),(38,1540,"Otros 1","Tipo F"),(39,1008,"Otros 2","Tipo B"),(40,4348," Otros 3","Tipo B");
