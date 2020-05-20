@@ -121,6 +121,7 @@
 						<h5>Simulador de distribución de insumos a hospitales</h5>
 						<div class="ibox-tools">
 							<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
+							</a>
 						</div>
 					</div>
 					<div class="ibox-content">
