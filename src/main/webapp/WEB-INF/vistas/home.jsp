@@ -31,6 +31,7 @@
 				</div>
 			</div>
 		</div>
+
 		<div class="row">
 			<div class="col-sm-12 col-lg-6">
 				<div class="ibox float-e-margins">
@@ -141,29 +142,46 @@
 								</div>
 							</div>
 							<div class="col-sm-3">
-								<button type="button" class="btn btn-sm btn-primary btn-block">
+								<button onclick="location.href='./distribuir-insumos'" type="button" class="btn btn-sm btn-primary btn-block">
 									Iniciar simulacion</button>
 							</div>
 						</div>
+						<h1>33asdas3</h1>
 						<div class="table-responsive">
 							<table class="table table-striped table-hover">
 								<thead>
 									<tr>
-
 										<th>#</th>
 										<th>Establecimiento</th>
 										<th>Capacidad</th>
 										<th>Indice</th>
 										<th>Zona</th>
-										<th>Tipos Asignados</th>
-										<th>Cantidad Asignada</th>
+										<th>Respiradores</th>
+										<th>Delantales</th>
+										<th>Otros 2</th>
+										<th>Otros 1</th>
+										<th>Camas</th>
+										<th>Jeringas</th>
+										<th>Tapa bocas</th>
 									</tr>
 								</thead>
 								<tbody>
+									<c:forEach items="${MapaDistribuido}" var="listElement">
+										<tr>
+											<td>${listElement.key.getId()}</td>
+											<td>${listElement.key.getNombre()}</td>
+											<td>${listElement.key.getCapacidad()}</td>
+											<td>${listElement.key.getIndice()}</td>
+											<td>${listElement.key.getZona()}</td>
+											<c:forEach items="${listElement.value}" var="mapElement">
+												<!--<td>${mapElement.key}:</td> No borrar este comentario, sirve para saber cual es el producto distribuido-->
+												<td>${mapElement.value}</td>
+											</c:forEach>
+										</tr>
+									</c:forEach>
 								</tbody>
 							</table>
 						</div>
-
 					</div>
 				</div>
 			</div>

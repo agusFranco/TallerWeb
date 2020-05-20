@@ -8,7 +8,7 @@ import ar.edu.unlam.tallerweb1.modelo.Insumo;
 
 public interface ServicioDistribucion {
 
-	public Map<Establecimiento, List<Insumo>> AsignarInsumos(List<Establecimiento> establecimientos,
-			List<Insumo> insumos);
+	public Map<Establecimiento, Map<String,Integer>> AsignarInsumos(List<Establecimiento> listaEstablecimientos,
+																	List<Insumo> listaInsumos);
 
 }
