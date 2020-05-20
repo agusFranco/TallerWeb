@@ -44,7 +44,7 @@
 					<div class="ibox-content">
 						<div class="table-responsive">
 							<table
-								class="table table-striped table-bordered table-hover grilla-dataTable">
+								class="table table-striped table-hover grilla-dataTable">
 								<thead>
 									<tr>
 
@@ -89,7 +89,7 @@
 					<div class="ibox-content">
 						<div class="table-responsive">
 							<table
-								class="table table-striped table-bordered table-hover grilla-dataTable">
+								class="table table-striped table-hover grilla-dataTable">
 								<thead>
 									<tr>
 										<th>#</th>
@@ -146,7 +146,7 @@
 							</div>
 						</div>
 						<div class="table-responsive">
-							<table class="table table-striped table-bordered table-hover">
+							<table class="table table-striped table-hover">
 								<thead>
 									<tr>
 
