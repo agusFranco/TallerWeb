@@ -68,11 +68,25 @@ public class HomeControlador {
 		List<Establecimiento> listaEst = servicioEstablecimiento.obtenerTodos();
 		List<Insumo> listaIns = servicioInsumo.obtenerTodos();
 
-		ModelMap modelo = new ModelMap();
+		ModelMap modeloDistribucion = new ModelMap();
 
-		modelo.put("listaDistrib", servicioDistribucion.AsignarInsumos(listaEst, listaIns));
+		
+		modeloDistribucion.put("MapaDistribuido", servicioDistribucion.AsignarInsumos(listaEst, listaIns));
+		//ESTAS LINEAS TENEMOS QUE ELIMINARLAS, TENEMOS QUE VER LA MANERA DE MANEJAR EL MODELO DEL HOME TAMBIEN EN ESTA PAGINA SIN REPETIR TODO DE ENUEVO
+		// Listas para mostrar en la tabla principal
+		List<Establecimiento> establecimientos = servicioEstablecimiento.obtenerTodos();
+		List<Insumo> insumos = servicioInsumo.obtenerTodos();
+		modeloDistribucion.put("listaEstablecimientos", establecimientos);
+		modeloDistribucion.put("listaInsumos", insumos);
 
-		return new ModelAndView("home", modelo);
+		// Agrego al modelo cartelito con contador de establecimientos
+		Long cantidadEst = servicioEstablecimiento.cantidadItems(establecimientos);
+		modeloDistribucion.put("cantidadEstablecimientos", cantidadEst);
+
+		// Agrego al modelo cartelito con contador de insumos
+		Long cantidadIns = servicioInsumo.CantTotalInsumos();
+		modeloDistribucion.put("cantidadInsumos", cantidadIns);
+		return new ModelAndView("home", modeloDistribucion);
 	}
 
 	// Carga de Establecimientos - Masiva

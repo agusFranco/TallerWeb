@@ -23,9 +23,6 @@ public class ServicioDistribucionImpl implements ServicioDistribucion {
 		
 //		Integer cantInsumos = listaInsumos.size();
 
-//		for (Insumo insumo: listaInsumos) {
-//			mapaInsumosDistribuido.put(insumo.getNombre(), insumo.getCantidad());
-//		}	
 		
 		//Contador de establecimiento por indice de riesgo mayor a 50
 		Integer estMas50 = 00;
@@ -39,26 +36,27 @@ public class ServicioDistribucionImpl implements ServicioDistribucion {
 		}
 		
 		//Variables para el foreach de los atributos/parametros del insumo
-		String NombreInsumoActual;
+		String nombreInsumoActual;
 		Integer cantInsumoActual;
 		
 		for (Establecimiento establecimientoItem: listaEstablecimientos) {
 			
-			Map<String,Integer> mapaInsumosDistribuido = new HashMap<String,Integer>();
+			// Mapa donde se almacena el nombre del insumo y su cantidad otorgada			
+			Map<String,Integer> mapaInsumoOtorgado = new HashMap<String,Integer>();
 			
 			for (Insumo insumoItem: listaInsumos) {
-				NombreInsumoActual = insumoItem.getNombre();
+				nombreInsumoActual = insumoItem.getNombre();
 				cantInsumoActual = insumoItem.getCantidad();
 				
 				if(establecimientoItem.getIndice() > 50) {	
 					
-					mapaInsumosDistribuido.put(NombreInsumoActual,(int) (cantInsumoActual*0.80/estMas50));
-					distribuciones.put(establecimientoItem,mapaInsumosDistribuido);
+					mapaInsumoOtorgado.put(nombreInsumoActual,(int) (cantInsumoActual*0.80/estMas50));
+					distribuciones.put(establecimientoItem,mapaInsumoOtorgado);
 					
 				}else {
 					
-					mapaInsumosDistribuido.put(NombreInsumoActual,(int) (cantInsumoActual*0.2/estMenos50));
-					distribuciones.put(establecimientoItem,mapaInsumosDistribuido);
+					mapaInsumoOtorgado.put(nombreInsumoActual,(int) (cantInsumoActual*0.2/estMenos50));
+					distribuciones.put(establecimientoItem,mapaInsumoOtorgado);
 				}
 			}
 		}

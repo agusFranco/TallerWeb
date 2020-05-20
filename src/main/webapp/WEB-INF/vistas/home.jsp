@@ -140,11 +140,11 @@
 								</div>
 							</div>
 							<div class="col-sm-3">
-								<button type="button" class="btn btn-sm btn-primary btn-block">
+								<button onclick="location.href='./distribuir-insumos'" type="button" class="btn btn-sm btn-primary btn-block">
 									Iniciar simulacion</button>
 							</div>
 						</div>
-						<h1>333</h1>
+						<h1>33asdas3</h1>
 						<div class="table-responsive">
 							<table class="table table-striped">
 								<thead>
@@ -164,7 +164,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach items="${listaDistrib}" var="listElement">
+									<c:forEach items="${MapaDistribuido}" var="listElement">
 										<tr>
 											<td>${listElement.key.getId()}</td>
 											<td>${listElement.key.getNombre()}</td>
