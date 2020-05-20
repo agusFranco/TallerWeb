@@ -31,6 +31,7 @@
 				</div>
 			</div>
 		</div>
+
 		<div class="row">
 			<div class="col-sm-12 col-lg-6">
 				<div class="ibox float-e-margins">
@@ -161,7 +162,28 @@
 								</tbody>
 							</table>
 						</div>
-
+												<div class="table-responsive">
+							<table class="table table-striped">
+							<thead>
+   <c:forEach items="${listaDistrib}" var="mapElement">
+      <tr>
+      		<td>${mapElement.key.getId()}</td>
+           <td>${mapElement.key.getNombre()}</td>
+           <td>${mapElement.key.getCapacidad()}</td>
+           <td>${mapElement.key.getIndice()}</td>
+           <td>${mapElement.key.getZona()}</td>
+           <c:forEach items="${mapElement.value}" var="listElement" >
+              <td>${listElement}</td>
+           </c:forEach>
+      </tr>
+   </c:forEach>
+								</thead>
+								<tbody>
+								</tbody>
+							</table>
+						</div>
+		<h1>PRss1</h1>
+	
 					</div>
 				</div>
 			</div>

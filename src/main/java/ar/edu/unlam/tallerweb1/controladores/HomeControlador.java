@@ -72,7 +72,7 @@ public class HomeControlador {
 
 		modelo.put("listaDistrib", servicioDistribucion.AsignarInsumos(listaEst, listaIns));
 
-		return new ModelAndView("redirect:/home", modelo);
+		return new ModelAndView("home", modelo);
 	}
 
 	// Carga de Establecimientos - Masiva
