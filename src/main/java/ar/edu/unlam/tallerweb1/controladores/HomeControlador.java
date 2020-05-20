@@ -30,6 +30,11 @@ public class HomeControlador {
 		this.servicioInsumo = servicioInsumo;
 	}
 
+	@RequestMapping(path = "/", method = RequestMethod.GET)
+	public ModelAndView inicio() {
+		return new ModelAndView("redirect:/home");
+	}
+
 	// Escucha la URL /home por GET, y redirige a una vista.
 	@RequestMapping(path = "/home", method = RequestMethod.GET)
 	public ModelAndView irAHome() {
