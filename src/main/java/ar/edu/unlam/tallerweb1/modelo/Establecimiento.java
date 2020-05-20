@@ -20,8 +20,7 @@ public class Establecimiento {
 
 	public Establecimiento() {
 	}
-	
-	
+
 	public Establecimiento(String nombre, String ubicacion, Integer capacidad, Integer indice, String zona,
 			String responsable) {
 		this.nombre = nombre;
@@ -31,8 +30,6 @@ public class Establecimiento {
 		this.zona = zona;
 		this.responsable = responsable;
 	}
-
-
 
 	public Integer getId() {
 		return id;

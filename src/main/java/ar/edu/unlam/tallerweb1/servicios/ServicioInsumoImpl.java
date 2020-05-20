@@ -2,8 +2,6 @@ package ar.edu.unlam.tallerweb1.servicios;
 
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +19,6 @@ public class ServicioInsumoImpl implements ServicioInsumo {
 	public ServicioInsumoImpl(RepositorioInsumo servicioInsumoDao) {
 		this.servicioInsumoDao = servicioInsumoDao;
 	}
-	
 
 	@Override
 	public void insertarDatosMasivos() {
@@ -33,10 +30,10 @@ public class ServicioInsumoImpl implements ServicioInsumo {
 		return servicioInsumoDao.getAll();
 	}
 
-//  Retorna la cantidad de insumos disponibles, realiza un SUM del campo 'cantidad'
+	//  Retorna la cantidad de insumos disponibles, realiza un SUM del campo 'cantidad'
 	@Override
 	public Long CantTotalInsumos() {
 		return servicioInsumoDao.CantTotalInsumos();
 	}
-	
+
 }

@@ -7,13 +7,13 @@ import ar.edu.unlam.tallerweb1.modelo.Establecimiento;
 public interface ServicioEstablecimiento {
 
 	Establecimiento consultarEstablecimiento(int id);
-	
+
 	List<Establecimiento> obtenerTodos();
-	
+
 	Establecimiento calcularRiesgo(Establecimiento establecimiento);
 
 	void insertarDatosMasivos();
-		
+
 	Long cantidadItems(List<Establecimiento> listaEstablecimiento);
-	
+
 }

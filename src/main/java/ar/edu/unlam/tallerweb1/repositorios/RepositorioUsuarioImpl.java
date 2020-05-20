@@ -9,7 +9,6 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import ar.edu.unlam.tallerweb1.modelo.Insumo;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 
 // implelemtacion del repositorio de usuarios, la anotacion @Repository indica a Spring que esta clase es un componente que debe
@@ -38,14 +37,14 @@ public class RepositorioUsuarioImpl extends RepositorioBaseImpl<Usuario, Integer
 				.add(Restrictions.eq("password", usuario.getPassword())).uniqueResult();
 	}
 
-//	Inserta usuarios a la BDD - MASIVO
+	//	Inserta usuarios a la BDD - MASIVO
 	public void insertarDatosMasivos() {
 		final Session session = sessionFactory.getCurrentSession();
 		// AGREGAR LOS INSERT MASIVOS DEL OBJETO
 		List<Usuario> listaObjetos = new ArrayList<Usuario>();
-		listaObjetos.add(new Usuario("test@test.com","test"));
+		listaObjetos.add(new Usuario("test@test.com", "test"));
 
-		for(Usuario objeto : listaObjetos) {
+		for (Usuario objeto : listaObjetos) {
 			session.save(objeto);
 		}
 	}
