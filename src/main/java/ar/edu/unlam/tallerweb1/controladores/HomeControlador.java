@@ -38,54 +38,18 @@ public class HomeControlador {
 	// Escucha la URL /home por GET, y redirige a una vista.
 	@RequestMapping(path = "/home", method = RequestMethod.GET)
 	public ModelAndView irAHome() {
-		// cruce entre establecimientos e insumos Map<Establecimiento,Insumo[]>
-		// insumosPorEstablecimiento = null; insumosPorEstablecimiento =
-		// servicioDistribucion.AsignarInsumos(establecimientos, insumos);
-
-		ModelMap modelo = new ModelMap();
-
-		// Listas para mostrar en la tabla principal
-		List<Establecimiento> establecimientos = servicioEstablecimiento.obtenerTodos();
-		List<Insumo> insumos = servicioInsumo.obtenerTodos();
-		modelo.put("listaEstablecimientos", establecimientos);
-		modelo.put("listaInsumos", insumos);
-
-		// Agrego al modelo cartelito con contador de establecimientos
-		Long cantidadEst = servicioEstablecimiento.cantidadItems(establecimientos);
-		modelo.put("cantidadEstablecimientos", cantidadEst);
-
-		// Agrego al modelo cartelito con contador de insumos
-		Long cantidadIns = servicioInsumo.CantTotalInsumos();
-		modelo.put("cantidadInsumos", cantidadIns);
-
-		return new ModelAndView("home", modelo);
+		return new ModelAndView("home", this.getDefaultHomeModel());
 	}
 
-	// Carga de Establecimientos - Masiva
 	@RequestMapping(path = "/home", method = RequestMethod.POST)
 	public ModelAndView distribuirInsumos() {
+		ModelMap modelo = this.getDefaultHomeModel();
 
-		List<Establecimiento> listaEst = servicioEstablecimiento.obtenerTodos();
-		List<Insumo> listaIns = servicioInsumo.obtenerTodos();
+		modelo.put("MapaDistribuido",
+				servicioDistribucion.AsignarInsumos((List<Establecimiento>) modelo.get("listaEstablecimientos"),
+						(List<Insumo>) modelo.get("listaInsumos")));
 
-		ModelMap modeloDistribucion = new ModelMap();
-
-		modeloDistribucion.put("MapaDistribuido", servicioDistribucion.AsignarInsumos(listaEst, listaIns));
-		//ESTAS LINEAS TENEMOS QUE ELIMINARLAS, TENEMOS QUE VER LA MANERA DE MANEJAR EL MODELO DEL HOME TAMBIEN EN ESTA PAGINA SIN REPETIR TODO DE ENUEVO
-		// Listas para mostrar en la tabla principal
-		List<Establecimiento> establecimientos = servicioEstablecimiento.obtenerTodos();
-		List<Insumo> insumos = servicioInsumo.obtenerTodos();
-		modeloDistribucion.put("listaEstablecimientos", establecimientos);
-		modeloDistribucion.put("listaInsumos", insumos);
-
-		// Agrego al modelo cartelito con contador de establecimientos
-		Long cantidadEst = servicioEstablecimiento.cantidadItems(establecimientos);
-		modeloDistribucion.put("cantidadEstablecimientos", cantidadEst);
-
-		// Agrego al modelo cartelito con contador de insumos
-		Long cantidadIns = servicioInsumo.CantTotalInsumos();
-		modeloDistribucion.put("cantidadInsumos", cantidadIns);
-		return new ModelAndView("home", modeloDistribucion);
+		return new ModelAndView("home", modelo);
 	}
 
 	// Carga de Establecimientos - Masiva
@@ -102,13 +66,19 @@ public class HomeControlador {
 		return new ModelAndView("redirect:/home");
 	}
 
-	// REVISAR ESTE METODO, INTENTAR HACER ESTE METODO DE CARGA GENERICO
-	// @RequestMapping(path = "/cargar-est", method = RequestMethod.GET)
-	// public ModelAndView cargarEstablecimientos() {
-	//
-	// List<Establecimiento> listaEstablecimiento = new
-	// ArrayList<Establecimiento>();
-	// servicioEstablecimiento.insertarDatosMasivos(listaEstablecimiento);
-	// return new ModelAndView("home");
-	// }
+	private ModelMap getDefaultHomeModel() {
+		ModelMap modelo = new ModelMap();
+
+		List<Establecimiento> establecimientos = servicioEstablecimiento.obtenerTodos();
+		List<Insumo> insumos = servicioInsumo.obtenerTodos();
+		Long cantidadEst = servicioEstablecimiento.cantidadItems(establecimientos);
+		Long cantidadIns = servicioInsumo.CantTotalInsumos();
+
+		modelo.put("listaEstablecimientos", establecimientos);
+		modelo.put("listaInsumos", insumos);
+		modelo.put("cantidadEstablecimientos", cantidadEst);
+		modelo.put("cantidadInsumos", cantidadIns);
+
+		return modelo;
+	}
 }

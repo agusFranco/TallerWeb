@@ -44,8 +44,7 @@
 					</div>
 					<div class="ibox-content">
 						<div class="table-responsive">
-							<table
-								class="table table-striped table-hover grilla-dataTable">
+							<table class="table table-striped table-hover grilla-dataTable">
 								<thead>
 									<tr>
 
@@ -85,8 +84,7 @@
 					</div>
 					<div class="ibox-content">
 						<div class="table-responsive">
-							<table
-								class="table table-striped table-hover grilla-dataTable">
+							<table class="table table-striped table-hover grilla-dataTable">
 								<thead>
 									<tr>
 										<th>#</th>
@@ -138,13 +136,12 @@
 								</div>
 							</div>
 							<div class="col-sm-3">
-							 <form action="./home" method="POST">
-								<button type="submit" class="btn btn-sm btn-primary btn-block">
-									Iniciar simulacion</button>
-							 </form>
+								<form action="./home" method="POST">
+									<button type="submit" class="btn btn-sm btn-primary btn-block">
+										Iniciar simulacion</button>
+								</form>
 							</div>
 						</div>
-						<h1>111111</h1>
 						<div class="table-responsive">
 							<table class="table table-striped table-hover grilla-dataTable">
 								<thead>
