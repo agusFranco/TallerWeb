@@ -62,7 +62,7 @@ public class HomeControlador {
 	}
 
 	// Carga de Establecimientos - Masiva
-	@RequestMapping(path = "/distribuir-insumos", method = RequestMethod.GET)
+	@RequestMapping(path = "/home", method = RequestMethod.POST)
 	public ModelAndView distribuirInsumos() {
 
 		List<Establecimiento> listaEst = servicioEstablecimiento.obtenerTodos();
@@ -70,7 +70,6 @@ public class HomeControlador {
 
 		ModelMap modeloDistribucion = new ModelMap();
 
-		
 		modeloDistribucion.put("MapaDistribuido", servicioDistribucion.AsignarInsumos(listaEst, listaIns));
 		//ESTAS LINEAS TENEMOS QUE ELIMINARLAS, TENEMOS QUE VER LA MANERA DE MANEJAR EL MODELO DEL HOME TAMBIEN EN ESTA PAGINA SIN REPETIR TODO DE ENUEVO
 		// Listas para mostrar en la tabla principal

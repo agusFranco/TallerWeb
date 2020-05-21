@@ -51,8 +51,6 @@
 
 										<th>#</th>
 										<th>Nombre</th>
-										<th>Responsable</th>
-										<th>Zona</th>
 										<th>Capacidad</th>
 										<th>Indice</th>
 									</tr>
@@ -64,8 +62,6 @@
 											<tr>
 												<td>${itemEstablecimiento.getId()}</td>
 												<td>${itemEstablecimiento.getNombre()}</td>
-												<td>${itemEstablecimiento.getResponsable()}</td>
-												<td>${itemEstablecimiento.getZona()}</td>
 												<td>${itemEstablecimiento.getCapacidad()}</td>
 												<td>${itemEstablecimiento.getIndice()}</td>
 											</tr>
@@ -142,13 +138,15 @@
 								</div>
 							</div>
 							<div class="col-sm-3">
-								<button onclick="location.href='./distribuir-insumos'" type="button" class="btn btn-sm btn-primary btn-block">
+							 <form action="./home" method="POST">
+								<button type="submit" class="btn btn-sm btn-primary btn-block">
 									Iniciar simulacion</button>
+							 </form>
 							</div>
 						</div>
-						<h1>33asdas3</h1>
+						<h1>111111</h1>
 						<div class="table-responsive">
-							<table class="table table-striped table-hover">
+							<table class="table table-striped table-hover grilla-dataTable">
 								<thead>
 									<tr>
 										<th>#</th>
