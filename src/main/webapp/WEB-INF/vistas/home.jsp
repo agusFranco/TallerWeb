@@ -115,7 +115,7 @@
 			<div class="col-lg-12">
 				<div class="ibox float-e-margins">
 					<div class="ibox-title">
-						<h5>Simulador de distribución de insumos a hospitales</h5>
+						<h5>Simulador de distribución de insumos a establecimientos</h5>
 						<div class="ibox-tools">
 							<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
 							</a>
@@ -123,7 +123,7 @@
 					</div>
 					<div class="ibox-content">
 						<div class="row">
-							<div class="col-sm-9 m-b-xs">
+							<div class="col-sm-10 m-b-xs">
 								<div data-toggle="buttons" class="btn-group">
 									<label class="btn btn-sm btn-white"> <input
 										type="radio" id="option1" name="options"> Por Indice
@@ -135,10 +135,10 @@
 									</label>
 								</div>
 							</div>
-							<div class="col-sm-3">
+							<div class="col-sm-2">
 								<form action="./home" method="POST">
-									<button type="submit" class="btn btn-sm btn-primary btn-block">
-										Iniciar simulacion</button>
+									<button type="submit" class="btn btn-primary">
+										<i class="fa fa-medkit"></i><strong> Iniciar simulacion</strong></button>
 								</form>
 							</div>
 						</div>

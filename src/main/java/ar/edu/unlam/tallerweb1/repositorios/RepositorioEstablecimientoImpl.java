@@ -19,7 +19,7 @@ public class RepositorioEstablecimientoImpl extends RepositorioBaseImpl<Establec
 		super(sessionFactory);
 	}
 
-	//	Inserta Establecimientos a la BDD - MASIVO
+	
 	public void insertarDatosMasivos() {
 		final Session session = sessionFactory.getCurrentSession();
 
