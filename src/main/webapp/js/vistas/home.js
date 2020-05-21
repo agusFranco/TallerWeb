@@ -9,7 +9,7 @@ $(document).ready(function() {
             "sProcessing": "Procesando...",
             "sLengthMenu": "Mostrar _MENU_ registros",
             "sZeroRecords": "No se encontraron resultados",
-            "sEmptyTable": "Sin información disponible para esta tabla",
+            "sEmptyTable": "Sin informacion disponible para esta tabla",
             "sInfo": "Mostrando del registro _START_ al _END_ de un total de _TOTAL_",
             "sInfoEmpty": "Mostrando del registro 0 al 0 de un total de 0",
             "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",

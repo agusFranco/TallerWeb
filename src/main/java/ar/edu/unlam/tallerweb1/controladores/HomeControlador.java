@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,9 +19,9 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioInsumo;
 @Controller
 public class HomeControlador {
 
-	private ServicioDistribucion servicioDistribucion;
-	private ServicioEstablecimiento servicioEstablecimiento;
-	private ServicioInsumo servicioInsumo;
+	private final ServicioDistribucion servicioDistribucion;
+	private final ServicioEstablecimiento servicioEstablecimiento;
+	private final ServicioInsumo servicioInsumo;
 
 	@Autowired
 	public HomeControlador(ServicioDistribucion servicioDistribucion, ServicioEstablecimiento servicioEstablecimiento,
@@ -30,6 +31,7 @@ public class HomeControlador {
 		this.servicioInsumo = servicioInsumo;
 	}
 
+	// Escucha la URL "/" y redirije a Home. Esto antes estaba en login pero fue.
 	@RequestMapping(path = "/", method = RequestMethod.GET)
 	public ModelAndView inicio() {
 		return new ModelAndView("redirect:/home");
@@ -41,13 +43,19 @@ public class HomeControlador {
 		return new ModelAndView("home", this.getDefaultHomeModel());
 	}
 
+	// Action de distribuir los insumos.
+	// Busca el modelo default y le agrega la asignacion de insumos.
 	@RequestMapping(path = "/home", method = RequestMethod.POST)
 	public ModelAndView distribuirInsumos() {
+		// Busco el modelo default
 		ModelMap modelo = this.getDefaultHomeModel();
 
-		modelo.put("MapaDistribuido",
-				servicioDistribucion.AsignarInsumos((List<Establecimiento>) modelo.get("listaEstablecimientos"),
-						(List<Insumo>) modelo.get("listaInsumos")));
+		// cruce entre establecimientos e insumos Map<Establecimiento,Insumo[]>
+		Map<Establecimiento, Map<String, Integer>> asignacion = servicioDistribucion.AsignarInsumos(
+				(List<Establecimiento>) modelo.get("listaEstablecimientos"), (List<Insumo>) modelo.get("listaInsumos"));
+
+		// La agrego al modelo
+		modelo.put("MapaDistribuido", asignacion);
 
 		return new ModelAndView("home", modelo);
 	}
@@ -66,11 +74,15 @@ public class HomeControlador {
 		return new ModelAndView("redirect:/home");
 	}
 
+	// Obtiene los datos por default de la vista home.
 	private ModelMap getDefaultHomeModel() {
 		ModelMap modelo = new ModelMap();
 
+		// Listas para mostrar en la tabla principal
 		List<Establecimiento> establecimientos = servicioEstablecimiento.obtenerTodos();
 		List<Insumo> insumos = servicioInsumo.obtenerTodos();
+
+		// Valores para los widget
 		Long cantidadEst = servicioEstablecimiento.cantidadItems(establecimientos);
 		Long cantidadIns = servicioInsumo.CantTotalInsumos();
 

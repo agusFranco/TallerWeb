@@ -168,7 +168,8 @@
 											<td>${listElement.key.getCapacidad()}</td>
 											<td>${listElement.key.getIndice()}</td>
 											<td>${listElement.key.getZona()}</td>
-											<c:forEach items="${listElement.value}" var="mapElement">
+											<c:forEach items="${listElement.value}" var="mapElement"
+												begin="0" end="6">
 												<!--<td>${mapElement.key}:</td> No borrar este comentario, sirve para saber cual es el producto distribuido-->
 												<td>${mapElement.value}</td>
 											</c:forEach>
