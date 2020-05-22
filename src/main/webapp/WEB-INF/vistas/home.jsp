@@ -51,7 +51,7 @@
 										<th>#</th>
 										<th>Nombre</th>
 										<th>Capacidad</th>
-										<th>Indice</th>
+										<th>Ocupacion</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -62,7 +62,7 @@
 												<td>${itemEstablecimiento.getId()}</td>
 												<td>${itemEstablecimiento.getNombre()}</td>
 												<td>${itemEstablecimiento.getCapacidad()}</td>
-												<td>${itemEstablecimiento.getIndice()}</td>
+												<td>${itemEstablecimiento.getOcupacion()}</td>
 											</tr>
 										</c:forEach>
 									</c:if>
@@ -125,11 +125,12 @@
 						<div class="row">
 							<div class="col-sm-10 m-b-xs">
 								<div data-toggle="buttons" class="btn-group">
+									<p>Calcular Índice de riesgo por</p>
 									<label class="btn btn-sm btn-white"> <input
 										type="radio" id="option1" name="options"> Por Indice
 									</label> <label class="btn btn-sm btn-white active"> <input
-										type="radio" id="option2" name="options"> Por
-										Capacidad
+										type="radio" id="option2" name="options">
+										Ocupación sobre Capacidad
 									</label> <label class="btn btn-sm btn-white"> <input
 										type="radio" id="option3" name="options"> Por Zona
 									</label>
@@ -138,7 +139,9 @@
 							<div class="col-sm-2">
 								<form action="./home" method="POST">
 									<button type="submit" class="btn btn-primary">
-										<i class="fa fa-medkit"></i><strong> Iniciar simulacion</strong></button>
+										<i class="fa fa-medkit"></i><strong> Iniciar
+											simulacion</strong>
+									</button>
 								</form>
 							</div>
 						</div>
@@ -149,7 +152,7 @@
 										<th>#</th>
 										<th>Establecimiento</th>
 										<th>Capacidad</th>
-										<th>Indice</th>
+										<th>Prioridad (%)</th>
 										<th>Zona</th>
 										<th>Respiradores</th>
 										<th>Delantales</th>
@@ -166,7 +169,7 @@
 											<td>${listElement.key.getId()}</td>
 											<td>${listElement.key.getNombre()}</td>
 											<td>${listElement.key.getCapacidad()}</td>
-											<td>${listElement.key.getIndice()}</td>
+											<td>${listElement.key.getPrioridad()} %</td>
 											<td>${listElement.key.getZona()}</td>
 											<c:forEach items="${listElement.value}" var="mapElement"
 												begin="0" end="6">

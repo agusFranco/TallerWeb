@@ -20,43 +20,46 @@ public class ServicioDistribucionImpl implements ServicioDistribucion {
 
 		Map<Establecimiento, Map<String,Integer>> distribuciones = new HashMap<Establecimiento, Map<String,Integer>>();
 
-		
 //		Integer cantInsumos = listaInsumos.size();
-
+		
+		
 		
 		//Contador de establecimiento por indice de riesgo mayor a 50
 		Integer estMas50 = 00;
 		Integer estMenos50 = 00;
-		for (Establecimiento establecimientoItem: listaEstablecimientos) {
-			if(establecimientoItem.getIndice() > 50) {
+		for (Establecimiento estItem: listaEstablecimientos) {
+			Integer prioridad = estItem.getCapacidad()/estItem.getOcupacion();		
+			if(prioridad > 50) {
 				estMas50++;
 			}else {
 				estMenos50++;
 			}
+			estItem.setPrioridad(prioridad);
 		}
 		
 		//Variables para el foreach de los atributos/parametros del insumo
 		String nombreInsumoActual;
 		Integer cantInsumoActual;
 		
-		for (Establecimiento establecimientoItem: listaEstablecimientos) {
+		for (Establecimiento estItem: listaEstablecimientos) {
 			
 			// Mapa donde se almacena el nombre del insumo y su cantidad otorgada			
 			Map<String,Integer> mapaInsumoOtorgado = new HashMap<String,Integer>();
+			Integer prioridad = estItem.getCapacidad()/estItem.getOcupacion();
 			
 			for (Insumo insumoItem: listaInsumos) {
 				nombreInsumoActual = insumoItem.getNombre();
 				cantInsumoActual = insumoItem.getCantidad();
 				
-				if(establecimientoItem.getIndice() > 50) {	
+				if(prioridad > 50) {	
 					
 					mapaInsumoOtorgado.put(nombreInsumoActual,(int) (cantInsumoActual*0.80/estMas50));
-					distribuciones.put(establecimientoItem,mapaInsumoOtorgado);
+					distribuciones.put(estItem,mapaInsumoOtorgado);
 					
 				}else {
 					
-					mapaInsumoOtorgado.put(nombreInsumoActual,(int) (cantInsumoActual*0.2/estMenos50));
-					distribuciones.put(establecimientoItem,mapaInsumoOtorgado);
+					mapaInsumoOtorgado.put(nombreInsumoActual,(int) (cantInsumoActual*0.20/estMenos50));
+					distribuciones.put(estItem,mapaInsumoOtorgado);
 				}
 			}
 		}

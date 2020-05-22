@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	$('.grilla-dataTable').DataTable({
-		pageLength : 7,
+		pageLength : 10,
 		responsive : true,
 		dom : '<"html5buttons"B>lTfgitp',
 		buttons : [],
