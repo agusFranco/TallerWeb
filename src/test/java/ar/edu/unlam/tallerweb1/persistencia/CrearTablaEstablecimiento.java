@@ -18,7 +18,7 @@ public class CrearTablaEstablecimiento extends SpringTest {
 	public void crearTablaEstablecimiento() {
 		Establecimiento clinicaCovid19 = new Establecimiento();
 		clinicaCovid19.setCapacidad(100);
-		clinicaCovid19.setIndice(10);
+		clinicaCovid19.setPrioridad(10);
 		clinicaCovid19.setNombre("clinicaUNO");
 		final Session session = session();
 		session().save(clinicaCovid19);

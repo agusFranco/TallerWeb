@@ -15,5 +15,6 @@ public interface ServicioEstablecimiento {
 	void insertarDatosMasivos();
 
 	Long cantidadItems(List<Establecimiento> listaEstablecimiento);
+	
 
 }

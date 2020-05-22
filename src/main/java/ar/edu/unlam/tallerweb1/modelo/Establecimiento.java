@@ -5,6 +5,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import ar.edu.unlam.tallerweb1.modelo.otros.Zona;
+
 @Entity
 public class Establecimiento {
 
@@ -13,20 +15,21 @@ public class Establecimiento {
 	private Integer id;
 	private String nombre;
 	private String ubicacion;
-	private Integer capacidad;
-	private Integer indice;
 	private String zona;
+	private Integer capacidad;
+	private Integer ocupacion;
+	private Integer prioridad;
 	private String responsable;
 
 	public Establecimiento() {
 	}
 
-	public Establecimiento(String nombre, String ubicacion, Integer capacidad, Integer indice, String zona,
+	public Establecimiento(String nombre, String ubicacion, Integer capacidad, Integer prioridad, String zona,
 			String responsable) {
 		this.nombre = nombre;
 		this.ubicacion = ubicacion;
 		this.capacidad = capacidad;
-		this.indice = indice;
+		this.prioridad = prioridad;
 		this.zona = zona;
 		this.responsable = responsable;
 	}
@@ -59,16 +62,24 @@ public class Establecimiento {
 		this.capacidad = capacidad;
 	}
 
-	public Integer getIndice() {
-		return indice;
+	public Integer getPrioridad() {
+		return prioridad;
 	}
 
-	public void setIndice(Integer indice) {
-		this.indice = indice;
+	public void setPrioridad(Integer prioridad) {
+		this.prioridad = prioridad;
 	}
 
 	public String getZona() {
 		return zona;
+	}
+
+	public Integer getOcupacion() {
+		return ocupacion;
+	}
+
+	public void setOcupacion(Integer ocupacion) {
+		this.ocupacion = ocupacion;
 	}
 
 	public void setZona(String zona) {
@@ -81,5 +92,9 @@ public class Establecimiento {
 
 	public void setResponsable(String responsable) {
 		this.responsable = responsable;
+	}
+	
+	public Integer calcularPrioridadOcupacion(Integer capacidad, Integer ocupacion) {
+		return capacidad/ocupacion;
 	}
 }

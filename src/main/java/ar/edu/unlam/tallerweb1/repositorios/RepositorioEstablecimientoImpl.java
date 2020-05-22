@@ -46,4 +46,5 @@ public class RepositorioEstablecimientoImpl extends RepositorioBaseImpl<Establec
 		}
 	}
 
+
 }
