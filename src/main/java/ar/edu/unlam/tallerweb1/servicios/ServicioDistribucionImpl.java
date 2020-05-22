@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,20 +16,18 @@ import ar.edu.unlam.tallerweb1.modelo.Insumo;
 public class ServicioDistribucionImpl implements ServicioDistribucion {
 
 	@Override
-	public Map<Establecimiento, Map<String, Integer>> AsignarInsumos(List<Establecimiento> listaEstablecimientos,
-																	 List<Insumo> listaInsumos) {
+	public Map<Establecimiento, List<Insumo>> asignarInsumos(List<Establecimiento> listaEstablecimientos,
+															 List<Insumo> listaInsumos) {
 
-		Map<Establecimiento, Map<String,Integer>> distribuciones = new HashMap<Establecimiento, Map<String,Integer>>();
+		Map<Establecimiento, List<Insumo>> distribuciones = new HashMap<Establecimiento, List<Insumo>>();
 
 //		Integer cantInsumos = listaInsumos.size();
-		
-		
 		
 		//Contador de establecimiento por indice de riesgo mayor a 50
 		Integer estMas50 = 00;
 		Integer estMenos50 = 00;
 		for (Establecimiento estItem: listaEstablecimientos) {
-			Integer prioridad = estItem.getCapacidad()/estItem.getOcupacion();		
+			Integer prioridad = estItem.calcularPrioridadOcupacion(estItem.getCapacidad(), estItem.getOcupacion());
 			if(prioridad > 50) {
 				estMas50++;
 			}else {
@@ -44,22 +43,31 @@ public class ServicioDistribucionImpl implements ServicioDistribucion {
 		for (Establecimiento estItem: listaEstablecimientos) {
 			
 			// Mapa donde se almacena el nombre del insumo y su cantidad otorgada			
-			Map<String,Integer> mapaInsumoOtorgado = new HashMap<String,Integer>();
-			Integer prioridad = estItem.getCapacidad()/estItem.getOcupacion();
+			List<Insumo> listaInsumoOtorgado = new ArrayList<Insumo>();
+			Integer prioridadEst = estItem.getCapacidad()/estItem.getOcupacion();
 			
 			for (Insumo insumoItem: listaInsumos) {
 				nombreInsumoActual = insumoItem.getNombre();
 				cantInsumoActual = insumoItem.getCantidad();
 				
-				if(prioridad > 50) {	
-					
-					mapaInsumoOtorgado.put(nombreInsumoActual,(int) (cantInsumoActual*0.80/estMas50));
-					distribuciones.put(estItem,mapaInsumoOtorgado);
+				Insumo insumoActual = new Insumo();
+				insumoActual.setNombre(nombreInsumoActual);
+				
+
+				if(prioridadEst > 50) {	
+
+//					insumoActual.setCantidad(1000);
+					insumoActual.setCantidad((int) (cantInsumoActual * 0.8 /estMas50));
+					listaInsumoOtorgado.add(insumoActual);
+
+					distribuciones.put(estItem,listaInsumoOtorgado);
 					
 				}else {
-					
-					mapaInsumoOtorgado.put(nombreInsumoActual,(int) (cantInsumoActual*0.20/estMenos50));
-					distribuciones.put(estItem,mapaInsumoOtorgado);
+//					insumoActual.setCantidad((int) (1000));
+					insumoActual.setCantidad((int) (cantInsumoActual * 0.2 /estMenos50));
+					listaInsumoOtorgado.add(insumoActual);
+
+					distribuciones.put(estItem,listaInsumoOtorgado);
 				}
 			}
 		}

@@ -129,8 +129,8 @@
 									<label class="btn btn-sm btn-white"> <input
 										type="radio" id="option1" name="options"> Por Indice
 									</label> <label class="btn btn-sm btn-white active"> <input
-										type="radio" id="option2" name="options">
-										Ocupación sobre Capacidad
+										type="radio" id="option2" name="options"> Ocupación
+										sobre Capacidad
 									</label> <label class="btn btn-sm btn-white"> <input
 										type="radio" id="option3" name="options"> Por Zona
 									</label>
@@ -156,29 +156,29 @@
 										<th>Zona</th>
 										<th>Respiradores</th>
 										<th>Medicamentos</th>
-										<th>Delantales</th>
-										<th>Guantes</th>
-										<th>Camas</th>
 										<th>Jeringas</th>
 										<th>Tapa bocas</th>
+										<th>Delantales</th>
+										<th>Camas</th>
+										<th>Guantes</th>
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach items="${MapaDistribuido}" var="listElement">
+									<c:forEach items="${MapaDistribuido}" var="MapElement">
 										<tr>
-											<td>${listElement.key.getId()}</td>
-											<td>${listElement.key.getNombre()}</td>
-											<td>${listElement.key.getCapacidad()}</td>
-											<td>${listElement.key.getPrioridad()} %</td>
-											<td>${listElement.key.getZona()}</td>
-											<c:forEach items="${listElement.value}" var="mapElement">
-												<!--<td>${mapElement.key}:</td>-->
-												<td>${mapElement.value}</td>
+											<td>${MapElement.key.getId()}</td>
+											<td>${MapElement.key.getNombre()}</td>
+											<td>${MapElement.key.getCapacidad()}</td>
+											<td>${MapElement.key.getPrioridad()}%</td>
+											<td>${MapElement.key.getZona()}</td>
+											<c:forEach items="${MapElement.value}" var="listElement">
+												<td>${{listElement.getCantidad()}}</td>
 											</c:forEach>
 										</tr>
 									</c:forEach>
 								</tbody>
 							</table>
+
 						</div>
 					</div>
 				</div>

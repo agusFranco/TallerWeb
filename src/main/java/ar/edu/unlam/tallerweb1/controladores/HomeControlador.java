@@ -51,12 +51,12 @@ public class HomeControlador {
 		ModelMap modelo = this.getDefaultHomeModel();
 
 		// cruce entre establecimientos e insumos Map<Establecimiento,Insumo[]>
-		Map<Establecimiento, Map<String, Integer>> asignacion = servicioDistribucion.AsignarInsumos(
+		Map<Establecimiento, List<Insumo>> asignacion = servicioDistribucion.asignarInsumos(
 				(List<Establecimiento>) modelo.get("listaEstablecimientos"), (List<Insumo>) modelo.get("listaInsumos"));
 
 		// La agrego al modelo
 		modelo.put("MapaDistribuido", asignacion);
-
+		
 		return new ModelAndView("home", modelo);
 	}
 

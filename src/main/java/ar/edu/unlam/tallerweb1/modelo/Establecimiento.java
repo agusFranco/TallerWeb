@@ -93,4 +93,8 @@ public class Establecimiento {
 	public void setResponsable(String responsable) {
 		this.responsable = responsable;
 	}
+	
+	public Integer calcularPrioridadOcupacion(Integer capacidad, Integer ocupacion) {
+		return capacidad/ocupacion;
+	}
 }

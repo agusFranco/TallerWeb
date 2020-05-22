@@ -47,4 +47,7 @@ public class ServicioEstablecimientoImpl implements ServicioEstablecimiento {
 		return servicioEstablecimientoDao.cantidadItems(listaEstablecimiento);
 	}
 
+
+	
+
 }
