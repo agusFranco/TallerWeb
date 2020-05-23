@@ -58,11 +58,4 @@ public class ServicioEstablecimientoImpl implements ServicioEstablecimiento {
 		return establecimientos;
 	}
 
-<<<<<<< HEAD
-	
-=======
-
-	
-
->>>>>>> 48728e5054ab85fe3cac4ece8d4e982ba780df8c
 }

@@ -14,7 +14,6 @@ public interface ServicioEstablecimiento {
 
 	/* SERVICIOS QUE CALCULAR EL ORDEN DE PRIORIDAD */
 
-<<<<<<< HEAD
 	public List<Establecimiento> CalcularPrioridad_Combinado(List<Establecimiento> establecimientos);
 	
 	public List<Establecimiento> CalcularPrioridad_Ocupacion(List<Establecimiento> establecimientos);
@@ -22,9 +21,5 @@ public interface ServicioEstablecimiento {
 	public List<Establecimiento> CalcularPrioridad_Capacidad(List<Establecimiento> establecimientos);
 	
 	public List<Establecimiento> CalcularPrioridad_Zona(List<Establecimiento> establecimientos);
-=======
-	Long cantidadItems(List<Establecimiento> listaEstablecimiento);
-	
->>>>>>> 48728e5054ab85fe3cac4ece8d4e982ba780df8c
 
 }

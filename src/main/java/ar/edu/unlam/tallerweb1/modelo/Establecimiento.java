@@ -15,17 +15,11 @@ public class Establecimiento {
 	private Integer id;
 	private String nombre;
 	private String ubicacion;
-<<<<<<< HEAD
-	private Integer capacidad;
-	private Integer indice;
-=======
 	private String zona;
 	private Integer capacidad;
 	private Integer ocupacion;
 	private Integer prioridad;
->>>>>>> 48728e5054ab85fe3cac4ece8d4e982ba780df8c
 	private String responsable;
-	private String zona;
 	
 	public Establecimiento() {
 	}
@@ -35,12 +29,7 @@ public class Establecimiento {
 		this.nombre = nombre;
 		this.ubicacion = ubicacion;
 		this.capacidad = capacidad;
-<<<<<<< HEAD
-		this.indice = indice;
-=======
-		this.prioridad = prioridad;
 		this.zona = zona;
->>>>>>> 48728e5054ab85fe3cac4ece8d4e982ba780df8c
 		this.responsable = responsable;
 	}
 

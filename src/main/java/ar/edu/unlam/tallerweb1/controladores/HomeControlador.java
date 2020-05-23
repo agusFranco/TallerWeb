@@ -63,7 +63,7 @@ public class HomeControlador {
 	// Carga de Establecimientos - Masiva
 	@RequestMapping(path = "/cargar-establecimientos", method = RequestMethod.GET)
 	public ModelAndView cargarEstablecimientos() {
-		servicioEstablecimiento.insertarDatosMasivos();
+		//servicioEstablecimiento.insertarDatosMasivos();
 		return new ModelAndView("redirect:/home");
 	}
 
