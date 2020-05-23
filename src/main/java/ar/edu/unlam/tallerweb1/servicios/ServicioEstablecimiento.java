@@ -10,10 +10,16 @@ public interface ServicioEstablecimiento {
 
 	List<Establecimiento> obtenerTodos();
 
-	Establecimiento calcularRiesgo(Establecimiento establecimiento);
-
-	void insertarDatosMasivos();
-
 	Long cantidadItems(List<Establecimiento> listaEstablecimiento);
+
+	/* SERVICIOS QUE CALCULAR EL ORDEN DE PRIORIDAD */
+
+	public List<Establecimiento> CalcularPrioridad_Combinado(List<Establecimiento> establecimientos);
+	
+	public List<Establecimiento> CalcularPrioridad_Ocupacion(List<Establecimiento> establecimientos);
+	
+	public List<Establecimiento> CalcularPrioridad_Capacidad(List<Establecimiento> establecimientos);
+	
+	public List<Establecimiento> CalcularPrioridad_Zona(List<Establecimiento> establecimientos);
 
 }

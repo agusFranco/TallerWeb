@@ -15,9 +15,9 @@ public class Establecimiento {
 	private String ubicacion;
 	private Integer capacidad;
 	private Integer indice;
-	private String zona;
 	private String responsable;
-
+	private String zona;
+	
 	public Establecimiento() {
 	}
 
@@ -27,7 +27,6 @@ public class Establecimiento {
 		this.ubicacion = ubicacion;
 		this.capacidad = capacidad;
 		this.indice = indice;
-		this.zona = zona;
 		this.responsable = responsable;
 	}
 

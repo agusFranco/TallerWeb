@@ -30,21 +30,33 @@ public class ServicioEstablecimientoImpl implements ServicioEstablecimiento {
 	public List<Establecimiento> obtenerTodos() {
 		return servicioEstablecimientoDao.getAll();
 	}
-
-	//	DEFINIR
-	@Override
-	public Establecimiento calcularRiesgo(Establecimiento establecimiento) {
-		return null;
-	}
-
-	@Override
-	public void insertarDatosMasivos() {
-		servicioEstablecimientoDao.insertarDatosMasivos();
-	}
-
+	
 	@Override
 	public Long cantidadItems(List<Establecimiento> listaEstablecimiento) {
 		return servicioEstablecimientoDao.cantidadItems(listaEstablecimiento);
 	}
 
+	/* SERVICIOS QUE CALCULAR EL ORDEN DE PRIORIDAD */
+
+	@Override
+	public List<Establecimiento> CalcularPrioridad_Combinado(List<Establecimiento> establecimientos){
+		return establecimientos; //LO HACE JULI
+	}
+	
+	@Override
+	public List<Establecimiento> CalcularPrioridad_Ocupacion(List<Establecimiento> establecimientos){
+		return establecimientos; //LO HACE SEBA
+	}
+	
+	@Override
+	public List<Establecimiento> CalcularPrioridad_Capacidad(List<Establecimiento> establecimientos){
+		return establecimientos; //LO HACE SEBA
+	}
+	
+	@Override
+	public List<Establecimiento> CalcularPrioridad_Zona(List<Establecimiento> establecimientos){
+		return establecimientos;
+	}
+
+	
 }
