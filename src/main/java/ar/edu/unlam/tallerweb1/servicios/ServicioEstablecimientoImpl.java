@@ -39,22 +39,33 @@ public class ServicioEstablecimientoImpl implements ServicioEstablecimiento {
 	/* SERVICIOS QUE CALCULAR EL ORDEN DE PRIORIDAD */
 
 	@Override
-	public List<Establecimiento> CalcularPrioridad_Combinado(List<Establecimiento> establecimientos){
+	public List<Establecimiento> calcularPrioridad_Combinado(List<Establecimiento> establecimientos){
 		return establecimientos; //LO HACE JULI
 	}
 	
 	@Override
-	public List<Establecimiento> CalcularPrioridad_Ocupacion(List<Establecimiento> establecimientos){
+	public List<Establecimiento> calcularPrioridad_Ocupacion(List<Establecimiento> establecimientos){
+		
+		for (Establecimiento itemEst : establecimientos) {
+			Integer prioridad = (int) (((float)itemEst.getOcupacion() / (float)itemEst.getCapacidad()) * 100);
+			itemEst.setPrioridad(prioridad);
+		}	
 		return establecimientos; //LO HACE SEBA
 	}
 	
 	@Override
-	public List<Establecimiento> CalcularPrioridad_Capacidad(List<Establecimiento> establecimientos){
+	public List<Establecimiento> calcularPrioridad_Capacidad(List<Establecimiento> establecimientos){
+		
+		for (Establecimiento itemEst : establecimientos) {
+			Integer prioridad = (int) (itemEst.getCapacidad() * 100);
+			itemEst.setPrioridad(prioridad);
+		}			
+		
 		return establecimientos; //LO HACE SEBA
 	}
 	
 	@Override
-	public List<Establecimiento> CalcularPrioridad_Zona(List<Establecimiento> establecimientos){
+	public List<Establecimiento> calcularPrioridad_Zona(List<Establecimiento> establecimientos){
 		return establecimientos;
 	}
 

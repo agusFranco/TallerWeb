@@ -57,22 +57,27 @@ public class HomeControlador {
 		// La agrego al modelo
 		modelo.put("MapaDistribuido", asignacion);
 		
+//		Calcula el orden de prioridad de acuerdo a la Ocupacion
+		List<Establecimiento> establecimientosOrden = servicioEstablecimiento.calcularPrioridad_Ocupacion((List<Establecimiento>) modelo.get("listaEstablecimientos"));
+		
+		modelo.put("establecimientoOrden", establecimientosOrden);
+		
 		return new ModelAndView("home", modelo);
 	}
 
-	// Carga de Establecimientos - Masiva
-	@RequestMapping(path = "/cargar-establecimientos", method = RequestMethod.GET)
-	public ModelAndView cargarEstablecimientos() {
-		//servicioEstablecimiento.insertarDatosMasivos();
-		return new ModelAndView("redirect:/home");
-	}
-
-	// Carga de Insumos - Masiva
-	@RequestMapping(path = "/cargar-insumos", method = RequestMethod.GET)
-	public ModelAndView cargarInsumos() {
-		servicioInsumo.insertarDatosMasivos();
-		return new ModelAndView("redirect:/home");
-	}
+//	// Carga de Establecimientos - Masiva
+//	@RequestMapping(path = "/cargar-establecimientos", method = RequestMethod.GET)
+//	public ModelAndView cargarEstablecimientos() {
+//		//servicioEstablecimiento.insertarDatosMasivos();
+//		return new ModelAndView("redirect:/home");
+//	}
+//
+//	// Carga de Insumos - Masiva
+//	@RequestMapping(path = "/cargar-insumos", method = RequestMethod.GET)
+//	public ModelAndView cargarInsumos() {
+////		servicioInsumo.insertarDatosMasivos();
+//		return new ModelAndView("redirect:/home");
+//	}
 
 	// Obtiene los datos por default de la vista home.
 	private ModelMap getDefaultHomeModel() {

@@ -20,10 +20,10 @@ public class ServicioInsumoImpl implements ServicioInsumo {
 		this.servicioInsumoDao = servicioInsumoDao;
 	}
 
-	@Override
-	public void insertarDatosMasivos() {
-		servicioInsumoDao.insertarDatosMasivos();
-	}
+//	@Override
+//	public void insertarDatosMasivos() {
+//		servicioInsumoDao.insertarDatosMasivos();
+//	}
 
 	@Override
 	public List<Insumo> obtenerTodos() {

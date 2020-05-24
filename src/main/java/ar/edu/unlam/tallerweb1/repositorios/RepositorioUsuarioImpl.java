@@ -37,16 +37,16 @@ public class RepositorioUsuarioImpl extends RepositorioBaseImpl<Usuario, Integer
 				.add(Restrictions.eq("password", usuario.getPassword())).uniqueResult();
 	}
 
-	//	Inserta usuarios a la BDD - MASIVO
-	public void insertarDatosMasivos() {
-		final Session session = sessionFactory.getCurrentSession();
-		// AGREGAR LOS INSERT MASIVOS DEL OBJETO
-		List<Usuario> listaObjetos = new ArrayList<Usuario>();
-		listaObjetos.add(new Usuario("test@test.com", "test"));
-
-		for (Usuario objeto : listaObjetos) {
-			session.save(objeto);
-		}
-	}
+//	//	Inserta usuarios a la BDD - MASIVO
+//	public void insertarDatosMasivos() {
+//		final Session session = sessionFactory.getCurrentSession();
+//		// AGREGAR LOS INSERT MASIVOS DEL OBJETO
+//		List<Usuario> listaObjetos = new ArrayList<Usuario>();
+//		listaObjetos.add(new Usuario("test@test.com", "test"));
+//
+//		for (Usuario objeto : listaObjetos) {
+//			session.save(objeto);
+//		}
+//	}
 
 }

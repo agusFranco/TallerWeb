@@ -32,6 +32,7 @@
 			</div>
 		</div>
 
+
 		<div class="row">
 			<div class="col-sm-12 col-lg-6">
 				<div class="ibox float-e-margins">
@@ -52,10 +53,11 @@
 										<th>Nombre</th>
 										<th>Capacidad</th>
 										<th>Ocupacion</th>
+										<th>Prioridad (%)</th>
 									</tr>
 								</thead>
 								<tbody>
-									<c:if test="${not empty listaEstablecimientos}">
+									<!--<c:if test="${not empty listaEstablecimientos}">
 										<c:forEach items="${listaEstablecimientos}"
 											var="itemEstablecimiento">
 											<tr>
@@ -65,7 +67,51 @@
 												<td>${itemEstablecimiento.getOcupacion()}</td>
 											</tr>
 										</c:forEach>
-									</c:if>
+									</c:if>-->
+
+									<!--<c:if test="${not empty establecimientoOrden}">
+										<c:forEach items="${establecimientoOrden}"
+											var="itemEstablecimiento">
+											<tr>
+												<td>${itemEstablecimiento.getId()}</td>
+												<td>${itemEstablecimiento.getNombre()}</td>
+												<td>${itemEstablecimiento.getCapacidad()}</td>
+												<td>${itemEstablecimiento.getOcupacion()}</td>
+												<td>${itemEstablecimiento.getPrioridad()}%</td>
+											</tr>
+										</c:forEach>
+									</c:if>-->
+
+									<c:choose>
+										<c:when test="${not empty establecimientoOrden}">
+											<c:forEach items="${establecimientoOrden}"
+												var="itemEstablecimiento">
+												<tr>
+													<td>${itemEstablecimiento.getId()}</td>
+													<td>${itemEstablecimiento.getNombre()}</td>
+													<td>${itemEstablecimiento.getCapacidad()}</td>
+													<td>${itemEstablecimiento.getOcupacion()}</td>
+													<td>${itemEstablecimiento.getPrioridad()}%</td>
+												</tr>
+											</c:forEach>
+										</c:when>
+
+										<c:when test="${not empty listaEstablecimientos}">
+											<c:forEach items="${listaEstablecimientos}"
+												var="itemEstablecimiento">
+												<tr>
+													<td>${itemEstablecimiento.getId()}</td>
+													<td>${itemEstablecimiento.getNombre()}</td>
+													<td>${itemEstablecimiento.getCapacidad()}</td>
+													<td>${itemEstablecimiento.getOcupacion()}</td>
+													<td>-</td>
+												</tr>
+											</c:forEach>
+										</c:when>
+									</c:choose>
+
+
+
 								</tbody>
 							</table>
 						</div>

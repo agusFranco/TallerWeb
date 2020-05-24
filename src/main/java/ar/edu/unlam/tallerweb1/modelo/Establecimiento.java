@@ -18,13 +18,14 @@ public class Establecimiento {
 	private String zona;
 	private Integer capacidad;
 	private Integer ocupacion;
-	private Integer prioridad;
 	private String responsable;
+//	Calculados / No persisten en la bdd
+	private Integer prioridad;
 	
 	public Establecimiento() {
 	}
 
-	public Establecimiento(String nombre, String ubicacion, Integer capacidad, Integer prioridad, String zona,
+	public Establecimiento(String nombre, String ubicacion, Integer capacidad, String zona,
 			String responsable) {
 		this.nombre = nombre;
 		this.ubicacion = ubicacion;
@@ -93,7 +94,4 @@ public class Establecimiento {
 		this.responsable = responsable;
 	}
 	
-	public Integer calcularPrioridadOcupacion(Integer capacidad, Integer ocupacion) {
-		return capacidad/ocupacion;
-	}
 }
