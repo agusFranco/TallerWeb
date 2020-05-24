@@ -25,11 +25,12 @@ public class Establecimiento {
 	public Establecimiento() {
 	}
 
-	public Establecimiento(String nombre, String ubicacion, Integer capacidad, String zona,
+	public Establecimiento(String nombre, String ubicacion, Integer capacidad,Integer ocupacion, String zona,
 			String responsable) {
 		this.nombre = nombre;
 		this.ubicacion = ubicacion;
 		this.capacidad = capacidad;
+		this.ocupacion = ocupacion;
 		this.zona = zona;
 		this.responsable = responsable;
 	}

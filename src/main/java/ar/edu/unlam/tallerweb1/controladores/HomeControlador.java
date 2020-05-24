@@ -46,6 +46,7 @@ public class HomeControlador {
 
 	// Action de distribuir los insumos.
 	// Busca el modelo default y le agrega la asignacion de insumos.
+	@SuppressWarnings("unchecked")
 	@RequestMapping(path = "/home", method = RequestMethod.POST)
 	public ModelAndView distribuirInsumos() {
 		// Busco el modelo default
@@ -66,26 +67,27 @@ public class HomeControlador {
 	
 	// Action de distribuir los insumos.
 	// Busca el modelo default y le agrega la asignacion de insumos.
+	@SuppressWarnings("unchecked")
 	@RequestMapping(path = "/calcular-prioridad", method = RequestMethod.GET)
 	public ModelAndView calcularPrioridadOcupacion(@RequestParam("prioridad") String prioridad ) {
 		// Busco el modelo default
 		ModelMap modelo = this.getDefaultHomeModel();
 		
-		List<Establecimiento> establecimientosOrden;
+		List<Establecimiento> estXPrioridad;
 		//Calcula prioridad de acuerdo al RequestParam
 		switch(prioridad) {
 		case "ocupacion":
-			establecimientosOrden = servicioEstablecimiento.calcularPrioridad_Ocupacion((List<Establecimiento>) modelo.get("listaEstablecimientos"));
+			estXPrioridad = servicioEstablecimiento.calcularPrioridad_Ocupacion((List<Establecimiento>) modelo.get("listaEstablecimientos"));
 			break;
 			
-		case "capacidad": establecimientosOrden = servicioEstablecimiento.calcularPrioridad_Capacidad((List<Establecimiento>) modelo.get("listaEstablecimientos"));
+		case "capacidad": estXPrioridad = servicioEstablecimiento.calcularPrioridad_Capacidad((List<Establecimiento>) modelo.get("listaEstablecimientos"));
 			break;
 		
-		case "zona": establecimientosOrden = null;
-		default: establecimientosOrden = null;
+		case "zona": estXPrioridad = null;
+		default: estXPrioridad = null;
 		}
 
-		modelo.put("establecimientoOrden", establecimientosOrden);
+		modelo.put("estXPrioridad", estXPrioridad);
 		
 		return new ModelAndView("home", modelo);
 	}

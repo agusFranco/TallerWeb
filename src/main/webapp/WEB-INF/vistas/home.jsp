@@ -1,7 +1,7 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags/"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <t:layout>
 	<div class="wrapper wrapper-content animated fadeInRight">
@@ -33,6 +33,11 @@
 			</div>
 		</div>
 
+
+
+
+
+
 		<div class="row">
 			<div class="col-sm-12 col-lg-6">
 				<div class="ibox float-e-margins">
@@ -43,16 +48,17 @@
 							</a>
 							<div class="col-sm-12"></div>
 						</div>
-						<div class="btn-group">
+						<div class="btn-group btn-group-toggle">
 							<p>Calcular índice de prioridad</p>
 							<a class="btn btn-sm btn-white"
-								href="./calcular-prioridad?prioridad=ocupacion"> Ocupación </a>
-							<a class="btn btn-sm btn-white"
-								href="./calcular-prioridad?prioridad=capacidad"> Capacidad </a>
-							<a class="btn btn-sm btn-white"
+								href="./calcular-prioridad?prioridad=ocupacion"> Relación
+								Ocupación - Capacidad</a> <a class="btn btn-sm btn-white"
+								href="./calcular-prioridad?prioridad=capacidad"> Capacidad
+								Total</a> <a class="btn btn-sm btn-white"
 								href="./calcular-prioridad?prioridad=zona"> Zona </a>
 						</div>
 					</div>
+
 
 					<div class="ibox-content">
 						<div class="table-responsive">
@@ -70,15 +76,16 @@
 								<tbody>
 									<!-- Si las listas con la Prioridad: NO SON VACIAS => Mostrame esa lista sino la default -->
 									<c:choose>
-										<c:when test="${not empty establecimientoOrden}">
-											<c:forEach items="${establecimientoOrden}" var="estItem">
+										<c:when test="${not empty estXPrioridad}">
+											<c:forEach items="${estXPrioridad}" var="estItem">
 												<tr>
 													<td>${estItem.getId()}</td>
 													<td>${estItem.getNombre()}</td>
 													<td>${estItem.getCapacidad()}</td>
 													<td>${estItem.getOcupacion()}</td>
 													<td><fmt:formatNumber type="number"
-															maxFractionDigits="2" value="${estItem.getPrioridad()}"/> %</td>
+															maxFractionDigits="2" value="${estItem.getPrioridad()}" />
+														%</td>
 												</tr>
 											</c:forEach>
 										</c:when>
@@ -156,7 +163,7 @@
 									<p>Calcular Índice de riesgo por</p>
 									<label class="btn btn-sm btn-white"> <input
 										type="radio" id="option1" name="options"> Por Indice
-									</label> <label class="btn btn-sm btn-white active"> <input
+									</label> <label class="btn btn-sm btn-white"> <input
 										type="radio" id="option2" name="options"> Ocupación
 										sobre Capacidad
 									</label> <label class="btn btn-sm btn-white"> <input
