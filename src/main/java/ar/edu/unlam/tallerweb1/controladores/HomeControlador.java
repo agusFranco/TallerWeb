@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.modelo.Establecimiento;
@@ -66,14 +67,19 @@ public class HomeControlador {
 	// Action de distribuir los insumos.
 	// Busca el modelo default y le agrega la asignacion de insumos.
 	@RequestMapping(path = "/calcular-prioridad-ocupacion", method = RequestMethod.GET)
-	public ModelAndView calcularPrioridadOcupacion() {
+	public ModelAndView calcularPrioridadOcupacion(@RequestParam("prioridad") String prioridad ) {
 		// Busco el modelo default
 		ModelMap modelo = this.getDefaultHomeModel();
+		
+		List<Establecimiento> establecimientosOrden;
+		switch(prioridad) {
+		case "ocupacion":
+			//Calcula el orden de prioridad de acuerdo a la Ocupacion
+			establecimientosOrden = servicioEstablecimiento.calcularPrioridad_Ocupacion((List<Establecimiento>) modelo.get("listaEstablecimientos"));
+			break;
+		default: establecimientosOrden = null;
+		}
 
-		
-//		Calcula el orden de prioridad de acuerdo a la Ocupacion
-		List<Establecimiento> establecimientosOrden = servicioEstablecimiento.calcularPrioridad_Ocupacion((List<Establecimiento>) modelo.get("listaEstablecimientos"));
-		
 		modelo.put("establecimientoOrden", establecimientosOrden);
 		
 		return new ModelAndView("home", modelo);

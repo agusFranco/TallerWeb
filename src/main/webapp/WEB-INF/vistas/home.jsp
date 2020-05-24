@@ -45,11 +45,11 @@
 						<div class="btn-group">
 							<p>Calcular índice de prioridad</p>
 							<a class="btn btn-sm btn-white"
-								href="./calcular-prioridad-ocupacion"> Ocupación </a> <a
+								href="./calcular-prioridad-ocupacion?prioridad=ocupacion"> Ocupación </a> <a
 								class="btn btn-sm btn-white"
-								href="./calcular-prioridad-ocupacion"> Capacidad </a> <a
+								href="./calcular-prioridad-ocupacion?prioridad=capacidad"> Capacidad </a> <a
 								class="btn btn-sm btn-white"
-								href="./calcular-prioridad-ocupacion"> Zona </a>
+								href="./calcular-prioridad-ocupacion?prioridad=zona"> Zona </a>
 						</div>
 					</div>
 
