@@ -14,12 +14,12 @@ public interface ServicioEstablecimiento {
 
 	/* SERVICIOS QUE CALCULAR EL ORDEN DE PRIORIDAD */
 
-	public List<Establecimiento> calcularPrioridad_Combinado(List<Establecimiento> establecimientos);
+	List<Establecimiento> calcularPrioridad_Combinado(List<Establecimiento> establecimientos);
 	
-	public List<Establecimiento> calcularPrioridad_Ocupacion(List<Establecimiento> establecimientos);
+	List<Establecimiento> calcularPrioridad_Ocupacion(List<Establecimiento> establecimientos);
 	
-	public List<Establecimiento> calcularPrioridad_Capacidad(List<Establecimiento> establecimientos);
+	List<Establecimiento> calcularPrioridad_Capacidad(List<Establecimiento> establecimientos);
 	
-	public List<Establecimiento> calcularPrioridad_Zona(List<Establecimiento> establecimientos);
+	List<Establecimiento> calcularPrioridad_Zona(List<Establecimiento> establecimientos);
 
 }

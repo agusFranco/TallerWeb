@@ -21,12 +21,6 @@ public interface RepositorioBase<TEntity extends Object, TId extends Serializabl
 	// Actualiza un objeto de una entidad
 	void update(TEntity entity);
 
-	// void insertBigData(List<TEntity> items);
-
-//	// Obliga a que cada uno de los repositorio inserte datos masivos, no es
-//	// genérico.
-//	void insertarDatosMasivos();
-
 	// Permite obtener la cantidad de Items que tiene la lista
 	Long cantidadItems(List<TEntity> listaEntity);
 }

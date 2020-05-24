@@ -20,7 +20,7 @@ public class Establecimiento {
 	private Integer ocupacion;
 	private String responsable;
 //	Calculados / No persisten en la bdd
-	private Integer prioridad;
+	private Float prioridad;
 	
 	public Establecimiento() {
 	}
@@ -62,11 +62,11 @@ public class Establecimiento {
 		this.capacidad = capacidad;
 	}
 
-	public Integer getPrioridad() {
+	public Float getPrioridad() {
 		return prioridad;
 	}
 
-	public void setPrioridad(Integer prioridad) {
+	public void setPrioridad(Float prioridad) {
 		this.prioridad = prioridad;
 	}
 

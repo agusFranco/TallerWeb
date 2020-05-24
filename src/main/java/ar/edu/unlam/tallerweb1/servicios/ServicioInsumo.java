@@ -8,8 +8,6 @@ public interface ServicioInsumo {
 
 	List<Insumo> obtenerTodos();
 
-//	void insertarDatosMasivos();
-
 	//  Retorna la cantidad de insumos disponibles, realiza un SUM del campo 'cantidad'
 	Long CantTotalInsumos();
 }

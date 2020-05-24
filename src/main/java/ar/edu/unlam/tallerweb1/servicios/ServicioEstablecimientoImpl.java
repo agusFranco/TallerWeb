@@ -47,17 +47,21 @@ public class ServicioEstablecimientoImpl implements ServicioEstablecimiento {
 	public List<Establecimiento> calcularPrioridad_Ocupacion(List<Establecimiento> establecimientos){
 		
 		for (Establecimiento itemEst : establecimientos) {
-			Integer prioridad = (int) (((float)itemEst.getOcupacion() / (float)itemEst.getCapacidad()) * 100);
+			Float prioridad =(((float)itemEst.getOcupacion() / (float)itemEst.getCapacidad()) * 100);
 			itemEst.setPrioridad(prioridad);
 		}	
-		return establecimientos; //LO HACE SEBA
+		return establecimientos;
 	}
 	
 	@Override
 	public List<Establecimiento> calcularPrioridad_Capacidad(List<Establecimiento> establecimientos){
 		
+		Integer capTotal=0;
 		for (Establecimiento itemEst : establecimientos) {
-			Integer prioridad = (int) (itemEst.getCapacidad() * 100);
+				capTotal += itemEst.getCapacidad();
+		}		
+		for (Establecimiento itemEst : establecimientos) {
+			Float prioridad = (((float)itemEst.getCapacidad() / (float)capTotal) * 100) ;
 			itemEst.setPrioridad(prioridad);
 		}			
 		

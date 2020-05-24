@@ -1,6 +1,7 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags/"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <t:layout>
 	<div class="wrapper wrapper-content animated fadeInRight">
@@ -45,11 +46,11 @@
 						<div class="btn-group">
 							<p>Calcular índice de prioridad</p>
 							<a class="btn btn-sm btn-white"
-								href="./calcular-prioridad-ocupacion?prioridad=ocupacion"> Ocupación </a> <a
-								class="btn btn-sm btn-white"
-								href="./calcular-prioridad-ocupacion?prioridad=capacidad"> Capacidad </a> <a
-								class="btn btn-sm btn-white"
-								href="./calcular-prioridad-ocupacion?prioridad=zona"> Zona </a>
+								href="./calcular-prioridad?prioridad=ocupacion"> Ocupación </a>
+							<a class="btn btn-sm btn-white"
+								href="./calcular-prioridad?prioridad=capacidad"> Capacidad </a>
+							<a class="btn btn-sm btn-white"
+								href="./calcular-prioridad?prioridad=zona"> Zona </a>
 						</div>
 					</div>
 
@@ -67,7 +68,7 @@
 									</tr>
 								</thead>
 								<tbody>
-								<!-- Si las listas con la Prioridad: NO SON VACIAS => Mostrame esa lista sino la default -->
+									<!-- Si las listas con la Prioridad: NO SON VACIAS => Mostrame esa lista sino la default -->
 									<c:choose>
 										<c:when test="${not empty establecimientoOrden}">
 											<c:forEach items="${establecimientoOrden}" var="estItem">
@@ -76,7 +77,8 @@
 													<td>${estItem.getNombre()}</td>
 													<td>${estItem.getCapacidad()}</td>
 													<td>${estItem.getOcupacion()}</td>
-													<td>${estItem.getPrioridad()}%</td>
+													<td><fmt:formatNumber type="number"
+															maxFractionDigits="2" value="${estItem.getPrioridad()}"/> %</td>
 												</tr>
 											</c:forEach>
 										</c:when>

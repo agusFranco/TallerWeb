@@ -66,17 +66,22 @@ public class HomeControlador {
 	
 	// Action de distribuir los insumos.
 	// Busca el modelo default y le agrega la asignacion de insumos.
-	@RequestMapping(path = "/calcular-prioridad-ocupacion", method = RequestMethod.GET)
+	@RequestMapping(path = "/calcular-prioridad", method = RequestMethod.GET)
 	public ModelAndView calcularPrioridadOcupacion(@RequestParam("prioridad") String prioridad ) {
 		// Busco el modelo default
 		ModelMap modelo = this.getDefaultHomeModel();
 		
 		List<Establecimiento> establecimientosOrden;
+		//Calcula prioridad de acuerdo al RequestParam
 		switch(prioridad) {
 		case "ocupacion":
-			//Calcula el orden de prioridad de acuerdo a la Ocupacion
 			establecimientosOrden = servicioEstablecimiento.calcularPrioridad_Ocupacion((List<Establecimiento>) modelo.get("listaEstablecimientos"));
 			break;
+			
+		case "capacidad": establecimientosOrden = servicioEstablecimiento.calcularPrioridad_Capacidad((List<Establecimiento>) modelo.get("listaEstablecimientos"));
+			break;
+		
+		case "zona": establecimientosOrden = null;
 		default: establecimientosOrden = null;
 		}
 
