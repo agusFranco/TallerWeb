@@ -32,7 +32,6 @@
 			</div>
 		</div>
 
-
 		<div class="row">
 			<div class="col-sm-12 col-lg-6">
 				<div class="ibox float-e-margins">
@@ -41,8 +40,19 @@
 						<div class="ibox-tools">
 							<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
 							</a>
+							<div class="col-sm-12"></div>
+						</div>
+						<div class="btn-group">
+							<p>Calcular índice de prioridad</p>
+							<a class="btn btn-sm btn-white"
+								href="./calcular-prioridad-ocupacion"> Ocupación </a> <a
+								class="btn btn-sm btn-white"
+								href="./calcular-prioridad-ocupacion"> Capacidad </a> <a
+								class="btn btn-sm btn-white"
+								href="./calcular-prioridad-ocupacion"> Zona </a>
 						</div>
 					</div>
+
 					<div class="ibox-content">
 						<div class="table-responsive">
 							<table class="table table-striped table-hover grilla-dataTable">
@@ -57,61 +67,31 @@
 									</tr>
 								</thead>
 								<tbody>
-									<!--<c:if test="${not empty listaEstablecimientos}">
-										<c:forEach items="${listaEstablecimientos}"
-											var="itemEstablecimiento">
-											<tr>
-												<td>${itemEstablecimiento.getId()}</td>
-												<td>${itemEstablecimiento.getNombre()}</td>
-												<td>${itemEstablecimiento.getCapacidad()}</td>
-												<td>${itemEstablecimiento.getOcupacion()}</td>
-											</tr>
-										</c:forEach>
-									</c:if>-->
-
-									<!--<c:if test="${not empty establecimientoOrden}">
-										<c:forEach items="${establecimientoOrden}"
-											var="itemEstablecimiento">
-											<tr>
-												<td>${itemEstablecimiento.getId()}</td>
-												<td>${itemEstablecimiento.getNombre()}</td>
-												<td>${itemEstablecimiento.getCapacidad()}</td>
-												<td>${itemEstablecimiento.getOcupacion()}</td>
-												<td>${itemEstablecimiento.getPrioridad()}%</td>
-											</tr>
-										</c:forEach>
-									</c:if>-->
-
+								<!-- Si las listas con la Prioridad: NO SON VACIAS => Mostrame esa lista sino la default -->
 									<c:choose>
 										<c:when test="${not empty establecimientoOrden}">
-											<c:forEach items="${establecimientoOrden}"
-												var="itemEstablecimiento">
+											<c:forEach items="${establecimientoOrden}" var="estItem">
 												<tr>
-													<td>${itemEstablecimiento.getId()}</td>
-													<td>${itemEstablecimiento.getNombre()}</td>
-													<td>${itemEstablecimiento.getCapacidad()}</td>
-													<td>${itemEstablecimiento.getOcupacion()}</td>
-													<td>${itemEstablecimiento.getPrioridad()}%</td>
+													<td>${estItem.getId()}</td>
+													<td>${estItem.getNombre()}</td>
+													<td>${estItem.getCapacidad()}</td>
+													<td>${estItem.getOcupacion()}</td>
+													<td>${estItem.getPrioridad()}%</td>
 												</tr>
 											</c:forEach>
 										</c:when>
-
 										<c:when test="${not empty listaEstablecimientos}">
-											<c:forEach items="${listaEstablecimientos}"
-												var="itemEstablecimiento">
+											<c:forEach items="${listaEstablecimientos}" var="estItem">
 												<tr>
-													<td>${itemEstablecimiento.getId()}</td>
-													<td>${itemEstablecimiento.getNombre()}</td>
-													<td>${itemEstablecimiento.getCapacidad()}</td>
-													<td>${itemEstablecimiento.getOcupacion()}</td>
+													<td>${estItem.getId()}</td>
+													<td>${estItem.getNombre()}</td>
+													<td>${estItem.getCapacidad()}</td>
+													<td>${estItem.getOcupacion()}</td>
 													<td>-</td>
 												</tr>
 											</c:forEach>
 										</c:when>
 									</c:choose>
-
-
-
 								</tbody>
 							</table>
 						</div>

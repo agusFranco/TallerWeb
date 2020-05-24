@@ -63,7 +63,7 @@
 						</form>
 					</div>
 					<ul class="nav navbar-top-links navbar-right">
-						<li><a href="#" id="loginLink">Cerrar Sesión</a></li>
+						<li><a href="./home" id="loginLink">Cerrar Sesión</a></li>
 					</ul>
 				</nav>
 			</div>

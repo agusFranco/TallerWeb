@@ -31,7 +31,7 @@ public class HomeControlador {
 		this.servicioInsumo = servicioInsumo;
 	}
 
-	// Escucha la URL "/" y redirije a Home. Esto antes estaba en login pero fue.
+
 	@RequestMapping(path = "/", method = RequestMethod.GET)
 	public ModelAndView inicio() {
 		return new ModelAndView("redirect:/home");
@@ -57,6 +57,20 @@ public class HomeControlador {
 		// La agrego al modelo
 		modelo.put("MapaDistribuido", asignacion);
 		
+		return new ModelAndView("home", modelo);
+	}
+
+	
+	
+	
+	// Action de distribuir los insumos.
+	// Busca el modelo default y le agrega la asignacion de insumos.
+	@RequestMapping(path = "/calcular-prioridad-ocupacion", method = RequestMethod.GET)
+	public ModelAndView calcularPrioridadOcupacion() {
+		// Busco el modelo default
+		ModelMap modelo = this.getDefaultHomeModel();
+
+		
 //		Calcula el orden de prioridad de acuerdo a la Ocupacion
 		List<Establecimiento> establecimientosOrden = servicioEstablecimiento.calcularPrioridad_Ocupacion((List<Establecimiento>) modelo.get("listaEstablecimientos"));
 		
@@ -65,19 +79,6 @@ public class HomeControlador {
 		return new ModelAndView("home", modelo);
 	}
 
-//	// Carga de Establecimientos - Masiva
-//	@RequestMapping(path = "/cargar-establecimientos", method = RequestMethod.GET)
-//	public ModelAndView cargarEstablecimientos() {
-//		//servicioEstablecimiento.insertarDatosMasivos();
-//		return new ModelAndView("redirect:/home");
-//	}
-//
-//	// Carga de Insumos - Masiva
-//	@RequestMapping(path = "/cargar-insumos", method = RequestMethod.GET)
-//	public ModelAndView cargarInsumos() {
-////		servicioInsumo.insertarDatosMasivos();
-//		return new ModelAndView("redirect:/home");
-//	}
 
 	// Obtiene los datos por default de la vista home.
 	private ModelMap getDefaultHomeModel() {
@@ -98,4 +99,5 @@ public class HomeControlador {
 
 		return modelo;
 	}
+	
 }
