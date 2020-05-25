@@ -79,10 +79,10 @@ public class HomeControlador {
 		ModelMap modelo = this.getDefaultHomeModel();
 
 		// Calcula prioridad de acuerdo al RequestParam
-		List<Establecimiento> estXPrioridad = this.servicioEstablecimiento.calcularPrioridad(prioridad,
+		List<Establecimiento> establConPrioridad = this.servicioEstablecimiento.calcularPrioridad(prioridad,
 				(List<Establecimiento>) modelo.get("listaEstablecimientos"));
 
-		modelo.put("estXPrioridad", estXPrioridad);
+		modelo.put("establConPrioridad", establConPrioridad);
 
 		return new ModelAndView("home", modelo);
 	}

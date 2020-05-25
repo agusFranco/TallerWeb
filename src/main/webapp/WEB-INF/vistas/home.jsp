@@ -39,7 +39,7 @@
 
 
 		<div class="row">
-			<div class="col-sm-12 col-lg-6">
+			<div class="col-sm-12 col-lg-7">
 				<div class="ibox float-e-margins">
 					<div class="ibox-title">
 						<h5>Establecimientos</h5>
@@ -70,22 +70,24 @@
 										<th>Nombre</th>
 										<th>Capacidad</th>
 										<th>Ocupacion</th>
-										<th>Prioridad (%)</th>
+										<th>Zona</th>
+										<th>Prioridad</th>
 									</tr>
 								</thead>
 								<tbody>
 									<!-- Si las listas con la Prioridad: NO SON VACIAS => Mostrame esa lista sino la default -->
 									<c:choose>
-										<c:when test="${not empty estXPrioridad}">
-											<c:forEach items="${estXPrioridad}" var="estItem">
+										<c:when test="${not empty establConPrioridad}">
+											<c:forEach items="${establConPrioridad}" var="estItem">
 												<tr>
 													<td>${estItem.getId()}</td>
 													<td>${estItem.getNombre()}</td>
 													<td>${estItem.getCapacidad()}</td>
 													<td>${estItem.getOcupacion()}</td>
-													<td><fmt:formatNumber type="number"
-															maxFractionDigits="2" value="${estItem.getPrioridad()}" />
-														%</td>
+													<td>${estItem.getZona().getNombre()}</td>
+													<td class="text-center"><fmt:formatNumber
+															type="number" maxFractionDigits="2"
+															value="${estItem.getPrioridad()}" /> %</td>
 												</tr>
 											</c:forEach>
 										</c:when>
@@ -96,7 +98,8 @@
 													<td>${estItem.getNombre()}</td>
 													<td>${estItem.getCapacidad()}</td>
 													<td>${estItem.getOcupacion()}</td>
-													<td>-</td>
+													<td>${estItem.getZona().getNombre()}</td>
+													<td class="text-center">-</td>
 												</tr>
 											</c:forEach>
 										</c:when>
@@ -108,7 +111,7 @@
 				</div>
 			</div>
 
-			<div class="col-sm-12 col-lg-6">
+			<div class="col-sm-12 col-lg-5">
 				<div class="ibox float-e-margins">
 					<div class="ibox-title">
 						<h5>Insumos</h5>
