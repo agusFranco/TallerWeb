@@ -1,8 +1,5 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Projections;
@@ -21,7 +18,7 @@ public class RepositorioInsumoImpl extends RepositorioBaseImpl<Insumo, Integer> 
 
 	//  Retorna la cantidad de insumos disponibles, realiza un SUM del campo 'cantidad'
 	@Override
-	public Long CantTotalInsumos() {
+	public Long cantTotalInsumos() {
 		final Session session = sessionFactory.getCurrentSession();
 		return (Long) session.createCriteria(Insumo.class).setProjection(Projections.sum("cantidad")).uniqueResult();
 	}

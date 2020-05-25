@@ -31,15 +31,14 @@
 				<prop key="hibernate.show_sql">false</prop>
 				<prop key="hibernate.format_sql">false</prop>
 				<!--Para indicar si hibernate genera el modelo de datos al startup-->
-				<!--create: lo crea siempre-->
-				<!--update: aplica cambios realizados-->
-				<!--none: no modifica nunca el esquema de datos-->
+				<!-- create: lo crea siempre
+					 update: aplica cambios realizados
+					 none: no modifica nunca el esquema de datos-->
 				<prop key="hibernate.hbm2ddl.auto">none</prop>
 			</props>
 		</property>
 		<!--Se configura qué paquetes debe escanear hibernate en busca de clases persistibles, es decir-->
-		<!--clases anotadas como @Entity, es necesario hacer esto y no unicamente anotar como @Entity las-->
-		<!--clases persistibles-->
+		<!--clases anotadas como @Entity, es necesario hacer esto y no unicamente anotar como @Entity las clases persistibles-->
 		<property name="packagesToScan">
 			<list>
 				<value>ar.edu.unlam.tallerweb1.modelo</value>

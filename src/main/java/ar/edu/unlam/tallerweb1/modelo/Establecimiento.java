@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 @Entity
 public class Establecimiento {
@@ -17,11 +18,14 @@ public class Establecimiento {
 	private Integer capacidad;
 	private Integer ocupacion;
 	private String responsable;
-//	Calculados / No persisten en la bdd
-	private Float prioridad;
-
+	
 	@ManyToOne
 	private Zona zona;
+
+//	No persisten en la bbdd
+	@Transient
+	private Float prioridad;
+
 
 	public Establecimiento() {
 	}

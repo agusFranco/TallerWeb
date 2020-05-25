@@ -25,7 +25,7 @@
 						<h5>Insumos</h5>
 					</div>
 					<div class="ibox-content">
-						<h1 class="no-margins">${cantidadInsumos}</h1>
+						<h1 class="no-margins">${cantTotalInsumos}</h1>
 
 						<small>Total disponibles </small>
 					</div>
@@ -49,13 +49,15 @@
 							<div class="col-sm-12"></div>
 						</div>
 						<div class="btn-group btn-group-toggle">
-							<p>Calcular índice de prioridad</p>
+							<p>Calcular índice de prioridad por</p>
 							<a class="btn btn-sm btn-white"
 								href="./calcular-prioridad?prioridad=OCUPACION"> Relación
 								Ocupación - Capacidad</a> <a class="btn btn-sm btn-white"
 								href="./calcular-prioridad?prioridad=CAPACIDAD"> Capacidad
 								Total</a> <a class="btn btn-sm btn-white"
-								href="./calcular-prioridad?prioridad=ZONA"> Zona </a>
+								href="./calcular-prioridad?prioridad=ZONA"> Zona </a> <a
+								class="btn btn-sm btn-white"
+								href="./calcular-prioridad?prioridad=COMBINADO"> Combinado </a>
 						</div>
 					</div>
 
@@ -190,15 +192,17 @@
 										<th>#</th>
 										<th>Establecimiento</th>
 										<th>Capacidad</th>
-										<th>Prioridad (%)</th>
+										<th>Ocupación</th>
 										<th>Zona</th>
-										<th>Respiradores</th>
-										<th>Medicamentos</th>
+										<th>Prioridad</th>
+										<th>Total Insumos Asignados</th>
+										<!--	<th>Respiradores</th>
+									 	<th>Medicamentos</th>
 										<th>Jeringas</th>
 										<th>Tapa bocas</th>
 										<th>Delantales</th>
 										<th>Camas</th>
-										<th>Guantes</th>
+										<th>Guantes</th> -->
 									</tr>
 								</thead>
 								<tbody>
@@ -206,22 +210,21 @@
 										<tr>
 											<td>${MapElement.key.getId()}</td>
 											<td>${MapElement.key.getNombre()}</td>
-											<td>${MapElement.key.getCapacidad()}</td>
+											<td>${MapElement.key.capacidad}</td>
+											<td>${MapElement.key.ocupacion}</td>
+											<td>${MapElement.key.getZona().getNombre()}</td>
 											<td>${MapElement.key.getPrioridad()}%</td>
-											<td>${MapElement.key.getZona()}</td>
-											<c:forEach items="${MapElement.value}" var="listElement">
-												<td>${{listElement.getCantidad()}}</td>
-											</c:forEach>
+											<td><a class="text-info font-weight-bold h4"
+												href="detalles-asignaciones?idEstabl=${MapElement.key.getId()}">
+													923 (Clic/detalle)</a></td>
 										</tr>
 									</c:forEach>
 								</tbody>
 							</table>
-
 						</div>
 					</div>
 				</div>
 			</div>
-
 		</div>
 	</div>
 </t:layout>

@@ -16,8 +16,7 @@ public class Usuario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	// para el resto de los atributo no se usan anotaciones entonces se usa el
-	// default de hibernate: la columna se llama igual que
+	// Default de hibernate: la columna se llama igual que
 	// el atributo, la misma admite nulos, y el tipo de dato se deduce del tipo de
 	// dato de java.
 	private String email;

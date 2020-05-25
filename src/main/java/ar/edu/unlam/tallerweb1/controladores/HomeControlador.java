@@ -97,12 +97,12 @@ public class HomeControlador {
 
 		// Valores para los widget
 		Long cantidadEst = servicioEstablecimiento.cantidadItems(establecimientos);
-		Long cantidadIns = servicioInsumo.CantTotalInsumos();
+		Long cantTotalInsumos = servicioInsumo.cantTotalInsumos();
 
 		modelo.put("listaEstablecimientos", establecimientos);
 		modelo.put("listaInsumos", insumos);
 		modelo.put("cantidadEstablecimientos", cantidadEst);
-		modelo.put("cantidadInsumos", cantidadIns);
+		modelo.put("cantTotalInsumos", cantTotalInsumos);
 
 		return modelo;
 	}
