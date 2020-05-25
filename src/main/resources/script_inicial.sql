@@ -1,6 +1,18 @@
 use db;
 
+SET FOREIGN_KEY_CHECKS = 0; 
 TRUNCATE TABLE `establecimiento`;
+TRUNCATE TABLE `zona`;
+TRUNCATE TABLE `insumo`;
+SET FOREIGN_KEY_CHECKS = 1;
+
+INSERT INTO `zona` (`id`,`nombre`,`puntaje`) 
+VALUES 
+(1,"ZONA A", 90),
+(2,"ZONA B", 50),
+(3,"ZONA C", 30),
+(4,"ZONA D", 20),
+(5,"ZONA E", 10);
 
 INSERT INTO `establecimiento` (`id`,`capacidad`,`ocupacion`,`nombre`,`responsable`,`ubicacion`,`zona_id`) 
 VALUES 
@@ -14,3 +26,13 @@ VALUES
 (8,1000,100,"Rhoncus Company","Armando","-12.16646, -49.08455",4),
 (9,2000,500,"Rhoncus Id Mollis Ltd","Agustin","-52.19993, -28.86915",5),
 (10,4000,200,"Sem Consulting","Julian","1.64948, 106.37695",5);
+
+INSERT INTO `insumo` (`id`,`cantidad`,`nombre`,`tipo`) 
+VALUES 
+(1,100,"Respiradores","Tipo B"),
+(2,200,"Medicamentos","Tipo C"),
+(3,300,"Jeringas","Tipo A"),
+(4,400,"Tapa bocas","Tipo D"),
+(5,100,"Delantales","Tipo C"),
+(6,200,"Camas","Tipo F"),
+(7,400,"Guantes","Tipo B");
