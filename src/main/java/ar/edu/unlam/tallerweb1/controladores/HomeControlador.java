@@ -8,15 +8,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import ar.edu.unlam.tallerweb1.comun.enums.TipoDePrioridad;
+import ar.edu.unlam.tallerweb1.comun.modelos.entrada.CalcularPrioridadMdE;
 import ar.edu.unlam.tallerweb1.configuracion.StringToTipoDePrioridad;
 import ar.edu.unlam.tallerweb1.modelo.Establecimiento;
 import ar.edu.unlam.tallerweb1.modelo.Insumo;
-import ar.edu.unlam.tallerweb1.modelo.otros.TipoDePrioridad;
 import ar.edu.unlam.tallerweb1.servicios.ServicioDistribucion;
 import ar.edu.unlam.tallerweb1.servicios.ServicioEstablecimiento;
 import ar.edu.unlam.tallerweb1.servicios.ServicioInsumo;
@@ -85,6 +88,19 @@ public class HomeControlador {
 		modelo.put("estXPrioridad", estXPrioridad);
 
 		return new ModelAndView("home", modelo);
+	}
+
+	// Calcula la prioridad (por ajax) en base a el modelo de entrada.
+	@RequestMapping(path = "/calcularPrioridad", method = RequestMethod.POST)
+	public @ResponseBody List<Establecimiento> calcularPrioridad(@RequestBody CalcularPrioridadMdE parametro) {
+		// Busco los establecimientos
+		List<Establecimiento> establecimientos = servicioEstablecimiento.obtenerTodos();
+
+		// Calculo prioridad en base al modelo de entrada.
+		List<Establecimiento> estXPrioridad = this.servicioEstablecimiento.calcularPrioridad(parametro.getPrioridad(),
+				establecimientos);
+
+		return estXPrioridad;
 	}
 
 	// Obtiene los datos por default de la vista home.

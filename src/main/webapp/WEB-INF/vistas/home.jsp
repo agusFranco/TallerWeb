@@ -56,6 +56,7 @@
 								href="./calcular-prioridad?prioridad=CAPACIDAD"> Capacidad
 								Total</a> <a class="btn btn-sm btn-white"
 								href="./calcular-prioridad?prioridad=ZONA"> Zona </a>
+							<button class="btn btn-sm btn-white" onclick="calcularPrioridad()">Calcular Prioridad con Ajax</button>
 						</div>
 					</div>
 

@@ -2,7 +2,7 @@ package ar.edu.unlam.tallerweb1.configuracion;
 
 import java.beans.PropertyEditorSupport;
 
-import ar.edu.unlam.tallerweb1.modelo.otros.TipoDePrioridad;
+import ar.edu.unlam.tallerweb1.comun.enums.TipoDePrioridad;
 
 public class StringToTipoDePrioridad extends PropertyEditorSupport {
 

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ar.edu.unlam.tallerweb1.modelo.Establecimiento;
-import ar.edu.unlam.tallerweb1.modelo.otros.TipoDePrioridad;
+import ar.edu.unlam.tallerweb1.comun.enums.TipoDePrioridad;
 import ar.edu.unlam.tallerweb1.negocio.CalculadorDePrioridad;
 import ar.edu.unlam.tallerweb1.negocio.PrioridadCapacidadStrategy;
 import ar.edu.unlam.tallerweb1.negocio.PrioridadCombinadoStrategy;

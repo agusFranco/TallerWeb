@@ -3,7 +3,7 @@ package ar.edu.unlam.tallerweb1.servicios;
 import java.util.List;
 
 import ar.edu.unlam.tallerweb1.modelo.Establecimiento;
-import ar.edu.unlam.tallerweb1.modelo.otros.TipoDePrioridad;
+import ar.edu.unlam.tallerweb1.comun.enums.TipoDePrioridad;
 
 public interface ServicioEstablecimiento {
 
