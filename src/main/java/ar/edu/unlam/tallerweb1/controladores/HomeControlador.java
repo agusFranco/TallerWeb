@@ -70,8 +70,8 @@ public class HomeControlador {
 		return new ModelAndView("home", modelo);
 	}
 
-	// Action de distribuir los insumos.
-	// Busca el modelo default y le agrega la asignacion de insumos.
+	// Action para calcular la prioridad
+	// Busca el modelo default y le agrega el calculo de la prioridad de riesgo
 	@SuppressWarnings("unchecked")
 	@RequestMapping(path = "/calcular-prioridad", method = RequestMethod.GET)
 	public ModelAndView calcularPrioridadOcupacion(@RequestParam("prioridad") TipoDePrioridad prioridad) {

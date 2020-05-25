@@ -5,6 +5,8 @@ import java.util.List;
 import ar.edu.unlam.tallerweb1.modelo.Establecimiento;
 
 public class PrioridadCapacidadStrategy implements PrioridadStrategy {
+	
+	@Override
 	public List<Establecimiento> calcular(List<Establecimiento> establecimientos) {
 		Integer capTotal = 0;
 		for (Establecimiento itemEst : establecimientos) {
@@ -15,6 +17,6 @@ public class PrioridadCapacidadStrategy implements PrioridadStrategy {
 			itemEst.setPrioridad(prioridad);
 		}
 
-		return establecimientos; // LO HACE SEBA
+		return establecimientos;
 	}
 }

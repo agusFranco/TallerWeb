@@ -42,18 +42,24 @@ public class ServicioEstablecimientoImpl implements ServicioEstablecimiento {
 		return servicioEstablecimientoDao.cantidadItems(listaEstablecimiento);
 	}
 
-	/* SERVICIOS QUE CALCULAR EL ORDEN DE PRIORIDAD */
-
+	/* SERVICIO QUE CALCULA EL PORCENTAJE DE PRIORIDAD DE RIESGO */
 	@Override
 	public List<Establecimiento> calcularPrioridad(TipoDePrioridad prioridad, List<Establecimiento> establecimientos) {
+		//Crea un calculador que servira para calcular la prioridad correspondiente
 		CalculadorDePrioridad calculador = this.crearCalculador(prioridad);
-		return calculador.calcularPrioridad(establecimientos);
+		// Utilizo el metodo del calculador para calcular la prioridad		
+		List<Establecimiento> listaEst = calculador.calcularPrioridad(establecimientos);
+		return listaEst;
 	}
 
+	
+	//Metodo propio del servicio: Utilizado para calcular la prioridad
 	private CalculadorDePrioridad crearCalculador(TipoDePrioridad prioridad) {
 		switch (prioridad) {
 		case OCUPACION:
-			return new CalculadorDePrioridad(new PrioridadOcupacionStrategy());
+			PrioridadOcupacionStrategy prioridadXOcupacion = new PrioridadOcupacionStrategy();
+			CalculadorDePrioridad calculador = new CalculadorDePrioridad(prioridadXOcupacion);
+			return calculador;
 		case CAPACIDAD:
 			return new CalculadorDePrioridad(new PrioridadCapacidadStrategy());
 		case ZONA:
