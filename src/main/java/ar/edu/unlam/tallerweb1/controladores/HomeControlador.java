@@ -6,13 +6,17 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import ar.edu.unlam.tallerweb1.configuracion.StringToTipoDePrioridad;
 import ar.edu.unlam.tallerweb1.modelo.Establecimiento;
 import ar.edu.unlam.tallerweb1.modelo.Insumo;
+import ar.edu.unlam.tallerweb1.modelo.otros.TipoDePrioridad;
 import ar.edu.unlam.tallerweb1.servicios.ServicioDistribucion;
 import ar.edu.unlam.tallerweb1.servicios.ServicioEstablecimiento;
 import ar.edu.unlam.tallerweb1.servicios.ServicioInsumo;
@@ -30,6 +34,11 @@ public class HomeControlador {
 		this.servicioDistribucion = servicioDistribucion;
 		this.servicioEstablecimiento = servicioEstablecimiento;
 		this.servicioInsumo = servicioInsumo;
+	}
+
+	@InitBinder
+	public void initBinder(WebDataBinder dataBinder) {
+		dataBinder.registerCustomEditor(TipoDePrioridad.class, new StringToTipoDePrioridad());
 	}
 
 	@RequestMapping(path = "/", method = RequestMethod.GET)
@@ -65,7 +74,7 @@ public class HomeControlador {
 	// Busca el modelo default y le agrega la asignacion de insumos.
 	@SuppressWarnings("unchecked")
 	@RequestMapping(path = "/calcular-prioridad", method = RequestMethod.GET)
-	public ModelAndView calcularPrioridadOcupacion(@RequestParam("prioridad") String prioridad) {
+	public ModelAndView calcularPrioridadOcupacion(@RequestParam("prioridad") TipoDePrioridad prioridad) {
 		// Busco el modelo default
 		ModelMap modelo = this.getDefaultHomeModel();
 

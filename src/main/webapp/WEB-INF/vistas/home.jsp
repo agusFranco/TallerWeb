@@ -51,11 +51,11 @@
 						<div class="btn-group btn-group-toggle">
 							<p>Calcular índice de prioridad</p>
 							<a class="btn btn-sm btn-white"
-								href="./calcular-prioridad?prioridad=ocupacion"> Relación
+								href="./calcular-prioridad?prioridad=OCUPACION"> Relación
 								Ocupación - Capacidad</a> <a class="btn btn-sm btn-white"
-								href="./calcular-prioridad?prioridad=capacidad"> Capacidad
+								href="./calcular-prioridad?prioridad=CAPACIDAD"> Capacidad
 								Total</a> <a class="btn btn-sm btn-white"
-								href="./calcular-prioridad?prioridad=zona"> Zona </a>
+								href="./calcular-prioridad?prioridad=ZONA"> Zona </a>
 						</div>
 					</div>
 

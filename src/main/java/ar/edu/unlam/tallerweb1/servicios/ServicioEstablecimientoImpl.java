@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ar.edu.unlam.tallerweb1.modelo.Establecimiento;
+import ar.edu.unlam.tallerweb1.modelo.otros.TipoDePrioridad;
 import ar.edu.unlam.tallerweb1.negocio.CalculadorDePrioridad;
 import ar.edu.unlam.tallerweb1.negocio.PrioridadCapacidadStrategy;
 import ar.edu.unlam.tallerweb1.negocio.PrioridadCombinadoStrategy;
@@ -44,20 +45,20 @@ public class ServicioEstablecimientoImpl implements ServicioEstablecimiento {
 	/* SERVICIOS QUE CALCULAR EL ORDEN DE PRIORIDAD */
 
 	@Override
-	public List<Establecimiento> calcularPrioridad(String prioridad, List<Establecimiento> establecimientos) {
+	public List<Establecimiento> calcularPrioridad(TipoDePrioridad prioridad, List<Establecimiento> establecimientos) {
 		CalculadorDePrioridad calculador = this.crearCalculador(prioridad);
 		return calculador.calcularPrioridad(establecimientos);
 	}
 
-	private CalculadorDePrioridad crearCalculador(String prioridad) {
+	private CalculadorDePrioridad crearCalculador(TipoDePrioridad prioridad) {
 		switch (prioridad) {
-		case "ocupacion":
+		case OCUPACION:
 			return new CalculadorDePrioridad(new PrioridadOcupacionStrategy());
-		case "capacidad":
+		case CAPACIDAD:
 			return new CalculadorDePrioridad(new PrioridadCapacidadStrategy());
-		case "zona":
+		case ZONA:
 			return new CalculadorDePrioridad(new PrioridadZonaStrategy());
-		case "combinado":
+		case COMBINADO:
 			return new CalculadorDePrioridad(new PrioridadCombinadoStrategy());
 		default:
 			return new CalculadorDePrioridad(new PrioridadCombinadoStrategy());
