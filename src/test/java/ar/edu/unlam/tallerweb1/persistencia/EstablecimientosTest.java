@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ar.edu.unlam.tallerweb1.SpringTest;
 import ar.edu.unlam.tallerweb1.modelo.Establecimiento;
 import ar.edu.unlam.tallerweb1.modelo.Zona;
+import ar.edu.unlam.tallerweb1.modelo.otros.TipoDePrioridad;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioEstablecimiento;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioEstablecimientoImpl;
 import ar.edu.unlam.tallerweb1.servicios.ServicioEstablecimientoImpl;
@@ -51,7 +52,7 @@ public class EstablecimientosTest extends SpringTest {
 		listaEst.add(new Establecimiento("Establecimiento_TEST", "Ubicacion_TEST", 200, 10, zona, "Responsable_TEST"));
 
 //		Ejecucion	
-		List<Establecimiento> litaPrioridad = servicio.calcularPrioridad("ocupacion", listaEst);
+		List<Establecimiento> litaPrioridad = servicio.calcularPrioridad(TipoDePrioridad.OCUPACION, listaEst);
 		Establecimiento estTesteado = litaPrioridad.get(0);
 
 //		Comprobacion
@@ -74,7 +75,7 @@ public class EstablecimientosTest extends SpringTest {
 		listaEst.add(
 				new Establecimiento("Establecimiento_TEST3", "Ubicacion_TEST3", 300, 10, zona, "Responsable_TEST3"));
 //		Ejecucion	
-		List<Establecimiento> litaPrioridad = servicio.calcularPrioridad("capacidad", listaEst);
+		List<Establecimiento> litaPrioridad = servicio.calcularPrioridad(TipoDePrioridad.CAPACIDAD, listaEst);
 		Establecimiento estTesteado = litaPrioridad.get(0);
 
 //		Comprobacion
