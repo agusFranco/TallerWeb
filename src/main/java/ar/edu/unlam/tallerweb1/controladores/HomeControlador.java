@@ -32,7 +32,6 @@ public class HomeControlador {
 		this.servicioInsumo = servicioInsumo;
 	}
 
-
 	@RequestMapping(path = "/", method = RequestMethod.GET)
 	public ModelAndView inicio() {
 		return new ModelAndView("redirect:/home");
@@ -58,40 +57,26 @@ public class HomeControlador {
 
 		// La agrego al modelo
 		modelo.put("MapaDistribuido", asignacion);
-		
+
 		return new ModelAndView("home", modelo);
 	}
 
-	
-	
-	
 	// Action de distribuir los insumos.
 	// Busca el modelo default y le agrega la asignacion de insumos.
 	@SuppressWarnings("unchecked")
 	@RequestMapping(path = "/calcular-prioridad", method = RequestMethod.GET)
-	public ModelAndView calcularPrioridadOcupacion(@RequestParam("prioridad") String prioridad ) {
+	public ModelAndView calcularPrioridadOcupacion(@RequestParam("prioridad") String prioridad) {
 		// Busco el modelo default
 		ModelMap modelo = this.getDefaultHomeModel();
-		
-		List<Establecimiento> estXPrioridad;
-		//Calcula prioridad de acuerdo al RequestParam
-		switch(prioridad) {
-		case "ocupacion":
-			estXPrioridad = servicioEstablecimiento.calcularPrioridad_Ocupacion((List<Establecimiento>) modelo.get("listaEstablecimientos"));
-			break;
-			
-		case "capacidad": estXPrioridad = servicioEstablecimiento.calcularPrioridad_Capacidad((List<Establecimiento>) modelo.get("listaEstablecimientos"));
-			break;
-		
-		case "zona": estXPrioridad = null;
-		default: estXPrioridad = null;
-		}
+
+		// Calcula prioridad de acuerdo al RequestParam
+		List<Establecimiento> estXPrioridad = this.servicioEstablecimiento.calcularPrioridad(prioridad,
+				(List<Establecimiento>) modelo.get("listaEstablecimientos"));
 
 		modelo.put("estXPrioridad", estXPrioridad);
-		
+
 		return new ModelAndView("home", modelo);
 	}
-
 
 	// Obtiene los datos por default de la vista home.
 	private ModelMap getDefaultHomeModel() {
@@ -112,5 +97,5 @@ public class HomeControlador {
 
 		return modelo;
 	}
-	
+
 }

@@ -13,13 +13,5 @@ public interface ServicioEstablecimiento {
 	Long cantidadItems(List<Establecimiento> listaEstablecimiento);
 
 	/* SERVICIOS QUE CALCULAR EL ORDEN DE PRIORIDAD */
-
-	List<Establecimiento> calcularPrioridad_Combinado(List<Establecimiento> establecimientos);
-	
-	List<Establecimiento> calcularPrioridad_Ocupacion(List<Establecimiento> establecimientos);
-	
-	List<Establecimiento> calcularPrioridad_Capacidad(List<Establecimiento> establecimientos);
-	
-	List<Establecimiento> calcularPrioridad_Zona(List<Establecimiento> establecimientos);
-
+	List<Establecimiento> calcularPrioridad(String prioridad, List<Establecimiento> establecimientos);
 }

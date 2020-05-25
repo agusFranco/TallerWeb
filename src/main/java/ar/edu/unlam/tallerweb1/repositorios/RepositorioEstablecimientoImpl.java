@@ -1,9 +1,5 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -18,6 +14,5 @@ public class RepositorioEstablecimientoImpl extends RepositorioBaseImpl<Establec
 	public RepositorioEstablecimientoImpl(SessionFactory sessionFactory) {
 		super(sessionFactory);
 	}
-
 
 }
