@@ -45,26 +45,22 @@ public class ServicioEstablecimientoImpl implements ServicioEstablecimiento {
 
 	@Override
 	public List<Establecimiento> calcularPrioridad(String prioridad, List<Establecimiento> establecimientos) {
-		CalculadorDePrioridad calculador;
+		CalculadorDePrioridad calculador = this.crearCalculador(prioridad);
+		return calculador.calcularPrioridad(establecimientos);
+	}
 
+	private CalculadorDePrioridad crearCalculador(String prioridad) {
 		switch (prioridad) {
 		case "ocupacion":
-			calculador = new CalculadorDePrioridad(new PrioridadOcupacionStrategy());
-			break;
+			return new CalculadorDePrioridad(new PrioridadOcupacionStrategy());
 		case "capacidad":
-			calculador = new CalculadorDePrioridad(new PrioridadCapacidadStrategy());
-			break;
+			return new CalculadorDePrioridad(new PrioridadCapacidadStrategy());
 		case "zona":
-			calculador = new CalculadorDePrioridad(new PrioridadZonaStrategy());
-			break;
+			return new CalculadorDePrioridad(new PrioridadZonaStrategy());
 		case "combinado":
-			calculador = new CalculadorDePrioridad(new PrioridadCombinadoStrategy());
-			break;
+			return new CalculadorDePrioridad(new PrioridadCombinadoStrategy());
 		default:
-			calculador = new CalculadorDePrioridad(new PrioridadCombinadoStrategy());
-			break;
+			return new CalculadorDePrioridad(new PrioridadCombinadoStrategy());
 		}
-
-		return calculador.calcularPrioridad(establecimientos);
 	}
 }
