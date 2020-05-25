@@ -4,8 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-import ar.edu.unlam.tallerweb1.modelo.otros.Zona;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Establecimiento {
@@ -15,17 +14,19 @@ public class Establecimiento {
 	private Integer id;
 	private String nombre;
 	private String ubicacion;
-	private String zona;
 	private Integer capacidad;
 	private Integer ocupacion;
 	private String responsable;
 //	Calculados / No persisten en la bdd
 	private Float prioridad;
-	
+
+	@ManyToOne
+	private Zona zona;
+
 	public Establecimiento() {
 	}
 
-	public Establecimiento(String nombre, String ubicacion, Integer capacidad,Integer ocupacion, String zona,
+	public Establecimiento(String nombre, String ubicacion, Integer capacidad, Integer ocupacion, Zona zona,
 			String responsable) {
 		this.nombre = nombre;
 		this.ubicacion = ubicacion;
@@ -71,7 +72,7 @@ public class Establecimiento {
 		this.prioridad = prioridad;
 	}
 
-	public String getZona() {
+	public Zona getZona() {
 		return zona;
 	}
 
@@ -83,7 +84,7 @@ public class Establecimiento {
 		this.ocupacion = ocupacion;
 	}
 
-	public void setZona(String zona) {
+	public void setZona(Zona zona) {
 		this.zona = zona;
 	}
 
@@ -94,5 +95,5 @@ public class Establecimiento {
 	public void setResponsable(String responsable) {
 		this.responsable = responsable;
 	}
-	
+
 }

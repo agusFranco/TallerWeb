@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ar.edu.unlam.tallerweb1.SpringTest;
 import ar.edu.unlam.tallerweb1.modelo.Establecimiento;
+import ar.edu.unlam.tallerweb1.modelo.Zona;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioEstablecimiento;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioEstablecimientoImpl;
 import ar.edu.unlam.tallerweb1.servicios.ServicioEstablecimientoImpl;
@@ -46,15 +47,15 @@ public class EstablecimientosTest extends SpringTest {
 		RepositorioEstablecimiento repo = new RepositorioEstablecimientoImpl(session().getSessionFactory());
 		ServicioEstablecimientoImpl servicio = new ServicioEstablecimientoImpl(repo);
 		List<Establecimiento> listaEst = new ArrayList<Establecimiento>();
-		listaEst.add(new Establecimiento("Establecimiento_TEST", "Ubicacion_TEST", 200,10, "Zona_TEST", "Responsable_TEST"));
+		Zona zona = new Zona();
+		listaEst.add(new Establecimiento("Establecimiento_TEST", "Ubicacion_TEST", 200,10, zona, "Responsable_TEST"));
 	
 //		Ejecucion	
 		List<Establecimiento> litaPrioridad = servicio.calcularPrioridad_Ocupacion(listaEst);
 		Establecimiento estTesteado = litaPrioridad.get(0);
 		
 //		Comprobacion
-		assertEquals(5.0, estTesteado.getPrioridad(), 0.0);
-		
+		assertEquals(5.0, estTesteado.getPrioridad(), 0.0);		
 	}
 	
 
@@ -67,16 +68,15 @@ public class EstablecimientosTest extends SpringTest {
 		RepositorioEstablecimiento repo = new RepositorioEstablecimientoImpl(session().getSessionFactory());
 		ServicioEstablecimientoImpl servicio = new ServicioEstablecimientoImpl(repo);
 		List<Establecimiento> listaEst = new ArrayList<Establecimiento>();
-		listaEst.add(new Establecimiento("Establecimiento_TEST", "Ubicacion_TEST", 500,10, "Zona_TEST", "Responsable_TEST"));
-		listaEst.add(new Establecimiento("Establecimiento_TEST2", "Ubicacion_TEST2", 200,10, "Zona_TEST2", "Responsable_TEST2"));
-		listaEst.add(new Establecimiento("Establecimiento_TEST3", "Ubicacion_TEST3", 300,10, "Zona_TEST3", "Responsable_TEST3"));
+		Zona zona = new Zona();
+		listaEst.add(new Establecimiento("Establecimiento_TEST", "Ubicacion_TEST", 500,10, zona, "Responsable_TEST"));
+		listaEst.add(new Establecimiento("Establecimiento_TEST2", "Ubicacion_TEST2", 200,10, zona, "Responsable_TEST2"));
+		listaEst.add(new Establecimiento("Establecimiento_TEST3", "Ubicacion_TEST3", 300,10, zona, "Responsable_TEST3"));
 //		Ejecucion	
 		List<Establecimiento> litaPrioridad = servicio.calcularPrioridad_Capacidad(listaEst);
 		Establecimiento estTesteado = litaPrioridad.get(0);
 		
 //		Comprobacion
-		assertEquals(50.0, estTesteado.getPrioridad(), 0.0);
-		
-	}
-	
+		assertEquals(50.0, estTesteado.getPrioridad(), 0.0);		
+	}	
 }
