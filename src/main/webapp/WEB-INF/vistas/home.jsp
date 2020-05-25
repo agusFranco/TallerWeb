@@ -216,7 +216,7 @@
 											<td>${MapElement.key.getPrioridad()}%</td>
 											<td><a class="text-info font-weight-bold h4"
 												href="detalles-asignaciones?idEstabl=${MapElement.key.getId()}">
-													923 (Clic/detalle)</a></td>
+													${MapElement.key.capacidad*1.4}-dummy (Clic/detalle)</a></td>
 										</tr>
 									</c:forEach>
 								</tbody>
