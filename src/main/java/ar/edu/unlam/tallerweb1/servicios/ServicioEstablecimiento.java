@@ -13,6 +13,6 @@ public interface ServicioEstablecimiento {
 
 	Long cantidadItems(List<Establecimiento> listaEstablecimiento);
 
-	/* SERVICIOS QUE CALCULAR EL ORDEN DE PRIORIDAD */
+	/* SERVICIO QUE CALCULA EL PORCENTAJE DE PRIORIDAD DE RIESGO */
 	List<Establecimiento> calcularPrioridad(TipoDePrioridad prioridad, List<Establecimiento> establecimientos);
 }

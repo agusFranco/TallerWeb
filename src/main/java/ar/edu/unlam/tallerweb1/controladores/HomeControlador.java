@@ -73,8 +73,8 @@ public class HomeControlador {
 		return new ModelAndView("home", modelo);
 	}
 
-	// Action de distribuir los insumos.
-	// Busca el modelo default y le agrega la asignacion de insumos.
+	// Action para calcular la prioridad
+	// Busca el modelo default y le agrega el calculo de la prioridad de riesgo
 	@SuppressWarnings("unchecked")
 	@RequestMapping(path = "/calcular-prioridad", method = RequestMethod.GET)
 	public ModelAndView calcularPrioridadOcupacion(@RequestParam("prioridad") TipoDePrioridad prioridad) {
@@ -82,10 +82,10 @@ public class HomeControlador {
 		ModelMap modelo = this.getDefaultHomeModel();
 
 		// Calcula prioridad de acuerdo al RequestParam
-		List<Establecimiento> estXPrioridad = this.servicioEstablecimiento.calcularPrioridad(prioridad,
+		List<Establecimiento> establConPrioridad = this.servicioEstablecimiento.calcularPrioridad(prioridad,
 				(List<Establecimiento>) modelo.get("listaEstablecimientos"));
 
-		modelo.put("estXPrioridad", estXPrioridad);
+		modelo.put("establConPrioridad", establConPrioridad);
 
 		return new ModelAndView("home", modelo);
 	}
@@ -113,12 +113,12 @@ public class HomeControlador {
 
 		// Valores para los widget
 		Long cantidadEst = servicioEstablecimiento.cantidadItems(establecimientos);
-		Long cantidadIns = servicioInsumo.CantTotalInsumos();
+		Long cantTotalInsumos = servicioInsumo.cantTotalInsumos();
 
 		modelo.put("listaEstablecimientos", establecimientos);
 		modelo.put("listaInsumos", insumos);
 		modelo.put("cantidadEstablecimientos", cantidadEst);
-		modelo.put("cantidadInsumos", cantidadIns);
+		modelo.put("cantTotalInsumos", cantTotalInsumos);
 
 		return modelo;
 	}

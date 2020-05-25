@@ -25,7 +25,7 @@
 						<h5>Insumos</h5>
 					</div>
 					<div class="ibox-content">
-						<h1 class="no-margins">${cantidadInsumos}</h1>
+						<h1 class="no-margins">${cantTotalInsumos}</h1>
 
 						<small>Total disponibles </small>
 					</div>
@@ -39,7 +39,7 @@
 
 
 		<div class="row">
-			<div class="col-sm-12 col-lg-6">
+			<div class="col-sm-12 col-lg-7">
 				<div class="ibox float-e-margins">
 					<div class="ibox-title">
 						<h5>Establecimientos</h5>
@@ -49,14 +49,18 @@
 							<div class="col-sm-12"></div>
 						</div>
 						<div class="btn-group btn-group-toggle">
-							<p>Calcular índice de prioridad</p>
+							<p>Calcular índice de prioridad por</p>
 							<a class="btn btn-sm btn-white"
 								href="./calcular-prioridad?prioridad=OCUPACION"> Relación
 								Ocupación - Capacidad</a> <a class="btn btn-sm btn-white"
 								href="./calcular-prioridad?prioridad=CAPACIDAD"> Capacidad
 								Total</a> <a class="btn btn-sm btn-white"
-								href="./calcular-prioridad?prioridad=ZONA"> Zona </a>
-							<button class="btn btn-sm btn-white" onclick="calcularPrioridad()">Calcular Prioridad con Ajax</button>
+								href="./calcular-prioridad?prioridad=ZONA"> Zona </a> <a
+								class="btn btn-sm btn-white"
+								href="./calcular-prioridad?prioridad=COMBINADO"> Combinado </a>
+							<button class="btn btn-sm btn-white"
+								onclick="calcularPrioridad()">Calcular Prioridad con
+								Ajax</button>
 						</div>
 					</div>
 
@@ -71,22 +75,24 @@
 										<th>Nombre</th>
 										<th>Capacidad</th>
 										<th>Ocupacion</th>
-										<th>Prioridad (%)</th>
+										<th>Zona</th>
+										<th>Prioridad</th>
 									</tr>
 								</thead>
 								<tbody>
 									<!-- Si las listas con la Prioridad: NO SON VACIAS => Mostrame esa lista sino la default -->
 									<c:choose>
-										<c:when test="${not empty estXPrioridad}">
-											<c:forEach items="${estXPrioridad}" var="estItem">
+										<c:when test="${not empty establConPrioridad}">
+											<c:forEach items="${establConPrioridad}" var="estItem">
 												<tr>
 													<td>${estItem.getId()}</td>
 													<td>${estItem.getNombre()}</td>
 													<td>${estItem.getCapacidad()}</td>
 													<td>${estItem.getOcupacion()}</td>
-													<td><fmt:formatNumber type="number"
-															maxFractionDigits="2" value="${estItem.getPrioridad()}" />
-														%</td>
+													<td>${estItem.getZona().getNombre()}</td>
+													<td class="text-center"><fmt:formatNumber
+															type="number" maxFractionDigits="2"
+															value="${estItem.getPrioridad()}" /> %</td>
 												</tr>
 											</c:forEach>
 										</c:when>
@@ -97,7 +103,8 @@
 													<td>${estItem.getNombre()}</td>
 													<td>${estItem.getCapacidad()}</td>
 													<td>${estItem.getOcupacion()}</td>
-													<td>-</td>
+													<td>${estItem.getZona().getNombre()}</td>
+													<td class="text-center">-</td>
 												</tr>
 											</c:forEach>
 										</c:when>
@@ -109,7 +116,7 @@
 				</div>
 			</div>
 
-			<div class="col-sm-12 col-lg-6">
+			<div class="col-sm-12 col-lg-5">
 				<div class="ibox float-e-margins">
 					<div class="ibox-title">
 						<h5>Insumos</h5>
@@ -188,15 +195,17 @@
 										<th>#</th>
 										<th>Establecimiento</th>
 										<th>Capacidad</th>
-										<th>Prioridad (%)</th>
+										<th>Ocupación</th>
 										<th>Zona</th>
-										<th>Respiradores</th>
-										<th>Medicamentos</th>
+										<th>Prioridad</th>
+										<th>Total Insumos Asignados</th>
+										<!--	<th>Respiradores</th>
+									 	<th>Medicamentos</th>
 										<th>Jeringas</th>
 										<th>Tapa bocas</th>
 										<th>Delantales</th>
 										<th>Camas</th>
-										<th>Guantes</th>
+										<th>Guantes</th> -->
 									</tr>
 								</thead>
 								<tbody>
@@ -204,22 +213,21 @@
 										<tr>
 											<td>${MapElement.key.getId()}</td>
 											<td>${MapElement.key.getNombre()}</td>
-											<td>${MapElement.key.getCapacidad()}</td>
+											<td>${MapElement.key.capacidad}</td>
+											<td>${MapElement.key.ocupacion}</td>
+											<td>${MapElement.key.getZona().getNombre()}</td>
 											<td>${MapElement.key.getPrioridad()}%</td>
-											<td>${MapElement.key.getZona()}</td>
-											<c:forEach items="${MapElement.value}" var="listElement">
-												<td>${{listElement.getCantidad()}}</td>
-											</c:forEach>
+											<td><a class="text-info font-weight-bold h4"
+												href="detalles-asignaciones?idEstabl=${MapElement.key.getId()}">
+													${MapElement.key.capacidad*1.4}-dummy (Clic/detalle)</a></td>
 										</tr>
 									</c:forEach>
 								</tbody>
 							</table>
-
 						</div>
 					</div>
 				</div>
 			</div>
-
 		</div>
 	</div>
 </t:layout>

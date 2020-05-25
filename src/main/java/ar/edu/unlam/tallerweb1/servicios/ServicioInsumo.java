@@ -9,5 +9,5 @@ public interface ServicioInsumo {
 	List<Insumo> obtenerTodos();
 
 	//  Retorna la cantidad de insumos disponibles, realiza un SUM del campo 'cantidad'
-	Long CantTotalInsumos();
+	Long cantTotalInsumos();
 }

@@ -5,10 +5,13 @@ public enum TipoDePrioridad {
 
 	private String tipo;
 
-	TipoDePrioridad(String tipo) {
+	// Constructor privado en los enum	
+	private TipoDePrioridad(String tipo) {
 		this.tipo = tipo;
 	}
 
+	//Los enum solo tienen getters
+	
 	public String getTipo() {
 		return this.tipo;
 	}

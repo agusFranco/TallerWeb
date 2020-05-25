@@ -19,7 +19,7 @@ public class RepositorioInsumoImpl extends RepositorioBaseImpl<Insumo, Integer> 
 	//  Retorna la cantidad de insumos disponibles, realiza un SUM del campo 'cantidad'
 	@SuppressWarnings("deprecation")
 	@Override
-	public Long CantTotalInsumos() {
+	public Long cantTotalInsumos() {
 		final Session session = sessionFactory.getCurrentSession();
 		return (Long) session.createCriteria(Insumo.class).setProjection(Projections.sum("cantidad")).uniqueResult();
 	}
