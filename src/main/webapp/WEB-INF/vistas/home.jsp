@@ -42,10 +42,6 @@
 				</div>
 			</div>
 		</div>
-	</div>
-
-
-	<div>
 		<div class="row">
 			<div class="col-sm-12 col-lg-7">
 				<div class="ibox float-e-margins">
@@ -235,8 +231,10 @@
 					</div>
 				</div>
 			</div>
-		</div>		
+		</div>
 	</div>
+
+
 </t:layout>
 
 <script src="js/vistas/home.js"></script>
