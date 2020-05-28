@@ -4,9 +4,9 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <t:layout>
-	<div class="wrapper wrapper-content animated fadeInRight">
+	<div class="wrapper wrapper-content animated fadeInRight mb-5">
 		<div class="row">
-			<div class="col-md-3">
+			<div class="col-md-2">
 				<div class="ibox float-e-margins">
 					<div class="ibox-title">
 						<h5>Establecimientos</h5>
@@ -18,7 +18,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-2">
 				<div class="ibox float-e-margins">
 					<div class="ibox-title">
 						<span class="label label-success pull-right">Disponibilidad</span>
@@ -31,13 +31,21 @@
 					</div>
 				</div>
 			</div>
+			<div class="col-sm-8">
+				<div class="panel ">
+					<div class="panel-heading">
+						<h3 class="panel-title">Total de Insumos por Tipo</h3>
+					</div>
+					<div class="panel-body">
+						<div id="demo-bar-chart" class="ct-chart"></div>
+					</div>
+				</div>
+			</div>
 		</div>
+	</div>
 
 
-
-
-
-
+	<div>
 		<div class="row">
 			<div class="col-sm-12 col-lg-7">
 				<div class="ibox float-e-margins">
@@ -70,7 +78,6 @@
 							<table class="table table-striped table-hover grilla-dataTable">
 								<thead>
 									<tr>
-
 										<th>#</th>
 										<th>Nombre</th>
 										<th>Capacidad</th>
@@ -219,7 +226,7 @@
 											<td>${MapElement.key.getPrioridad()}%</td>
 											<td><a class="text-info font-weight-bold h4"
 												href="detalles-asignaciones?idEstabl=${MapElement.key.getId()}">
-													${MapElement.key.capacidad*1.4}-dummy (Clic/detalle)</a></td>
+													${MapElement.key.capacidad*1.4}(Clic/detalle)</a></td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -233,3 +240,32 @@
 </t:layout>
 
 <script src="js/vistas/home.js"></script>
+
+
+<script>
+	$(function() {
+		var options;
+		var data = {
+			labels : [ 
+						<c:forEach items="${listaInsumos}" var="item">
+							'${item.getNombre()}'
+							<c:if test="${!item.getNombre()}">,</c:if>
+						</c:forEach>],
+			series : [
+						[ 
+						<c:forEach items="${listaInsumos}" var="item">
+							${item.getCantidad()},
+						</c:forEach> ], ]
+					};
+		// bar chart
+		options = {
+			height : "150px",
+			axisX : {
+				showGrid : false
+			},
+		};
+
+		new Chartist.Bar('#demo-bar-chart', data, options);		
+
+	});
+</script>

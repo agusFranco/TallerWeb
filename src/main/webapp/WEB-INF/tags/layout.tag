@@ -15,6 +15,9 @@
 <link href="css/template/style.css" rel="stylesheet">
 <link href="css/fonts/font-awesome/css/font-awesome.min.css"
 	rel="stylesheet">
+	
+	<!-- Gráficos -->
+<link href="css/chartist/chartist-custom.css" rel="stylesheet">
 </head>
 <body>
 	<div id="wrapper">
@@ -89,4 +92,7 @@
 <script src="js/template/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 <script src="js/template/plugins/dataTables/datatables.min.js"></script>
 <script src="js/template/app/inspinia.js"></script>
+
+<!-- Gráficos -->
+<script src="js/chartist/chartist.js"></script>
 </html>
