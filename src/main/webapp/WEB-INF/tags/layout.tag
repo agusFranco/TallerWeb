@@ -15,59 +15,38 @@
 <link href="css/template/style.css" rel="stylesheet">
 <link href="css/fonts/font-awesome/css/font-awesome.min.css"
 	rel="stylesheet">
-	
-	<!-- Gráficos -->
+
+<!-- Gráficos -->
 <link href="css/chartist/chartist-custom.css" rel="stylesheet">
 </head>
-<body>
+<body class="top-navigation">
 	<div id="wrapper">
-		<div id="page-nav-header">
-			<!-- <jsp:invoke fragment="header"/> -->
-			<nav class="navbar-default navbar-static-side" role="navigation">
-				<div class="sidebar-collapse">
-					<ul class="nav" id="side-menu">
-						<li class="nav-header">
-							<div class="dropdown profile-element">
-								<a data-toggle="dropdown" class="dropdown-toggle" href="#">
-									<span class="clear"> <span class="block m-t-xs">
-											<strong class="font-bold">Bienvenido</strong><br /> <strong
-											class="font-bold">"Nombre del usuario"</strong>
-									</span> <span class="text-muted text-xs block">Menú <b
-											class="caret"></b></span>
-								</span>
-								</a>
-								<ul class="dropdown-menu animated fadeInRight m-t-xs">
-									<li><a href="#">Item</a></li>
-								</ul>
-							</div>
-							<div class="logo-element">WO</div>
-						</li>
-						<li><a href="#"><i class="fa fa-th"></i> <span
-								class="nav-label">Página de inicio</span> </a></li>
-						<li><a href="#"><i class="fa fa-map-marker"></i> <span
-								class="nav-label">Mapa de distribución</span> </a></li>
-					</ul>
-				</div>
-			</nav>
-		</div>
 		<div id="page-wrapper" class="gray-bg">
-			<div class="row border-bottom">
-				<nav class="navbar navbar-static-top white-bg" role="navigation"
-					style="margin-bottom: 0">
+			<div id="page-header" class="row border-bottom white-bg">
+				<nav class="navbar navbar-static-top" role="navigation">
 					<div class="navbar-header">
-						<a class="navbar-minimalize minimalize-styl-2 btn btn-primary "
-							href="#"><i class="fa fa-bars"></i> </a>
-						<form role="search" class="navbar-form-custom" method="post"
-							action="">
-							<div class="form-group">
-								<input type="text" placeholder="Buscar..." class="form-control"
-									name="top-search" id="top-search">
-							</div>
-						</form>
+						<button aria-controls="navbar" aria-expanded="false"
+							data-target="#navbar" data-toggle="collapse"
+							class="navbar-toggle collapsed" type="button">
+							<i class="fa fa-reorder"></i>
+						</button>
+						<a href="./home" class="navbar-brand">WebOnes</a>
 					</div>
-					<ul class="nav navbar-top-links navbar-right">
-						<li><a href="./home" id="loginLink">Cerrar Sesión</a></li>
-					</ul>
+					<div class="navbar-collapse collapse" id="navbar">
+						<ul class="nav navbar-nav">
+							<li class="active"><a aria-expanded="false" role="button"
+								href="./home"> Home </a></li>
+							<li><a aria-expanded="false" role="button"
+								href="./distribucion"> Distribucion </a></li>
+								<li><a aria-expanded="false" role="button"
+								href="./mapa"> Mapa </a></li>
+						</ul>
+						<ul class="nav navbar-top-links navbar-right">
+							<li><a href="login.html"> <i class="fa fa-sign-out"></i>
+									Log out
+							</a></li>
+						</ul>
+					</div>
 				</nav>
 			</div>
 			<div id="body">
