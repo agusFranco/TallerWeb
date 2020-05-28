@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<title>WebOnes · Insumos Médicos</title>
+<title>DIMAR · Distribucion de Insumos Médicos</title>
 
 <link href="css/template/bootstrap.min.css" rel="stylesheet">
 <link href="css/template/datatables.min.css" rel="stylesheet">
@@ -30,7 +30,7 @@
 							class="navbar-toggle collapsed" type="button">
 							<i class="fa fa-reorder"></i>
 						</button>
-						<a href="./home" class="navbar-brand">WebOnes</a>
+						<a href="./home" class="navbar-brand">DIMAR</a>
 					</div>
 					<div class="navbar-collapse collapse" id="navbar">
 						<ul class="nav navbar-nav">
