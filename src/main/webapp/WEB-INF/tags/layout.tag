@@ -54,9 +54,9 @@
 			</div>
 			<div id="page-footer">
 				<div class="footer">
-					<div class="pull-right">Insumos Medicos</div>
+					<div class="pull-right">Distribucion de Insumos Medicos</div>
 					<div>
-						<strong>WebOnes</strong> UNLaM - 2020
+						<strong>DIMAR</strong> - UNLaM - 2020
 					</div>
 				</div>
 			</div>
