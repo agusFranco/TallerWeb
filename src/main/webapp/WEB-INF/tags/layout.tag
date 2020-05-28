@@ -21,7 +21,7 @@
 </head>
 <body class="top-navigation">
 	<div id="wrapper">
-		<div id="page-wrapper" class="gray-bg">
+		<div id="page-wrapper">
 			<div id="page-header" class="row border-bottom white-bg">
 				<nav class="navbar navbar-static-top" role="navigation">
 					<div class="navbar-header">
