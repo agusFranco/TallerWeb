@@ -52,6 +52,7 @@
 			<div id="body">
 				<jsp:doBody />
 			</div>
+			<br />
 			<div id="page-footer">
 				<div class="footer">
 					<div class="pull-right">Distribucion de Insumos Medicos</div>
