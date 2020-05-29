@@ -1,19 +1,3 @@
-var calcularPrioridad = function() {
-	var inputModel = {
-		prioridad : "ZONA"
-	};
-
-	return $.ajax({
-		type : "POST",
-		url : './calcularPrioridad',
-		contentType : 'application/json; charset=utf-8',
-		data : JSON.stringify(inputModel),
-		success : function(result) {
-			console.log(result);
-		}
-	});
-};
-
 $(document)
 		.ready(
 				function() {
@@ -51,6 +35,5 @@ $(document)
 									});
 
 				}
-				
-		
+
 		);

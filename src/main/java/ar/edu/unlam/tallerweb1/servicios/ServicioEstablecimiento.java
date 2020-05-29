@@ -12,7 +12,4 @@ public interface ServicioEstablecimiento {
 	List<Establecimiento> obtenerTodos();
 
 	Long cantidadItems(List<Establecimiento> listaEstablecimiento);
-
-	/* SERVICIO QUE CALCULA EL PORCENTAJE DE PRIORIDAD DE RIESGO */
-	List<Establecimiento> calcularPrioridad(TipoDePrioridad prioridad, List<Establecimiento> establecimientos);
 }

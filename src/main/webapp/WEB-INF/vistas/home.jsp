@@ -55,16 +55,13 @@
 						<div class="btn-group btn-group-toggle">
 							<p>Calcular índice de prioridad por</p>
 							<a class="btn btn-sm btn-white"
-								href="./calcular-prioridad?prioridad=OCUPACION"> Relación
+								href="./calcularPrioridad?prioridad=OCUPACION"> Relación
 								Ocupación - Capacidad</a> <a class="btn btn-sm btn-white"
-								href="./calcular-prioridad?prioridad=CAPACIDAD"> Capacidad
+								href="./calcularPrioridad?prioridad=CAPACIDAD"> Capacidad
 								Total</a> <a class="btn btn-sm btn-white"
-								href="./calcular-prioridad?prioridad=ZONA"> Zona </a> <a
+								href="./calcularPrioridad?prioridad=ZONA"> Zona </a> <a
 								class="btn btn-sm btn-white"
-								href="./calcular-prioridad?prioridad=COMBINADO"> Combinado </a>
-							<button class="btn btn-sm btn-white"
-								onclick="calcularPrioridad()">Calcular Prioridad con
-								Ajax</button>
+								href="./calcularPrioridad?prioridad=COMBINADO"> Combinado </a>
 						</div>
 					</div>
 

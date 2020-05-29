@@ -8,15 +8,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.comun.enums.TipoDePrioridad;
-import ar.edu.unlam.tallerweb1.comun.modelos.entrada.CalcularPrioridadMdE;
 import ar.edu.unlam.tallerweb1.configuracion.StringToTipoDePrioridad;
 import ar.edu.unlam.tallerweb1.modelo.Establecimiento;
 import ar.edu.unlam.tallerweb1.modelo.Insumo;
@@ -64,7 +61,7 @@ public class HomeControlador {
 		ModelMap modelo = this.getDefaultHomeModel();
 
 		// cruce entre establecimientos e insumos Map<Establecimiento,Insumo[]>
-		Map<Establecimiento, List<Insumo>> asignacion = servicioDistribucion.asignarInsumos(
+		Map<Establecimiento, List<Insumo>> asignacion = servicioDistribucion.distribuirInsumos(
 				(List<Establecimiento>) modelo.get("listaEstablecimientos"), (List<Insumo>) modelo.get("listaInsumos"));
 
 		// La agrego al modelo
@@ -76,31 +73,18 @@ public class HomeControlador {
 	// Action para calcular la prioridad
 	// Busca el modelo default y le agrega el calculo de la prioridad de riesgo
 	@SuppressWarnings("unchecked")
-	@RequestMapping(path = "/calcular-prioridad", method = RequestMethod.GET)
-	public ModelAndView calcularPrioridadOcupacion(@RequestParam("prioridad") TipoDePrioridad prioridad) {
+	@RequestMapping(path = "/calcularPrioridad", method = RequestMethod.GET)
+	public ModelAndView calcularPrioridad(@RequestParam("prioridad") TipoDePrioridad prioridad) {
 		// Busco el modelo default
 		ModelMap modelo = this.getDefaultHomeModel();
 
 		// Calcula prioridad de acuerdo al RequestParam
-		List<Establecimiento> establConPrioridad = this.servicioEstablecimiento.calcularPrioridad(prioridad,
+		List<Establecimiento> establConPrioridad = this.servicioDistribucion.calcularPrioridad(prioridad,
 				(List<Establecimiento>) modelo.get("listaEstablecimientos"));
 
 		modelo.put("establConPrioridad", establConPrioridad);
 
 		return new ModelAndView("home", modelo);
-	}
-
-	// Calcula la prioridad (por ajax) en base a el modelo de entrada.
-	@RequestMapping(path = "/calcularPrioridad", method = RequestMethod.POST)
-	public @ResponseBody List<Establecimiento> calcularPrioridad(@RequestBody CalcularPrioridadMdE parametro) {
-		// Busco los establecimientos
-		List<Establecimiento> establecimientos = servicioEstablecimiento.obtenerTodos();
-
-		// Calculo prioridad en base al modelo de entrada.
-		List<Establecimiento> estXPrioridad = this.servicioEstablecimiento.calcularPrioridad(parametro.getPrioridad(),
-				establecimientos);
-
-		return estXPrioridad;
 	}
 
 	// Obtiene los datos por default de la vista home.
@@ -123,4 +107,20 @@ public class HomeControlador {
 		return modelo;
 	}
 
+	// SI EN ALGUN MOMENTO NECESITAMOS USARLO
+	// // Calcula la prioridad (por ajax) en base a el modelo de entrada.
+	// @RequestMapping(path = "/calcularPrioridad", method = RequestMethod.POST)
+	// public @ResponseBody List<Establecimiento> calcularPrioridad(@RequestBody
+	// CalcularPrioridadMdE parametro) {
+	// // Busco los establecimientos
+	// List<Establecimiento> establecimientos =
+	// servicioEstablecimiento.obtenerTodos();
+	//
+	// // Calculo prioridad en base al modelo de entrada.
+	// List<Establecimiento> estXPrioridad =
+	// this.servicioDistribucion.calcularPrioridad(parametro.getPrioridad(),
+	// establecimientos);
+	//
+	// return estXPrioridad;
+	// }
 }
