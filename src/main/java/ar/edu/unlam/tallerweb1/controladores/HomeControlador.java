@@ -46,23 +46,42 @@ public class HomeControlador {
 		return new ModelAndView("redirect:/home");
 	}
 
-	// Escucha la URL /home por GET, y redirige a una vista.
 	@RequestMapping(path = "/home", method = RequestMethod.GET)
 	public ModelAndView irAHome() {
 		return new ModelAndView("home", this.getDefaultHomeModel());
 	}
 
-	// Action de distribuir los insumos.
-	// Busca el modelo default y le agrega la asignacion de insumos.
-	@SuppressWarnings("unchecked")
+	// Calcular Indice de Prioridad
+	// Busca el modelo default / Ejecuta la Prioridad
+	@RequestMapping(path = "/calcularPrioridad", method = RequestMethod.GET)
+	public ModelAndView calcularPrioridad(@RequestParam("prioridad") TipoDePrioridad prioridad) {
+		// Busco el modelo default
+		ModelMap modelo = this.getDefaultHomeModel();
+		List<Establecimiento> listEstablec = (List<Establecimiento>) modelo.get("listaEstablecimientos");
+		
+		// Calcula prioridad de acuerdo al RequestParam
+		List<Establecimiento> establecConPrioridad = this.servicioDistribucion.calcularPrioridad(
+																		prioridad,listEstablec);
+		
+		modelo.put("establConPrioridad", establecConPrioridad);
+
+		return new ModelAndView("home", modelo);
+	}
+	
+	
+	// Calcular Distribución
+	// Busca el modelo default / Ejecuta distribución de insumos.
 	@RequestMapping(path = "/home", method = RequestMethod.POST)
 	public ModelAndView distribuirInsumos() {
 		// Busco el modelo default
 		ModelMap modelo = this.getDefaultHomeModel();
 
-		// cruce entre establecimientos e insumos Map<Establecimiento,Insumo[]>
+		List<Establecimiento> listaEstablec = (List<Establecimiento>) modelo.get("listaEstablecimientos");
+		List<Insumo> listaInsumos = (List<Insumo>) modelo.get("listaInsumos");
+		
+		// Distribucion de Insumos entre establecimientos
 		Map<Establecimiento, List<Insumo>> asignacion = servicioDistribucion.distribuirInsumos(
-				(List<Establecimiento>) modelo.get("listaEstablecimientos"), (List<Insumo>) modelo.get("listaInsumos"));
+																	listaEstablec,listaInsumos);
 
 		// La agrego al modelo
 		modelo.put("MapaDistribuido", asignacion);
@@ -70,38 +89,23 @@ public class HomeControlador {
 		return new ModelAndView("home", modelo);
 	}
 
-	// Action para calcular la prioridad
-	// Busca el modelo default y le agrega el calculo de la prioridad de riesgo
-	@SuppressWarnings("unchecked")
-	@RequestMapping(path = "/calcularPrioridad", method = RequestMethod.GET)
-	public ModelAndView calcularPrioridad(@RequestParam("prioridad") TipoDePrioridad prioridad) {
-		// Busco el modelo default
-		ModelMap modelo = this.getDefaultHomeModel();
 
-		// Calcula prioridad de acuerdo al RequestParam
-		List<Establecimiento> establConPrioridad = this.servicioDistribucion.calcularPrioridad(prioridad,
-				(List<Establecimiento>) modelo.get("listaEstablecimientos"));
-
-		modelo.put("establConPrioridad", establConPrioridad);
-
-		return new ModelAndView("home", modelo);
-	}
 
 	// Obtiene los datos por default de la vista home.
 	private ModelMap getDefaultHomeModel() {
 		ModelMap modelo = new ModelMap();
 
-		// Listas para mostrar en la tabla principal
-		List<Establecimiento> establecimientos = servicioEstablecimiento.obtenerTodos();
-		List<Insumo> insumos = servicioInsumo.obtenerTodos();
+		// Listas para mostrar de Establecimientos e insumos.
+		List<Establecimiento> listaEstablec = servicioEstablecimiento.obtenerTodos();
+		List<Insumo> listaInsumos = servicioInsumo.obtenerTodos();
 
 		// Valores para los widget
-		Long cantidadEst = servicioEstablecimiento.cantidadItems(establecimientos);
+		Long cantEstablec = servicioEstablecimiento.cantidadItems(listaEstablec);
 		Long cantTotalInsumos = servicioInsumo.cantTotalInsumos();
 
-		modelo.put("listaEstablecimientos", establecimientos);
-		modelo.put("listaInsumos", insumos);
-		modelo.put("cantidadEstablecimientos", cantidadEst);
+		modelo.put("listaEstablecimientos", listaEstablec);
+		modelo.put("listaInsumos", listaInsumos);
+		modelo.put("cantidadEstablecimientos", cantEstablec);
 		modelo.put("cantTotalInsumos", cantTotalInsumos);
 
 		return modelo;

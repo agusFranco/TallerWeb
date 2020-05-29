@@ -1,8 +1,5 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
-import java.util.List;
-import java.util.Map;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

@@ -14,7 +14,7 @@ import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioLogin;
 
 @Controller
-public class ControladorLogin {
+public class LoginControlador {
 
 	// La anotacion @Autowired indica a Spring que se debe utilizar el contructor
 	// como mecanismo de inyeccion de dependencias,
@@ -28,7 +28,7 @@ public class ControladorLogin {
 	private ServicioLogin servicioLogin;
 
 	@Autowired
-	public ControladorLogin(ServicioLogin servicioLogin) {
+	public LoginControlador(ServicioLogin servicioLogin) {
 		this.servicioLogin = servicioLogin;
 	}
 

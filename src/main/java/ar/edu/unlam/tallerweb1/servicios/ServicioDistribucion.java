@@ -8,8 +8,10 @@ import ar.edu.unlam.tallerweb1.modelo.Establecimiento;
 import ar.edu.unlam.tallerweb1.modelo.Insumo;
 
 public interface ServicioDistribucion {
+	
 	List<Establecimiento> calcularPrioridad(TipoDePrioridad prioridad, List<Establecimiento> establecimientos);
 
-	Map<Establecimiento, List<Insumo>> distribuirInsumos(List<Establecimiento> listaEstablecimientos,
-			List<Insumo> listaInsumos);
+	Map<Establecimiento, List<Insumo>> distribuirInsumos(TipoDePrioridad prioridad,
+														 List<Establecimiento> establecimientos,
+														 List<Insumo> insumos);
 }

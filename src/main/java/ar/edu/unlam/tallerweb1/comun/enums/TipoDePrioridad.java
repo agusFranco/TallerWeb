@@ -13,16 +13,18 @@ import ar.edu.unlam.tallerweb1.negocio.PrioridadZonaStrategy;
 
 // Nuevo Contexto
 public enum TipoDePrioridad {
-	COMBINADO("combinado", new PrioridadCombinadoStrategy()), OCUPACION("ocupacion", new PrioridadOcupacionStrategy()),
-	CAPACIDAD("capacidad", new PrioridadCapacidadStrategy()), ZONA("zona", new PrioridadZonaStrategy());
+	COMBINADO("combinado", new PrioridadCombinadoStrategy()), 
+	OCUPACION("ocupacion", new PrioridadOcupacionStrategy()),
+	CAPACIDAD("capacidad", new PrioridadCapacidadStrategy()), 
+	ZONA("zona", new PrioridadZonaStrategy());
 
 	private String tipo;
-	private PrioridadStrategy estrategiaDeCalculoDePrioridad;
+	private PrioridadStrategy prioridadStrategy;
 
-	// Constructor privado en los enum
+	// Constructor privado del enum
 	private TipoDePrioridad(String tipo, PrioridadStrategy estrategiaDeCalculoDePrioridad) {
 		this.tipo = tipo;
-		this.estrategiaDeCalculoDePrioridad = estrategiaDeCalculoDePrioridad;
+		this.prioridadStrategy = estrategiaDeCalculoDePrioridad;
 	}
 
 	// Los enum solo tienen getters
@@ -30,11 +32,11 @@ public enum TipoDePrioridad {
 		return this.tipo;
 	}
 
-	public List<Establecimiento> calcularPrioridad(List<Establecimiento> lista) {
-		return estrategiaDeCalculoDePrioridad.calcular(lista);
+	public List<Establecimiento> calcularPrioridad(List<Establecimiento> establecimientos) {
+		return prioridadStrategy.calcular(establecimientos);
 	}
 
-	public Map<Establecimiento, List<Insumo>> distribuir(List<Establecimiento> establecimientos, List<Insumo> insumos) {
-		return estrategiaDeCalculoDePrioridad.distribuir(establecimientos, insumos);
+	public Map<Establecimiento, List<Insumo>> distribuirInsumos(List<Establecimiento> establecimientos, List<Insumo> insumos) {
+		return prioridadStrategy.distribuir(establecimientos, insumos);
 	}
 }

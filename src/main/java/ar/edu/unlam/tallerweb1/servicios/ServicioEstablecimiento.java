@@ -3,7 +3,6 @@ package ar.edu.unlam.tallerweb1.servicios;
 import java.util.List;
 
 import ar.edu.unlam.tallerweb1.modelo.Establecimiento;
-import ar.edu.unlam.tallerweb1.comun.enums.TipoDePrioridad;
 
 public interface ServicioEstablecimiento {
 
@@ -11,5 +10,5 @@ public interface ServicioEstablecimiento {
 
 	List<Establecimiento> obtenerTodos();
 
-	Long cantidadItems(List<Establecimiento> listaEstablecimiento);
+	Long cantidadItems(List<Establecimiento> establecimientos);
 }
