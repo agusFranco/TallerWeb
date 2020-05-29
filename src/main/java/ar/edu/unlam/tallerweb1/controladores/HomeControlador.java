@@ -57,11 +57,11 @@ public class HomeControlador {
 	public ModelAndView calcularPrioridad(@RequestParam("prioridad") TipoDePrioridad prioridad) {
 		// Busco el modelo default
 		ModelMap modelo = this.getDefaultHomeModel();
-		List<Establecimiento> listEstablec = (List<Establecimiento>) modelo.get("listaEstablecimientos");
+		List<Establecimiento> listaEstablec = (List<Establecimiento>) modelo.get("listaEstablecimientos");
 		
 		// Calcula prioridad de acuerdo al RequestParam
 		List<Establecimiento> establecConPrioridad = this.servicioDistribucion.calcularPrioridad(
-																		prioridad,listEstablec);
+																		prioridad,listaEstablec);
 		
 		modelo.put("establConPrioridad", establecConPrioridad);
 
@@ -71,17 +71,21 @@ public class HomeControlador {
 	
 	// Calcular Distribución
 	// Busca el modelo default / Ejecuta distribución de insumos.
-	@RequestMapping(path = "/home", method = RequestMethod.POST)
-	public ModelAndView distribuirInsumos() {
+	@RequestMapping(path = "/distribucion", method = RequestMethod.GET)
+	public ModelAndView distribuirInsumos(@RequestParam("prioridad") TipoDePrioridad prioridad) {
 		// Busco el modelo default
 		ModelMap modelo = this.getDefaultHomeModel();
 
 		List<Establecimiento> listaEstablec = (List<Establecimiento>) modelo.get("listaEstablecimientos");
 		List<Insumo> listaInsumos = (List<Insumo>) modelo.get("listaInsumos");
+
+		// Calcula prioridad de acuerdo al RequestParam
+		List<Establecimiento> establecConPrioridad = this.servicioDistribucion.calcularPrioridad(
+																		prioridad,listaEstablec);
 		
 		// Distribucion de Insumos entre establecimientos
 		Map<Establecimiento, List<Insumo>> asignacion = servicioDistribucion.distribuirInsumos(
-																	listaEstablec,listaInsumos);
+																	prioridad,establecConPrioridad,listaInsumos);
 
 		// La agrego al modelo
 		modelo.put("MapaDistribuido", asignacion);

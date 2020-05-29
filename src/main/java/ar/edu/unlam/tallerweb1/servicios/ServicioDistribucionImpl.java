@@ -1,6 +1,5 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,14 +23,12 @@ public class ServicioDistribucionImpl implements ServicioDistribucion {
 	}
 
 	@Override
-	public Map<Establecimiento, List<Insumo>> distribuirInsumos(List<Establecimiento> listaEstablecimientos,
+	public Map<Establecimiento, List<Insumo>> distribuirInsumos(TipoDePrioridad prioridad,
+																List<Establecimiento> listaEstablecimientos,
 																List<Insumo> listaInsumos) {
 
-		Map<Establecimiento, List<Insumo>> distribuciones = new HashMap<Establecimiento, List<Insumo>>();
+		Map<Establecimiento, List<Insumo>> establecInsumosDistribuidos = prioridad.distribuirInsumos(listaEstablecimientos, listaInsumos);
 
-		// Utilizo el método del calculador para calcular la prioridad
-		// List<Establecimiento> establConPrioridad = prioridad.calcularPrioridad(establecimientos);
-
-		return distribuciones;
+		return establecInsumosDistribuidos;
 	}
 }

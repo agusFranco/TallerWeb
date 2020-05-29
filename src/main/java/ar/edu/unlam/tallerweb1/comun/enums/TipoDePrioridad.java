@@ -11,7 +11,7 @@ import ar.edu.unlam.tallerweb1.negocio.PrioridadOcupacionStrategy;
 import ar.edu.unlam.tallerweb1.negocio.PrioridadStrategy;
 import ar.edu.unlam.tallerweb1.negocio.PrioridadZonaStrategy;
 
-// Nuevo Contexto
+// Contiene el "Contexto del strategy"
 public enum TipoDePrioridad {
 	COMBINADO("combinado", new PrioridadCombinadoStrategy()), 
 	OCUPACION("ocupacion", new PrioridadOcupacionStrategy()),
@@ -22,9 +22,9 @@ public enum TipoDePrioridad {
 	private PrioridadStrategy prioridadStrategy;
 
 	// Constructor privado del enum
-	private TipoDePrioridad(String tipo, PrioridadStrategy estrategiaDeCalculoDePrioridad) {
+	private TipoDePrioridad(String tipo, PrioridadStrategy prioridadStrategy) {
 		this.tipo = tipo;
-		this.prioridadStrategy = estrategiaDeCalculoDePrioridad;
+		this.prioridadStrategy = prioridadStrategy;
 	}
 
 	// Los enum solo tienen getters

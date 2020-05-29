@@ -180,7 +180,8 @@
 								</div>
 							</div>
 							<div class="col-sm-2">
-								<form action="./home" method="POST">
+								<form action="./distribucion" method="GET">
+									Prioridad: <input type="text" name="prioridad" class="form-control">
 									<button type="submit" class="btn btn-primary">
 										<i class="fa fa-medkit"></i><strong> Iniciar
 											simulacion</strong>
@@ -231,6 +232,85 @@
 		</div>
 	</div>
 
+
+
+
+
+
+<div class="row">
+			<div class="col-lg-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-title">
+						<h5>ESTA GRAFICO SIRVE PARA AYUDAR A VER LA DISTRIBUCION POR CADA TIPO DE INSUMO EN EL CUADRO !!!!!!!!!!!!!!!  </h5>
+						<div class="ibox-tools">
+					 </div>
+					</div>
+					<div class="ibox-content">
+						<div class="row">
+							<div class="col-sm-10 m-b-xs">
+								<div data-toggle="buttons" class="btn-group">
+									<p>Calcular Índice de riesgo por</p>
+									<label class="btn btn-sm btn-white"> <input
+										type="radio" id="option1" name="options"> Por Indice
+									</label> <label class="btn btn-sm btn-white"> <input
+										type="radio" id="option2" name="options"> Ocupación
+										sobre Capacidad
+									</label> <label class="btn btn-sm btn-white"> <input
+										type="radio" id="option3" name="options"> Por Zona
+									</label>
+								</div>
+							</div>
+							<div class="col-sm-2">
+								<form action="./distribucion" method="GET">
+									Prioridad: <input type="text" name="prioridad" class="form-control">
+									<button type="submit" class="btn btn-primary">
+										<i class="fa fa-medkit"></i><strong> Iniciar
+											simulacion</strong>
+									</button>
+								</form>
+							</div>
+						</div>
+						<div class="table-responsive">
+							<table class="table table-striped table-hover grilla-dataTable">
+								<thead>
+									<tr>
+										<th>#</th>
+										<th>Establecimiento</th>
+										<th>Capacidad</th>
+										<th>Ocupación</th>
+										<th>Zona</th>
+										<th>Prioridad</th>
+										<th>Total Insumos Asignados</th>
+										<!--	<th>Respiradores</th>
+									 	<th>Medicamentos</th>
+										<th>Jeringas</th>
+										<th>Tapa bocas</th>
+										<th>Delantales</th>
+										<th>Camas</th>
+										<th>Guantes</th> -->
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach items="${MapaDistribuido}" var="MapElement">
+										<tr>
+											<td>${MapElement.key.getId()}</td>
+											<td>${MapElement.key.getNombre()}</td>
+											<td>${MapElement.key.capacidad}</td>
+											<td>${MapElement.key.ocupacion}</td>
+											<td>${MapElement.key.getZona().getNombre()}</td>
+											<td>${MapElement.key.getPrioridad()}%</td>
+											<c:forEach items="${MapElement.value}" var="listElement">
+												<td><%-- ${{listElement.getNombre()}}-> --%>${{listElement.getCantidad()}}</td>
+											</c:forEach>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
 </t:layout>
 
