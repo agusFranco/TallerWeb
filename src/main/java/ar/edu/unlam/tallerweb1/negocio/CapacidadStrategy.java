@@ -9,7 +9,7 @@ import ar.edu.unlam.tallerweb1.modelo.Establecimiento;
 import ar.edu.unlam.tallerweb1.modelo.Insumo;
 
 // Estrategia: Calcular prioridad por "CAPACIDAD"
-public class PrioridadCapacidadStrategy implements PrioridadStrategy {
+public class CapacidadStrategy implements Strategy {
 
 	@Override
 	public List<Establecimiento> calcular(List<Establecimiento> establecimientos) {

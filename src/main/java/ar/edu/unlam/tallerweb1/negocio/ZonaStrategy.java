@@ -7,8 +7,8 @@ import java.util.Map;
 import ar.edu.unlam.tallerweb1.modelo.Establecimiento;
 import ar.edu.unlam.tallerweb1.modelo.Insumo;
 
-//Estrategia: Calcular prioridad por "COMBINADO"
-public class PrioridadCombinadoStrategy implements PrioridadStrategy {
+//Estrategia: Calcular prioridad por "ZONA"
+public class ZonaStrategy implements Strategy {
 
 	@Override
 	public List<Establecimiento> calcular(List<Establecimiento> establecimientos) {

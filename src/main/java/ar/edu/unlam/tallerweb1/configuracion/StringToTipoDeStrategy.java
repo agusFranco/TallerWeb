@@ -2,19 +2,19 @@ package ar.edu.unlam.tallerweb1.configuracion;
 
 import java.beans.PropertyEditorSupport;
 
-import ar.edu.unlam.tallerweb1.comun.enums.TipoDePrioridad;
+import ar.edu.unlam.tallerweb1.comun.enums.TipoDeStrategy;
 
-public class StringToTipoDePrioridad extends PropertyEditorSupport {
+public class StringToTipoDeStrategy extends PropertyEditorSupport {
 
 	@Override
 	public void setAsText(String text) throws IllegalArgumentException {
 		String capitalized = text.toUpperCase();
 
 		try {
-			TipoDePrioridad prioridad = TipoDePrioridad.valueOf(capitalized);
+			TipoDeStrategy prioridad = TipoDeStrategy.valueOf(capitalized);
 			setValue(prioridad);
 		} catch (Exception ex) {
-			setValue(TipoDePrioridad.COMBINADO);
+			setValue(TipoDeStrategy.COMBINADO);
 		}
 	}
 }

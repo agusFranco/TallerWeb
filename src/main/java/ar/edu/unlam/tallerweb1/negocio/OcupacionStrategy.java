@@ -8,11 +8,9 @@ import java.util.Map;
 
 import ar.edu.unlam.tallerweb1.modelo.Establecimiento;
 import ar.edu.unlam.tallerweb1.modelo.Insumo;
-import ar.edu.unlam.tallerweb1.servicios.ServicioEstablecimientoImpl;
-import ar.edu.unlam.tallerweb1.servicios.ServicioInsumo;
 
 //Estrategia: Calcular prioridad por "OCUPACIÓN"
-public class PrioridadOcupacionStrategy implements PrioridadStrategy {
+public class OcupacionStrategy implements Strategy {
 
 	@Override
 	public List<Establecimiento> calcular(List<Establecimiento> establecimientos) {
@@ -37,6 +35,7 @@ public class PrioridadOcupacionStrategy implements PrioridadStrategy {
 	@Override
 	public Map<Establecimiento, List<Insumo>> distribuir(List<Establecimiento> establecimientos, List<Insumo> insumos) {
 		
+		establecimientos = this.calcular(establecimientos);
 		Map<Establecimiento,List<Insumo>> asignacion =  new HashMap<Establecimiento, List<Insumo>>();
 
 		Integer totalInsumos = 0;
@@ -46,16 +45,11 @@ public class PrioridadOcupacionStrategy implements PrioridadStrategy {
 		
 		//Cantidad de establecimientos
 		Integer cantidadEstablec = establecimientos.size();	
-	
-		
-
-			
 		
 		// Calculo de Rangos		
 		Float promedioMaximo = establecimientos.stream().max(Comparator.comparing(Establecimiento::getPrioridad)).get().getPrioridad();
 		Float promedioMitad = promedioMaximo/2;
 		Float promedioUnCuarto = promedioMitad/2;
-		
 		
 		//Contador de establecimientos para distribuir en rangos
 		Integer contadorEstAlta = 0;
@@ -69,8 +63,7 @@ public class PrioridadOcupacionStrategy implements PrioridadStrategy {
 				}else {
 					contadorEstBaja++;		
 				}		
-		}
-		
+		}	
 		
 		//	Asignación de Insumos a Establecimientos
 		for(Establecimiento itemEstablec : establecimientos) {

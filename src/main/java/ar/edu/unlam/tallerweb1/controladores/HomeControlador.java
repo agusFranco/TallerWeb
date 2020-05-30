@@ -13,32 +13,29 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import ar.edu.unlam.tallerweb1.comun.enums.TipoDePrioridad;
-import ar.edu.unlam.tallerweb1.configuracion.StringToTipoDePrioridad;
+import ar.edu.unlam.tallerweb1.comun.enums.TipoDeStrategy;
+import ar.edu.unlam.tallerweb1.configuracion.StringToTipoDeStrategy;
 import ar.edu.unlam.tallerweb1.modelo.Establecimiento;
 import ar.edu.unlam.tallerweb1.modelo.Insumo;
-import ar.edu.unlam.tallerweb1.servicios.ServicioDistribucion;
 import ar.edu.unlam.tallerweb1.servicios.ServicioEstablecimiento;
 import ar.edu.unlam.tallerweb1.servicios.ServicioInsumo;
 
-@Controller
+@Controller("/")
 public class HomeControlador {
 
-	private final ServicioDistribucion servicioDistribucion;
 	private final ServicioEstablecimiento servicioEstablecimiento;
 	private final ServicioInsumo servicioInsumo;
 
 	@Autowired
-	public HomeControlador(ServicioDistribucion servicioDistribucion, ServicioEstablecimiento servicioEstablecimiento,
+	public HomeControlador(ServicioEstablecimiento servicioEstablecimiento,
 			ServicioInsumo servicioInsumo) {
-		this.servicioDistribucion = servicioDistribucion;
 		this.servicioEstablecimiento = servicioEstablecimiento;
 		this.servicioInsumo = servicioInsumo;
 	}
 
 	@InitBinder
 	public void initBinder(WebDataBinder dataBinder) {
-		dataBinder.registerCustomEditor(TipoDePrioridad.class, new StringToTipoDePrioridad());
+		dataBinder.registerCustomEditor(TipoDeStrategy.class, new StringToTipoDeStrategy());
 	}
 
 	@RequestMapping(path = "/", method = RequestMethod.GET)
@@ -54,45 +51,18 @@ public class HomeControlador {
 	// Calcular Indice de Prioridad
 	// Busca el modelo default / Ejecuta la Prioridad
 	@RequestMapping(path = "/calcularPrioridad", method = RequestMethod.GET)
-	public ModelAndView calcularPrioridad(@RequestParam("prioridad") TipoDePrioridad prioridad) {
+	public ModelAndView calcularPrioridad(@RequestParam("strategy") TipoDeStrategy strategy) {
 		// Busco el modelo default
 		ModelMap modelo = this.getDefaultHomeModel();
 		List<Establecimiento> listaEstablec = (List<Establecimiento>) modelo.get("listaEstablecimientos");
 		
 		// Calcula prioridad de acuerdo al RequestParam
-		List<Establecimiento> establecConPrioridad = this.servicioDistribucion.calcularPrioridad(
-																		prioridad,listaEstablec);
+		List<Establecimiento> establecConPrioridad = strategy.calcularPrioridad(listaEstablec);
 		
 		modelo.put("establConPrioridad", establecConPrioridad);
 
 		return new ModelAndView("home", modelo);
 	}
-	
-	
-	// Calcular Distribución
-	// Busca el modelo default / Ejecuta distribución de insumos.
-	@RequestMapping(path = "/distribucion", method = RequestMethod.GET)
-	public ModelAndView distribuirInsumos(@RequestParam("prioridad") TipoDePrioridad prioridad) {
-		// Busco el modelo default
-		ModelMap modelo = this.getDefaultHomeModel();
-
-		List<Establecimiento> listaEstablec = (List<Establecimiento>) modelo.get("listaEstablecimientos");
-		List<Insumo> listaInsumos = (List<Insumo>) modelo.get("listaInsumos");
-
-		// Calcula prioridad de acuerdo al RequestParam
-		List<Establecimiento> establecConPrioridad = this.servicioDistribucion.calcularPrioridad(
-																		prioridad,listaEstablec);
-		
-		// Distribucion de Insumos entre establecimientos
-		Map<Establecimiento, List<Insumo>> asignacion = servicioDistribucion.distribuirInsumos(
-																	prioridad,establecConPrioridad,listaInsumos);
-
-		// La agrego al modelo
-		modelo.put("MapaDistribuido", asignacion);
-
-		return new ModelAndView("home", modelo);
-	}
-
 
 
 	// Obtiene los datos por default de la vista home.

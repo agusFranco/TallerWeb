@@ -6,29 +6,32 @@
 <t:layout>
 	<div class="wrapper wrapper-content animated fadeInRight mb-5">
 		<div class="row">
-			<div class="col-md-2">
-				<div class="ibox float-e-margins">
-					<div class="ibox-title">
-						<h5>Establecimientos</h5>
-					</div>
-					<div class="ibox-content">
-						<h1 class="no-margins">${cantidadEstablecimientos}</h1>
-
-						<small>Total </small>
+			<div class="col-sm-4" style="padding-left: 0;">
+				<div class="col-lg-6">
+					<div class="ibox float-e-margins">
+						<div class="ibox-title">
+							<h5>Establecimientos</h5>
+						</div>
+						<div class="ibox-content">
+							<h1 class="no-margins">${cantidadEstablecimientos}</h1>
+							<div class="stat-percent font-bold text-navy">En total</div>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class="col-md-2">
-				<div class="ibox float-e-margins">
-					<div class="ibox-title">
-						<span class="label label-success pull-right">Disponibilidad</span>
-						<h5>Insumos</h5>
+				<div class="col-lg-6" >
+					<div class="ibox float-e-margins">
+						<div class="ibox-title">
+							<h5>Insumos</h5>
+						</div>
+						<div class="ibox-content">
+							<h1 class="no-margins">${cantTotalInsumos}</h1>
+							<div class="stat-percent font-bold text-navy">En total</div>
+						</div>
 					</div>
-					<div class="ibox-content">
-						<h1 class="no-margins">${cantTotalInsumos}</h1>
-
-						<small>Total disponibles </small>
-					</div>
+				</div>
+				<div class="col-lg-12">
+					<a class="btn btn-lg btn-primary" style="width: 100%;height: 75px;line-height: 50px;"
+						href="./distribuirInsumos?strategy=OCUPACION">Distribuir insumos</a>
 				</div>
 			</div>
 			<div class="col-sm-8">
@@ -43,7 +46,7 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-sm-12 col-lg-7">
+			<div class="col-sm-12">
 				<div class="ibox float-e-margins">
 					<div class="ibox-title">
 						<h5>Establecimientos</h5>
@@ -55,13 +58,13 @@
 						<div class="btn-group btn-group-toggle">
 							<p>Calcular índice de prioridad por</p>
 							<a class="btn btn-sm btn-white"
-								href="./calcularPrioridad?prioridad=OCUPACION"> Relación
+								href="./calcularPrioridad?strategy=OCUPACION"> Relación
 								Ocupación - Capacidad</a> <a class="btn btn-sm btn-white"
-								href="./calcularPrioridad?prioridad=CAPACIDAD"> Capacidad
+								href="./calcularPrioridad?strategy=CAPACIDAD"> Capacidad
 								Total</a> <a class="btn btn-sm btn-white"
-								href="./calcularPrioridad?prioridad=ZONA"> Zona </a> <a
+								href="./calcularPrioridad?strategy=ZONA"> Zona </a> <a
 								class="btn btn-sm btn-white"
-								href="./calcularPrioridad?prioridad=COMBINADO"> Combinado </a>
+								href="./calcularPrioridad?strategy=COMBINADO"> Combinado </a>
 						</div>
 					</div>
 
@@ -116,7 +119,7 @@
 				</div>
 			</div>
 
-			<div class="col-sm-12 col-lg-5">
+			<div class="col-sm-12">
 				<div class="ibox float-e-margins">
 					<div class="ibox-title">
 						<h5>Insumos</h5>
@@ -154,164 +157,6 @@
 				</div>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-lg-12">
-				<div class="ibox float-e-margins">
-					<div class="ibox-title">
-						<h5>Simulador de distribución de insumos a establecimientos</h5>
-						<div class="ibox-tools">
-							<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
-							</a>
-						</div>
-					</div>
-					<div class="ibox-content">
-						<div class="row">
-							<div class="col-sm-10 m-b-xs">
-								<div data-toggle="buttons" class="btn-group">
-									<p>Calcular Índice de riesgo por</p>
-									<label class="btn btn-sm btn-white"> <input
-										type="radio" id="option1" name="options"> Por Indice
-									</label> <label class="btn btn-sm btn-white"> <input
-										type="radio" id="option2" name="options"> Ocupación
-										sobre Capacidad
-									</label> <label class="btn btn-sm btn-white"> <input
-										type="radio" id="option3" name="options"> Por Zona
-									</label>
-								</div>
-							</div>
-							<div class="col-sm-2">
-								<form action="./distribucion" method="GET">
-									Prioridad: <input type="text" name="prioridad" class="form-control">
-									<button type="submit" class="btn btn-primary">
-										<i class="fa fa-medkit"></i><strong> Iniciar
-											simulacion</strong>
-									</button>
-								</form>
-							</div>
-						</div>
-						<div class="table-responsive">
-							<table class="table table-striped table-hover grilla-dataTable">
-								<thead>
-									<tr>
-										<th>#</th>
-										<th>Establecimiento</th>
-										<th>Capacidad</th>
-										<th>Ocupación</th>
-										<th>Zona</th>
-										<th>Prioridad</th>
-										<th>Total Insumos Asignados</th>
-										<!--	<th>Respiradores</th>
-									 	<th>Medicamentos</th>
-										<th>Jeringas</th>
-										<th>Tapa bocas</th>
-										<th>Delantales</th>
-										<th>Camas</th>
-										<th>Guantes</th> -->
-									</tr>
-								</thead>
-								<tbody>
-									<c:forEach items="${MapaDistribuido}" var="MapElement">
-										<tr>
-											<td>${MapElement.key.getId()}</td>
-											<td>${MapElement.key.getNombre()}</td>
-											<td>${MapElement.key.capacidad}</td>
-											<td>${MapElement.key.ocupacion}</td>
-											<td>${MapElement.key.getZona().getNombre()}</td>
-											<td>${MapElement.key.getPrioridad()}%</td>
-											<td><a class="text-info font-weight-bold h4"
-												href="detalles-asignaciones?idEstabl=${MapElement.key.getId()}">
-													${MapElement.key.capacidad*1.4}(Clic/detalle)</a></td>
-										</tr>
-									</c:forEach>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-
-
-
-
-<div class="row">
-			<div class="col-lg-12">
-				<div class="ibox float-e-margins">
-					<div class="ibox-title">
-						<h5>ESTA GRAFICO SIRVE PARA AYUDAR A VER LA DISTRIBUCION POR CADA TIPO DE INSUMO EN EL CUADRO !!!!!!!!!!!!!!!  </h5>
-						<div class="ibox-tools">
-					 </div>
-					</div>
-					<div class="ibox-content">
-						<div class="row">
-							<div class="col-sm-10 m-b-xs">
-								<div data-toggle="buttons" class="btn-group">
-									<p>Calcular Índice de riesgo por</p>
-									<label class="btn btn-sm btn-white"> <input
-										type="radio" id="option1" name="options"> Por Indice
-									</label> <label class="btn btn-sm btn-white"> <input
-										type="radio" id="option2" name="options"> Ocupación
-										sobre Capacidad
-									</label> <label class="btn btn-sm btn-white"> <input
-										type="radio" id="option3" name="options"> Por Zona
-									</label>
-								</div>
-							</div>
-							<div class="col-sm-2">
-								<form action="./distribucion" method="GET">
-									Prioridad: <input type="text" name="prioridad" class="form-control">
-									<button type="submit" class="btn btn-primary">
-										<i class="fa fa-medkit"></i><strong> Iniciar
-											simulacion</strong>
-									</button>
-								</form>
-							</div>
-						</div>
-						<div class="table-responsive">
-							<table class="table table-striped table-hover grilla-dataTable">
-								<thead>
-									<tr>
-										<th>#</th>
-										<th>Establecimiento</th>
-										<th>Capacidad</th>
-										<th>Ocupación</th>
-										<th>Zona</th>
-										<th>Prioridad</th>
-										<th>Total Insumos Asignados</th>
-										<!--	<th>Respiradores</th>
-									 	<th>Medicamentos</th>
-										<th>Jeringas</th>
-										<th>Tapa bocas</th>
-										<th>Delantales</th>
-										<th>Camas</th>
-										<th>Guantes</th> -->
-									</tr>
-								</thead>
-								<tbody>
-									<c:forEach items="${MapaDistribuido}" var="MapElement">
-										<tr>
-											<td>${MapElement.key.getId()}</td>
-											<td>${MapElement.key.getNombre()}</td>
-											<td>${MapElement.key.capacidad}</td>
-											<td>${MapElement.key.ocupacion}</td>
-											<td>${MapElement.key.getZona().getNombre()}</td>
-											<td>${MapElement.key.getPrioridad()}%</td>
-											<c:forEach items="${MapElement.value}" var="listElement">
-												<td><%-- ${{listElement.getNombre()}}-> --%>${{listElement.getCantidad()}}</td>
-											</c:forEach>
-										</tr>
-									</c:forEach>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
 </t:layout>
 
 <script src="js/vistas/home.js"></script>

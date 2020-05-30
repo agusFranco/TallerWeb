@@ -13,6 +13,7 @@
 <link href="css/template/datatables.min.css" rel="stylesheet">
 <link href="css/template/animate.css" rel="stylesheet">
 <link href="css/template/style.css" rel="stylesheet">
+<link href="css/footable/footable.standalone.min.css" rel="stylesheet">
 <link href="css/fonts/font-awesome/css/font-awesome.min.css"
 	rel="stylesheet">
 
@@ -35,11 +36,10 @@
 					<div class="navbar-collapse collapse" id="navbar">
 						<ul class="nav navbar-nav">
 							<li class="active"><a aria-expanded="false" role="button"
-								href="./home"> Home </a></li>
+								href="./home"> Inicio </a></li>
 							<li><a aria-expanded="false" role="button"
-								href="./distribucion"> Distribucion </a></li>
-								<li><a aria-expanded="false" role="button"
-								href="./mapa"> Mapa </a></li>
+								href="./distribucion"> Distribución </a></li>
+								
 						</ul>
 						<ul class="nav navbar-top-links navbar-right">
 							<li><a href="login.html"> <i class="fa fa-sign-out"></i>
@@ -72,7 +72,9 @@
 <script src="js/template/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 <script src="js/template/plugins/dataTables/datatables.min.js"></script>
 <script src="js/template/app/inspinia.js"></script>
+<script src="js/template/plugins/footable/footable.js"></script>
 
 <!-- Gráficos -->
 <script src="js/chartist/chartist.js"></script>
+
 </html>
