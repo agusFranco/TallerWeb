@@ -74,7 +74,6 @@
 							<table class="table table-striped table-hover grilla-dataTable">
 								<thead>
 									<tr>
-										<th>#</th>
 										<th>Nombre</th>
 										<th>Capacidad</th>
 										<th>Ocupacion</th>
@@ -88,14 +87,13 @@
 										<c:when test="${not empty establConPrioridad}">
 											<c:forEach items="${establConPrioridad}" var="estItem">
 												<tr>
-													<td>${estItem.getId()}</td>
 													<td>${estItem.getNombre()}</td>
 													<td>${estItem.getCapacidad()}</td>
 													<td>${estItem.getOcupacion()}</td>
 													<td>${estItem.getZona().getNombre()}</td>
 													<td class="text-center"><fmt:formatNumber
 															type="number" maxFractionDigits="2"
-															value="${estItem.getPrioridad()}" /> %</td>
+															value="${estItem.getPrioridad()}" /></td>
 												</tr>
 											</c:forEach>
 										</c:when>
@@ -133,7 +131,6 @@
 							<table class="table table-striped table-hover grilla-dataTable">
 								<thead>
 									<tr>
-										<th>#</th>
 										<th>Nombre</th>
 										<th>Tipo</th>
 										<th>Cantidad</th>
@@ -143,7 +140,6 @@
 									<c:if test="${not empty listaInsumos}">
 										<c:forEach items="${listaInsumos}" var="item">
 											<tr>
-												<td>${item.getId()}</td>
 												<td>${item.getNombre()}</td>
 												<td>${item.getTipo()}</td>
 												<td>${item.getCantidad()}</td>

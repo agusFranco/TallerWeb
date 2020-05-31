@@ -12,12 +12,10 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import ar.edu.unlam.tallerweb1.SpringTest;
-import ar.edu.unlam.tallerweb1.comun.enums.TipoDePrioridad;
 import ar.edu.unlam.tallerweb1.modelo.Establecimiento;
 import ar.edu.unlam.tallerweb1.modelo.Zona;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioEstablecimiento;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioEstablecimientoImpl;
-import ar.edu.unlam.tallerweb1.servicios.ServicioDistribucionImpl;
 import ar.edu.unlam.tallerweb1.servicios.ServicioEstablecimientoImpl;
 
 public class EstablecimientosTest extends SpringTest {

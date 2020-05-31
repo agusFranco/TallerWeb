@@ -1,10 +1,13 @@
 package ar.edu.unlam.tallerweb1.negocio;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import ar.edu.unlam.tallerweb1.modelo.Establecimiento;
 import ar.edu.unlam.tallerweb1.modelo.Insumo;
@@ -12,9 +15,7 @@ import ar.edu.unlam.tallerweb1.modelo.Insumo;
 //Estrategia: Calcular prioridad por "OCUPACIÓN"
 public class OcupacionStrategy implements Strategy {
 
-	@Override
-	public List<Establecimiento> calcular(List<Establecimiento> establecimientos) {
-		
+	private List<Establecimiento> calcularPorcentaje(List<Establecimiento> establecimientos) {
 		// Calculo el total de Ocupacion 		
 		Integer totalOcupacion = 0;
 		for(Establecimiento itemEstablec : establecimientos) {
@@ -27,15 +28,32 @@ public class OcupacionStrategy implements Strategy {
 			itemEstablec.setPrioridad(prioridad);
 		}
 		
-		List<Establecimiento> establConPrioridad = establecimientos;
-		return establConPrioridad;
+		Collections.sort(establecimientos,(a,b) -> {
+			return (int) (b.getPrioridad() - a.getPrioridad());
+		});
+		
+		return establecimientos;
+	}
+	
+	@Override
+	public List<Establecimiento> calcular(List<Establecimiento> establecimientos) {
+	
+		establecimientos = calcularPorcentaje(establecimientos);
+
+		for (int i = 0; i < establecimientos.size(); i++) {
+			establecimientos.get(i).setPrioridad((float)(i+1));
+		}
+		
+		return establecimientos;
+		
 	}
 
 	
 	@Override
 	public Map<Establecimiento, List<Insumo>> distribuir(List<Establecimiento> establecimientos, List<Insumo> insumos) {
 		
-		establecimientos = this.calcular(establecimientos);
+		establecimientos = this.calcularPorcentaje(establecimientos);
+		List<Establecimiento> establecimientosPtos = calcular(establecimientos);
 		Map<Establecimiento,List<Insumo>> asignacion =  new HashMap<Establecimiento, List<Insumo>>();
 
 		Integer totalInsumos = 0;
@@ -78,7 +96,7 @@ public class OcupacionStrategy implements Strategy {
 //				Float restoInsumos = 0F;
 				if(itemEstablec.getPrioridad() > promedioMitad) {
 
-					insumoAsignado.setCantidad((int) (itemInsumo.getCantidad()*0.6) / contadorEstAlta);
+					insumoAsignado.setCantidad((int) (itemInsumo.getCantidad()*0.1) / contadorEstAlta);
 					//Resto de Insumos sobrantes	
 //					 restoInsumos = restoInsumos + (float) ((itemInsumo.getCantidad()*0.6) % contadorEstAlta);
 					
@@ -90,7 +108,7 @@ public class OcupacionStrategy implements Strategy {
 					
 				}else {
 					
-					insumoAsignado.setCantidad((int) (itemInsumo.getCantidad()*0.1) / contadorEstBaja);
+					insumoAsignado.setCantidad((int) (itemInsumo.getCantidad()*0.6) / contadorEstBaja);
 					//Resto de Insumos sobrantes	
 //					 restoInsumos = restoInsumos + (float) ((itemInsumo.getCantidad()*0.1) % contadorEstBaja);
 					
@@ -112,8 +130,10 @@ public class OcupacionStrategy implements Strategy {
 				//Agrego insumo a la lista de insumos				
 				insumosAsignados.add(insumoAsignado);
 			}
+			Predicate<Establecimiento> byId = establecimiento -> establecimiento.getId().equals(itemEstablec.getId());
+			Establecimiento result = establecimientosPtos.stream().filter(byId).collect(Collectors.toList()).get(0);
 			//Agrego la lista de Insumos al Establecimiento			
-			asignacion.put(itemEstablec, insumosAsignados);
+			asignacion.put(result, insumosAsignados);
 		}
 		return asignacion;
 	}

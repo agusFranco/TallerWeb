@@ -47,7 +47,7 @@ public class DistribucionControlador {
 	
 	@RequestMapping(path = "/distribucion", method = RequestMethod.GET)
 	public ModelAndView inicio() {
-		return new ModelAndView("distribuirInsumos?strategy=OCUPACION");
+		return new ModelAndView("redirect:/distribuirInsumos?strategy=OCUPACION");
 	}
 
 }

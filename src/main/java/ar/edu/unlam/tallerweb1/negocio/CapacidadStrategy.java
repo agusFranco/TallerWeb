@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.negocio;
 
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -11,8 +12,7 @@ import ar.edu.unlam.tallerweb1.modelo.Insumo;
 // Estrategia: Calcular prioridad por "CAPACIDAD"
 public class CapacidadStrategy implements Strategy {
 
-	@Override
-	public List<Establecimiento> calcular(List<Establecimiento> establecimientos) {
+	private List<Establecimiento> calcularPorcentaje(List<Establecimiento> establecimientos) {
 		Integer capTotal = 0;
 
 		for (Establecimiento itemEstabl : establecimientos) {
@@ -23,8 +23,23 @@ public class CapacidadStrategy implements Strategy {
 			itemEstabl.setPrioridad(prioridad);
 		}
 
-		List<Establecimiento> establConPrioridad = establecimientos;
-		return establConPrioridad;
+		Collections.sort(establecimientos,(a,b) -> {
+			return (int) (b.getPrioridad() - a.getPrioridad());
+		});
+		
+		return establecimientos;
+	}
+	
+	@Override
+	public List<Establecimiento> calcular(List<Establecimiento> establecimientos) {
+
+		establecimientos = calcularPorcentaje(establecimientos);
+
+		for (int i = 0; i < establecimientos.size(); i++) {
+			establecimientos.get(i).setPrioridad((float)(i+1));
+		}
+		
+		return establecimientos;
 	}
 
 	@Override

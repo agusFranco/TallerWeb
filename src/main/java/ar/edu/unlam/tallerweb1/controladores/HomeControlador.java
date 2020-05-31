@@ -40,12 +40,12 @@ public class HomeControlador {
 
 	@RequestMapping(path = "/", method = RequestMethod.GET)
 	public ModelAndView inicio() {
-		return new ModelAndView("redirect:/home");
+		return new ModelAndView("redirect:/calcularPrioridad?strategy=OCUPACION");
 	}
 
 	@RequestMapping(path = "/home", method = RequestMethod.GET)
 	public ModelAndView irAHome() {
-		return new ModelAndView("home", this.getDefaultHomeModel());
+		return new ModelAndView("redirect:/calcularPrioridad?strategy=OCUPACION");
 	}
 
 	// Calcular Indice de Prioridad

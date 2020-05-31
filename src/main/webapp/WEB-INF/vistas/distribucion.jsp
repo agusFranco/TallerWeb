@@ -34,8 +34,8 @@
 													class="tablez table table-striped table-hover grilla-dataTable">
 													<thead>
 														<tr>
-															<th>Establecimiento</th>
 															<th>Prioridad</th>
+															<th>Establecimiento</th>
 															<th>Distribuci&#243;n</th>
 															<th>Detalle</th>
 															<th data-breakpoints="all" data-title="Insumos:"></th>
@@ -44,30 +44,31 @@
 													<tbody>
 														<c:forEach items="${MapaDistribuido}" var="MapElement">
 															<tr>
+																<td><fmt:formatNumber type="number"
+																		maxFractionDigits="2"
+																		value="${MapElement.key.getPrioridad()}" /></td>
 																<td><i class="fa fa-hospital-o"></i>
 																	${MapElement.key.getNombre()}</td>
-																<td><fmt:formatNumber
-															type="number" maxFractionDigits="2"
-															value="${MapElement.key.getPrioridad()}" />%</td>
-																<c:set var="total" value="${0}"/>
+
+																<c:set var="total" value="${0}" />
 																<c:forEach items="${MapElement.value}" var="listElement">
-																		 <c:set var="total" value="${total + listElement.getCantidad()}" />
+																	<c:set var="total"
+																		value="${total + listElement.getCantidad()}" />
 																</c:forEach>
-																<td><span class="label label-success">Total: ${total}</span></td>
+																<td><span class="label label-success">Total:
+																		${total}</span></td>
 																<td class="client-status"><a
 																	href="./detalle?id=${MapElement.key.getId()}"> <i
 																		class="fa fa-external-link"> </i>
 																</a></td>
-																<td>
-																	<c:forEach items="${MapElement.value}" var="listElement">
+																<td><c:forEach items="${MapElement.value}"
+																		var="listElement">
 																		<span
 																			style="margin: 0px 0px 10px 0px; padding: 5px; display: inline-block;"
 																			class="label label-warning">
 																			${listElement.getNombre()}:
-																			${listElement.getCantidad()}
-																		</span>
-																	</c:forEach>
-																</td>
+																			${listElement.getCantidad()} </span>
+																	</c:forEach></td>
 															</tr>
 														</c:forEach>
 
