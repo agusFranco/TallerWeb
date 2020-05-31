@@ -39,11 +39,13 @@
 								href="./home"> Inicio </a></li>
 							<li><a aria-expanded="false" role="button"
 								href="./distribucion"> Distribución </a></li>
+								<li><a aria-expanded="false" role="button"
+								href="./responsables"> Responsables </a></li>
 								
 						</ul>
 						<ul class="nav navbar-top-links navbar-right">
 							<li><a href="login.html"> <i class="fa fa-sign-out"></i>
-									Log out
+									Cerrar sesión
 							</a></li>
 						</ul>
 					</div>

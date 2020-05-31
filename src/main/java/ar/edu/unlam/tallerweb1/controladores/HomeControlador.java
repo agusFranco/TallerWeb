@@ -72,7 +72,7 @@ public class HomeControlador {
 		// Listas para mostrar de Establecimientos e insumos.
 		List<Establecimiento> listaEstablec = servicioEstablecimiento.obtenerTodos();
 		List<Insumo> listaInsumos = servicioInsumo.obtenerTodos();
-
+		
 		// Valores para los widget
 		Long cantEstablec = servicioEstablecimiento.cantidadItems(listaEstablec);
 		Long cantTotalInsumos = servicioInsumo.cantTotalInsumos();

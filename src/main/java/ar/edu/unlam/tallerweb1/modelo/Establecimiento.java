@@ -5,6 +5,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
 @Entity
@@ -17,7 +19,9 @@ public class Establecimiento {
 	private String ubicacion;
 	private Integer capacidad;
 	private Integer ocupacion;
-	private String responsable;
+	
+	@ManyToOne
+	private Responsable responsable;
 	
 	@ManyToOne
 	private Zona zona;
@@ -31,7 +35,7 @@ public class Establecimiento {
 	}
 
 	public Establecimiento(String nombre, String ubicacion, Integer capacidad, Integer ocupacion, Zona zona,
-			String responsable) {
+			Responsable responsable) {
 		this.nombre = nombre;
 		this.ubicacion = ubicacion;
 		this.capacidad = capacidad;
@@ -92,11 +96,11 @@ public class Establecimiento {
 		this.zona = zona;
 	}
 
-	public String getResponsable() {
+	public Responsable getResponsable() {
 		return responsable;
 	}
 
-	public void setResponsable(String responsable) {
+	public void setResponsable(Responsable responsable) {
 		this.responsable = responsable;
 	}
 

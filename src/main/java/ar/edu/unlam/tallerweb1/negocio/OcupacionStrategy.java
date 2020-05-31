@@ -74,7 +74,7 @@ public class OcupacionStrategy implements Strategy {
 		Integer contadorEstMedia = 0;
 		Integer contadorEstBaja = 0;
 		for(Establecimiento itemEstablec : establecimientos) {
-				if(itemEstablec.getPrioridad() > promedioMitad /*&& itemEstablec.getPrioridad() < 100*/) {
+				if(itemEstablec.getPrioridad() > promedioMitad) {
 					contadorEstAlta++;	
 				}else if(itemEstablec.getPrioridad() > promedioUnCuarto) {
 					contadorEstMedia++;
@@ -95,23 +95,11 @@ public class OcupacionStrategy implements Strategy {
 				
 //				Float restoInsumos = 0F;
 				if(itemEstablec.getPrioridad() > promedioMitad) {
-
 					insumoAsignado.setCantidad((int) (itemInsumo.getCantidad()*0.6) / contadorEstAlta);
-					//Resto de Insumos sobrantes	
-//					 restoInsumos = restoInsumos + (float) ((itemInsumo.getCantidad()*0.6) % contadorEstAlta);
-					
-				}else if(itemEstablec.getPrioridad() > promedioUnCuarto) {
-					
+				}else if(itemEstablec.getPrioridad() > promedioUnCuarto) {				
 					insumoAsignado.setCantidad((int) (itemInsumo.getCantidad()*0.3) / contadorEstMedia);
-					//Resto de Insumos sobrantes	
-//					 restoInsumos = restoInsumos + (float) ((itemInsumo.getCantidad()*0.3) % contadorEstMedia);
-					
-				}else {
-					
-					insumoAsignado.setCantidad((int) (itemInsumo.getCantidad()*0.1) / contadorEstBaja);
-					//Resto de Insumos sobrantes	
-//					 restoInsumos = restoInsumos + (float) ((itemInsumo.getCantidad()*0.1) % contadorEstBaja);
-					
+				}else {					
+					insumoAsignado.setCantidad((int) (itemInsumo.getCantidad()*0.1) / contadorEstBaja);			
 				}
 				
 

@@ -17,7 +17,6 @@ public class RepositorioInsumoImpl extends RepositorioBaseImpl<Insumo, Integer> 
 	}
 
 	//  Retorna la cantidad de insumos disponibles, realiza un SUM del campo 'cantidad'
-	@SuppressWarnings("deprecation")
 	@Override
 	public Long cantTotalInsumos() {
 		final Session session = sessionFactory.getCurrentSession();

@@ -18,6 +18,7 @@
 						</div>
 					</div>
 				</div>
+
 				<div class="col-lg-6">
 					<div class="ibox float-e-margins">
 						<div class="ibox-title">
@@ -124,19 +125,20 @@
 				<div class="ibox float-e-margins">
 					<div class="ibox-title">
 						<h5>Insumos</h5>
-						<div class="ibox-tools">
-							<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
+						<div class="ibox-tools ">
+							<a class="collapse-link "> <i class="fa fa-chevron-up "></i>
 							</a>
 						</div>
 					</div>
 					<div class="ibox-content">
 						<div class="table-responsive">
 							<table class="table table-striped table-hover grilla-dataTable">
-								<thead>
+								<thead class="">
 									<tr>
 										<th>Nombre</th>
 										<th>Tipo</th>
 										<th>Cantidad</th>
+										<th>Precio Unidad</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -146,6 +148,7 @@
 												<td>${item.getNombre()}</td>
 												<td>${item.getTipo()}</td>
 												<td>${item.getCantidad()}</td>
+												<td>$ ${item.precioUnidad}</td>
 											</tr>
 										</c:forEach>
 									</c:if>
