@@ -19,8 +19,8 @@
 					<div class="ibox-content">
 						<h2>Distribuci&#243;n</h2>
 						<p>
-							Asignaci&#243;n de insumos a establecimientos.<br>Selecciona
-							el metodo de distribuci&#243;n de la derecha.
+							Asignación de insumos a establecimientos.<br>Selecciona
+							el metodo de distribución de la derecha.
 						</p>
 						<div class="clients-list">
 							<div class="tab-content">
@@ -36,7 +36,7 @@
 														<tr>
 															<th>Prioridad</th>
 															<th>Establecimiento</th>
-															<th>Distribuci&#243;n</th>
+															<th>Distribución</th>
 															<th>Detalle</th>
 															<th data-breakpoints="all" data-title="Insumos:"></th>
 														</tr>
@@ -55,7 +55,7 @@
 																	<c:set var="total"
 																		value="${total + listElement.getCantidad()}" />
 																</c:forEach>
-																<td><span class="label label-success">Total:
+																<td><span class="label label-success" style="font-size: 13px" >Total:
 																		${total}</span></td>
 																<td class="client-status"><a
 																	href="./detalle?id=${MapElement.key.getId()}"> <i
@@ -64,8 +64,8 @@
 																<td><c:forEach items="${MapElement.value}"
 																		var="listElement">
 																		<span
-																			style="margin: 0px 0px 10px 0px; padding: 5px; display: inline-block;"
-																			class="label label-info">
+																			style="margin: 0px 0px 10px 0px; padding: 5px; display: inline-block;font-size: 13px;"
+																			class="label label-info" >
 																			${listElement.getNombre()}:
 																			${listElement.getCantidad()} </span>
 																	</c:forEach></td>
@@ -94,11 +94,9 @@
 							<div id="contact-1" class="tab-pane active">
 								<div class="row">
 									<div class="col-md-12">
-										<strong> Distribuci&#243;n por Ocupacion/capacidad </strong>
+										<strong> Distribución por Ocupacion </strong>
 										<p>Los insumos se distribuyen en base a la prioridad
-											establecidad en base a el calculo de ocupacion sobre
-											capacidad. Los establecimientos con prioridad mayor al 80% se
-											les distribuira un 60% de los insumos totales.</p>
+											establecidad por el cálculo del porcentaje de ocupación de los establecimientos.</p>
 										<a href="./distribuirInsumos?strategy=OCUPACION"
 											class="btn btn-primary btn-sm btn-block"> <i
 											class="fa fa-random"></i> Distribuir insumos

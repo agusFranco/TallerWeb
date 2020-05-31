@@ -58,8 +58,8 @@
 						<div class="btn-group btn-group-toggle">
 							<p>Calcular índice de prioridad por</p>
 							<a class="btn btn-sm btn-white"
-								href="./calcularPrioridad?strategy=OCUPACION"> Relación
-								Ocupación - Capacidad</a> <a class="btn btn-sm btn-white"
+								href="./calcularPrioridad?strategy=OCUPACION"> Ocupación
+								</a> <a class="btn btn-sm btn-white"
 								href="./calcularPrioridad?strategy=CAPACIDAD"> Capacidad
 								Total</a> <a class="btn btn-sm btn-white"
 								href="./calcularPrioridad?strategy=ZONA"> Zona </a> <a
