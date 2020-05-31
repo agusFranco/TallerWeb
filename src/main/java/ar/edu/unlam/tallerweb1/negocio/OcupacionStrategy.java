@@ -38,13 +38,13 @@ public class OcupacionStrategy implements Strategy {
 	@Override
 	public List<Establecimiento> calcular(List<Establecimiento> establecimientos) {
 	
-		establecimientos = calcularPorcentaje(establecimientos);
+		List<Establecimiento> establecimientosAux = new ArrayList<Establecimiento>(establecimientos);
 
-		for (int i = 0; i < establecimientos.size(); i++) {
-			establecimientos.get(i).setPrioridad((float)(i+1));
+		for (int i = 0; i < establecimientosAux.size(); i++) {
+			establecimientosAux.get(i).setPrioridad((float)(i+1));
 		}
 		
-		return establecimientos;
+		return establecimientosAux;
 		
 	}
 
@@ -53,7 +53,7 @@ public class OcupacionStrategy implements Strategy {
 	public Map<Establecimiento, List<Insumo>> distribuir(List<Establecimiento> establecimientos, List<Insumo> insumos) {
 		
 		establecimientos = this.calcularPorcentaje(establecimientos);
-		List<Establecimiento> establecimientosPtos = calcular(establecimientos);
+
 		Map<Establecimiento,List<Insumo>> asignacion =  new HashMap<Establecimiento, List<Insumo>>();
 
 		Integer totalInsumos = 0;
@@ -96,7 +96,7 @@ public class OcupacionStrategy implements Strategy {
 //				Float restoInsumos = 0F;
 				if(itemEstablec.getPrioridad() > promedioMitad) {
 
-					insumoAsignado.setCantidad((int) (itemInsumo.getCantidad()*0.1) / contadorEstAlta);
+					insumoAsignado.setCantidad((int) (itemInsumo.getCantidad()*0.6) / contadorEstAlta);
 					//Resto de Insumos sobrantes	
 //					 restoInsumos = restoInsumos + (float) ((itemInsumo.getCantidad()*0.6) % contadorEstAlta);
 					
@@ -108,7 +108,7 @@ public class OcupacionStrategy implements Strategy {
 					
 				}else {
 					
-					insumoAsignado.setCantidad((int) (itemInsumo.getCantidad()*0.6) / contadorEstBaja);
+					insumoAsignado.setCantidad((int) (itemInsumo.getCantidad()*0.1) / contadorEstBaja);
 					//Resto de Insumos sobrantes	
 //					 restoInsumos = restoInsumos + (float) ((itemInsumo.getCantidad()*0.1) % contadorEstBaja);
 					
@@ -130,11 +130,21 @@ public class OcupacionStrategy implements Strategy {
 				//Agrego insumo a la lista de insumos				
 				insumosAsignados.add(insumoAsignado);
 			}
-			Predicate<Establecimiento> byId = establecimiento -> establecimiento.getId().equals(itemEstablec.getId());
-			Establecimiento result = establecimientosPtos.stream().filter(byId).collect(Collectors.toList()).get(0);
+			
 			//Agrego la lista de Insumos al Establecimiento			
-			asignacion.put(result, insumosAsignados);
+			asignacion.put(itemEstablec, insumosAsignados);
 		}
+		
+		// HAGO ENROQUE ENTRE EL PORCENTAJE Y EL PUNTAJE MACHEANDO POR ID
+		List<Establecimiento> establecimientosPtos = calcular(establecimientos);
+		for (Establecimiento est : establecimientosPtos) {
+			for (Map.Entry<Establecimiento,List<Insumo>> asg : asignacion.entrySet()) {  
+				if(asg.getKey().getId() == est.getId()) {
+					asg.getKey().setPrioridad(est.getPrioridad());
+				}
+			}
+		}
+		
 		return asignacion;
 	}
 	

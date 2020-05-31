@@ -65,7 +65,7 @@
 																		var="listElement">
 																		<span
 																			style="margin: 0px 0px 10px 0px; padding: 5px; display: inline-block;"
-																			class="label label-warning">
+																			class="label label-info">
 																			${listElement.getNombre()}:
 																			${listElement.getCantidad()} </span>
 																	</c:forEach></td>
