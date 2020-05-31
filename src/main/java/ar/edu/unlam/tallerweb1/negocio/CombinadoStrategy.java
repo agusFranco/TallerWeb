@@ -53,51 +53,68 @@ public class CombinadoStrategy implements Strategy {
 		  * grupo 3 recibe el 17 de los insumos > 17% de cada tipo
 		  * grupo 4 recibe el 10 de los insumos > 10% de cada tipo
 		  * grupo 5 recibe el 5  de los insumos >  5% de cada tipo
-		  * Si al separar en 5 grupos hay resto, quedan en el grupo 5.
+		  * Si al separar en 5 grupos hay resto, los restantes quedan en el grupo 5.
 		 */
+		
+		establecimientos = this.calcular(establecimientos);
 		
 		// RETORNO
 		Map<Establecimiento,List<Insumo>> model = new HashMap<Establecimiento, List<Insumo>>();
 		
-		// DIVIDO LOS ESTABLECIMIENTOS EN GRUPOS
-		Map<Integer, List<Establecimiento>> grupos = new HashMap<Integer, List<Establecimiento>>();
-		int limiteGruppo = (int) establecimientos.size()/5;
-		int grupoActual = 1;
-		List<Establecimiento> grupoEstablecimiento = new ArrayList<Establecimiento>();
-		for (int i = 0; i < establecimientos.size(); i++) {
-			if(i % limiteGruppo == 0 && i > 0 && grupoActual < 5) {
-				grupos.put(grupoActual, grupoEstablecimiento);
-				grupoEstablecimiento = new ArrayList<Establecimiento>();
-				grupoActual++;
-			}
-			grupoEstablecimiento.add(establecimientos.get(i));
-			if(i == establecimientos.size()-1) {
-				grupos.put(grupoActual, grupoEstablecimiento);
-			}
-		}
-		
-		// RECORRO LOS ESTABLECIMIENTOS
-		
-		
-		
 		// AGRUPO LOS INSUMOS POR TIPO
 		Map<String, List<Insumo>> grupoInsumos = insumos.stream().collect(Collectors.groupingBy(w -> w.getTipo()));
-		// RECORRO LOS TIPOS
-		for (Map.Entry<String,List<Insumo>> grInsumos : grupoInsumos.entrySet()) {  
-			// RECORRO LOS INSUMOS DE ESTE TIPO
-			List<Insumo> insumosDeTipo = grInsumos.getValue();
-			for(Insumo insumo : insumosDeTipo) {
-				//ESTABLECIMIENTO GRUPO 1
-				List<Establecimiento> grupo1 = grupos.get(1);
-				for(Establecimiento est : grupo1) {
-					List<Insumo> auxInsumo = new ArrayList<Insumo>();
-					insumo.setCantidad((int)(insumo.getCantidad()*0.4)/grupo1.size());
-					auxInsumo.add(insumo);
-					model.put(est, auxInsumo);
+		
+		// TOTAL INSUMOS
+		float totalInsumos = (float)insumos.stream().mapToDouble(o -> o.getCantidad()).sum();
+		
+		// PARAMETRIZACION X CANTIDAD DE GRUPOS
+		int cantGrupos = 5;
+		float[] distribucion = {0.40f,0.28f,0.17f,0.10f,0.05f};
+		int cantxGrupo = (int) establecimientos.size()/cantGrupos;
+		
+		// DIVIDO LOS ESTABLECIMIENTOS EN GRUPOS
+		int desde = 0;
+		int hasta = cantxGrupo;
+		float sumatoriaInsumos = 0;
+		for (int i = 0; i < cantGrupos; i++) {
+			// OBTENGO LA SUBLISTA DE INSUMOS 
+			List<Establecimiento> grupo = establecimientos.subList(desde, hasta);
+			for(Establecimiento est : grupo) {
+				
+				// RECORRO LOS TIPOS
+				List<Insumo> auxInsumo = new ArrayList<Insumo>();
+				for (Map.Entry<String,List<Insumo>> grInsumos : grupoInsumos.entrySet()) {  
+
+					// RECORRO LOS INSUMOS
+					List<Insumo> insumosDeTipo = grInsumos.getValue();
+					for(Insumo insumo : insumosDeTipo) {
+						if(sumatoriaInsumos < totalInsumos) {
+							// COPIO EL INSUMO
+							Insumo clon = new Insumo();
+							clon.setNombre(insumo.getNombre());
+							int cantidad = Math.round(Math.round((insumo.getCantidad()*distribucion[i])/grupo.size()));
+							sumatoriaInsumos += cantidad;
+							if(sumatoriaInsumos > totalInsumos) {
+								cantidad -= sumatoriaInsumos - totalInsumos;
+							}
+							clon.setCantidad(cantidad);
+							auxInsumo.add(clon);	
+						}
+					}			
 				}
+				// ASOCIO LOS INSUMOS A UN ESTABLECIMIENTO
+				model.put(est, auxInsumo);
 			}
+
 			
+			// PROXIMA RONDA
+			desde = hasta;
+			hasta = hasta + cantxGrupo;
+			if(hasta > establecimientos.size()-1) {
+				hasta = establecimientos.size();
+			}
 		}
-		return new HashMap<Establecimiento, List<Insumo>>();
+		
+		return model;
 	}
 }

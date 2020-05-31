@@ -55,6 +55,4 @@ public class Insumo {
 		this.cantidad = cantidad;
 	}
 	
-
-
 }
