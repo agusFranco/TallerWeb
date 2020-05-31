@@ -12,15 +12,23 @@
 </style>
 
 <t:layout>
+
 	<div class="wrapper wrapper-content  animated fadeInRight">
+
+
+
+
+
+
+
 		<div class="row">
 			<div class="col-sm-8">
 				<div class="ibox">
 					<div class="ibox-content">
-						<h2>Distribuci&#243;n</h2>
+						<h2>Distribución</h2>
 						<p>
-							Asignación de insumos a establecimientos.<br>Selecciona
-							el metodo de distribución de la derecha.
+							Asignación de insumos a establecimientos.<br>Selecciona el
+							metodo de distribución de la derecha.
 						</p>
 						<div class="clients-list">
 							<div class="tab-content">
@@ -55,8 +63,8 @@
 																	<c:set var="total"
 																		value="${total + listElement.getCantidad()}" />
 																</c:forEach>
-																<td><span class="label label-success" style="font-size: 13px" >Total:
-																		${total}</span></td>
+																<td><span class="label label-success"
+																	style="font-size: 13px">Total: ${total}</span></td>
 																<td class="client-status"><a
 																	href="./detalle?id=${MapElement.key.getId()}"> <i
 																		class="fa fa-external-link"> </i>
@@ -64,8 +72,8 @@
 																<td><c:forEach items="${MapElement.value}"
 																		var="listElement">
 																		<span
-																			style="margin: 0px 0px 10px 0px; padding: 5px; display: inline-block;font-size: 13px;"
-																			class="label label-info" >
+																			style="margin: 0px 0px 10px 0px; padding: 5px; display: inline-block; font-size: 13px;"
+																			class="label label-info">
 																			${listElement.getNombre()}:
 																			${listElement.getCantidad()} </span>
 																	</c:forEach></td>
@@ -81,13 +89,41 @@
 							</div>
 							<button style="margin-top: 20px;" type="button"
 								class="btn btn-success btn-sm btn-block">
-								<i class="fa fa-check"></i> Confirmar distribuci&#243;n
+								<i class="fa fa-check"></i> Confirmar Distribución
 							</button>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="col-sm-4">
+				<c:choose>
+					<c:when test="${param.strategy == 'EQUITATIVO'}">
+						<div class="ibox float-e-margins col-md-12">
+							<div class="ibox-title">
+								<h5>Insumos sobrantes en repartija equitativa</h5>
+							</div>
+							<div class="ibox-content">
+								<h1 class="no-margins text-center">${insumosSobrantes}</h1>
+								<div class="stat-percent font-bold text-navy">En total</div>
+							</div>
+							<div class="ibox float-e-margins col-md-12">
+								<div class="ibox-title">
+									<h5>Asignados al Establecimiento</h5>
+								</div>
+								<div class="ibox-content">
+									<c:forEach items="${MapaDistribuido}" var="MapElement">
+										<c:if test="${MapElement.key.id eq 1}">
+										<p style="font-size: 20px;">${MapElement.key.nombre}</p>
+    								</c:if>
+									</c:forEach>
+								</div>
+
+							</div>
+						</div>
+					</c:when>
+					<c:otherwise>
+					</c:otherwise>
+				</c:choose>
 				<div class="ibox ">
 					<div class="ibox-content">
 						<div class="tab-content">
@@ -96,7 +132,8 @@
 									<div class="col-md-12">
 										<strong> Distribución por Ocupacion </strong>
 										<p>Los insumos se distribuyen en base a la prioridad
-											establecidad por el cálculo del porcentaje de ocupación de los establecimientos.</p>
+											establecidad por el cálculo del porcentaje de ocupación de
+											los establecimientos.</p>
 										<a href="./distribuirInsumos?strategy=OCUPACION"
 											class="btn btn-primary btn-sm btn-block"> <i
 											class="fa fa-random"></i> Distribuir insumos
@@ -113,7 +150,7 @@
 							<div id="contact-1" class="tab-pane active">
 								<div class="row">
 									<div class="col-md-12">
-										<strong> Distribuci&#243;n por capacidad total </strong>
+										<strong> Distribución por capacidad total </strong>
 										<p>Los insumos se distribuyen en base a la prioridad
 											establecidad por la capicidad total del establecimiento.</p>
 										<a href="./distribuirInsumos?strategy=CAPACIDAD"
@@ -132,7 +169,7 @@
 							<div id="contact-1" class="tab-pane active">
 								<div class="row">
 									<div class="col-md-12">
-										<strong> Distribuci&#243;n por zona </strong>
+										<strong> Distribución por zona </strong>
 										<p>Los Establecimiento con prioridades entre un 10% - 20%
 											recibiran un ...</p>
 										<a href="./distribuirInsumos?strategy=ZONA"
@@ -151,7 +188,7 @@
 							<div id="contact-1" class="tab-pane active">
 								<div class="row">
 									<div class="col-md-12">
-										<strong> Distribuci&#243;n combinada </strong>
+										<strong> Distribución combinada </strong>
 										<p>Los insumos se distribuyen en base a la prioridad
 											establecidad.</p>
 										<a href="./distribuirInsumos?strategy=COMBINADO"
@@ -164,6 +201,26 @@
 						</div>
 					</div>
 				</div>
+				<div class="ibox ">
+					<div class="ibox-content">
+						<div class="tab-content">
+							<div id="contact-1" class="tab-pane active">
+								<div class="row">
+									<div class="col-md-12">
+										<strong> Distribución equitativa </strong>
+										<p>Los insumos se distribuyen equitativamente entre todos
+											los establecimientos.</p>
+										<a href="./distribuirInsumos?strategy=EQUITATIVO"
+											class="btn btn-primary btn-sm btn-block"> <i
+											class="fa fa-random"></i> Distribuir insumos
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
 			</div>
 		</div>
 	</div>
@@ -172,11 +229,9 @@
 <script src="js/vistas/home.js"></script>
 
 <script type="text/javascript">
-
-jQuery(function($){
-	$('.tablez').footable();
-});
-
+	jQuery(function($) {
+		$('.tablez').footable();
+	});
 </script>
 
 

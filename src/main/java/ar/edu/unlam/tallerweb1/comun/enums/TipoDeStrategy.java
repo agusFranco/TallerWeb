@@ -10,13 +10,15 @@ import ar.edu.unlam.tallerweb1.negocio.OcupacionStrategy;
 import ar.edu.unlam.tallerweb1.negocio.CapacidadStrategy;
 import ar.edu.unlam.tallerweb1.negocio.Strategy;
 import ar.edu.unlam.tallerweb1.negocio.ZonaStrategy;
+import ar.edu.unlam.tallerweb1.negocio.EquitativoStrategy;
 
 // Contiene el "Contexto del strategy"
 public enum TipoDeStrategy {
 	COMBINADO("combinado", new CombinadoStrategy()), 
 	OCUPACION("ocupacion", new OcupacionStrategy()),
 	CAPACIDAD("capacidad", new CapacidadStrategy()), 
-	ZONA("zona", new ZonaStrategy());
+	ZONA("zona", new ZonaStrategy()),
+	EQUITATIVO("equitativo", new EquitativoStrategy());
 
 	private String tipo;
 	private Strategy strategy;

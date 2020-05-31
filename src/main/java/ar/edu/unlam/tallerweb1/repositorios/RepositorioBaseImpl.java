@@ -67,5 +67,5 @@ public abstract class RepositorioBaseImpl<TEntity extends Object, TId extends Se
 		final Session session = this.sessionFactory.getCurrentSession();
 		return (Long) session.createCriteria(this.type).setProjection(Projections.rowCount()).uniqueResult();
 	}
-
+	
 }

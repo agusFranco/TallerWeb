@@ -18,7 +18,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-6" >
+				<div class="col-lg-6">
 					<div class="ibox float-e-margins">
 						<div class="ibox-title">
 							<h5>Insumos</h5>
@@ -30,8 +30,10 @@
 					</div>
 				</div>
 				<div class="col-lg-12">
-					<a class="btn btn-lg btn-primary" style="width: 100%;height: 75px;line-height: 50px;"
-						href="./distribuirInsumos?strategy=OCUPACION">Distribuir insumos</a>
+					<a class="btn btn-lg btn-primary"
+						style="width: 100%; height: 75px; line-height: 50px;"
+						href="./distribuirInsumos?strategy=OCUPACION">Distribuir
+						insumos</a>
 				</div>
 			</div>
 			<div class="col-sm-8">
@@ -56,10 +58,11 @@
 							<div class="col-sm-12"></div>
 						</div>
 						<div class="btn-group btn-group-toggle">
+
 							<p>Calcular índice de prioridad por</p>
 							<a class="btn btn-sm btn-white"
-								href="./calcularPrioridad?strategy=OCUPACION"> Ocupación
-								</a> <a class="btn btn-sm btn-white"
+								href="./calcularPrioridad?strategy=OCUPACION"> Ocupación </a> <a
+								class="btn btn-sm btn-white"
 								href="./calcularPrioridad?strategy=CAPACIDAD"> Capacidad
 								Total</a> <a class="btn btn-sm btn-white"
 								href="./calcularPrioridad?strategy=ZONA"> Zona </a> <a

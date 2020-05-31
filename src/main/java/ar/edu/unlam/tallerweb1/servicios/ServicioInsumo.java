@@ -10,6 +10,6 @@ public interface ServicioInsumo {
 
 	//  Retorna la cantidad de insumos disponibles, realiza un SUM del campo 'cantidad'
 	Long cantTotalInsumos();
-	s
-	Long insumosSobrantes)();
+
+	Long insumosSobrantes();
 }

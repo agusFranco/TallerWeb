@@ -114,12 +114,10 @@ public class OcupacionStrategy implements Strategy {
 					
 				}
 				
-				// Suma de Insumo restante
-//				int sumaInsumoRestante = (int) (Math.round(restoInsumos+0.1));
-				// Insumo al que le voy a sumar el restante
+
 				Integer InsumoASumar = insumoAsignado.getCantidad();
-				//	OTRA MANERA DE SOLUCIONAR EL PROBLEMA
 				int sumaInsumoRestante = itemInsumo.getCantidad() % cantidadEstablec;
+				
 				//	Establecimiento con mayor prioridad		
 				Establecimiento establecimientoMaxPrioridad = establecimientos.stream().max(Comparator.comparing(Establecimiento::getPrioridad)).get();
 				if(itemEstablec.equals(establecimientoMaxPrioridad)) {
