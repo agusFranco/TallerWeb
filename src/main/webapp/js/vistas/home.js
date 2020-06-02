@@ -1,3 +1,9 @@
+var calcularPrioridad = function() {
+	const form = document.getElementById("calcularPrioridadForm");
+	
+	form.submit();
+};
+
 $(document)
 		.ready(
 				function() {

@@ -59,16 +59,31 @@
 							<div class="col-sm-12"></div>
 						</div>
 						<div class="btn-group btn-group-toggle">
-
 							<p>Calcular índice de prioridad por</p>
-							<a class="btn btn-sm btn-white"
-								href="./calcularPrioridad?strategy=OCUPACION"> Ocupación </a> <a
-								class="btn btn-sm btn-white"
-								href="./calcularPrioridad?strategy=CAPACIDAD"> Capacidad
-								Total</a> <a class="btn btn-sm btn-white"
-								href="./calcularPrioridad?strategy=ZONA"> Zona </a> <a
-								class="btn btn-sm btn-white"
-								href="./calcularPrioridad?strategy=COMBINADO"> Combinado </a>
+							<form action="./home" method="POST" id="calcularPrioridadForm">
+								<div data-toggle="buttons" class="btn-group">
+									<label
+										class="btn btn-sm ${filtrosActivos == 'ocupacion' ? 'active btn-primary' : 'btn-white'}">
+										<input type="radio" id="option1" name="strategy"
+										value="OCUPACION" onchange="calcularPrioridad()">
+										Ocupación
+									</label> <label
+										class="btn btn-sm ${filtrosActivos == 'capacidad' ? 'active btn-primary' : 'btn-white'}">
+										<input type="radio" id="option2" name="strategy"
+										value="CAPACIDAD" onchange="calcularPrioridad()">
+										Capacidad
+									</label> <label
+										class="btn btn-sm ${filtrosActivos == 'zona' ? 'active btn-primary' : 'btn-white'}">
+										<input type="radio" id="option3" name="strategy" value="ZONA"
+										onchange="calcularPrioridad()"> Zona
+									</label> <label
+										class="btn btn-sm ${filtrosActivos == 'combinado' ? 'active btn-primary' : 'btn-white'}">
+										<input type="radio" id="option4" name="strategy"
+										value="COMBINADO" onchange="calcularPrioridad()">
+										Combinado
+									</label>
+								</div>
+							</form>
 						</div>
 					</div>
 
