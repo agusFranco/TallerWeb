@@ -14,7 +14,7 @@
 
 <t:layout>
 
-<%-- 	<form:form action="/cambiarInsumos" method="POST"
+	<%-- 	<form:form action="/cambiarInsumos" method="POST"
 		modelAttribute="establecimiento">
 		<form:input path="nombre" id="idEstablec" type="text"
 			class="form-control" placeholder="Ingrese id establecimiento" />
@@ -32,8 +32,8 @@
 					<div class="ibox-content">
 						<h2>Distribuci&#243;n</h2>
 						<p>
-							Asignaci&#243;n de insumos a establecimientos.<br>Selecciona el
-							metodo de distribuci&#243;n de la derecha.
+							Asignaci&#243;n de insumos a establecimientos.<br>Selecciona
+							el metodo de distribuci&#243;n de la derecha.
 						</p>
 						<div class="clients-list">
 							<div class="table-responsive">
@@ -127,8 +127,8 @@
 									<div class="col-md-12">
 										<strong> Distribuci&#243;n por Ocupacion </strong>
 										<p>Los insumos se distribuyen en base a la prioridad
-											establecidad por el calculo del porcentaje de ocupaci&#243;n de
-											los establecimientos.</p>
+											establecidad por el calculo del porcentaje de ocupaci&#243;n
+											de los establecimientos.</p>
 										<a href="./distribuirInsumos?strategy=OCUPACION"
 											class="btn btn-primary btn-sm btn-block"> <i
 											class="fa fa-random"></i> Distribuir insumos
@@ -147,7 +147,7 @@
 									<div class="col-md-12">
 										<strong> Distribuci&#243;n por capacidad total </strong>
 										<p>Los insumos se distribuyen en base a la prioridad
-											establecidad por la capicidad total del establecimiento.</p>
+											establecida por la capicidad total del establecimiento.</p>
 										<a href="./distribuirInsumos?strategy=CAPACIDAD"
 											class="btn btn-primary btn-sm btn-block"> <i
 											class="fa fa-random"></i> Distribuir insumos
@@ -165,8 +165,19 @@
 								<div class="row">
 									<div class="col-md-12">
 										<strong> Distribuci&#243;n por zona </strong>
-										<p>Los Establecimiento con prioridades entre un 10% - 20%
-											recibiran un ...</p>
+										<p>Los insumos se distribuyen en base a la prioridad
+											establecida por el puntaje de su zona</p>
+										<p>Zona con puntaje:</p>
+										<dl class="dl-horizontal">
+											<dt>Mayor o Igual a 80pts</dt>
+											<dd>Recibe el 40% de cada tipo de insumo.</dd>
+											<dt>Mayor o Igual a 50pts</dt>
+											<dd>Recibe el 30% de cada tipo de insumo.</dd>
+											<dt>Mayor o Igual a 20pts</dt>
+											<dd>Recibe el 20% de cada tipo de insumo.</dd>
+											<dt>Mayor o Igual a 80pts</dt>
+											<dd>Recibe el 10% de cada tipo de insumo.</dd>
+										</dl>
 										<a href="./distribuirInsumos?strategy=ZONA"
 											class="btn btn-primary btn-sm btn-block"> <i
 											class="fa fa-random"></i> Distribuir insumos
@@ -184,18 +195,19 @@
 								<div class="row">
 									<div class="col-md-12">
 										<strong> Distribuci&#243;n combinada </strong>
-										<p>Los establecimientos definen su prioridad en base a la ocupaci&#243;n sobre la capacidad
-										, la capacidad total y la puntuaci&#243;n de la zona.
-										Luego los establecimientos se dividen en 5 grupos de igual cantidad y los restantes 
-										   se suman al &#250;ltimo grupo.
-										   <ul>
-										   <li>El grupo 1 recibe el 40% de cada tipo de insumo.</li>
-										   <li>El grupo 2 recibe el 28% de cada tipo de insumo.</li>
-										   <li>El grupo 3 recibe el 17% de cada tipo de insumo.</li>
-										   <li>El grupo 4 recibe el 10% de cada tipo de insumo.</li>
-										   <li>El grupo 5 recibe el 05% de cada tipo de insumo.</li>
-										   </ul>
-									 	</p>
+										<p>Los establecimientos definen su prioridad en base a la
+											ocupaci&#243;n sobre la capacidad , la capacidad total y la
+											puntuaci&#243;n de la zona. Luego los establecimientos se
+											dividen en 5 grupos de igual cantidad y los restantes se
+											suman al &#250;ltimo grupo.
+										<ul>
+											<li>El grupo 1 recibe el 40% de cada tipo de insumo.</li>
+											<li>El grupo 2 recibe el 28% de cada tipo de insumo.</li>
+											<li>El grupo 3 recibe el 17% de cada tipo de insumo.</li>
+											<li>El grupo 4 recibe el 10% de cada tipo de insumo.</li>
+											<li>El grupo 5 recibe el 05% de cada tipo de insumo.</li>
+										</ul>
+										</p>
 										<a href="./distribuirInsumos?strategy=COMBINADO"
 											class="btn btn-primary btn-sm btn-block"> <i
 											class="fa fa-random"></i> Distribuir insumos
