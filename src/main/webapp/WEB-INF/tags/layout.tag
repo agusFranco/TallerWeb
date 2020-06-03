@@ -13,7 +13,7 @@
 <link href="css/template/datatables.min.css" rel="stylesheet">
 <link href="css/template/animate.css" rel="stylesheet">
 <link href="css/template/style.css" rel="stylesheet">
-<link href="css/footable/footable.standalone.min.css" rel="stylesheet">
+<link href="css/footable/footable.core.css" rel="stylesheet">
 <link href="css/fonts/font-awesome/css/font-awesome.min.css"
 	rel="stylesheet">
 
