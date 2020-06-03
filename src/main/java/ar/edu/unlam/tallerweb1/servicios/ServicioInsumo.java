@@ -1,7 +1,9 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
 import java.util.List;
+import java.util.Map;
 
+import ar.edu.unlam.tallerweb1.modelo.Establecimiento;
 import ar.edu.unlam.tallerweb1.modelo.Insumo;
 
 public interface ServicioInsumo {
@@ -12,4 +14,6 @@ public interface ServicioInsumo {
 	Long cantTotalInsumos();
 
 	Long insumosSobrantes();
+	
+	Map<Establecimiento, List<Insumo>> cambiarDeEstablecInsumosSobrantes (Map<Establecimiento, List<Insumo>> mapa, Establecimiento establecimiento);
 }

@@ -30,8 +30,11 @@ public class Establecimiento {
 	@Transient
 	private Float prioridad;
 
-
 	public Establecimiento() {
+	}
+	
+	public Establecimiento(String nombre) {
+		this.nombre = nombre;
 	}
 
 	public Establecimiento(String nombre, String ubicacion, Integer capacidad, Integer ocupacion, Zona zona,

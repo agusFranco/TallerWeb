@@ -1,6 +1,11 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
+import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ar.edu.unlam.tallerweb1.modelo.Establecimiento;
 import ar.edu.unlam.tallerweb1.modelo.Insumo;
+import ar.edu.unlam.tallerweb1.negocio.OcupacionStrategy;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioEstablecimiento;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioInsumo;
 
@@ -19,7 +25,8 @@ public class ServicioInsumoImpl implements ServicioInsumo {
 	private RepositorioEstablecimiento servicioEstablecimientoDao;
 
 	@Autowired
-	public ServicioInsumoImpl(RepositorioInsumo servicioInsumoDao,RepositorioEstablecimiento servicioEstablecimientoDao) {
+	public ServicioInsumoImpl(RepositorioInsumo servicioInsumoDao,
+			RepositorioEstablecimiento servicioEstablecimientoDao) {
 		this.servicioInsumoDao = servicioInsumoDao;
 		this.servicioEstablecimientoDao = servicioEstablecimientoDao;
 	}
@@ -29,7 +36,8 @@ public class ServicioInsumoImpl implements ServicioInsumo {
 		return servicioInsumoDao.getAll();
 	}
 
-	//  Retorna la cantidad de insumos disponibles, realiza un SUM del campo 'cantidad'
+	// Retorna la cantidad de insumos disponibles, realiza un SUM del campo
+	// 'cantidad'
 	@Override
 	public Long cantTotalInsumos() {
 		return servicioInsumoDao.cantTotalInsumos();
@@ -37,17 +45,31 @@ public class ServicioInsumoImpl implements ServicioInsumo {
 
 	@Override
 	public Long insumosSobrantes() {
-		Long totalInsumos = servicioInsumoDao.cantTotalInsumos();
 		Long totalEstablec = (long) servicioEstablecimientoDao.getAll().size();
 		List<Insumo> listaInsumos = servicioInsumoDao.getAll();
-		
+
 		Long insumosSobrantes = 0L;
-		for(Insumo itemInsumo : listaInsumos) {
-			insumosSobrantes = insumosSobrantes + itemInsumo.getCantidad() % totalEstablec;
+		for (Insumo itemInsumo : listaInsumos) {
+			insumosSobrantes = insumosSobrantes + (itemInsumo.getCantidad() % totalEstablec);
 		}
-		
-		
 		return insumosSobrantes;
 	}
 
+	@Override
+	public Map<Establecimiento, List<Insumo>> cambiarDeEstablecInsumosSobrantes(Map<Establecimiento, List<Insumo>> mapa, Establecimiento establecimiento) {
+		
+		/*for (Entry<Establecimiento, List<Insumo>> entry : mapa.entrySet()) {
+		    Establecimiento key = entry.getKey();
+		    if(key.getId() == establecimiento.getId()) {
+		    	
+		    	for(Insumo  insumo: entry.getValue()) {
+
+		    		insumo.setCantidad(1000);
+		    	}
+
+		    }
+
+		}*/
+		return mapa;
+	}
 }

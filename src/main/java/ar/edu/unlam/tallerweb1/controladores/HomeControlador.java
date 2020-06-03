@@ -62,19 +62,19 @@ public class HomeControlador {
 	private ModelMap obtenerModeloDeHome(TipoDeStrategy strategy) {
 		ModelMap modelo = new ModelMap();
 
-		// Listas para mostrar de Establecimientos e insumos.
-		List<Establecimiento> listaEstablec = servicioEstablecimiento.obtenerTodos();
-		List<Insumo> listaInsumos = servicioInsumo.obtenerTodos();
+		// Listas para mostrar Establecimientos e insumos
+		List<Establecimiento> establecimientos = servicioEstablecimiento.obtenerTodos();
+		List<Insumo> insumos = servicioInsumo.obtenerTodos();
 
 		// Populo la lista con prioridades
-		List<Establecimiento> establecConPrioridad = strategy.calcularPrioridad(listaEstablec);
+		List<Establecimiento> establecConPrioridad = strategy.calcularPrioridad(establecimientos);
 
 		// Valores para los widget
-		Long cantEstablec = servicioEstablecimiento.cantidadItems(listaEstablec);
+		Long cantEstablec = servicioEstablecimiento.cantidadItems(establecimientos);
 		Long cantTotalInsumos = servicioInsumo.cantTotalInsumos();
 
-		modelo.put("listaEstablecimientos", listaEstablec);
-		modelo.put("listaInsumos", listaInsumos);
+		modelo.put("listaEstablecimientos", establecimientos);
+		modelo.put("listaInsumos", insumos);
 		modelo.put("cantidadEstablecimientos", cantEstablec);
 		modelo.put("cantTotalInsumos", cantTotalInsumos);
 		modelo.put("establConPrioridad", establecConPrioridad);

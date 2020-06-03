@@ -12,9 +12,9 @@ public class StringToTipoDeStrategy extends PropertyEditorSupport {
 
 		try {
 			TipoDeStrategy prioridad = TipoDeStrategy.valueOf(capitalized);
-			setValue(prioridad);
+			this.setValue(prioridad);
 		} catch (Exception ex) {
-			setValue(TipoDeStrategy.COMBINADO);
+			this.setValue(TipoDeStrategy.COMBINADO);
 		}
 	}
 }

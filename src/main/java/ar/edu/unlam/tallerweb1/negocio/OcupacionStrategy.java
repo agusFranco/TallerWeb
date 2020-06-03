@@ -14,8 +14,104 @@ import ar.edu.unlam.tallerweb1.modelo.Insumo;
 
 //Estrategia: Calcular prioridad por "OCUPACIÓN"
 public class OcupacionStrategy implements Strategy {
+	
+	// Convierte los porcentajes en prioridad
+	@Override
+	public List<Establecimiento> calcular(List<Establecimiento> establecimientos) {
+	
+		establecimientos = this.calcularPorcentajeDeDistribucion(establecimientos);
+		
+		// Ordeno la lista por prioridad		
+		Collections.sort(establecimientos,(a,b) -> {
+			return (int) (b.getPrioridad() - a.getPrioridad());
+		});
 
-	private List<Establecimiento> calcularPorcentaje(List<Establecimiento> establecimientos) {
+		for (int i = 0; i < establecimientos.size(); i++) {
+			establecimientos.get(i).setPrioridad((float)(i+1));
+		}
+		return establecimientos;
+	}
+	
+	@Override
+	public Map<Establecimiento, List<Insumo>> distribuir(List<Establecimiento> establecimientos, List<Insumo> insumos) {
+		
+		establecimientos = this.calcularPorcentajeDeDistribucion(establecimientos);
+		Map<Establecimiento,List<Insumo>> distribucionesMap =  new HashMap<Establecimiento, List<Insumo>>();
+
+		Integer totalInsumos = 0;
+		for(Insumo item : insumos) {
+			totalInsumos = totalInsumos + item.getCantidad();
+		}
+		
+		// Calculo de Rangos		
+		Float promMaximo = establecimientos.stream().max(Comparator.comparing(Establecimiento::getPrioridad)).get().getPrioridad();
+		Float promMitad = promMaximo/2;
+		Float promCuarto = promMitad/2;
+		
+		//Contador de establecimientos para distribuir en rangos
+		Integer contadorEstAlta = 0;
+		Integer contadorEstMedia = 0;
+		Integer contadorEstBaja = 0;
+		for(Establecimiento itemEstablec : establecimientos) {
+			 if(itemEstablec.getPrioridad() > promMitad) {
+				contadorEstAlta++;	
+			}else if(itemEstablec.getPrioridad() > promCuarto) {
+				contadorEstMedia++;
+			}else {
+				contadorEstBaja++;		
+			}		
+		}	
+		
+		//	Asignación de Insumo por insumo a Establecimientos
+		for(Establecimiento itemEstablec : establecimientos) {
+			List<Insumo> insumosAsignados = new ArrayList<Insumo>();
+			
+			for(Insumo itemInsumo : insumos) {
+				Insumo insumoTemp = new Insumo();
+				insumoTemp.setNombre(itemInsumo.getNombre());
+				insumoTemp.setTipo(itemInsumo.getTipo());
+						
+				if(itemEstablec.getPrioridad() > promMitad) {
+					insumoTemp.setCantidad((int) (itemInsumo.getCantidad()*0.6) / contadorEstAlta);
+				}else if(itemEstablec.getPrioridad() > promCuarto) {				
+					insumoTemp.setCantidad((int) (itemInsumo.getCantidad()*0.3) / contadorEstMedia);
+				}else {					
+					insumoTemp.setCantidad((int) (itemInsumo.getCantidad()*0.1) / contadorEstBaja);			
+				}
+						
+//				Le asigno al establecimiento con mayor prioridad los insumos restantes
+				Integer cantidadEstablec = establecimientos.size();	
+				Integer InsumoASumar = insumoTemp.getCantidad();
+				int sumaInsumoRestante = itemInsumo.getCantidad() % cantidadEstablec;		
+				Establecimiento establecimientoMaxPrioridad = 						establecimientos.stream().max(Comparator.comparing(Establecimiento::getPrioridad)).get();
+				if(itemEstablec.equals(establecimientoMaxPrioridad)) {
+					insumoTemp.setCantidad(InsumoASumar+sumaInsumoRestante);
+				}
+				
+				//Agrego insumo a la lista de insumos				
+				insumosAsignados.add(insumoTemp);
+			}
+			
+			//Agrego la lista de insumos correspondiente distribuidos al establecimiento
+			distribucionesMap.put(itemEstablec, insumosAsignados);
+		}
+		
+		// Convierte porcentaje a prioridad - PREGUNTAR PORQUE FUNCIONA, ¿AMBITO DE VARIABLES?
+		 this.calcular(establecimientos);
+		
+		/*Otra solución para para match de la prioridad con el porcentaje*/
+//		for (Establecimiento est : establecimientosPtos) {
+//			for (Map.Entry<Establecimiento,List<Insumo>> asg : distribucionesMap.entrySet()) {  
+//				if(asg.getKey().getId() == est.getId()) {
+//					asg.getKey().setPrioridad(est.getPrioridad());
+//				}
+//			}
+//		}
+		
+		return distribucionesMap;
+	}
+	
+	public List<Establecimiento> calcularPorcentajeDeDistribucion(List<Establecimiento> establecimientos) {
 		// Calculo el total de Ocupacion 		
 		Integer totalOcupacion = 0;
 		for(Establecimiento itemEstablec : establecimientos) {
@@ -28,110 +124,7 @@ public class OcupacionStrategy implements Strategy {
 			itemEstablec.setPrioridad(prioridad);
 		}
 		
-		Collections.sort(establecimientos,(a,b) -> {
-			return (int) (b.getPrioridad() - a.getPrioridad());
-		});
-		
 		return establecimientos;
-	}
-	
-	@Override
-	public List<Establecimiento> calcular(List<Establecimiento> establecimientos) {
-	
-		List<Establecimiento> establecimientosAux = new ArrayList<Establecimiento>(establecimientos);
-
-		for (int i = 0; i < establecimientosAux.size(); i++) {
-			establecimientosAux.get(i).setPrioridad((float)(i+1));
-		}
-		
-		return establecimientosAux;
-		
-	}
-
-	
-	@Override
-	public Map<Establecimiento, List<Insumo>> distribuir(List<Establecimiento> establecimientos, List<Insumo> insumos) {
-		
-		establecimientos = this.calcularPorcentaje(establecimientos);
-
-		Map<Establecimiento,List<Insumo>> asignacion =  new HashMap<Establecimiento, List<Insumo>>();
-
-		Integer totalInsumos = 0;
-		for(Insumo item : insumos) {
-			totalInsumos = totalInsumos + item.getCantidad();
-		}
-		
-		//Cantidad de establecimientos
-		Integer cantidadEstablec = establecimientos.size();	
-		
-		// Calculo de Rangos		
-		Float promedioMaximo = establecimientos.stream().max(Comparator.comparing(Establecimiento::getPrioridad)).get().getPrioridad();
-		Float promedioMitad = promedioMaximo/2;
-		Float promedioUnCuarto = promedioMitad/2;
-		
-		//Contador de establecimientos para distribuir en rangos
-		Integer contadorEstAlta = 0;
-		Integer contadorEstMedia = 0;
-		Integer contadorEstBaja = 0;
-		for(Establecimiento itemEstablec : establecimientos) {
-				if(itemEstablec.getPrioridad() > promedioMitad) {
-					contadorEstAlta++;	
-				}else if(itemEstablec.getPrioridad() > promedioUnCuarto) {
-					contadorEstMedia++;
-				}else {
-					contadorEstBaja++;		
-				}		
-		}	
-		
-		//	Asignación de Insumos a Establecimientos
-		for(Establecimiento itemEstablec : establecimientos) {
-			List<Insumo> insumosAsignados = new ArrayList<Insumo>();
-			
-			for(Insumo itemInsumo : insumos) {
-				Insumo insumoAsignado = new Insumo();
-				insumoAsignado.setNombre(itemInsumo.getNombre());
-				insumoAsignado.setTipo(itemInsumo.getTipo());
-				
-				
-//				Float restoInsumos = 0F;
-				if(itemEstablec.getPrioridad() > promedioMitad) {
-					insumoAsignado.setCantidad((int) (itemInsumo.getCantidad()*0.6) / contadorEstAlta);
-				}else if(itemEstablec.getPrioridad() > promedioUnCuarto) {				
-					insumoAsignado.setCantidad((int) (itemInsumo.getCantidad()*0.3) / contadorEstMedia);
-				}else {					
-					insumoAsignado.setCantidad((int) (itemInsumo.getCantidad()*0.1) / contadorEstBaja);			
-				}
-				
-
-				Integer InsumoASumar = insumoAsignado.getCantidad();
-				int sumaInsumoRestante = itemInsumo.getCantidad() % cantidadEstablec;
-				
-				//	Establecimiento con mayor prioridad		
-				Establecimiento establecimientoMaxPrioridad = establecimientos.stream().max(Comparator.comparing(Establecimiento::getPrioridad)).get();
-				if(itemEstablec.equals(establecimientoMaxPrioridad)) {
-					insumoAsignado.setCantidad(InsumoASumar+sumaInsumoRestante);
-				}
-				
-				
-				//Agrego insumo a la lista de insumos				
-				insumosAsignados.add(insumoAsignado);
-			}
-			
-			//Agrego la lista de Insumos al Establecimiento			
-			asignacion.put(itemEstablec, insumosAsignados);
-		}
-		
-		// HAGO ENROQUE ENTRE EL PORCENTAJE Y EL PUNTAJE MACHEANDO POR ID
-		List<Establecimiento> establecimientosPtos = calcular(establecimientos);
-		for (Establecimiento est : establecimientosPtos) {
-			for (Map.Entry<Establecimiento,List<Insumo>> asg : asignacion.entrySet()) {  
-				if(asg.getKey().getId() == est.getId()) {
-					asg.getKey().setPrioridad(est.getPrioridad());
-				}
-			}
-		}
-		
-		return asignacion;
 	}
 	
 	

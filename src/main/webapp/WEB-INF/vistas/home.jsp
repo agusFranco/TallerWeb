@@ -174,6 +174,7 @@
 				</div>
 			</div>
 		</div>
+		</div>
 </t:layout>
 
 <script src="js/vistas/home.js"></script>

@@ -2,6 +2,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <style>
 .footable-details th {
@@ -12,6 +13,17 @@
 </style>
 
 <t:layout>
+
+<%-- 	<form:form action="/cambiarInsumos" method="POST"
+		modelAttribute="establecimiento">
+		<form:input path="nombre" id="idEstablec" type="text"
+			class="form-control" placeholder="Ingrese id establecimiento" />
+
+		<button class="btn btn-lg btn-info" Type="Submit">
+			<strong>Enviar</strong>
+		</button>
+	</form:form> --%>
+
 
 	<div class="wrapper wrapper-content  animated fadeInRight">
 		<div class="row">
