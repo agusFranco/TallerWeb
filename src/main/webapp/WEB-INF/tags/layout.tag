@@ -1,6 +1,8 @@
 <%@tag description="Overall Page template" pageEncoding="UTF-8"%>
 <%@attribute name="header" fragment="true"%>
 <%@attribute name="footer" fragment="true"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <html>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta charset="utf-8" />
@@ -19,6 +21,14 @@
 
 <!-- Gráficos -->
 <link href="css/chartist/chartist-custom.css" rel="stylesheet">
+
+
+<script type="text/javascript">
+	<c:set var="url"
+	value="${requestScope['javax.servlet.forward.request_uri']}" />
+	var currentUrl = '<c:out value="${url}"/>';
+</script>
+
 </head>
 <body class="top-navigation">
 	<div id="wrapper">
@@ -35,13 +45,14 @@
 					</div>
 					<div class="navbar-collapse collapse" id="navbar">
 						<ul class="nav navbar-nav">
-							<li class="active"><a aria-expanded="false" role="button"
+
+							<li id="inicioLink"><a aria-expanded="false" role="button"
 								href="./home"> Inicio </a></li>
-							<li><a aria-expanded="false" role="button"
-								href="./distribucion"> Distribución </a></li>
-								<li><a aria-expanded="false" role="button"
-								href="./responsables"> Responsables </a></li>
-								
+							<li id="distribucionLink"><a aria-expanded="false"
+								role="button" href="./distribucion"> Distribución </a></li>
+							<li id="responsablesLink"><a aria-expanded="false"
+								role="button" href="./responsables"> Responsables </a></li>
+
 						</ul>
 						<ul class="nav navbar-top-links navbar-right">
 							<li><a href="login.html"> <i class="fa fa-sign-out"></i>
@@ -78,5 +89,22 @@
 
 <!-- Gráficos -->
 <script src="js/chartist/chartist.js"></script>
+<script type="text/javascript">
+	var setearLinkActivo = function() {
+		if (currentUrl.includes('home')) {
+			$("#inicioLink").addClass('active');
+		}
+
+		if (currentUrl.includes('distribuir')) {
+			$("#distribucionLink").addClass('active');
+		}
+
+		if (currentUrl.includes('responsables')) {
+			$("#responsablesLink").addClass('active');
+		}
+	};
+
+	setearLinkActivo();
+</script>
 
 </html>
