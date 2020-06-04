@@ -14,7 +14,7 @@ public class GrupoDeDistribucion {
 	}
 
 	public GrupoDeDistribucion() {
-
+		this.cantidad = 0;
 	}
 
 	public Integer getPuntajeMinimo() {
