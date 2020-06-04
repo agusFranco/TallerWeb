@@ -97,7 +97,8 @@ public class CapacidadStrategy implements Strategy {
 				// Por lo general, cuando el divisor es 32, si utilizo el divisor 16 pero le
 				// sumo la mitad, seria el fin de la busqueda de grupos.
 				if (divisor == 32) {
-					max = ((maximo / 16) + (maximo / 2)) * i;
+					Integer auxiliar = (maximo / 16);
+					max = (auxiliar + (auxiliar / 2)) * i;
 				} else {
 					max = (maximo / divisor) * i;
 				}
