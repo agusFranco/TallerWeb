@@ -11,4 +11,7 @@ public interface ServicioEstablecimiento {
 	List<Establecimiento> obtenerTodos();
 
 	Long cantidadItems(List<Establecimiento> establecimientos);
+	
+	Establecimiento establecimientoMayorOcupacion();
+
 }

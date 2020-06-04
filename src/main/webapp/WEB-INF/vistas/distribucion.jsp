@@ -30,10 +30,10 @@
 			<div class="col-sm-8">
 				<div class="ibox">
 					<div class="ibox-content">
-						<h2>Distribuci&#243;n</h2>
+						<h2>Distribución</h2>
 						<p>
 							Asignaci&#243;n de insumos a establecimientos.<br>Selecciona
-							el metodo de distribuci&#243;n de la derecha.
+							el metodo de Distribución de la derecha.
 						</p>
 						<div class="clients-list">
 							<div class="table-responsive">
@@ -43,17 +43,24 @@
 										<tr>
 											<th>Prioridad</th>
 											<th>Establecimiento</th>
-											<th>Distribuci&#243;n</th>
+											<th>Distribución</th>
 											<th>Detalle</th>
 											<th data-breakpoints="all" data-title="Insumos:"></th>
+											<th data-breakpoints="all" data-title="Parámetros:"></th>
 										</tr>
 									</thead>
 									<tbody>
 										<c:forEach items="${MapaDistribuido}" var="MapElement">
 											<tr>
-												<td><fmt:formatNumber type="number"
-														maxFractionDigits="2"
-														value="${MapElement.key.getPrioridad()}" /></td>
+												<td><c:choose>
+														<c:when test="${param.strategy == 'EQUITATIVO'}">
+															<p>-</p>
+														</c:when>
+														<c:otherwise>
+															<fmt:formatNumber type="number" maxFractionDigits="2"
+																value="${MapElement.key.getPrioridad()}" />
+														</c:otherwise>
+													</c:choose></td>
 												<td><i class="fa fa-hospital-o"></i>
 													${MapElement.key.getNombre()}</td>
 
@@ -76,6 +83,28 @@
 															${listElement.getNombre()}: ${listElement.getCantidad()}
 														</span>
 													</c:forEach></td>
+												<td>
+													<div class="d-flex align-items-center">
+														<span
+															style="margin: 0px 0px 5px 0px; padding: 2px; display: inline-block; font-size: 13px;"
+															class="btn btn-primary"> <strong>Capacidad
+																Total: </strong> ${MapElement.key.capacidad}
+														</span> <span
+															style="margin: 0px 0px 5px 0px; padding: 2px; display: inline-block; font-size: 13px;"
+															class="btn btn-primary"> <strong>Ocupación:
+														</strong> ${MapElement.key.ocupacion}
+														</span> <span
+															style="margin: 0px 0px 5px 0px; padding: 2px; display: inline-block; font-size: 13px;"
+															class="btn btn-primary"> <strong>Zona: </strong>
+															${MapElement.key.zona.nombre}
+														</span> <span
+															style="margin: 0px 0px 5px 0px; padding: 2px; display: inline-block; font-size: 13px;"
+															class="btn btn-primary"> <strong>Puntaje
+																de la zona: </strong> ${MapElement.key.zona.puntaje}
+														</span>
+													</div>
+												</td>
+
 											</tr>
 										</c:forEach>
 
@@ -84,7 +113,7 @@
 							</div>
 							<button style="margin-top: 20px;" type="button"
 								class="btn btn-success btn-sm btn-block">
-								<i class="fa fa-check"></i> Confirmar Distribuci&#243;n
+								<i class="fa fa-check"></i> Confirmar Distribución
 							</button>
 						</div>
 					</div>
@@ -95,7 +124,7 @@
 					<c:when test="${param.strategy == 'EQUITATIVO'}">
 						<div class="ibox float-e-margins col-md-12">
 							<div class="ibox-title">
-								<h5>Insumos sobrantes en repartija equitativa</h5>
+								<h5>Insumos sobrantes en distribución equitativa</h5>
 							</div>
 							<div class="ibox-content">
 								<h1 class="no-margins text-center">${insumosSobrantes}</h1>
@@ -106,15 +135,31 @@
 									<h5>Asignados al Establecimiento</h5>
 								</div>
 								<div class="ibox-content">
-									<c:forEach items="${MapaDistribuido}" var="MapElement">
-										<c:if test="${MapElement.key.id eq 1}">
-											<p style="font-size: 20px;">${MapElement.key.nombre}</p>
-										</c:if>
-									</c:forEach>
+									<p style="font-size: 20px;">${establecMayorOcupacion.nombre}</p>
 								</div>
+								<div class="ibox-title">
+									<strong>Cambiar establecimiento de asignación</strong>
+								</div>
+								<form:form action="cambiarInsumos" method="POST"
+									modelAttribute="establecimiento">
+								<form:select path="id" class="form-control"
+										id="establecimiento"> --%>
+										<%-- <form:option value="{establecMayorOcupacion.id}" selected="selected">${establecMayorOcupacion.nombre}</form:option> --%>
+										<c:forEach items="${MapaDistribuido}" var="est">
+											<form:option value="{est.key.id}">${est.key.nombre}</form:option>
+										</c:forEach>
+									</form:select> 
 
+									<form:input path="nombre" type="text" id="nombre"
+										class="form-control" placeholder="nombre" value="asdasdasda" />
+									<button class="btn btn-lg btn-info btn-block font-weight-bold"
+										Type="Submit" style="font-size: 15px;">Confirmar
+										movimiento de asignación</button>
+								</form:form>
 							</div>
+
 						</div>
+
 					</c:when>
 					<c:otherwise>
 					</c:otherwise>
@@ -125,10 +170,18 @@
 							<div id="contact-1" class="tab-pane active">
 								<div class="row">
 									<div class="col-md-12">
-										<strong> Distribuci&#243;n por Ocupacion </strong>
-										<p>Los insumos se distribuyen en base a la prioridad
-											establecidad por el calculo del porcentaje de ocupaci&#243;n
-											de los establecimientos.</p>
+										<strong> Distribución por ocupacion </strong>
+										<p>Los establecimientos definen su prioridad en base a su
+											porcentaje de ocupación. Estos se agrupan en 3 grupos
+											dependiendo su indice de riesgo.</p>
+										<ul>
+											<li>El grupo 1 recibe el 60% de cada tipo de insumo. <br />
+												<i>El establecimiento con mayor prioridad dentro de este
+													grupo recibe el 60% de cada tipo de insumo + insumos
+													extras.</i></li>
+											<li>El grupo 2 recibe el 30% de cada tipo de insumo.</li>
+											<li>El grupo 3 recibe el 10% de cada tipo de insumo.</li>
+										</ul>
 										<a href="./distribuirInsumos?strategy=OCUPACION"
 											class="btn btn-primary btn-sm btn-block"> <i
 											class="fa fa-random"></i> Distribuir insumos
@@ -145,7 +198,7 @@
 							<div id="contact-1" class="tab-pane active">
 								<div class="row">
 									<div class="col-md-12">
-										<strong> Distribuci&#243;n por capacidad total </strong>
+										<strong> Distribución por capacidad total </strong>
 										<p>Los insumos se distribuyen en base a la prioridad
 											establecida por la capicidad total del establecimiento.</p>
 										<a href="./distribuirInsumos?strategy=CAPACIDAD"
@@ -164,7 +217,7 @@
 							<div id="contact-1" class="tab-pane active">
 								<div class="row">
 									<div class="col-md-12">
-										<strong> Distribuci&#243;n por zona </strong>
+										<strong> Distribución por zona </strong>
 										<p>Los insumos se distribuyen en base a la prioridad
 											establecida por el puntaje de su zona</p>
 										<p>Zona con puntaje:</p>
@@ -194,7 +247,7 @@
 							<div id="contact-1" class="tab-pane active">
 								<div class="row">
 									<div class="col-md-12">
-										<strong> Distribuci&#243;n combinada </strong>
+										<strong> Distribución combinada </strong>
 										<p>Los establecimientos definen su prioridad en base a la
 											ocupaci&#243;n sobre la capacidad , la capacidad total y la
 											puntuaci&#243;n de la zona. Luego los establecimientos se
@@ -224,10 +277,15 @@
 							<div id="contact-1" class="tab-pane active">
 								<div class="row">
 									<div class="col-md-12">
-										<strong> Distribuci&#243;n equitativa </strong>
+										<strong> Distribución equitativa </strong>
 										<p>Los insumos se distribuyen equitativamente entre todos
-											los establecimientos.</p>
-										<a href="./distribuirInsumos?strategy=EQUITATIVO"
+											los establecimientos sin la determinación de un índice de
+											riesgo para cada uno de ellos.</p>
+										<i>Al establecimiento con mayor cantidad de infectados se
+											le otorgarán los insumos sobrantes, los cuales no pudieron
+											ser distribuídos equitativamente entre la totalidad de los
+											establecimientos. </i> <a
+											href="./distribuirInsumos?strategy=EQUITATIVO"
 											class="btn btn-primary btn-sm btn-block"> <i
 											class="fa fa-random"></i> Distribuir insumos
 										</a>

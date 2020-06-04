@@ -22,7 +22,7 @@ import ar.edu.unlam.tallerweb1.negocio.OcupacionStrategy;
 import ar.edu.unlam.tallerweb1.servicios.ServicioEstablecimiento;
 import ar.edu.unlam.tallerweb1.servicios.ServicioInsumo;
 
-@Controller("/distribucion")
+@Controller()
 public class DistribucionControlador {
 	
 	private final ServicioEstablecimiento servicioEstablecimiento;
@@ -41,7 +41,7 @@ public class DistribucionControlador {
 	}
 	
 	@RequestMapping(path = "/distribuirInsumos", method = RequestMethod.GET)
-	public ModelAndView distribuirInsumos(@RequestParam("strategy") TipoDeStrategy strategy) {
+	public ModelAndView distribuirInsumos(@RequestParam(value="strategy", defaultValue = "OCUPACION") TipoDeStrategy strategy) {
 		ModelMap modelo = new ModelMap();
 		List<Establecimiento> establecimientos = servicioEstablecimiento.obtenerTodos();
 		List<Insumo> insumos = servicioInsumo.obtenerTodos();
@@ -55,6 +55,9 @@ public class DistribucionControlador {
 		
 		modelo.put("establecimiento",new Establecimiento());
 		
+		Establecimiento establecMayorOcupacion = servicioEstablecimiento.establecimientoMayorOcupacion();
+		modelo.put("establecMayorOcupacion",establecMayorOcupacion);
+		
 		return new ModelAndView("distribucion", modelo);
 	}
 
@@ -66,23 +69,20 @@ public class DistribucionControlador {
 	
 	
 	
-	/*
+	
 	@RequestMapping(path = "/cambiarInsumos", method = RequestMethod.POST)
 	public ModelAndView cambiarInsumos(@ModelAttribute("establecimiento") Establecimiento establecimiento) {
 		ModelMap modelo = new ModelMap();
-		
 		List<Establecimiento> establecimientos = servicioEstablecimiento.obtenerTodos();
 		List<Insumo> insumos = servicioInsumo.obtenerTodos();
 		Map<Establecimiento, List<Insumo>> distribucion;
 		distribucion = TipoDeStrategy.EQUITATIVO.distribuirInsumos(establecimientos, insumos);
-		
 
-		Map<Establecimiento, List<Insumo>> distribucion1 = servicioInsumo.cambiarDeEstablecInsumosSobrantes(distribucion, establecimiento);
+		Map<Establecimiento, List<Insumo>> distribucionCambiada = servicioInsumo.cambiarDeEstablecInsumosSobrantes(distribucion, establecimiento);
 		
-		modelo.put("MapaDistribuido", distribucion1);
-		
+		modelo.put("MapaDistribuido", distribucionCambiada);
 		
 		return new ModelAndView("distribucion", modelo);
-	}*/
+	}
 
 }

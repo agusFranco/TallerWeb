@@ -47,7 +47,7 @@ public class EquitativoStrategy implements Strategy {
 				insumoAsignado.setCantidad((int) itemInsumo.getCantidad() / cantidadEstablec);
 
 				//Asignación de insumos restantes
-				if(itemEstablec.getId()==1) {
+				if(itemEstablec.getId()== establecimientos.stream().max(Comparator.comparing(Establecimiento::getOcupacion)).get().getId()) {
 					Integer InsumoASumar = insumoAsignado.getCantidad();
 					int InsumoRestante = itemInsumo.getCantidad() % cantidadEstablec;		
 					insumoAsignado.setCantidad(InsumoASumar+InsumoRestante);	
