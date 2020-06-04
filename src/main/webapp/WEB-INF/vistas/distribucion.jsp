@@ -142,13 +142,13 @@
 								</div>
 								<form:form action="cambiarInsumos" method="POST"
 									modelAttribute="establecimiento">
-								<form:select path="id" class="form-control"
+									<form:select path="id" class="form-control"
 										id="establecimiento"> --%>
 										<%-- <form:option value="{establecMayorOcupacion.id}" selected="selected">${establecMayorOcupacion.nombre}</form:option> --%>
 										<c:forEach items="${MapaDistribuido}" var="est">
 											<form:option value="{est.key.id}">${est.key.nombre}</form:option>
 										</c:forEach>
-									</form:select> 
+									</form:select>
 
 									<form:input path="nombre" type="text" id="nombre"
 										class="form-control" placeholder="nombre" value="asdasdasda" />
@@ -200,7 +200,7 @@
 									<div class="col-md-12">
 										<strong> Distribución por capacidad total </strong>
 										<p>Los insumos se distribuyen en base a la prioridad
-											establecida por la capicidad total del establecimiento.</p>
+											establecida por la capacidad total del establecimiento.</p>
 										<a href="./distribuirInsumos?strategy=CAPACIDAD"
 											class="btn btn-primary btn-sm btn-block"> <i
 											class="fa fa-random"></i> Distribuir insumos
@@ -222,13 +222,13 @@
 											establecida por el puntaje de su zona</p>
 										<p>Zona con puntaje:</p>
 										<dl class="dl-horizontal">
-											<dt>Mayor o Igual a 80pts</dt>
+											<dt>Entre 80 y 100 pts</dt>
 											<dd>Recibe el 40% de cada tipo de insumo.</dd>
-											<dt>Mayor o Igual a 50pts</dt>
+											<dt>Entre 50 y 79 pts </dt>
 											<dd>Recibe el 30% de cada tipo de insumo.</dd>
-											<dt>Mayor o Igual a 20pts</dt>
+											<dt>Entre 20 y 49 pts </dt>
 											<dd>Recibe el 20% de cada tipo de insumo.</dd>
-											<dt>Mayor o Igual a 00pts</dt>
+											<dt>Entre 00 y 19 pts </dt>
 											<dd>Recibe el 10% de cada tipo de insumo.</dd>
 										</dl>
 										<a href="./distribuirInsumos?strategy=ZONA"
