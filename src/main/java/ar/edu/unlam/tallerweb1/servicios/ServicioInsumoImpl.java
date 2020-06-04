@@ -56,20 +56,27 @@ public class ServicioInsumoImpl implements ServicioInsumo {
 	}
 
 	@Override
-	public Map<Establecimiento, List<Insumo>> cambiarDeEstablecInsumosSobrantes(Map<Establecimiento, List<Insumo>> mapa, Establecimiento establecimiento) {
-		
-		/*for (Entry<Establecimiento, List<Insumo>> entry : mapa.entrySet()) {
-		    Establecimiento key = entry.getKey();
-		    if(key.getId() == establecimiento.getId()) {
-		    	
-		    	for(Insumo  insumo: entry.getValue()) {
+	public Map<Establecimiento, List<Insumo>> cambiarDeEstablecInsumosSobrantes(Map<Establecimiento, List<Insumo>> mapa,
+			Establecimiento establecimiento) {
 
-		    		insumo.setCantidad(1000);
-		    	}
+		Establecimiento establecimientoMaxPrioridad = mapa.keySet().stream()
+				.max(Comparator.comparing(Establecimiento::getOcupacion)).get();
+		Establecimiento establecimientoMinPrioridad = mapa.keySet().stream()
+				.min(Comparator.comparing(Establecimiento::getOcupacion)).get();
 
-		    }
+		for (Entry<Establecimiento,List<Insumo>> entry : mapa.entrySet()) {
 
-		}*/
+			if (entry.getKey().getId() == establecimiento.getId()) {
+				for (Insumo insumo : entry.getValue()) {
+					insumo.setCantidad(insumo.getCantidad() + 8);
+				}
+			}
+			if(entry.getKey().getId() == establecimientoMaxPrioridad.getId()) {
+				for (Insumo insumo : entry.getValue()) {
+					insumo.setCantidad(insumo.getCantidad() - 8);
+				}
+			}
+		}
 		return mapa;
 	}
 }
