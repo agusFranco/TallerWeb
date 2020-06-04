@@ -175,7 +175,7 @@
 											<dd>Recibe el 30% de cada tipo de insumo.</dd>
 											<dt>Mayor o Igual a 20pts</dt>
 											<dd>Recibe el 20% de cada tipo de insumo.</dd>
-											<dt>Mayor o Igual a 80pts</dt>
+											<dt>Mayor o Igual a 00pts</dt>
 											<dd>Recibe el 10% de cada tipo de insumo.</dd>
 										</dl>
 										<a href="./distribuirInsumos?strategy=ZONA"
