@@ -221,16 +221,17 @@
 										<p>Los insumos se distribuyen en base a la prioridad
 											establecida por el puntaje de su zona</p>
 										<p>Zona con puntaje:</p>
-										<dl class="dl-horizontal">
-											<dt>Entre 80 y 100 pts</dt>
-											<dd>Recibe el 40% de cada tipo de insumo.</dd>
-											<dt>Entre 50 y 79 pts </dt>
-											<dd>Recibe el 30% de cada tipo de insumo.</dd>
-											<dt>Entre 20 y 49 pts </dt>
-											<dd>Recibe el 20% de cada tipo de insumo.</dd>
-											<dt>Entre 00 y 19 pts </dt>
-											<dd>Recibe el 10% de cada tipo de insumo.</dd>
-										</dl>
+										<ul>
+											<li>Entre 80 y 100 pts - Recibe el 40% de cada tipo de
+												insumo.</li>
+											<li>Entre 50 y 79 pts - Recibe el 30% de cada tipo de
+												insumo.</li>
+											<li>Entre 20 y 49 pts - Recibe el 20% de cada tipo de
+												insumo.</li>
+											<li>Entre 00 y 19 pts - Recibe el 10% de cada tipo de
+												insumo.</li>
+										</ul>
+
 										<a href="./distribuirInsumos?strategy=ZONA"
 											class="btn btn-primary btn-sm btn-block"> <i
 											class="fa fa-random"></i> Distribuir insumos
