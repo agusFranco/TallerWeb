@@ -34,12 +34,7 @@ public class ResponsableControlador {
 	public ModelAndView responsables() {
 		
 		ModelMap modelo = new ModelMap();
-		
-		List<Responsable> responsables = servicioResponsable.obtenerTodos();
 		List<Establecimiento> establecimientos = servicioEstablecimiento.obtenerTodos();
-		
-
-		modelo.put("responsables", responsables);
 		modelo.put("establecimientos",establecimientos);
 		return new ModelAndView("responsables", modelo);
 	}

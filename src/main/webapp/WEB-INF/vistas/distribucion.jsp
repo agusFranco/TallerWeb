@@ -21,7 +21,7 @@
 					<div class="ibox-content">
 						<h2>
 							Distribuci&#243;n - <span
-								style="text-transform: lowercase; font-style: italic;">${param.strategy}</span>
+								style="text-transform: lowercase; font-style: italic;">${not empty param.strategy ? param.strategy : "equitativo con cambio de asignacion"}</span>
 						</h2>
 						<p>
 							Asignaci&#243;n de insumos a establecimientos.<br>Selecciona
@@ -38,15 +38,15 @@
 											<th>Distribuci&#243;n</th>
 											<th>Detalle</th>
 											<th data-breakpoints="all" data-title="Insumos:"></th>
-											<th data-breakpoints="all" data-title="Par&#243;metros:"></th>
+											<th data-breakpoints="all" data-title="Parametros:"></th>
 										</tr>
 									</thead>
 									<tbody>
 										<c:forEach items="${MapaDistribuido}" var="MapElement">
 											<tr>
 												<td><c:choose>
-														<c:when test="${param.strategy == 'EQUITATIVO'}">
-															<p>-</p>
+														<c:when test="${param.strategy == 'EQUITATIVO' || empty param.strategy}">
+															<p class="text-success">${establecMayorOcupacion.nombre==MapElement.key.getNombre() ? "Insumos Extra" : "~"}</p>
 														</c:when>
 														<c:otherwise>
 															<fmt:formatNumber type="number" maxFractionDigits="2"
@@ -270,7 +270,7 @@
 											&#243;ndice de riesgo para cada uno de ellos.</p>
 										<i>Al establecimiento con mayor cantidad de infectados se
 											le otorgar&#243;n los insumos sobrantes, los cuales no
-											pudieron ser distribu&#243;dos equitativamente entre la
+											pudieron ser distribuidos equitativamente entre la
 											totalidad de los establecimientos. </i> <a
 											href="./distribuirInsumos?strategy=EQUITATIVO"
 											class="btn btn-primary btn-sm btn-block"> <i

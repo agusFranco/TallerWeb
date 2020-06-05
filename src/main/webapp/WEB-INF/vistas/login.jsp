@@ -1,44 +1,93 @@
+<%@taglib prefix="t" tagdir="/WEB-INF/tags/"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-	<head>
-	<!-- Bootstrap core CSS -->
-	    <link href="css/bootstrap.min.css" rel="stylesheet" >
-	    <!-- Bootstrap theme -->
-	    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
-	</head>
-	<body>
-		<div class = "container">
-			<div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-				<%--Definicion de un form asociado a la accion /validar-login por POST. Se indica ademas que el model attribute se--%>
-				<%--debe referenciar con el nombre usuario, spring mapea los elementos de la vista con los atributos de dicho objeto--%>
-					<%--para eso debe coincidir el valor del elemento path de cada input con el nombre de un atributo del objeto --%>
-				<form:form action="validar-login" method="POST" modelAttribute="usuario">
-			    	<h3 class="form-signin-heading h2 text-center"><strong>SIMULADOR DE INSUMOS MÉDICOS</strong></h3>
-					<hr class="colorgraph"><br>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-					<%--Elementos de entrada de datos, el elemento path debe indicar en que atributo del objeto usuario se guardan los datos ingresados--%>
-					<form:input path="email" id="email" type="email" class="form-control" placeholder="Ingrese su usuario"/>
-					<form:input path="password" type="password" id="password" class="form-control" placeholder="Ingrese su contraseña"/>     		  
-					
-					<button class="btn btn-lg btn-info btn-block" Type="Submit"><strong>Inciar sesión</strong></button>
-					<a href="home" class=""><strong>Atajo para acceder al home</strong></a>
-				</form:form>
+<!doctype html>
+<html lang="es" class="fullscreen-bg">
+<head>
+<title>Login | DIMAR - Insumos Médicos</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<!-- VENDOR CSS -->
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<!-- MAIN CSS -->
+<link rel="stylesheet" href="css/login/css/main.css">
+<!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
+<link rel="stylesheet" href="css/login/css/demo.css">
+<!-- GOOGLE FONTS -->
+<link
+	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700"
+	rel="stylesheet">
+<link href="css/fonts/font-awesome/css/font-awesome.min.css"
+	rel="stylesheet">
+</head>
 
-				<%--Bloque que es visible si el elemento error no estÃ¡ vacÃ­o	--%>
-				<c:if test="${not empty error}">
-			        <h4><span>${error}</span></h4>
-			        <br>
-		        </c:if>	
+<body>
+	<div id="wrapper">
+		<div class="vertical-align-wrap">
+			<div class="vertical-align-middle">
+				<div class="auth-box ">
+					<div class="left">
+						<div class="content">
+							<div class="header">
+								<div class="logo text-center">
+									<img src="css/login/LOGO.png" alt="DIMAR logo"
+										style="width: 300px;">
+								</div>
+								<p class="lead">Sistema de Ingreso</p>
+							</div>
+							<form:form action="validar-login" method="POST"
+								modelAttribute="usuario" class="form-auth-small">
+								<div class="form-group">
+
+									<label for="signin-email" class="control-label sr-only">Email</label>
+									<form:input path="email" id="signin-email" type="email"
+										class="form-control" placeholder="Ingrese su usuario" />
+								</div>
+								<div class="form-group">
+									<label for="signin-password" class="control-label sr-only">Password</label>
+									<form:input path="password" type="password"
+										id="signin-password" class="form-control"
+										placeholder="Ingrese su contraseña" />
+								</div>
+								<div class="form-group clearfix">
+									<label class="fancy-checkbox element-left"> <input
+										type="checkbox"> <span>Recordarme</span>
+									</label>
+								</div>
+								<button type="submit" class="btn btn-primary btn-lg btn-block">INGRESAR</button>
+								<div class="bottom">
+									<span class="helper-text"><i class="fa fa-lock"></i> <a
+										href="#">Olvidaste tu contraseña?</a></span>
+								</div>
+							</form:form>
+							<c:if test="${not empty error}">
+								<h4>
+									<span class="text-danger">${error}</span>
+								</h4>
+								<br>
+							</c:if>
+						</div>
+					</div>
+					<div class="right">
+						<div class="overlay"></div>
+						<div class="content text">
+							<h1 style="font-size: 40px">Sistema de distribución</h1>
+							<h1 style="font-size: 30px">de Insumos Médicos</h1>
+							<p class="heading">Taller Web I</p>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
 			</div>
 		</div>
-		
-		<!-- Placed at the end of the document so the pages load faster -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" ></script>
-		<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-		<script src="js/bootstrap.min.js" type="text/javascript"></script>	
-		
-		
-	</body>
+	</div>
+
+</body>
 </html>
+

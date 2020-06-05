@@ -76,7 +76,7 @@ public class DistribucionControlador {
 		ModelMap modelo = new ModelMap();
 		Map<Establecimiento, List<Insumo>> distribucionCambiada = servicioInsumo.cambiarDeEstablecInsumosSobrantes(establecimiento);
 		modelo.put("MapaDistribuido", distribucionCambiada);
-		
+		// Sera el que mas prioridad tiene porque es el que selecciona y envia solo el id
 		Establecimiento establecMaxprioridad= servicioEstablecimiento.consultarEstablecimiento(establecimiento.getId());
 		Long insumosSobrantes = servicioInsumo.insumosSobrantes();
 		modelo.put("insumosSobrantes",insumosSobrantes);

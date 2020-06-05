@@ -67,7 +67,7 @@ public class LoginControlador {
 			return new ModelAndView("redirect:/home");
 		} else {
 			// si el usuario no existe agrega un mensaje de error en el modelo.
-			model.put("error", "Usuario o clave incorrecta");
+			model.put("error", "Usuario o contraseña incorrecta");
 		}
 		return new ModelAndView("login", model);
 	}

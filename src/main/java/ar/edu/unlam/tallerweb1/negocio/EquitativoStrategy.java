@@ -64,4 +64,5 @@ public class EquitativoStrategy implements Strategy {
 
 		return asignacion;
 	}
+	
 }
