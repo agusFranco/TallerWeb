@@ -74,14 +74,13 @@ public class DistribucionControlador {
 	@RequestMapping(path = "/cambiarInsumos", method = RequestMethod.POST)
 	public ModelAndView cambiarInsumos(@ModelAttribute("establecimiento") Establecimiento establecimiento) {
 		ModelMap modelo = new ModelMap();
-		List<Establecimiento> establecimientos = servicioEstablecimiento.obtenerTodos();
-		List<Insumo> insumos = servicioInsumo.obtenerTodos();
-		Map<Establecimiento, List<Insumo>> distribucion;
-		distribucion = TipoDeStrategy.EQUITATIVO.distribuirInsumos(establecimientos, insumos);
-
-		Map<Establecimiento, List<Insumo>> distribucionCambiada = servicioInsumo.cambiarDeEstablecInsumosSobrantes(distribucion, establecimiento);
-		
+		Map<Establecimiento, List<Insumo>> distribucionCambiada = servicioInsumo.cambiarDeEstablecInsumosSobrantes(establecimiento);
 		modelo.put("MapaDistribuido", distribucionCambiada);
+		
+		Establecimiento establecMaxprioridad= servicioEstablecimiento.consultarEstablecimiento(establecimiento.getId());
+		Long insumosSobrantes = servicioInsumo.insumosSobrantes();
+		modelo.put("insumosSobrantes",insumosSobrantes);
+		modelo.put("establecMayorOcupacion",establecMaxprioridad);
 		
 		return new ModelAndView("distribucion", modelo);
 	}

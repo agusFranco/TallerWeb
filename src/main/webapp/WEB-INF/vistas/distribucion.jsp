@@ -3,6 +3,7 @@
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <style>
 .footable-details th {
@@ -18,7 +19,10 @@
 			<div class="col-sm-8">
 				<div class="ibox">
 					<div class="ibox-content">
-						<h2>Distribuci&#243;n - <span style="text-transform:lowercase;font-style:italic;">${param.strategy}</span></h2>
+						<h2>
+							Distribuci&#243;n - <span
+								style="text-transform: lowercase; font-style: italic;">${param.strategy}</span>
+						</h2>
 						<p>
 							Asignaci&#243;n de insumos a establecimientos.<br>Selecciona
 							el metodo de Distribuci&#243;n de la derecha.
@@ -59,9 +63,8 @@
 												</c:forEach>
 												<td><span class="label label-success"
 													style="font-size: 13px">Total: ${total}</span></td>
-												<td class="client-status">
-												<a <%-- href="./detalle?id=${MapElement.key.getId()}" --%>> <i
-														class="fa fa-external-link"> </i>
+												<td class="client-status"><a<%-- href="./detalle?id=${MapElement.key.getId()}" --%>>
+														<i class="fa fa-external-link"> </i>
 												</a></td>
 												<td><c:forEach items="${MapElement.value}"
 														var="listElement">
@@ -109,7 +112,7 @@
 			</div>
 			<div class="col-sm-4">
 				<c:choose>
-					<c:when test="${param.strategy == 'EQUITATIVO'}">
+					<c:when test="${param.strategy == 'EQUITATIVO' || empty param.strategy}">
 						<div class="ibox float-e-margins col-md-12">
 							<div class="ibox-title">
 								<h5>Insumos sobrantes en distribuci&#243;n equitativa</h5>
@@ -124,6 +127,7 @@
 								</div>
 								<div class="ibox-content">
 									<p style="font-size: 20px;">${establecMayorOcupacion.nombre}</p>
+									
 								</div>
 								<div class="ibox-title">
 									<strong>Cambiar establecimiento de asignaci&#243;n</strong>
@@ -141,9 +145,7 @@
 										movimiento de asignaci&#243;n</button>
 								</form:form>
 							</div>
-
 						</div>
-
 					</c:when>
 					<c:otherwise>
 					</c:otherwise>
@@ -264,12 +266,12 @@
 									<div class="col-md-12">
 										<strong> Distribuci&#243;n equitativa </strong>
 										<p>Los insumos se distribuyen equitativamente entre todos
-											los establecimientos sin la determinaci&#243;n de un &#243;ndice de
-											riesgo para cada uno de ellos.</p>
+											los establecimientos sin la determinaci&#243;n de un
+											&#243;ndice de riesgo para cada uno de ellos.</p>
 										<i>Al establecimiento con mayor cantidad de infectados se
-											le otorgar&#243;n los insumos sobrantes, los cuales no pudieron
-											ser distribu&#243;dos equitativamente entre la totalidad de los
-											establecimientos. </i> <a
+											le otorgar&#243;n los insumos sobrantes, los cuales no
+											pudieron ser distribu&#243;dos equitativamente entre la
+											totalidad de los establecimientos. </i> <a
 											href="./distribuirInsumos?strategy=EQUITATIVO"
 											class="btn btn-primary btn-sm btn-block"> <i
 											class="fa fa-random"></i> Distribuir insumos

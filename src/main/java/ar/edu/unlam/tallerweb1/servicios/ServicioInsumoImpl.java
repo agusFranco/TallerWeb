@@ -1,7 +1,9 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -13,7 +15,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ar.edu.unlam.tallerweb1.modelo.Establecimiento;
 import ar.edu.unlam.tallerweb1.modelo.Insumo;
+import ar.edu.unlam.tallerweb1.negocio.EquitativoStrategy;
 import ar.edu.unlam.tallerweb1.negocio.OcupacionStrategy;
+import ar.edu.unlam.tallerweb1.negocio.Strategy;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioEstablecimiento;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioInsumo;
 
@@ -56,27 +60,30 @@ public class ServicioInsumoImpl implements ServicioInsumo {
 	}
 
 	@Override
-	public Map<Establecimiento, List<Insumo>> cambiarDeEstablecInsumosSobrantes(Map<Establecimiento, List<Insumo>> mapa,
-			Establecimiento establecimiento) {
-
-		Establecimiento establecimientoMaxPrioridad = mapa.keySet().stream()
-				.max(Comparator.comparing(Establecimiento::getOcupacion)).get();
-		Establecimiento establecimientoMinPrioridad = mapa.keySet().stream()
-				.min(Comparator.comparing(Establecimiento::getOcupacion)).get();
-
-		for (Entry<Establecimiento,List<Insumo>> entry : mapa.entrySet()) {
-
-			if (entry.getKey().getId() == establecimiento.getId()) {
-				for (Insumo insumo : entry.getValue()) {
-					insumo.setCantidad(insumo.getCantidad() + 8);
+	public Map<Establecimiento, List<Insumo>> cambiarDeEstablecInsumosSobrantes(Establecimiento establecimiento) {
+		List<Establecimiento> establecimientos = servicioEstablecimientoDao.getAll();
+		List<Insumo> insumos = servicioInsumoDao.getAll();		
+		Map<Establecimiento, List<Insumo>> asignacion = new HashMap<Establecimiento, List<Insumo>>();	
+		Integer totalInsumos = 0;
+		for (Insumo item : insumos) {totalInsumos = totalInsumos + item.getCantidad();}
+		Integer cantidadEstablec = establecimientos.size();
+		for (Establecimiento itemEstablec : establecimientos) {
+			itemEstablec.setPrioridad((float) 1);
+			List<Insumo> insumosAsignados = new ArrayList<Insumo>();
+			for (Insumo itemInsumo : insumos) {
+				Insumo insumoAsignado = new Insumo();
+				insumoAsignado.setNombre(itemInsumo.getNombre());
+				insumoAsignado.setTipo(itemInsumo.getTipo());
+				insumoAsignado.setCantidad((int) itemInsumo.getCantidad() / cantidadEstablec);
+				if(itemEstablec.getId()== establecimiento.getId()) {
+					Integer InsumoASumar = insumoAsignado.getCantidad();
+					int InsumoRestante = itemInsumo.getCantidad() % cantidadEstablec;		
+					insumoAsignado.setCantidad(InsumoASumar+InsumoRestante);	
 				}
+				insumosAsignados.add(insumoAsignado);
 			}
-			if(entry.getKey().getId() == establecimientoMaxPrioridad.getId()) {
-				for (Insumo insumo : entry.getValue()) {
-					insumo.setCantidad(insumo.getCantidad() - 8);
-				}
-			}
+			asignacion.put(itemEstablec, insumosAsignados);
 		}
-		return mapa;
+		return asignacion;
 	}
 }
