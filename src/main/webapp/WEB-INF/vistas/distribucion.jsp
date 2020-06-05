@@ -13,18 +13,6 @@
 </style>
 
 <t:layout>
-
-	<%-- 	<form:form action="/cambiarInsumos" method="POST"
-		modelAttribute="establecimiento">
-		<form:input path="nombre" id="idEstablec" type="text"
-			class="form-control" placeholder="Ingrese id establecimiento" />
-
-		<button class="btn btn-lg btn-info" Type="Submit">
-			<strong>Enviar</strong>
-		</button>
-	</form:form> --%>
-
-
 	<div class="wrapper wrapper-content  animated fadeInRight">
 		<div class="row">
 			<div class="col-sm-8">
@@ -142,16 +130,12 @@
 								</div>
 								<form:form action="cambiarInsumos" method="POST"
 									modelAttribute="establecimiento">
-									<form:select path="id" class="form-control"
+									<form:select path="id" name="id" class="form-control"
 										id="establecimiento"> --%>
-										<%-- <form:option value="{establecMayorOcupacion.id}" selected="selected">${establecMayorOcupacion.nombre}</form:option> --%>
 										<c:forEach items="${MapaDistribuido}" var="est">
-											<form:option value="{est.key.id}">${est.key.nombre}</form:option>
+											<form:option value="${est.key.id}">${est.key.nombre}</form:option>
 										</c:forEach>
 									</form:select>
-
-									<form:input path="nombre" type="text" id="nombre"
-										class="form-control" placeholder="nombre" value="asdasdasda" />
 									<button class="btn btn-lg btn-info btn-block font-weight-bold"
 										Type="Submit" style="font-size: 15px;">Confirmar
 										movimiento de asignaci&#243;n</button>

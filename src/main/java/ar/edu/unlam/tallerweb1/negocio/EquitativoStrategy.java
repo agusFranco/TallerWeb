@@ -37,6 +37,7 @@ public class EquitativoStrategy implements Strategy {
 
 		// Asignación de Insumos a Establecimientos
 		for (Establecimiento itemEstablec : establecimientos) {
+			// Lista que será asignada al establecimiento	
 			List<Insumo> insumosAsignados = new ArrayList<Insumo>();
 
 			for (Insumo itemInsumo : insumos) {
@@ -46,14 +47,13 @@ public class EquitativoStrategy implements Strategy {
 
 				insumoAsignado.setCantidad((int) itemInsumo.getCantidad() / cantidadEstablec);
 
-				//Asignación de insumos restantes
+				//Asignación de insumos restantes al establecimiento con maxima cantidad de infectados
 				if(itemEstablec.getId()== establecimientos.stream().max(Comparator.comparing(Establecimiento::getOcupacion)).get().getId()) {
 					Integer InsumoASumar = insumoAsignado.getCantidad();
 					int InsumoRestante = itemInsumo.getCantidad() % cantidadEstablec;		
 					insumoAsignado.setCantidad(InsumoASumar+InsumoRestante);	
 				}
 
-				
 				// Agrego insumo a la lista de insumos
 				insumosAsignados.add(insumoAsignado);
 			}

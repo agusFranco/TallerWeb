@@ -47,6 +47,11 @@ public class Establecimiento {
 		this.responsable = responsable;
 	}
 
+	
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	public Integer getId() {
 		return id;
 	}

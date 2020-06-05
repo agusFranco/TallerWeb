@@ -19,6 +19,7 @@ public class OcupacionStrategy implements Strategy {
 	@Override
 	public List<Establecimiento> calcular(List<Establecimiento> establecimientos) {
 	
+		// ¿Acá es donde sucede la referencia de memoria?		
 		establecimientos = this.calcularPorcentajeDeDistribucion(establecimientos);
 		
 		// Ordeno la lista por prioridad		
@@ -38,6 +39,7 @@ public class OcupacionStrategy implements Strategy {
 		establecimientos = this.calcularPorcentajeDeDistribucion(establecimientos);
 		Map<Establecimiento,List<Insumo>> distribucionesMap =  new HashMap<Establecimiento, List<Insumo>>();
 
+		//Cantidad total de insumos
 		Integer totalInsumos = 0;
 		for(Insumo item : insumos) {
 			totalInsumos = totalInsumos + item.getCantidad();
@@ -64,6 +66,7 @@ public class OcupacionStrategy implements Strategy {
 		
 		//	Asignación de Insumo por insumo a Establecimientos
 		for(Establecimiento itemEstablec : establecimientos) {
+			// Lista que será asignada al establecimiento			
 			List<Insumo> insumosAsignados = new ArrayList<Insumo>();
 			
 			for(Insumo itemInsumo : insumos) {
@@ -79,7 +82,7 @@ public class OcupacionStrategy implements Strategy {
 					insumoTemp.setCantidad((int) (itemInsumo.getCantidad()*0.1) / contadorEstBaja);			
 				}
 						
-//				Le asigno al establecimiento con mayor prioridad los insumos restantes
+				//Le asigno al establecimiento con mayor prioridad los insumos restantes
 				Integer cantidadEstablec = establecimientos.size();	
 				Integer InsumoASumar = insumoTemp.getCantidad();
 				int sumaInsumoRestante = itemInsumo.getCantidad() % cantidadEstablec;		
@@ -97,7 +100,7 @@ public class OcupacionStrategy implements Strategy {
 		}
 		
 		// Convierte porcentaje a prioridad - PREGUNTAR PORQUE FUNCIONA, ¿AMBITO DE VARIABLES?
-		 this.calcular(establecimientos);
+		this.calcular(establecimientos);
 		
 		/*Otra solución para para match de la prioridad con el porcentaje*/
 //		for (Establecimiento est : establecimientosPtos) {

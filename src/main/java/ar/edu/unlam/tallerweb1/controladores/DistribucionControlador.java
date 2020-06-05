@@ -53,6 +53,7 @@ public class DistribucionControlador {
 		Long insumosSobrantes = servicioInsumo.insumosSobrantes();
 		modelo.put("insumosSobrantes",insumosSobrantes);
 		
+		// Requerido por el modelAttribute		
 		modelo.put("establecimiento",new Establecimiento());
 		
 		Establecimiento establecMayorOcupacion = servicioEstablecimiento.establecimientoMayorOcupacion();
