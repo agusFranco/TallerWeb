@@ -44,6 +44,7 @@ public class EquitativoStrategy implements Strategy {
 				Insumo insumoAsignado = new Insumo();
 				insumoAsignado.setNombre(itemInsumo.getNombre());
 				insumoAsignado.setTipo(itemInsumo.getTipo());
+				insumoAsignado.setId(itemInsumo.getId());
 
 				insumoAsignado.setCantidad((int) itemInsumo.getCantidad() / cantidadEstablec);
 

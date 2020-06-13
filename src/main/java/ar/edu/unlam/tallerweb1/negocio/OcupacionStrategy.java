@@ -73,6 +73,7 @@ public class OcupacionStrategy implements Strategy {
 				Insumo insumoTemp = new Insumo();
 				insumoTemp.setNombre(itemInsumo.getNombre());
 				insumoTemp.setTipo(itemInsumo.getTipo());
+				insumoTemp.setId(itemInsumo.getId());
 						
 				if(itemEstablec.getPrioridad() > promMitad) {
 					insumoTemp.setCantidad((int) (itemInsumo.getCantidad()*0.6) / contadorEstAlta);

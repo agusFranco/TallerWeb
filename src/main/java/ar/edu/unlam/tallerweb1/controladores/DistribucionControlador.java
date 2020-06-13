@@ -16,9 +16,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.comun.enums.TipoDeStrategy;
 import ar.edu.unlam.tallerweb1.configuracion.StringToTipoDeStrategy;
+import ar.edu.unlam.tallerweb1.modelo.DistribucionDetalle;
 import ar.edu.unlam.tallerweb1.modelo.Establecimiento;
 import ar.edu.unlam.tallerweb1.modelo.Insumo;
-import ar.edu.unlam.tallerweb1.negocio.OcupacionStrategy;
+import ar.edu.unlam.tallerweb1.servicios.ServicioDistribucion;
+import ar.edu.unlam.tallerweb1.servicios.ServicioDistribucionDetalle;
 import ar.edu.unlam.tallerweb1.servicios.ServicioEstablecimiento;
 import ar.edu.unlam.tallerweb1.servicios.ServicioInsumo;
 
@@ -27,12 +29,16 @@ public class DistribucionControlador {
 	
 	private final ServicioEstablecimiento servicioEstablecimiento;
 	private final ServicioInsumo servicioInsumo;
+	private final ServicioDistribucion servicioDistribucion;
+	private final ServicioDistribucionDetalle servicioDistribucionDetalle;
 
 	@Autowired
 	public DistribucionControlador(ServicioEstablecimiento servicioEstablecimiento,
-			ServicioInsumo servicioInsumo) {
+			ServicioInsumo servicioInsumo, ServicioDistribucion servicioDistribucion,ServicioDistribucionDetalle servicioDistribucionDetalle) {
 		this.servicioEstablecimiento = servicioEstablecimiento;
 		this.servicioInsumo = servicioInsumo;
+		this.servicioDistribucion = servicioDistribucion;
+		this.servicioDistribucionDetalle = servicioDistribucionDetalle;
 	}
 	
 	@InitBinder
@@ -77,12 +83,50 @@ public class DistribucionControlador {
 		Map<Establecimiento, List<Insumo>> distribucionCambiada = servicioInsumo.cambiarDeEstablecInsumosSobrantes(establecimiento);
 		modelo.put("MapaDistribuido", distribucionCambiada);
 		// Sera el que mas prioridad tiene porque es el que selecciona y envia solo el id
-		Establecimiento establecMaxprioridad= servicioEstablecimiento.consultarEstablecimiento(establecimiento.getId());
+		Establecimiento nuevoEstabMaxPrioridad= servicioEstablecimiento.consultarEstablecimiento(establecimiento.getId());
 		Long insumosSobrantes = servicioInsumo.insumosSobrantes();
 		modelo.put("insumosSobrantes",insumosSobrantes);
-		modelo.put("establecMayorOcupacion",establecMaxprioridad);
+		modelo.put("establecMayorOcupacion",nuevoEstabMaxPrioridad);
 		
 		return new ModelAndView("distribucion", modelo);
 	}
 
+	
+	@RequestMapping(path = "/confirmarDistribucion", method = RequestMethod.GET)
+	public ModelAndView confirmarDistribucion(@RequestParam(value="strategy" , defaultValue = "OCUPACION") TipoDeStrategy strategy) {
+		ModelMap modelo = new ModelMap();
+		List<Establecimiento> establecimientos = servicioEstablecimiento.obtenerTodos();
+		List<Insumo> insumos = servicioInsumo.obtenerTodos();
+		
+		Map<Establecimiento, List<Insumo>> distribucion;
+		distribucion = strategy.distribuirInsumos(establecimientos, insumos);
+		modelo.put("MapaDistribuido", distribucion);
+		
+		//Persiste la distribucion en la base, junto a sus detalles tambien
+		servicioDistribucion.guardarDistribucion(distribucion,strategy);
+		
+		
+		List<DistribucionDetalle> distribucionesDetalles = servicioDistribucionDetalle.obtenerDistribucionesDetalles();
+		modelo.put("distribucionesDetalles", distribucionesDetalles);
+		
+		
+		
+		return new ModelAndView("historialDistribuciones", modelo);
+	}
+	
+	@RequestMapping(path = "/historialDistribuciones", method = RequestMethod.GET)
+	public ModelAndView historialDistribuciones(@RequestParam(value="strategy" , defaultValue = "OCUPACION") TipoDeStrategy strategy) {
+		ModelMap modelo = new ModelMap();
+		List<Establecimiento> establecimientos = servicioEstablecimiento.obtenerTodos();
+		List<Insumo> insumos = servicioInsumo.obtenerTodos();
+		
+		List<DistribucionDetalle> distribucionesDetalles = servicioDistribucionDetalle.obtenerDistribucionesDetalles();
+		modelo.put("distribucionesDetalles", distribucionesDetalles);
+		
+		List<DistribucionDetalle> cantidadPorTipo = servicioDistribucionDetalle.totalDistribucionesPorTipo();
+		modelo.put("cantidadPorTipo", cantidadPorTipo);
+		
+		return new ModelAndView("historialDistribuciones", modelo);
+	}
+	
 }

@@ -14,17 +14,19 @@ import ar.edu.unlam.tallerweb1.negocio.EquitativoStrategy;
 
 // Contiene el "Contexto del strategy"
 public enum TipoDeStrategy {
-	COMBINADO("combinado", new CombinadoStrategy()), 
-	OCUPACION("ocupacion", new OcupacionStrategy()),
-	CAPACIDAD("capacidad", new CapacidadStrategy()), 
-	ZONA("zona", new ZonaStrategy()),
-	EQUITATIVO("equitativo", new EquitativoStrategy());
+	COMBINADO(1,"combinado", new CombinadoStrategy()), 
+	OCUPACION(2,"ocupacion", new OcupacionStrategy()),
+	CAPACIDAD(3,"capacidad", new CapacidadStrategy()), 
+	ZONA(4,"zona", new ZonaStrategy()),
+	EQUITATIVO(5,"equitativo", new EquitativoStrategy());
 
+	private int id;
 	private String tipo;
 	private Strategy strategy;
 
 	// Constructor privado del enum
-	private TipoDeStrategy(String tipo, Strategy strategy) {
+	private TipoDeStrategy(int id, String tipo, Strategy strategy) {
+		this.id = id;
 		this.tipo = tipo;
 		this.strategy = strategy;
 	}
@@ -32,6 +34,10 @@ public enum TipoDeStrategy {
 	// Los enum solo tienen getters
 	public String getTipo() {
 		return this.tipo;
+	}
+	
+	public int getId() {
+		return id;
 	}
 
 	public List<Establecimiento> calcularPrioridad(List<Establecimiento> establecimientos) {

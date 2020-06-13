@@ -92,6 +92,7 @@ public class CombinadoStrategy implements Strategy {
 							// COPIO EL INSUMO
 							Insumo clon = new Insumo();
 							clon.setNombre(insumo.getNombre());
+							clon.setId(insumo.getId());
 							int cantidad = Math.round(Math.round((insumo.getCantidad()*distribucion[i])/grupo.size()));
 							sumatoriaInsumos += cantidad;
 							if(sumatoriaInsumos > totalInsumos) {
