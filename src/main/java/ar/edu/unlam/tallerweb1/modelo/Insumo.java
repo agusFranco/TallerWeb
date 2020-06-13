@@ -82,5 +82,15 @@ public class Insumo {
 		return pxq;
 	}
 
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+	public void setPxq(Float pxq) {
+		this.pxq = pxq;
+	}
+
 	
 }

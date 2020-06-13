@@ -19,6 +19,7 @@ import ar.edu.unlam.tallerweb1.configuracion.StringToTipoDeStrategy;
 import ar.edu.unlam.tallerweb1.modelo.Establecimiento;
 import ar.edu.unlam.tallerweb1.modelo.Insumo;
 import ar.edu.unlam.tallerweb1.negocio.OcupacionStrategy;
+import ar.edu.unlam.tallerweb1.servicios.ServicioDistribucion;
 import ar.edu.unlam.tallerweb1.servicios.ServicioEstablecimiento;
 import ar.edu.unlam.tallerweb1.servicios.ServicioInsumo;
 
@@ -27,12 +28,14 @@ public class DistribucionControlador {
 	
 	private final ServicioEstablecimiento servicioEstablecimiento;
 	private final ServicioInsumo servicioInsumo;
+	private final ServicioDistribucion servicioDistribucion;
 
 	@Autowired
 	public DistribucionControlador(ServicioEstablecimiento servicioEstablecimiento,
-			ServicioInsumo servicioInsumo) {
+			ServicioInsumo servicioInsumo, ServicioDistribucion servicioDistribucion) {
 		this.servicioEstablecimiento = servicioEstablecimiento;
 		this.servicioInsumo = servicioInsumo;
+		this.servicioDistribucion =servicioDistribucion;
 	}
 	
 	@InitBinder
@@ -77,12 +80,31 @@ public class DistribucionControlador {
 		Map<Establecimiento, List<Insumo>> distribucionCambiada = servicioInsumo.cambiarDeEstablecInsumosSobrantes(establecimiento);
 		modelo.put("MapaDistribuido", distribucionCambiada);
 		// Sera el que mas prioridad tiene porque es el que selecciona y envia solo el id
-		Establecimiento establecMaxprioridad= servicioEstablecimiento.consultarEstablecimiento(establecimiento.getId());
+		Establecimiento nuevoEstabMaxPrioridad= servicioEstablecimiento.consultarEstablecimiento(establecimiento.getId());
 		Long insumosSobrantes = servicioInsumo.insumosSobrantes();
 		modelo.put("insumosSobrantes",insumosSobrantes);
-		modelo.put("establecMayorOcupacion",establecMaxprioridad);
+		modelo.put("establecMayorOcupacion",nuevoEstabMaxPrioridad);
 		
 		return new ModelAndView("distribucion", modelo);
 	}
 
+	
+	@RequestMapping(path = "/confirmarDistribucion", method = RequestMethod.GET)
+	public ModelAndView confirmarDistribucion(@RequestParam(value="strategy", defaultValue = "OCUPACION") TipoDeStrategy strategy) {
+		ModelMap modelo = new ModelMap();
+		List<Establecimiento> establecimientos = servicioEstablecimiento.obtenerTodos();
+		List<Insumo> insumos = servicioInsumo.obtenerTodos();
+		
+		Map<Establecimiento, List<Insumo>> distribucion;
+		distribucion = strategy.distribuirInsumos(establecimientos, insumos);
+		modelo.put("MapaDistribuido", distribucion);
+		
+		// Requerido por el modelAttribute		
+		modelo.put("establecimiento",new Establecimiento());
+		
+		
+		servicioDistribucion.guardarDistribucion(distribucion);
+		
+		return new ModelAndView("distribucion", modelo);
+	}
 }
