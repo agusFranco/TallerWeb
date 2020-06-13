@@ -24,8 +24,8 @@
 								style="text-transform: lowercase; font-style: italic;">${not empty param.strategy ? param.strategy : "equitativo con cambio de asignacion"}</span>
 						</h2>
 						<p>
-							Asignacion de insumos a establecimientos.<br>Selecciona
-							el metodo de Distribucion de la derecha.
+							Asignacion de insumos a establecimientos.<br>Selecciona el
+							metodo de Distribucion de la derecha.
 						</p>
 						<div class="clients-list">
 							<div class="table-responsive">
@@ -45,7 +45,8 @@
 										<c:forEach items="${MapaDistribuido}" var="MapElement">
 											<tr>
 												<td><c:choose>
-														<c:when test="${param.strategy == 'EQUITATIVO' || empty param.strategy}">
+														<c:when
+															test="${param.strategy == 'EQUITATIVO' || empty param.strategy}">
 															<p class="text-success">${establecMayorOcupacion.nombre==MapElement.key.getNombre() ? "Insumos Extra" : "~"}</p>
 														</c:when>
 														<c:otherwise>
@@ -101,18 +102,26 @@
 
 									</tbody>
 								</table>
+
 							</div>
-							<button style="margin-top: 20px;" type="button"
-								class="btn btn-success btn-sm btn-block">
-								<i class="fa fa-check"></i> Confirmar Distribucion
-							</button>
+
+							<c:set var="s_strategy" value="${param.strategy}" />
+							<form:form action="./confirmarDistribucion" method="GET">
+								<input type="hidden" name="strategy" value="${s_strategy}">
+								<button style="margin-top: 20px; font-size: 15px;" type="submit"
+									class="btn btn-success btn-sm btn-block">
+									<i class="fa fa-check"></i> Solicitar Distribucion
+								</button>
+
+							</form:form>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="col-sm-4">
 				<c:choose>
-					<c:when test="${param.strategy == 'EQUITATIVO' || empty param.strategy}">
+					<c:when
+						test="${param.strategy == 'EQUITATIVO' || empty param.strategy}">
 						<div class="ibox float-e-margins col-md-12">
 							<div class="ibox-title">
 								<h5>Insumos sobrantes en distribucion equitativa</h5>
@@ -127,7 +136,7 @@
 								</div>
 								<div class="ibox-content">
 									<p style="font-size: 20px;">${establecMayorOcupacion.nombre}</p>
-									
+
 								</div>
 								<div class="ibox-title">
 									<strong>Cambiar establecimiento de asignacion</strong>
@@ -237,9 +246,9 @@
 										<strong> Distribucion combinada </strong>
 										<p>Los establecimientos definen su prioridad en base a la
 											ocupacion sobre la capacidad , la capacidad total y la
-											puntuacion de la zona. Luego los establecimientos se
-											dividen en 5 grupos de igual cantidad y los restantes se
-											suman al &#250;ltimo grupo.
+											puntuacion de la zona. Luego los establecimientos se dividen
+											en 5 grupos de igual cantidad y los restantes se suman al
+											&#250;ltimo grupo.
 										<ul>
 											<li>El grupo 1 recibe el 40% de cada tipo de insumo.</li>
 											<li>El grupo 2 recibe el 28% de cada tipo de insumo.</li>
@@ -266,12 +275,12 @@
 									<div class="col-md-12">
 										<strong> Distribucion equitativa </strong>
 										<p>Los insumos se distribuyen equitativamente entre todos
-											los establecimientos sin la determinacion de un
-											ondice de riesgo para cada uno de ellos.</p>
+											los establecimientos sin la determinacion de un ondice de
+											riesgo para cada uno de ellos.</p>
 										<i>Al establecimiento con mayor cantidad de infectados se
-											le otorgaron los insumos sobrantes, los cuales no
-											pudieron ser distribuidos equitativamente entre la
-											totalidad de los establecimientos. </i> <a
+											le otorgaron los insumos sobrantes, los cuales no pudieron
+											ser distribuidos equitativamente entre la totalidad de los
+											establecimientos. </i> <a
 											href="./distribuirInsumos?strategy=EQUITATIVO"
 											class="btn btn-primary btn-sm btn-block"> <i
 											class="fa fa-random"></i> Distribuir insumos

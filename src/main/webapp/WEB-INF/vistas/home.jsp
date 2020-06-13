@@ -31,16 +31,16 @@
 					</div>
 				</div>
 				<div class="col-lg-12">
-					<a class="btn btn-lg btn-primary"
+					<a class="btn btn-lg btn-primary font-weight-bold"
 						style="width: 100%; height: 75px; line-height: 50px;"
-						href="./distribuirInsumos?strategy=OCUPACION">Distribuir
+						href="./distribuirInsumos?strategy=OCUPACION">Comenzar distribucion de
 						insumos</a>
 				</div>
 			</div>
 			<div class="col-sm-8">
 				<div class="panel ">
 					<div class="panel-heading">
-						<h3 class="panel-title">Total de Insumos por Tipo</h3>
+						<h3 class="panel-title">Tipos de insumos disponibles</h3>
 					</div>
 					<div class="panel-body">
 						<div id="demo-bar-chart" class="ct-chart"></div>

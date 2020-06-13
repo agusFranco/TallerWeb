@@ -16,7 +16,7 @@ import ar.edu.unlam.tallerweb1.modelo.Distribucion;
 import ar.edu.unlam.tallerweb1.modelo.Establecimiento;
 import ar.edu.unlam.tallerweb1.modelo.Insumo;
 
-@Repository("RepositorioDistribucionImpl")
+@Repository
 public class RepositorioDistribucionImpl extends RepositorioBaseImpl<Distribucion, Integer> implements RepositorioDistribucion {
 
 	@Autowired
@@ -28,8 +28,6 @@ public class RepositorioDistribucionImpl extends RepositorioBaseImpl<Distribucio
 	public void guardarDistribucion(Distribucion distribucion) {
 		final Session session = sessionFactory.getCurrentSession();
 		session.save(distribucion);
-		
-		
 	}
 
 	@Override

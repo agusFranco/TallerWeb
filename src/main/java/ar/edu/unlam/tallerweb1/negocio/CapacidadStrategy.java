@@ -50,6 +50,7 @@ public class CapacidadStrategy implements Strategy {
 				Insumo insumoTemporal = new Insumo();
 				insumoTemporal.setNombre(itemInsumo.getNombre());
 				insumoTemporal.setTipo(itemInsumo.getTipo());
+				insumoTemporal.setId(itemInsumo.getId());
 
 				// Obtengo Grupo
 				GrupoDeDistribucion grupo = this.obtenerGrupo(establecimiento);

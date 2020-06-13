@@ -51,6 +51,8 @@
 							<li id="distribucionLink"><a aria-expanded="false"
 								role="button" href="./distribucion"> Distribución </a></li>
 							<li id="responsablesLink"><a aria-expanded="false"
+								role="button" href="./historialDistribuciones"> Detalles de Distribuciones </a></li>
+							<li id="responsablesLink"><a aria-expanded="false"
 								role="button" href="./responsables"> Responsables </a></li>
 
 						</ul>

@@ -16,10 +16,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.comun.enums.TipoDeStrategy;
 import ar.edu.unlam.tallerweb1.configuracion.StringToTipoDeStrategy;
+import ar.edu.unlam.tallerweb1.modelo.DistribucionDetalle;
 import ar.edu.unlam.tallerweb1.modelo.Establecimiento;
 import ar.edu.unlam.tallerweb1.modelo.Insumo;
-import ar.edu.unlam.tallerweb1.negocio.OcupacionStrategy;
 import ar.edu.unlam.tallerweb1.servicios.ServicioDistribucion;
+import ar.edu.unlam.tallerweb1.servicios.ServicioDistribucionDetalle;
 import ar.edu.unlam.tallerweb1.servicios.ServicioEstablecimiento;
 import ar.edu.unlam.tallerweb1.servicios.ServicioInsumo;
 
@@ -29,13 +30,15 @@ public class DistribucionControlador {
 	private final ServicioEstablecimiento servicioEstablecimiento;
 	private final ServicioInsumo servicioInsumo;
 	private final ServicioDistribucion servicioDistribucion;
+	private final ServicioDistribucionDetalle servicioDistribucionDetalle;
 
 	@Autowired
 	public DistribucionControlador(ServicioEstablecimiento servicioEstablecimiento,
-			ServicioInsumo servicioInsumo, ServicioDistribucion servicioDistribucion) {
+			ServicioInsumo servicioInsumo, ServicioDistribucion servicioDistribucion,ServicioDistribucionDetalle servicioDistribucionDetalle) {
 		this.servicioEstablecimiento = servicioEstablecimiento;
 		this.servicioInsumo = servicioInsumo;
-		this.servicioDistribucion =servicioDistribucion;
+		this.servicioDistribucion = servicioDistribucion;
+		this.servicioDistribucionDetalle = servicioDistribucionDetalle;
 	}
 	
 	@InitBinder
@@ -90,7 +93,7 @@ public class DistribucionControlador {
 
 	
 	@RequestMapping(path = "/confirmarDistribucion", method = RequestMethod.GET)
-	public ModelAndView confirmarDistribucion(@RequestParam(value="strategy", defaultValue = "OCUPACION") TipoDeStrategy strategy) {
+	public ModelAndView confirmarDistribucion(@RequestParam(value="strategy" , defaultValue = "OCUPACION") TipoDeStrategy strategy) {
 		ModelMap modelo = new ModelMap();
 		List<Establecimiento> establecimientos = servicioEstablecimiento.obtenerTodos();
 		List<Insumo> insumos = servicioInsumo.obtenerTodos();
@@ -99,12 +102,31 @@ public class DistribucionControlador {
 		distribucion = strategy.distribuirInsumos(establecimientos, insumos);
 		modelo.put("MapaDistribuido", distribucion);
 		
-		// Requerido por el modelAttribute		
-		modelo.put("establecimiento",new Establecimiento());
+		//Persiste la distribucion en la base, junto a sus detalles tambien
+		servicioDistribucion.guardarDistribucion(distribucion,strategy);
 		
 		
-		servicioDistribucion.guardarDistribucion(distribucion);
+		List<DistribucionDetalle> distribucionesDetalles = servicioDistribucionDetalle.obtenerDistribucionesDetalles();
+		modelo.put("distribucionesDetalles", distribucionesDetalles);
 		
-		return new ModelAndView("distribucion", modelo);
+		
+		
+		return new ModelAndView("historialDistribuciones", modelo);
 	}
+	
+	@RequestMapping(path = "/historialDistribuciones", method = RequestMethod.GET)
+	public ModelAndView historialDistribuciones(@RequestParam(value="strategy" , defaultValue = "OCUPACION") TipoDeStrategy strategy) {
+		ModelMap modelo = new ModelMap();
+		List<Establecimiento> establecimientos = servicioEstablecimiento.obtenerTodos();
+		List<Insumo> insumos = servicioInsumo.obtenerTodos();
+		
+		List<DistribucionDetalle> distribucionesDetalles = servicioDistribucionDetalle.obtenerDistribucionesDetalles();
+		modelo.put("distribucionesDetalles", distribucionesDetalles);
+		
+		List<DistribucionDetalle> cantidadPorTipo = servicioDistribucionDetalle.totalDistribucionesPorTipo();
+		modelo.put("cantidadPorTipo", cantidadPorTipo);
+		
+		return new ModelAndView("historialDistribuciones", modelo);
+	}
+	
 }

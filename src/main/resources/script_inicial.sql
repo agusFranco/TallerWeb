@@ -4,19 +4,26 @@ SET FOREIGN_KEY_CHECKS = 0;
 TRUNCATE TABLE `establecimiento`;
 TRUNCATE TABLE `zona`;
 TRUNCATE TABLE `insumo`;
+TRUNCATE TABLE `responsable`;
 SET FOREIGN_KEY_CHECKS = 1;
 
-INSERT INTO `zona` (`id`,`nombre`,`puntaje`) 
-VALUES 
+INSERT INTO `zona` (`id`,`nombre`,`puntaje`) VALUES 
 (1,"ZONA A", 90),
 (2,"ZONA B", 50),
 (3,"ZONA C", 30),
 (4,"ZONA D", 20),
 (5,"ZONA E", 10);
 
+INSERT INTO `tipodistribucion` (`id`,`nombre`) VALUES
+(1,'Combinada'),
+(2,'Ocupacion'),
+(3,'Capacidad Total'),
+(4,'Zona'),
+(5,'Equitativa');
 
-INSERT INTO `responsable` (`id`,`nombre`,`apellido`,`edad`,`titulo`,`zona_id`) 
-VALUES 
+
+
+INSERT INTO `responsable` (`id`,`nombre`,`apellido`,`edad`,`titulo`,`zona_id`) VALUES 
 (1,"Enric","Montoya",45,"Título de Médico Especialista",1),
 (2,"Jacobo","Fuertes",35,"Gobernador de la ciudad",2),
 (3,"Carlos","Alonso",60,"Gobernador de la ciudad",3),
@@ -29,8 +36,7 @@ VALUES
 (10,"Jose","Alonso",78,"Rector de Hospital",5);
 
 
-INSERT INTO `establecimiento` (`id`,`capacidad`,`ocupacion`,`nombre`,`responsable_id`,`ubicacion`,`zona_id`) 
-VALUES 
+INSERT INTO `establecimiento` (`id`,`capacidad`,`ocupacion`,`nombre`,`responsable_id`,`ubicacion`,`zona_id`) VALUES 
 (1,1000,500,"Centro Médico ALBOR",1,"61.22679, -116.461", 1),
 (2,2000,300,"Instituto VITA",2,"77.66838, 135.06326",1),
 (3,3000,100,"Clínica del Prado",4,"57.7117, 18.61417",2),
@@ -42,8 +48,7 @@ VALUES
 (9,2000,500,"Hospital General Alvarez",9,"-52.19993, -28.86915",5),
 (10,4000,200,"Hospital Piñero",8,"1.64948, 106.37695",5);
 
-INSERT INTO `insumo` (`id`,`cantidad`,`nombre`,`tipo`,`precioUnidad`) 
-VALUES 
+INSERT INTO `insumo` (`id`,`cantidad`,`nombre`,`tipo`,`precioUnidad`) VALUES 
 (1,102,"Respiradores","Tipo B",3400),
 (2,203,"Medicamentos","Tipo C",120),
 (3,304,"Jeringas","Tipo A",110),
