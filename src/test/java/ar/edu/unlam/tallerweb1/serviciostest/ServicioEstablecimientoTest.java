@@ -31,9 +31,6 @@ public class ServicioEstablecimientoTest extends SpringTest {
 		
 		//Validacion
 		assertThat(unicoEstablecimientoDevuelto).isNotNull();
-		
-		
-		
 	}
 
 }
