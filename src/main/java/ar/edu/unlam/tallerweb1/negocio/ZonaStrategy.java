@@ -14,28 +14,10 @@ import ar.edu.unlam.tallerweb1.modelo.Zona;
 
 //Estrategia: Calcular prioridad por "ZONA"
 public class ZonaStrategy implements Strategy {
-
-	/// Grupos (PuntajeMinimo, PuntajeMaximo, Porcion de Distribucion, Cantidad
-	/// Inicial)
-	private GrupoDeDistribucion grupo1;
-	private GrupoDeDistribucion grupo2;
-	private GrupoDeDistribucion grupo3;
-	private GrupoDeDistribucion grupo4;
-
 	private List<GrupoDeDistribucion> grupos;
 
 	public ZonaStrategy() {
-		this.grupo1 = new GrupoDeDistribucion(80, 100, (float) 0.4);
-		this.grupo2 = new GrupoDeDistribucion(50, 79, (float) 0.3);
-		this.grupo3 = new GrupoDeDistribucion(20, 49, (float) 0.2);
-		this.grupo4 = new GrupoDeDistribucion(0, 19, (float) 0.1);
-
 		this.grupos = new ArrayList<GrupoDeDistribucion>();
-
-		this.grupos.add(this.grupo1);
-		this.grupos.add(this.grupo2);
-		this.grupos.add(this.grupo3);
-		this.grupos.add(this.grupo4);
 	}
 
 	@Override
@@ -59,6 +41,8 @@ public class ZonaStrategy implements Strategy {
 		Map<Establecimiento, List<Insumo>> distribucion = new HashMap<Establecimiento, List<Insumo>>();
 
 		this.establecerPrioridad(establecimientos);
+
+		this.definirGrupos();
 
 		this.establecerCantidadesDeGrupo(establecimientos);
 
@@ -106,6 +90,15 @@ public class ZonaStrategy implements Strategy {
 
 		// Orderno la lista.
 		Collections.sort(establecimientos, comparator.reversed());
+	}
+
+	// Metodo para definir los grupos.
+	private void definirGrupos() {
+		// Defino los 4 grupos y los sumo a la lista
+		this.grupos.add(new GrupoDeDistribucion(80, 100, (float) 0.4));
+		this.grupos.add(new GrupoDeDistribucion(50, 79, (float) 0.3));
+		this.grupos.add(new GrupoDeDistribucion(20, 49, (float) 0.2));
+		this.grupos.add(new GrupoDeDistribucion(0, 19, (float) 0.1));
 	}
 
 	// Trabajo con los Puntajes Minimos y maximos de la Tupla para poder ver si el
