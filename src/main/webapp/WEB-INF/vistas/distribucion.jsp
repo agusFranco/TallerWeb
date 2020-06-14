@@ -44,7 +44,7 @@
 											<tr>
 												<td><c:choose>
 														<c:when test="${estrategia == 'Equitativo'}">
-															<p class="text-success">${establecMayorOcupacion.nombre==MapElement.key.getNombre() ? "Insumos Extra" : "~"}</p>
+															<p class="text-success">${establecMayorOcupacion.nombre == MapElement.key.getNombre() ? "Insumos Extra" : "~"}</p>
 														</c:when>
 														<c:otherwise>
 															<fmt:formatNumber type="number" maxFractionDigits="2"

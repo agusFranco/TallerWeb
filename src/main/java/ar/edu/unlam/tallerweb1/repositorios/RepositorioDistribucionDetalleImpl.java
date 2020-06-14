@@ -1,6 +1,5 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
-
 import java.util.List;
 
 import org.hibernate.Session;
@@ -11,10 +10,10 @@ import org.springframework.stereotype.Repository;
 
 import ar.edu.unlam.tallerweb1.modelo.DistribucionDetalle;
 
-
 @Repository
-public class RepositorioDistribucionDetalleImpl extends RepositorioBaseImpl<DistribucionDetalle, Integer> implements RepositorioDistribucionDetalle {
-	
+public class RepositorioDistribucionDetalleImpl extends RepositorioBaseImpl<DistribucionDetalle, Integer>
+		implements RepositorioDistribucionDetalle {
+
 	@Autowired
 	public RepositorioDistribucionDetalleImpl(SessionFactory sessionFactory) {
 		super(sessionFactory);
@@ -30,15 +29,9 @@ public class RepositorioDistribucionDetalleImpl extends RepositorioBaseImpl<Dist
 	@Override
 	public List<DistribucionDetalle> totalDistribucionesPorTipo() {
 		final Session session = sessionFactory.getCurrentSession();
-		return session.createCriteria(DistribucionDetalle.class,"dd").createAlias("dd.tipoDistribucion", "tp")         
-                .setProjection(Projections.projectionList()
-                        .add(Projections.groupProperty("tp.id"))
-                        .add(Projections.count("tp.id"))           
-                ).list();
+		return session.createCriteria(DistribucionDetalle.class, "dd").createAlias("dd.tipoDistribucion", "tp")
+				.setProjection(Projections.projectionList().add(Projections.groupProperty("tp.id"))
+						.add(Projections.count("tp.id")))
+				.list();
 	}
-	
-	
-
-
-
 }
