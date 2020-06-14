@@ -50,9 +50,10 @@
 								href="./home"> Inicio </a></li>
 							<li id="distribucionLink"><a aria-expanded="false"
 								role="button" href="./distribucion"> Distribución </a></li>
-							<li id="responsablesLink"><a aria-expanded="false"
-								role="button" href="./historialDistribuciones"> Detalles de
-									Distribuciones </a></li>
+							<li id="historialDistribucionesLink"><a
+								aria-expanded="false" role="button"
+								href="./historialDistribuciones"> Detalles de Distribuciones
+							</a></li>
 							<li id="responsablesLink"><a aria-expanded="false"
 								role="button" href="./responsables"> Responsables </a></li>
 
@@ -104,6 +105,10 @@
 
 		if (currentUrl.includes('responsables')) {
 			$("#responsablesLink").addClass('active');
+		}
+
+		if (currentUrl.includes('historialDistribuciones')) {
+			$("#historialDistribucionesLink").addClass('active');
 		}
 	};
 
