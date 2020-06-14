@@ -99,7 +99,7 @@
 			$("#inicioLink").addClass('active');
 		}
 
-		if (currentUrl.includes('distribuir')) {
+		if (currentUrl.includes('distribucion')) {
 			$("#distribucionLink").addClass('active');
 		}
 
