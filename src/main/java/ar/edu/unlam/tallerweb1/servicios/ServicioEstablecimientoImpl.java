@@ -1,6 +1,5 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -9,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ar.edu.unlam.tallerweb1.modelo.Establecimiento;
-import ar.edu.unlam.tallerweb1.modelo.Insumo;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioEstablecimiento;
 
 @Service("servicioEstablecimiento")
@@ -42,7 +40,8 @@ public class ServicioEstablecimientoImpl implements ServicioEstablecimiento {
 	@Override
 	public Establecimiento establecimientoMayorOcupacion() {
 		List<Establecimiento> totalEstablec = servicioEstablecimientoDao.getAll();
-		Establecimiento eMayorOcupacion = totalEstablec.stream().max(Comparator.comparing(Establecimiento::getOcupacion)).get();
+		Establecimiento eMayorOcupacion = totalEstablec.stream()
+				.max(Comparator.comparing(Establecimiento::getOcupacion)).get();
 		return eMayorOcupacion;
 	}
 }

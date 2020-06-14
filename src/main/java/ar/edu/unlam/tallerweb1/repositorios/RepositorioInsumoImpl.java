@@ -16,7 +16,8 @@ public class RepositorioInsumoImpl extends RepositorioBaseImpl<Insumo, Integer> 
 		super(sessionFactory);
 	}
 
-	//  Retorna la cantidad de insumos disponibles, realiza un SUM del campo 'cantidad'
+	// Retorna la cantidad de insumos disponibles, realiza un SUM del campo
+	// 'cantidad'
 	@Override
 	public Long cantTotalInsumos() {
 		final Session session = sessionFactory.getCurrentSession();

@@ -22,7 +22,7 @@ public class GrupoDeDistribucion {
 	}
 
 	public void setPuntajeMinimo(Integer puntajeMinimo) {
-		this.puntajeMinimo = puntajeMinimo;
+		this.puntajeMinimo = puntajeMinimo;	
 	}
 
 	public Integer getPuntajeMaximo() {

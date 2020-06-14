@@ -14,14 +14,13 @@ public class DistribucionDetalle {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	private LocalDate fechaDistribucion;
 	private LocalDate fechaEntrega;
-	
+
 	@ManyToOne
 	private TipoDistribucion tipoDistribucion;
-	
-	
+
 	public DistribucionDetalle() {
 	}
 
@@ -57,8 +56,5 @@ public class DistribucionDetalle {
 	public void setTipoDistribucion(TipoDistribucion tipoDistribucion) {
 		this.tipoDistribucion = tipoDistribucion;
 	}
-
-
-
 
 }

@@ -5,20 +5,18 @@ import java.util.Map;
 
 import ar.edu.unlam.tallerweb1.modelo.Establecimiento;
 import ar.edu.unlam.tallerweb1.modelo.Insumo;
-import ar.edu.unlam.tallerweb1.negocio.CombinadoStrategy;
-import ar.edu.unlam.tallerweb1.negocio.OcupacionStrategy;
 import ar.edu.unlam.tallerweb1.negocio.CapacidadStrategy;
+import ar.edu.unlam.tallerweb1.negocio.CombinadoStrategy;
+import ar.edu.unlam.tallerweb1.negocio.EquitativoStrategy;
+import ar.edu.unlam.tallerweb1.negocio.OcupacionStrategy;
 import ar.edu.unlam.tallerweb1.negocio.Strategy;
 import ar.edu.unlam.tallerweb1.negocio.ZonaStrategy;
-import ar.edu.unlam.tallerweb1.negocio.EquitativoStrategy;
 
 // Contiene el "Contexto del strategy"
 public enum TipoDeStrategy {
-	COMBINADO(1,"Combinado", new CombinadoStrategy()), 
-	OCUPACION(2,"Ocupacion", new OcupacionStrategy()),
-	CAPACIDAD(3,"Capacidad", new CapacidadStrategy()), 
-	ZONA(4,"Zona", new ZonaStrategy()),
-	EQUITATIVO(5,"Equitativo", new EquitativoStrategy());
+	COMBINADO(1, "Combinado", new CombinadoStrategy()), OCUPACION(2, "Ocupacion", new OcupacionStrategy()),
+	CAPACIDAD(3, "Capacidad", new CapacidadStrategy()), ZONA(4, "Zona", new ZonaStrategy()),
+	EQUITATIVO(5, "Equitativo", new EquitativoStrategy());
 
 	private int id;
 	private String tipo;
@@ -35,7 +33,7 @@ public enum TipoDeStrategy {
 	public String getTipo() {
 		return this.tipo;
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -44,7 +42,8 @@ public enum TipoDeStrategy {
 		return strategy.calcular(establecimientos);
 	}
 
-	public Map<Establecimiento, List<Insumo>> distribuirInsumos(List<Establecimiento> establecimientos, List<Insumo> insumos) {
+	public Map<Establecimiento, List<Insumo>> distribuirInsumos(List<Establecimiento> establecimientos,
+			List<Insumo> insumos) {
 		return strategy.distribuir(establecimientos, insumos);
 	}
 }

@@ -23,6 +23,7 @@ public abstract class RepositorioBaseImpl<TEntity extends Object, TId extends Se
 	// Variable del tipo class de una entity
 	protected Class<TEntity> type;
 
+	@SuppressWarnings("unchecked")
 	@Autowired
 	public RepositorioBaseImpl(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
@@ -67,5 +68,5 @@ public abstract class RepositorioBaseImpl<TEntity extends Object, TId extends Se
 		final Session session = this.sessionFactory.getCurrentSession();
 		return (Long) session.createCriteria(this.type).setProjection(Projections.rowCount()).uniqueResult();
 	}
-	
+
 }
