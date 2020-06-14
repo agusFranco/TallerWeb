@@ -186,42 +186,40 @@
 			<div class="col-sm-4">
 				<c:choose>
 					<c:when test="${estrategia == 'Equitativo'}">
-						<div class="ibox float-e-margins col-md-12">
+						<div class="ibox">
 							<div class="ibox-title">
 								<h5>Insumos sobrantes en distribucion equitativa</h5>
 							</div>
 							<div class="ibox-content">
-								<h1 class="no-margins text-center">${insumosSobrantes}</h1>
-								<div class="stat-percent font-bold text-navy">En total</div>
-							</div>
-							<div class="ibox float-e-margins col-md-12">
-								<div class="ibox-title">
-									<h5>Asignados al Establecimiento</h5>
+								<div>
+									<dl class="dl-horizontal">
+										<dt>Insumos sobrantes:</dt>
+										<dd>${insumosSobrantes}</dd>
+										<dt>Asignados a:</dt>
+										<dd class="text-navy">${establecMayorOcupacion.nombre}</dd>
+									</dl>
 								</div>
-								<div class="ibox-content">
-									<p style="font-size: 20px;">${establecMayorOcupacion.nombre}</p>
-
+								<div>
+									<h4>Cambiar establecimiento de asignacion</h4>
+									<form:form action="cambiarInsumos" method="POST"
+										modelAttribute="establecimiento">
+										<div class="input-group">
+											<form:select path="id" name="id" class="form-control"
+												id="establecimiento">
+												<c:forEach items="${MapaDistribuido}" var="est">
+													<form:option value="${est.key.id}">${est.key.nombre}</form:option>
+												</c:forEach>
+											</form:select>
+											<span class="input-group-btn">
+												<button type="Submit" class="btn btn-primary">Cambiar
+													asignacion</button>
+											</span>
+										</div>
+									</form:form>
 								</div>
-								<div class="ibox-title">
-									<strong>Cambiar establecimiento de asignacion</strong>
-								</div>
-								<form:form action="cambiarInsumos" method="POST"
-									modelAttribute="establecimiento">
-									<form:select path="id" name="id" class="form-control"
-										id="establecimiento">
-										<c:forEach items="${MapaDistribuido}" var="est">
-											<form:option value="${est.key.id}">${est.key.nombre}</form:option>
-										</c:forEach>
-									</form:select>
-									<button class="btn btn-lg btn-info btn-block font-weight-bold"
-										Type="Submit" style="font-size: 15px;">Confirmar
-										movimiento de asignacion</button>
-								</form:form>
 							</div>
 						</div>
 					</c:when>
-					<c:otherwise>
-					</c:otherwise>
 				</c:choose>
 				<div class="ibox">
 					<div class="ibox-content">
