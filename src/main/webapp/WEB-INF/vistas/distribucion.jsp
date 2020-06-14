@@ -19,10 +19,7 @@
 			<div class="col-sm-8">
 				<div class="ibox">
 					<div class="ibox-content">
-						<h2>
-							Distribucion - <span
-								style="text-transform: lowercase; font-style: italic;">${not empty param.strategy ? param.strategy : "equitativo con cambio de asignacion"}</span>
-						</h2>
+						<h2>Distribucion - ${estrategia}</h2>
 						<p>
 							Asignacion de insumos a establecimientos.<br>Selecciona el
 							metodo de Distribucion de la derecha.
@@ -46,8 +43,7 @@
 											varStatus="loop">
 											<tr>
 												<td><c:choose>
-														<c:when
-															test="${param.strategy == 'EQUITATIVO' || empty param.strategy}">
+														<c:when test="${estrategia == 'Equitativo'}">
 															<p class="text-success">${establecMayorOcupacion.nombre==MapElement.key.getNombre() ? "Insumos Extra" : "~"}</p>
 														</c:when>
 														<c:otherwise>
@@ -90,7 +86,8 @@
 																		<div class="col-md-2">
 																			<strong>Responsable:</strong>
 																		</div>
-																		<div class="col-md-4">${MapElement.key.responsable.getNombre()}, ${MapElement.key.responsable.getApellido()}</div>
+																		<div class="col-md-4">${MapElement.key.responsable.getNombre()},
+																			${MapElement.key.responsable.getApellido()}</div>
 																		<div class="col-md-2">
 																			<strong>Ubicacion:</strong>
 																		</div>
@@ -108,7 +105,7 @@
 																		<div class="col-md-4">${MapElement.key.getOcupacion()}</div>
 
 																	</div>
-																																		<div class="row">
+																	<div class="row">
 																		<div class="col-md-2">
 																			<strong>Zona:</strong>
 																		</div>
@@ -118,18 +115,18 @@
 																		</div>
 																		<div class="col-md-4">${MapElement.key.zona.puntaje}</div>
 																	</div>
-<div>
+																	<div>
 																		<hr>
 																		<br>
-																				<c:forEach items="${MapElement.value}"
-																					var="listElement">
-																					<span
-																						style="margin: 0px 0px 10px 0px; padding: 5px; display: inline-block; font-size: 13px;"
-																						class="label label-warning">
-																						${listElement.getNombre()}: ${listElement.getCantidad()}
-																					</span>
-																				</c:forEach>
-</div>
+																		<c:forEach items="${MapElement.value}"
+																			var="listElement">
+																			<span
+																				style="margin: 0px 0px 10px 0px; padding: 5px; display: inline-block; font-size: 13px;"
+																				class="label label-warning">
+																				${listElement.getNombre()}:
+																				${listElement.getCantidad()} </span>
+																		</c:forEach>
+																	</div>
 
 																</div>
 																<div class="modal-footer">
@@ -176,14 +173,11 @@
 								</table>
 							</div>
 
-							<c:set var="s_strategy" value="${param.strategy}" />
-							<form:form action="./confirmarDistribucion" method="GET">
-								<input type="hidden" name="strategy" value="${s_strategy}">
-								<button style="margin-top: 20px; font-size: 15px;" type="submit"
-									class="btn btn-success btn-sm btn-block">
+							<form:form action="./confirmarDistribucion" method="POST">
+								<input type="hidden" name="strategy" value="${estrategia}">
+								<button type="submit" class="btn btn-success btn-sm btn-block">
 									<i class="fa fa-check"></i> Solicitar Distribucion
 								</button>
-
 							</form:form>
 						</div>
 					</div>
@@ -191,8 +185,7 @@
 			</div>
 			<div class="col-sm-4">
 				<c:choose>
-					<c:when
-						test="${param.strategy == 'EQUITATIVO' || empty param.strategy}">
+					<c:when test="${estrategia == 'Equitativo'}">
 						<div class="ibox float-e-margins col-md-12">
 							<div class="ibox-title">
 								<h5>Insumos sobrantes en distribucion equitativa</h5>
@@ -215,7 +208,7 @@
 								<form:form action="cambiarInsumos" method="POST"
 									modelAttribute="establecimiento">
 									<form:select path="id" name="id" class="form-control"
-										id="establecimiento"> --%>
+										id="establecimiento">
 										<c:forEach items="${MapaDistribuido}" var="est">
 											<form:option value="${est.key.id}">${est.key.nombre}</form:option>
 										</c:forEach>
@@ -230,7 +223,7 @@
 					<c:otherwise>
 					</c:otherwise>
 				</c:choose>
-				<div class="ibox ">
+				<div class="ibox">
 					<div class="ibox-content">
 						<div class="tab-content">
 							<div id="contact-1" class="tab-pane active">
@@ -245,17 +238,17 @@
 										<p>Los establecimientos definen su prioridad en base a su
 											porcentaje de ocupacion. Estos se agrupan en 3 grupos
 											dependiendo su indice de riesgo.</p>
-										<a href="./distribuirInsumos?strategy=OCUPACION"
-											class="btn btn-primary btn-sm btn-block"> <i
-											class="fa fa-random"></i> Distribuir insumos
-										</a>
+										<button onclick="distribuirInsumos('OCUPACION')"
+											class="btn btn-primary btn-sm btn-block">
+											<i class="fa fa-random"></i> Distribuir insumos
+										</button>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="ibox ">
+				<div class="ibox">
 					<div class="ibox-content">
 						<div class="tab-content">
 							<div id="contact-1" class="tab-pane active">
@@ -269,17 +262,17 @@
 										</strong>
 										<p>Los insumos se distribuyen en base a la prioridad
 											establecida por la capacidad total del establecimiento.</p>
-										<a href="./distribuirInsumos?strategy=CAPACIDAD"
-											class="btn btn-primary btn-sm btn-block"> <i
-											class="fa fa-random"></i> Distribuir insumos
-										</a>
+										<button onclick="distribuirInsumos('CAPACIDAD')"
+											class="btn btn-primary btn-sm btn-block">
+											<i class="fa fa-random"></i> Distribuir insumos
+										</button>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="ibox ">
+				<div class="ibox">
 					<div class="ibox-content">
 						<div class="tab-content">
 							<div id="contact-1" class="tab-pane active">
@@ -292,17 +285,17 @@
 										</a></strong>
 										<p>Los insumos se distribuyen en base a la prioridad
 											establecida por el puntaje de su zona</p>
-										<a href="./distribuirInsumos?strategy=ZONA"
-											class="btn btn-primary btn-sm btn-block"> <i
-											class="fa fa-random"></i> Distribuir insumos
-										</a>
+										<button onclick="distribuirInsumos('ZONA')"
+											class="btn btn-primary btn-sm btn-block">
+											<i class="fa fa-random"></i> Distribuir insumos
+										</button>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="ibox ">
+				<div class="ibox">
 					<div class="ibox-content">
 						<div class="tab-content">
 							<div id="contact-1" class="tab-pane active">
@@ -317,17 +310,17 @@
 										<p>Los establecimientos definen su prioridad en base a la
 											ocupacion sobre la capacidad , la capacidad total y la
 											puntuacion de la zona.</p>
-										<a href="./distribuirInsumos?strategy=COMBINADO"
-											class="btn btn-primary btn-sm btn-block"> <i
-											class="fa fa-random"></i> Distribuir insumos
-										</a>
+										<button onclick="distribuirInsumos('COMBINADO')"
+											class="btn btn-primary btn-sm btn-block">
+											<i class="fa fa-random"></i> Distribuir insumos
+										</button>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="ibox ">
+				<div class="ibox">
 					<div class="ibox-content">
 						<div class="tab-content">
 							<div id="contact-1" class="tab-pane active">
@@ -341,17 +334,20 @@
 										<p>Los insumos se distribuyen equitativamente entre todos
 											los establecimientos sin la determinacion de un ondice de
 											riesgo para cada uno de ellos.</p>
-										<a href="./distribuirInsumos?strategy=EQUITATIVO"
-											class="btn btn-primary btn-sm btn-block"> <i
-											class="fa fa-random"></i> Distribuir insumos
-										</a>
+										<button onclick="distribuirInsumos('EQUITATIVO')"
+											class="btn btn-primary btn-sm btn-block">
+											<i class="fa fa-random"></i> Distribuir insumos
+										</button>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-
+				<form action="./distribucion" method="POST" id="distribucionForm">
+					<input type="hidden" name="strategy" id="strategyField"> <input
+						type="hidden" name="establecimiento" id="establecimientoField">
+				</form>
 			</div>
 		</div>
 		<div class="modal inmodal" id="modalOcupacion" tabindex="-1"
@@ -490,7 +486,7 @@
 	</div>
 </t:layout>
 
-<script src="js/vistas/home.js"></script>
+<script src="js/vistas/distribucion.js"></script>
 
 <script type="text/javascript">
 	jQuery(function($) {

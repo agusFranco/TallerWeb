@@ -33,8 +33,8 @@
 				<div class="col-lg-12">
 					<a class="btn btn-lg btn-primary font-weight-bold"
 						style="width: 100%; height: 75px; line-height: 50px;"
-						href="./distribuirInsumos?strategy=OCUPACION">Comenzar distribucion de
-						insumos</a>
+						href="./distribucion">Comenzar
+						distribucion de insumos</a>
 				</div>
 			</div>
 			<div class="col-sm-8">
@@ -63,21 +63,21 @@
 							<form action="./home" method="POST" id="calcularPrioridadForm">
 								<div data-toggle="buttons" class="btn-group">
 									<label
-										class="btn btn-sm ${filtrosActivos == 'ocupacion' ? 'active btn-primary' : 'btn-white'}">
+										class="btn btn-sm ${filtrosActivos == 'Ocupacion' ? 'active btn-primary' : 'btn-white'}">
 										<input type="radio" id="option1" name="strategy"
 										value="OCUPACION" onchange="calcularPrioridad()">
 										Ocupación
 									</label> <label
-										class="btn btn-sm ${filtrosActivos == 'capacidad' ? 'active btn-primary' : 'btn-white'}">
+										class="btn btn-sm ${filtrosActivos == 'Capacidad' ? 'active btn-primary' : 'btn-white'}">
 										<input type="radio" id="option2" name="strategy"
 										value="CAPACIDAD" onchange="calcularPrioridad()">
 										Capacidad
 									</label> <label
-										class="btn btn-sm ${filtrosActivos == 'zona' ? 'active btn-primary' : 'btn-white'}">
+										class="btn btn-sm ${filtrosActivos == 'Zona' ? 'active btn-primary' : 'btn-white'}">
 										<input type="radio" id="option3" name="strategy" value="ZONA"
 										onchange="calcularPrioridad()"> Zona
 									</label> <label
-										class="btn btn-sm ${filtrosActivos == 'combinado' ? 'active btn-primary' : 'btn-white'}">
+										class="btn btn-sm ${filtrosActivos == 'Combinado' ? 'active btn-primary' : 'btn-white'}">
 										<input type="radio" id="option4" name="strategy"
 										value="COMBINADO" onchange="calcularPrioridad()">
 										Combinado
@@ -174,7 +174,7 @@
 				</div>
 			</div>
 		</div>
-		</div>
+	</div>
 </t:layout>
 
 <script src="js/vistas/home.js"></script>

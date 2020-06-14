@@ -1,5 +1,7 @@
-var calcularPrioridad = function() {
-	const form = document.getElementById("calcularPrioridadForm");
+var distribuirInsumos = function(estrategia) {
+	const form = $("#distribucionForm");
+	const strategyField = $("#strategyField");
+	strategyField.val(estrategia);
 	form.submit();
 };
 

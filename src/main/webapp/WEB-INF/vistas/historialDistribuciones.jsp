@@ -42,7 +42,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-lg-4 " >
+		<div class="col-lg-4 ">
 			<div class="ibox float-e-margins">
 				<div class="ibox-title">
 					<h5>Cantidad por Tipo de Distribuciones</h5>

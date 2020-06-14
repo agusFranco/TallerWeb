@@ -24,39 +24,40 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioDistribucionDetalle;
 
 public class DistribucionControladorTest {
 
-
 	@Test
-	public void meRedireccionaALaPaginaDeDistribucion(){
-		//Preperacion
+	public void meRedireccionaALaPaginaDeDistribucion() {
+		// Preperacion
 		ServicioInsumo servicioInsumo = mock(ServicioInsumo.class);
 		ServicioEstablecimiento servicioEstablecimiento = mock(ServicioEstablecimiento.class);
 		ServicioDistribucion servicioDistribucion = mock(ServicioDistribucion.class);
 		ServicioDistribucionDetalle servicioDistribucionDetalle = mock(ServicioDistribucionDetalle.class);
-		
-		DistribucionControlador distribucionControlador = new DistribucionControlador(servicioEstablecimiento, servicioInsumo,servicioDistribucion,servicioDistribucionDetalle);
-		
-		//Ejecucion
-		ModelAndView modelAndView = distribucionControlador.inicio();
-		
-		//Validacion
-		assertThat(modelAndView.getViewName()).contains("distribuir");	
+
+		DistribucionControlador distribucionControlador = new DistribucionControlador(servicioEstablecimiento,
+				servicioInsumo, servicioDistribucion, servicioDistribucionDetalle);
+
+		// Ejecucion
+		ModelAndView modelAndView = distribucionControlador.irADistribucion();
+
+		// Validacion
+		assertThat(modelAndView.getViewName()).contains("distribucion");
 	}
-	
+
 	@Test
-	public void distribuyeLosInsumosPorStrategy(){
-		//Preperacion
+	public void distribuyeLosInsumosPorStrategy() {
+		// Preperacion
 		ServicioInsumo servicioInsumo = mock(ServicioInsumo.class);
 		ServicioEstablecimiento servicioEstablecimiento = mock(ServicioEstablecimiento.class);
 		ServicioDistribucion servicioDistribucion = mock(ServicioDistribucion.class);
-		ServicioDistribucionDetalle servicioDistribucionDetalle = mock(ServicioDistribucionDetalle.class);		
-		DistribucionControlador distribucionControlador = new DistribucionControlador(servicioEstablecimiento, servicioInsumo,servicioDistribucion,servicioDistribucionDetalle);
-		
-		//simulacion de objetos
+		ServicioDistribucionDetalle servicioDistribucionDetalle = mock(ServicioDistribucionDetalle.class);
+		DistribucionControlador distribucionControlador = new DistribucionControlador(servicioEstablecimiento,
+				servicioInsumo, servicioDistribucion, servicioDistribucionDetalle);
+
+		// simulacion de objetos
 		List<Establecimiento> establecimientos = new ArrayList<Establecimiento>();
 
 		for (int i = 1; i < 6; i++) {
 			Establecimiento est = new Establecimiento();
-			est.setCapacidad(10*i);
+			est.setCapacidad(10 * i);
 			est.setId(i);
 			est.setNombre("prueba" + i);
 			est.setOcupacion(10 * i);
@@ -67,38 +68,38 @@ public class DistribucionControladorTest {
 			establecimientos.add(est);
 		}
 
-		
 		List<Insumo> insumos = new ArrayList<Insumo>();
 		Insumo ins = new Insumo();
 		ins.setNombre("test");
 		ins.setCantidad(100);
 		ins.setTipo("tipo");
 		insumos.add(ins);
-		
+
 		Map<Establecimiento, List<Insumo>> distribucion = new HashMap<Establecimiento, List<Insumo>>();
-		
+
 		distribucion.put(establecimientos.get(0), insumos);
 		distribucion.put(establecimientos.get(1), insumos);
-		
+
 		TipoDeStrategy strategy = TipoDeStrategy.CAPACIDAD;
 
-		//condiciones de carga
+		// condiciones de carga
 		when(servicioEstablecimiento.obtenerTodos()).thenReturn(establecimientos);
 		when(servicioInsumo.obtenerTodos()).thenReturn(insumos);
 		when(servicioInsumo.insumosSobrantes()).thenReturn((long) 1);
 		when(servicioEstablecimiento.establecimientoMayorOcupacion()).thenReturn(establecimientos.get(0));
-		//when(strategy.distribuirInsumos(establecimientos, insumos)).thenReturn(distribucion);
-		
-		//Ejecucion
-		ModelAndView modelAndView = distribucionControlador.distribuirInsumos(strategy);
+		// when(strategy.distribuirInsumos(establecimientos,
+		// insumos)).thenReturn(distribucion);
+
+		// Ejecucion
+		ModelAndView modelAndView = distribucionControlador.calcularDistribucion(strategy);
 		ModelMap model = modelAndView.getModelMap();
-		
-	     System.out.println(modelAndView);
-	     
-		//Validacion
+
+		System.out.println(modelAndView);
+
+		// Validacion
 		assertThat(model.get("establecimiento")).isNotNull();
 		assertThat(model.get("insumosSobrantes")).isNotNull();
 		assertThat(model.get("establecMayorOcupacion")).isNotNull();
-	
+
 	}
 }
