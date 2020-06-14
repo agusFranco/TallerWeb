@@ -95,10 +95,11 @@ public class ZonaStrategy implements Strategy {
 	// Metodo para definir los grupos.
 	private void definirGrupos() {
 		// Defino los 4 grupos y los sumo a la lista
-		this.grupos.add(new GrupoDeDistribucion(80, 100, (float) 0.4));
-		this.grupos.add(new GrupoDeDistribucion(50, 79, (float) 0.3));
-		this.grupos.add(new GrupoDeDistribucion(20, 49, (float) 0.2));
 		this.grupos.add(new GrupoDeDistribucion(0, 19, (float) 0.1));
+		this.grupos.add(new GrupoDeDistribucion(20, 49, (float) 0.2));
+		this.grupos.add(new GrupoDeDistribucion(50, 79, (float) 0.3));
+		this.grupos.add(new GrupoDeDistribucion(80, 100, (float) 0.4));
+
 	}
 
 	// Trabajo con los Puntajes Minimos y maximos de la Tupla para poder ver si el
