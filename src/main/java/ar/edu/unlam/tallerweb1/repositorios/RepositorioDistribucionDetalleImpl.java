@@ -29,9 +29,10 @@ public class RepositorioDistribucionDetalleImpl extends RepositorioBaseImpl<Dist
 	@Override
 	public List<DistribucionDetalle> totalDistribucionesPorTipo() {
 		final Session session = sessionFactory.getCurrentSession();
-		return session.createCriteria(DistribucionDetalle.class, "dd").createAlias("dd.tipoDistribucion", "tp")
-				.setProjection(Projections.projectionList().add(Projections.groupProperty("tp.id"))
-						.add(Projections.count("tp.id")))
-				.list();
+		return session.createCriteria(DistribucionDetalle.class, "dd").createAlias("dd.tipoDistribucion", "td")
+				.setProjection(Projections.projectionList()
+					.add(Projections.groupProperty("td.id"))
+					.add(Projections.count("td.id")))
+						.list();
 	}
 }

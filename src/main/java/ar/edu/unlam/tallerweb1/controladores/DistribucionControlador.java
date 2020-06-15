@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -111,7 +112,7 @@ public class DistribucionControlador {
 		List<DistribucionDetalle> distribucionesDetalles = servicioDistribucionDetalle.obtenerDistribucionesDetalles();
 		modelo.put("distribucionesDetalles", distribucionesDetalles);
 
-		List<DistribucionDetalle> cantidadPorTipo = servicioDistribucionDetalle.totalDistribucionesPorTipo();
+		ArrayList<DistribucionDetalle> cantidadPorTipo = (ArrayList<DistribucionDetalle>) 															servicioDistribucionDetalle.totalDistribucionesPorTipo();
 		modelo.put("cantidadPorTipo", cantidadPorTipo);
 
 		return modelo;
