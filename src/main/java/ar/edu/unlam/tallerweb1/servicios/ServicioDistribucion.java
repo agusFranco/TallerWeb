@@ -8,7 +8,7 @@ import ar.edu.unlam.tallerweb1.modelo.Establecimiento;
 import ar.edu.unlam.tallerweb1.modelo.Insumo;
 
 public interface ServicioDistribucion {
-	
+
 	void guardarDistribucion(Map<Establecimiento, List<Insumo>> distribucion, TipoDeStrategy tipoDeStrategy);
 
 }

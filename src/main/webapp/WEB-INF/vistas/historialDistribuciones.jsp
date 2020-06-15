@@ -18,7 +18,7 @@
 						</div>
 					</div>
 					<div class="ibox-content">
-						<table class="table table-hover no-margins grilla-dataTable">
+						<table class="table table-hover grilla-dataTable">
 							<thead>
 								<tr>
 									<th>Estado</th>
@@ -31,7 +31,7 @@
 								<c:forEach items="${distribucionesDetalles}" var="item">
 									<tr>
 										<td><span class="label label-primary">Generado</span></td>
-										<td>${item.fechaDistribucion}</td>
+										<td><i class="fa fa-clock-o"></i> &nbsp;${item.fechaDistribucion}</td>
 										<td><i class="fa fa-clock-o"></i> &nbsp;${item.fechaEntrega}</td>
 										<td class="text-navy">${item.tipoDistribucion.nombre}&nbsp;<i class="fa fa-random"></i></td>
 									</tr>
@@ -54,7 +54,7 @@
 		</div>
 	</div>
 </t:layout>
-<script src="js/vistas/historialDistribuciones.js"></script>
+<script src="${pageContext.request.contextPath}/js/vistas/historialDistribuciones.js"></script>
 <script>
 	$(document).ready(
 			function() {

@@ -10,6 +10,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -106,13 +107,28 @@ public class DistribucionControlador {
 		return new ModelAndView("historialDistribuciones", modelo);
 	}
 
+	@RequestMapping(path = "/distribucion/{id}", method = RequestMethod.GET)
+	public ModelAndView detalleDeDistribucion(@PathVariable("id") Integer id) {
+		Integer parsedId = 0;
+//		
+//		try {
+//			parsedId = Integer.parseInt(id);
+//		} catch (Exception e) {
+//			return new ModelAndView("redirect:/historialDistribuciones");
+//		}
+
+		ModelMap modelo = this.obtenerModeloDeHistorial();
+		return new ModelAndView("detalleDistribucion", modelo);
+	}
+
 	private ModelMap obtenerModeloDeHistorial() {
 		ModelMap modelo = new ModelMap();
 
 		List<DistribucionDetalle> distribucionesDetalles = servicioDistribucionDetalle.obtenerDistribucionesDetalles();
 		modelo.put("distribucionesDetalles", distribucionesDetalles);
 
-		ArrayList<DistribucionDetalle> cantidadPorTipo = (ArrayList<DistribucionDetalle>) 															servicioDistribucionDetalle.totalDistribucionesPorTipo();
+		ArrayList<DistribucionDetalle> cantidadPorTipo = (ArrayList<DistribucionDetalle>) servicioDistribucionDetalle
+				.totalDistribucionesPorTipo();
 		modelo.put("cantidadPorTipo", cantidadPorTipo);
 
 		return modelo;

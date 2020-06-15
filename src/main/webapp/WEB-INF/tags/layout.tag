@@ -2,33 +2,25 @@
 <%@attribute name="header" fragment="true"%>
 <%@attribute name="footer" fragment="true"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
 <html>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
 <title>DIMAR · Distribucion de Insumos Médicos</title>
-
-<link href="css/template/bootstrap.min.css" rel="stylesheet">
-<link href="css/template/datatables.min.css" rel="stylesheet">
-<link href="css/template/animate.css" rel="stylesheet">
-<link href="css/template/style.css" rel="stylesheet">
-<link href="css/footable/footable.core.css" rel="stylesheet">
-<link href="css/fonts/font-awesome/css/font-awesome.min.css"
-	rel="stylesheet">
-
+<link href="${pageContext.request.contextPath}/css/template/bootstrap.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/template/datatables.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/template/animate.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/template/style.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/footable/footable.core.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 <!-- Gráficos -->
-<link href="css/chartist/chartist-custom.css" rel="stylesheet">
-
-
+<link href="${pageContext.request.contextPath}/css/chartist/chartist-custom.css" rel="stylesheet">
 <script type="text/javascript">
 	<c:set var="url"
 	value="${requestScope['javax.servlet.forward.request_uri']}" />
 	var currentUrl = '<c:out value="${url}"/>';
 </script>
-
 </head>
 <body class="top-navigation">
 	<div id="wrapper">
@@ -36,31 +28,20 @@
 			<div id="page-header" class="row border-bottom white-bg">
 				<nav class="navbar navbar-static-top" role="navigation">
 					<div class="navbar-header">
-						<button aria-controls="navbar" aria-expanded="false"
-							data-target="#navbar" data-toggle="collapse"
-							class="navbar-toggle collapsed" type="button">
+						<button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
 							<i class="fa fa-reorder"></i>
 						</button>
 						<a href="./home" class="navbar-brand">DIMAR</a>
 					</div>
 					<div class="navbar-collapse collapse" id="navbar">
 						<ul class="nav navbar-nav">
-
-							<li id="inicioLink"><a aria-expanded="false" role="button"
-								href="./home"> Inicio </a></li>
-							<li id="distribucionLink"><a aria-expanded="false"
-								role="button" href="./distribucion"> Distribución </a></li>
-							<li id="historialDistribucionesLink"><a
-								aria-expanded="false" role="button"
-								href="./historialDistribuciones"> Historial
-							</a></li>
-							<li id="responsablesLink"><a aria-expanded="false"
-								role="button" href="./responsables"> Responsables </a></li>
-
+							<li id="inicioLink"><a aria-expanded="false" role="button" href="${pageContext.request.contextPath}/home"> Inicio </a></li>
+							<li id="distribucionLink"><a aria-expanded="false" role="button" href="${pageContext.request.contextPath}/distribucion"> Distribución </a></li>
+							<li id="historialDistribucionesLink"><a aria-expanded="false" role="button" href="${pageContext.request.contextPath}/historialDistribuciones"> Historial </a></li>
+							<li id="responsablesLink"><a aria-expanded="false" role="button" href="${pageContext.request.contextPath}/responsables"> Responsables </a></li>
 						</ul>
 						<ul class="nav navbar-top-links navbar-right">
-							<li><a href="login.html"> <i class="fa fa-sign-out"></i>
-									Cerrar sesión
+							<li><a href="login.html"> <i class="fa fa-sign-out"></i> Cerrar sesión
 							</a></li>
 						</ul>
 					</div>
@@ -81,18 +62,16 @@
 		</div>
 	</div>
 </body>
-
-<script src="js/template/jquery-3.1.1.min.js"></script>
-<script src="js/template/bootstrap.min.js"></script>
-<script src="js/template/plugins/metisMenu/metisMenu.min.js"></script>
-<script src="js/template/plugins/pace/pace.min.js"></script>
-<script src="js/template/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="js/template/plugins/dataTables/datatables.min.js"></script>
-<script src="js/template/app/inspinia.js"></script>
-<script src="js/template/plugins/footable/footable.js"></script>
-
+<script src="${pageContext.request.contextPath}/js/template/jquery-3.1.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/template/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/template/plugins/metisMenu/metisMenu.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/template/plugins/pace/pace.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/template/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/template/plugins/dataTables/datatables.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/template/app/inspinia.js"></script>
+<script src="${pageContext.request.contextPath}/js/template/plugins/footable/footable.js"></script>
 <!-- Gráficos -->
-<script src="js/chartist/chartist.js"></script>
+<script src="${pageContext.request.contextPath}/js/chartist/chartist.js"></script>
 <script type="text/javascript">
 	var setearLinkActivo = function() {
 		if (currentUrl.includes('home')) {
@@ -139,5 +118,4 @@
 		}
 	};
 </script>
-
 </html>

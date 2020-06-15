@@ -4,15 +4,13 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
 <!doctype html>
 <html lang="es" class="fullscreen-bg">
 <head>
 <title>Login | DIMAR - Insumos Médicos</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <!-- VENDOR CSS -->
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <!-- MAIN CSS -->
@@ -20,13 +18,9 @@
 <!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
 <link rel="stylesheet" href="css/login/css/demo.css">
 <!-- GOOGLE FONTS -->
-<link
-	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700"
-	rel="stylesheet">
-<link href="css/fonts/font-awesome/css/font-awesome.min.css"
-	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
+<link href="css/fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 </head>
-
 <body>
 	<div id="wrapper">
 		<div class="vertical-align-wrap">
@@ -36,34 +30,26 @@
 						<div class="content">
 							<div class="header">
 								<div class="logo text-center">
-									<img src="css/login/LOGO.png" alt="DIMAR logo"
-										style="width: 300px;">
+									<img src="css/login/LOGO.png" alt="DIMAR logo" style="width: 300px;">
 								</div>
 								<p class="lead">Sistema de Ingreso</p>
 							</div>
-							<form:form action="validar-login" method="POST"
-								modelAttribute="usuario" class="form-auth-small">
+							<form:form action="validar-login" method="POST" modelAttribute="usuario" class="form-auth-small">
 								<div class="form-group">
-
 									<label for="signin-email" class="control-label sr-only">Email</label>
-									<form:input path="email" id="signin-email" type="email"
-										class="form-control" placeholder="Ingrese su usuario" />
+									<form:input path="email" id="signin-email" type="email" class="form-control" placeholder="Ingrese su usuario" />
 								</div>
 								<div class="form-group">
 									<label for="signin-password" class="control-label sr-only">Password</label>
-									<form:input path="password" type="password"
-										id="signin-password" class="form-control"
-										placeholder="Ingrese su contraseña" />
+									<form:input path="password" type="password" id="signin-password" class="form-control" placeholder="Ingrese su contraseña" />
 								</div>
 								<div class="form-group clearfix">
-									<label class="fancy-checkbox element-left"> <input
-										type="checkbox"> <span>Recordarme</span>
+									<label class="fancy-checkbox element-left"> <input type="checkbox"> <span>Recordarme</span>
 									</label>
 								</div>
 								<button type="submit" class="btn btn-primary btn-lg btn-block">INGRESAR</button>
 								<div class="bottom">
-									<span class="helper-text"><i class="fa fa-lock"></i> <a
-										href="#">Olvidaste tu contraseña?</a></span>
+									<span class="helper-text"><i class="fa fa-lock"></i> <a href="#">Olvidaste tu contraseña?</a></span>
 								</div>
 							</form:form>
 							<c:if test="${not empty error}">
@@ -87,7 +73,5 @@
 			</div>
 		</div>
 	</div>
-
 </body>
 </html>
-

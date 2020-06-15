@@ -7,6 +7,8 @@ import ar.edu.unlam.tallerweb1.modelo.DistribucionDetalle;
 public interface ServicioDistribucionDetalle {
 
 	List<DistribucionDetalle> obtenerDistribucionesDetalles();
-	
+
 	List<DistribucionDetalle> totalDistribucionesPorTipo();
+
+	DistribucionDetalle obtenerDistribucionDetallerPorId(Integer id);
 }

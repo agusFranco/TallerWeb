@@ -177,7 +177,7 @@
 	</div>
 </t:layout>
 
-<script src="js/vistas/home.js"></script>
+<script src="${pageContext.request.contextPath}/js/vistas/home.js"></script>
 
 
 <script>
