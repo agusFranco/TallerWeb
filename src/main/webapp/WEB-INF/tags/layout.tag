@@ -52,7 +52,7 @@
 								role="button" href="./distribucion"> Distribución </a></li>
 							<li id="historialDistribucionesLink"><a
 								aria-expanded="false" role="button"
-								href="./historialDistribuciones"> Detalles de Distribuciones
+								href="./historialDistribuciones"> Historial
 							</a></li>
 							<li id="responsablesLink"><a aria-expanded="false"
 								role="button" href="./responsables"> Responsables </a></li>

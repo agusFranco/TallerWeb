@@ -10,9 +10,9 @@ import ar.edu.unlam.tallerweb1.repositorios.RepositorioDistribucionDetalle;
 
 @Service
 public class ServicioDistribucionDetalleImpl implements ServicioDistribucionDetalle {
-	
+
 	private RepositorioDistribucionDetalle repositorioDistribucionDetalle;
-	
+
 	@Autowired
 	public ServicioDistribucionDetalleImpl(RepositorioDistribucionDetalle repositorioDistribucionDetalle) {
 		this.repositorioDistribucionDetalle = repositorioDistribucionDetalle;
@@ -27,7 +27,4 @@ public class ServicioDistribucionDetalleImpl implements ServicioDistribucionDeta
 	public List<DistribucionDetalle> totalDistribucionesPorTipo() {
 		return repositorioDistribucionDetalle.totalDistribucionesPorTipo();
 	}
-	
-	
-
 }

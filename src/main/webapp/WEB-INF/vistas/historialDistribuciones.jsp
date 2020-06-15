@@ -2,14 +2,13 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
 <t:layout>
 	<div class="wrapper wrapper-content  animated fadeInRight">
 		<div class="row">
 			<div class="col-lg-6">
-				<div class="ibox float-e-margins">
+				<div class="ibox">
 					<div class="ibox-title">
 						<h5>Historial de distribuciones</h5>
 						<div class="ibox-tools">
@@ -19,7 +18,7 @@
 						</div>
 					</div>
 					<div class="ibox-content">
-						<table class="table table-hover no-margins">
+						<table class="table table-hover no-margins grilla-dataTable">
 							<thead>
 								<tr>
 									<th>Estado</th>
@@ -33,9 +32,8 @@
 									<tr>
 										<td><span class="label label-primary">Generado</span></td>
 										<td>${item.fechaDistribucion}</td>
-										<td><i class="fa fa-clock-o"></i>${item.fechaEntrega}</td>
-										<td class="text-navy">${item.tipoDistribucion.nombre} <i
-											class="fa fa-random"></i></td>
+										<td><i class="fa fa-clock-o"></i> &nbsp;${item.fechaEntrega}</td>
+										<td class="text-navy">${item.tipoDistribucion.nombre}&nbsp;<i class="fa fa-random"></i></td>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -43,8 +41,8 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-4 ">
-				<div class="ibox float-e-margins">
+			<div class="col-lg-4">
+				<div class="ibox">
 					<div class="ibox-title">
 						<h5>Cantidad de tipos de distribuciones</h5>
 					</div>
@@ -54,12 +52,9 @@
 				</div>
 			</div>
 		</div>
-
 	</div>
 </t:layout>
-
-<script src="js/vistas/home.js"></script>
-
+<script src="js/vistas/historialDistribuciones.js"></script>
 <script>
 	$(document).ready(
 			function() {
@@ -100,6 +95,3 @@
 				    }});
 			});
 </script>
-
-
-
