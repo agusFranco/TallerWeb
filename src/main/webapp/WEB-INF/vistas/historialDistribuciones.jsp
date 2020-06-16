@@ -4,6 +4,8 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<c:set var="relativePath" value="${pageContext.request.contextPath}" />
+
 <t:layout>
 	<div class="wrapper wrapper-content  animated fadeInRight">
 		<div class="row">
@@ -28,12 +30,12 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${distribucionesDetalles}" var="item">
+								<c:forEach items="${distribuciones}" var="item">
 									<tr>
 										<td><span class="label label-primary">Generado</span></td>
 										<td><i class="fa fa-clock-o"></i> &nbsp;${item.fechaDistribucion}</td>
 										<td><i class="fa fa-clock-o"></i> &nbsp;${item.fechaEntrega}</td>
-										<td class="text-navy">${item.tipoDistribucion.nombre}&nbsp;<i class="fa fa-random"></i></td>
+										<td class="text-navy">${item.tipoDistribucion.nombre}&nbsp;<a href="${relativePath}/distribucion/${item.getId()}"><i class="fa fa-random"></i></a></td>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -54,14 +56,14 @@
 		</div>
 	</div>
 </t:layout>
-<script src="${pageContext.request.contextPath}/js/vistas/historialDistribuciones.js"></script>
+<script src="${relativePath}/js/vistas/historialDistribuciones.js"></script>
 <script>
 	$(document).ready(
 			function() {
 				// Stocked horizontal bar
 
 				new Chartist.Bar('#ct-chart4', {
-					labels : [ 'Combinada','Ocupacion','Capacidad','Zona','Equitativa'],
+					labels : [ 'Equitativa','Combinada','Capacidad','Ocupacion','Zona'],
 					series : [ [ 
 					<c:forEach items="${cantidadPorTipo}" var="item">
 						${item[1]},
@@ -73,7 +75,6 @@
 					horizontalBars : true,
 					axisY : {
 						offset : 70
-
 					}
 				,
 				axisX: {

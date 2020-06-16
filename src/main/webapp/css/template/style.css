@@ -8560,3 +8560,9 @@ body.md-skin {
     margin: 0;
   }
 }
+
+.footable-details th {
+	font-weight: normal;
+	font-size: 13px;
+	line-height: 50px;
+}

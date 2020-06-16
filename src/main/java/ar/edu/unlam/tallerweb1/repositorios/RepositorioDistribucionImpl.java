@@ -5,15 +5,17 @@ import java.util.Map;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Projections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import ar.edu.unlam.tallerweb1.modelo.Distribucion;
+import ar.edu.unlam.tallerweb1.modelo.DistribucionDetalle;
 import ar.edu.unlam.tallerweb1.modelo.Establecimiento;
 import ar.edu.unlam.tallerweb1.modelo.Insumo;
 
 @Repository
-public class RepositorioDistribucionImpl extends RepositorioBaseImpl<Distribucion, Integer>
+public class RepositorioDistribucionImpl extends RepositorioBaseImpl<Distribucion, Long>
 		implements RepositorioDistribucion {
 
 	@Autowired
@@ -28,8 +30,22 @@ public class RepositorioDistribucionImpl extends RepositorioBaseImpl<Distribucio
 	}
 
 	@Override
-	public Map<Establecimiento, List<Insumo>> obtenerDistribucion(Integer nroDistribucion) {
-		// TODO Auto-generated method stub
-		return null;
+	public Distribucion obtenerDistribucion(Long id) {
+		final Session session = sessionFactory.getCurrentSession();
+
+		Distribucion distribucion = session.find(Distribucion.class, id);
+
+		distribucion.getDetalles().size();
+
+		return distribucion;
+	}
+
+	@SuppressWarnings({ "unchecked", "deprecation" })
+	@Override
+	public List<Distribucion> totalDistribucionesPorTipo() {
+		final Session session = sessionFactory.getCurrentSession();
+		return session.createCriteria(Distribucion.class, "dd").createAlias("dd.tipoDistribucion", "td").setProjection(
+				Projections.projectionList().add(Projections.groupProperty("td.id")).add(Projections.count("td.id")))
+				.list();
 	}
 }

@@ -58,6 +58,11 @@ public class HomeControlador {
 		return new ModelAndView("home", modelo);
 	}
 
+	@RequestMapping(path = "/404", method = RequestMethod.GET)
+	public ModelAndView irA404() {
+		return new ModelAndView("404");
+	}
+
 	// Obtiene los datos por default de la vista home.
 	private ModelMap obtenerModeloDeHome(TipoDeStrategy strategy) {
 		ModelMap modelo = new ModelMap();

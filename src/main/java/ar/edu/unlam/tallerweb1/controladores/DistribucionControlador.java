@@ -1,8 +1,10 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,12 +15,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import ar.edu.unlam.tallerweb1.comun.enums.TipoDeStrategy;
 import ar.edu.unlam.tallerweb1.configuracion.StringToTipoDeStrategy;
+import ar.edu.unlam.tallerweb1.modelo.Distribucion;
 import ar.edu.unlam.tallerweb1.modelo.DistribucionDetalle;
 import ar.edu.unlam.tallerweb1.modelo.Establecimiento;
 import ar.edu.unlam.tallerweb1.modelo.Insumo;
@@ -108,26 +110,32 @@ public class DistribucionControlador {
 	}
 
 	@RequestMapping(path = "/distribucion/{id}", method = RequestMethod.GET)
-	public ModelAndView detalleDeDistribucion(@PathVariable("id") Integer id) {
-		Integer parsedId = 0;
-//		
-//		try {
-//			parsedId = Integer.parseInt(id);
-//		} catch (Exception e) {
-//			return new ModelAndView("redirect:/historialDistribuciones");
-//		}
+	public ModelAndView detalleDeDistribucion(@PathVariable("id") Long id) {
+		ModelMap modelo = new ModelMap();
 
-		ModelMap modelo = this.obtenerModeloDeHistorial();
+		Distribucion distribucion = this.servicioDistribucion.obtenerConDetallesPorId(id);
+
+		if (distribucion == null) {
+			return new ModelAndView("redirect:/404");
+		}
+
+		modelo.put("distribucion", distribucion);
+
+		Map<Establecimiento, List<DistribucionDetalle>> detalles = distribucion.getDetalles().stream()
+				.collect(Collectors.groupingBy(d -> d.getEstablecimiento()));
+
+		modelo.put("detalles", detalles);
+
 		return new ModelAndView("detalleDistribucion", modelo);
 	}
 
 	private ModelMap obtenerModeloDeHistorial() {
 		ModelMap modelo = new ModelMap();
 
-		List<DistribucionDetalle> distribucionesDetalles = servicioDistribucionDetalle.obtenerDistribucionesDetalles();
-		modelo.put("distribucionesDetalles", distribucionesDetalles);
+		List<Distribucion> distribuciones = servicioDistribucion.obtenerDistribuciones();
+		modelo.put("distribuciones", distribuciones);
 
-		ArrayList<DistribucionDetalle> cantidadPorTipo = (ArrayList<DistribucionDetalle>) servicioDistribucionDetalle
+		ArrayList<Distribucion> cantidadPorTipo = (ArrayList<Distribucion>) servicioDistribucion
 				.totalDistribucionesPorTipo();
 		modelo.put("cantidadPorTipo", cantidadPorTipo);
 

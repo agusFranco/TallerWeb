@@ -5,13 +5,15 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import ar.edu.unlam.tallerweb1.modelo.Distribucion;
 import ar.edu.unlam.tallerweb1.modelo.DistribucionDetalle;
 
 @Repository
-public class RepositorioDistribucionDetalleImpl extends RepositorioBaseImpl<DistribucionDetalle, Integer>
+public class RepositorioDistribucionDetalleImpl extends RepositorioBaseImpl<DistribucionDetalle, Long>
 		implements RepositorioDistribucionDetalle {
 
 	@Autowired
@@ -20,18 +22,17 @@ public class RepositorioDistribucionDetalleImpl extends RepositorioBaseImpl<Dist
 	}
 
 	@Override
-	public void guardarFechaDeDistribucion(DistribucionDetalle distribucionDetalle) {
+	public void guardarDetalle(DistribucionDetalle detalle) {
 		final Session session = sessionFactory.getCurrentSession();
-		session.save(distribucionDetalle);
+		session.save(detalle);
 	}
 
-	@SuppressWarnings({ "unchecked", "deprecation" })
 	@Override
-	public List<DistribucionDetalle> totalDistribucionesPorTipo() {
+	public List<DistribucionDetalle> obtenerPorDistribucionId(Long id) {
 		final Session session = sessionFactory.getCurrentSession();
-		return session.createCriteria(DistribucionDetalle.class, "dd").createAlias("dd.tipoDistribucion", "td")
-				.setProjection(Projections.projectionList().add(Projections.groupProperty("td.id"))
-						.add(Projections.count("td.id")))
+		return session.createCriteria(DistribucionDetalle.class, "detalle")
+				.createAlias("detalle.distribucion", "distribucion")
+				.add(Restrictions.eq("distribucion.id", id))
 				.list();
 	}
 }

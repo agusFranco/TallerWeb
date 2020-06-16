@@ -24,33 +24,61 @@ import ar.edu.unlam.tallerweb1.repositorios.RepositorioDistribucionDetalle;
 public class ServicioDistribucionImpl implements ServicioDistribucion {
 
 	private RepositorioDistribucion repositorioDistribucion;
+	private RepositorioDistribucionDetalle repositorioDistribucionDetalle;
 
 	// Inyección de dependencia
 	@Autowired
 	public ServicioDistribucionImpl(RepositorioDistribucion repositorioDistribucion,
-			RepositorioDistribucionDetalle RepositorioDistribucionDetalle) {
+			RepositorioDistribucionDetalle repositorioDistribucionDetalle) {
 		this.repositorioDistribucion = repositorioDistribucion;
+		this.repositorioDistribucionDetalle = repositorioDistribucionDetalle;
 	}
 
+	// GetAll
 	@Override
-	public void guardarDistribucion(Map<Establecimiento, List<Insumo>> distribucion, TipoDeStrategy tipoDeStrategy) {
+	public List<Distribucion> obtenerDistribuciones() {
+		return repositorioDistribucion.getAll();
+	}
+
+	// GetById
+	@Override
+	public Distribucion obtenerPorId(Long id) {
+		return repositorioDistribucion.getById(id);
+	}
+
+	// GetById With LazyEntities
+	@Override
+	public Distribucion obtenerConDetallesPorId(Long id) {
+		return repositorioDistribucion.obtenerDistribucion(id);
+	}
+	
+	// Count
+	@Override
+	public List<Distribucion> totalDistribucionesPorTipo() {
+		return this.repositorioDistribucion.totalDistribucionesPorTipo();
+	}
+
+	//Save
+	@Override
+	public void guardarDistribucion(Map<Establecimiento, List<Insumo>> calculoDeDistribucion,
+			TipoDeStrategy tipoDeStrategy) {
 
 		// LocalDate end = LocalDate.now();
 		LocalDate localDateRandom = new RandomDate(LocalDate.of(2019, 1, 1), LocalDate.of(2021, 1, 1)).nextDate();
 
 		// Podemos agregar mas detalles a la distribucion
-		DistribucionDetalle distribucionDetalle = new DistribucionDetalle();
+		Distribucion distribucion = new Distribucion();
 		TipoDistribucion tipoDistribucion = new TipoDistribucion();
 
 		// Guardo el tipo de distribucion como detalle
 		tipoDistribucion.setId((long) tipoDeStrategy.getId());
 
-		distribucionDetalle.setFechaDistribucion(localDateRandom);
-		distribucionDetalle.setTipoDistribucion(tipoDistribucion);
+		distribucion.setFechaDistribucion(localDateRandom);
+		distribucion.setTipoDistribucion(tipoDistribucion);
 
 		// Si la creación de las instancias de los objetos auxiliares no están en este
 		// órden, se cargan mal a la base, POR QUE???
-		for (Entry<Establecimiento, List<Insumo>> establec_listaInsumo : distribucion.entrySet()) {
+		for (Entry<Establecimiento, List<Insumo>> establec_listaInsumo : calculoDeDistribucion.entrySet()) {
 			for (Insumo itemInsumo : establec_listaInsumo.getValue()) {
 				// Creo un insumo auxilir, no puedo usar directamente itemInsumo porque falla
 				Insumo insumoAAsignar = new Insumo();
@@ -58,19 +86,18 @@ public class ServicioDistribucionImpl implements ServicioDistribucion {
 
 				// Creo el objeto distribucion y le asigno sus atributos para ser cargados como
 				// un registro
-				Distribucion registro_est_insum = new Distribucion();
-				registro_est_insum.setEstablecimiento(establec_listaInsumo.getKey());
-				registro_est_insum.setInsumo(insumoAAsignar);
-				registro_est_insum.setCantidad(itemInsumo.getCantidad());
-
-				// Seteo la fecha de la distribucion
-				registro_est_insum.setDistribucionDetalle(distribucionDetalle);
+				DistribucionDetalle detalle = new DistribucionDetalle();
+				detalle.setEstablecimiento(establec_listaInsumo.getKey());
+				detalle.setInsumo(insumoAAsignar);
+				detalle.setCantidad(itemInsumo.getCantidad());
 
 				// Persisto el registro de la asignacion de una cantidad de un Insumo a un
 				// Establecimiento
-				repositorioDistribucion.guardarDistribucion(registro_est_insum);
+				distribucion.addDetalle(detalle);
 			}
 		}
-	}
 
+		// Persisto la distribucion
+		repositorioDistribucion.guardarDistribucion(distribucion);
+	}
 }

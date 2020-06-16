@@ -8,14 +8,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>DIMAR · Distribucion de Insumos Médicos</title>
-<link href="${pageContext.request.contextPath}/css/template/bootstrap.min.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/css/template/datatables.min.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/css/template/animate.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/css/template/style.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/css/footable/footable.core.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/css/fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+<c:set var="relativePath" value="${pageContext.request.contextPath}" />
+
+<link href="${relativePath}/css/template/bootstrap.min.css" rel="stylesheet">
+<link href="${relativePath}/css/template/datatables.min.css" rel="stylesheet">
+<link href="${relativePath}/css/template/animate.css" rel="stylesheet">
+<link href="${relativePath}/css/template/style.css" rel="stylesheet">
+<link href="${relativePath}/css/footable/footable.core.css" rel="stylesheet">
+<link href="${relativePath}/css/fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 <!-- Gráficos -->
-<link href="${pageContext.request.contextPath}/css/chartist/chartist-custom.css" rel="stylesheet">
+<link href="${relativePath}/css/chartist/chartist-custom.css" rel="stylesheet">
 <script type="text/javascript">
 	<c:set var="url"
 	value="${requestScope['javax.servlet.forward.request_uri']}" />
@@ -35,10 +38,10 @@
 					</div>
 					<div class="navbar-collapse collapse" id="navbar">
 						<ul class="nav navbar-nav">
-							<li id="inicioLink"><a aria-expanded="false" role="button" href="${pageContext.request.contextPath}/home"> Inicio </a></li>
-							<li id="distribucionLink"><a aria-expanded="false" role="button" href="${pageContext.request.contextPath}/distribucion"> Distribución </a></li>
-							<li id="historialDistribucionesLink"><a aria-expanded="false" role="button" href="${pageContext.request.contextPath}/historialDistribuciones"> Historial </a></li>
-							<li id="responsablesLink"><a aria-expanded="false" role="button" href="${pageContext.request.contextPath}/responsables"> Responsables </a></li>
+							<li id="inicioLink"><a aria-expanded="false" role="button" href="${relativePath}/home"> Inicio </a></li>
+							<li id="distribucionLink"><a aria-expanded="false" role="button" href="${relativePath}/distribucion"> Distribución </a></li>
+							<li id="historialDistribucionesLink"><a aria-expanded="false" role="button" href="${relativePath}/historialDistribuciones"> Historial </a></li>
+							<li id="responsablesLink"><a aria-expanded="false" role="button" href="${relativePath}/responsables"> Responsables </a></li>
 						</ul>
 						<ul class="nav navbar-top-links navbar-right">
 							<li><a href="login.html"> <i class="fa fa-sign-out"></i> Cerrar sesión
@@ -62,16 +65,16 @@
 		</div>
 	</div>
 </body>
-<script src="${pageContext.request.contextPath}/js/template/jquery-3.1.1.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/template/bootstrap.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/template/plugins/metisMenu/metisMenu.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/template/plugins/pace/pace.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/template/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/template/plugins/dataTables/datatables.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/template/app/inspinia.js"></script>
-<script src="${pageContext.request.contextPath}/js/template/plugins/footable/footable.js"></script>
+<script src="${relativePath}/js/template/jquery-3.1.1.min.js"></script>
+<script src="${relativePath}/js/template/bootstrap.min.js"></script>
+<script src="${relativePath}/js/template/plugins/metisMenu/metisMenu.min.js"></script>
+<script src="${relativePath}/js/template/plugins/pace/pace.min.js"></script>
+<script src="${relativePath}/js/template/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="${relativePath}/js/template/plugins/dataTables/datatables.min.js"></script>
+<script src="${relativePath}/js/template/app/inspinia.js"></script>
+<script src="${relativePath}/js/template/plugins/footable/footable.js"></script>
 <!-- Gráficos -->
-<script src="${pageContext.request.contextPath}/js/chartist/chartist.js"></script>
+<script src="${relativePath}/js/chartist/chartist.js"></script>
 <script type="text/javascript">
 	var setearLinkActivo = function() {
 		if (currentUrl.includes('home')) {

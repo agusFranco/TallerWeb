@@ -1,7 +1,6 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
-import java.time.LocalDate;
-
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,11 +14,16 @@ public class DistribucionDetalle {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	private LocalDate fechaDistribucion;
-	private LocalDate fechaEntrega;
+	@ManyToOne
+	private Establecimiento establecimiento;
 
 	@ManyToOne
-	private TipoDistribucion tipoDistribucion;
+	private Insumo insumo;
+
+	private Integer cantidad;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Distribucion distribucion;
 
 	public DistribucionDetalle() {
 	}
@@ -32,29 +36,35 @@ public class DistribucionDetalle {
 		this.id = id;
 	}
 
-	public LocalDate getFechaDistribucion() {
-		return fechaDistribucion;
+	public Establecimiento getEstablecimiento() {
+		return establecimiento;
 	}
 
-	public void setFechaDistribucion(LocalDate fechaDistribucion) {
-		this.fechaDistribucion = fechaDistribucion;
-		this.fechaEntrega = fechaDistribucion.plusWeeks(2);
+	public void setEstablecimiento(Establecimiento establecimiento) {
+		this.establecimiento = establecimiento;
 	}
 
-	public LocalDate getFechaEntrega() {
-		return fechaEntrega;
+	public Insumo getInsumo() {
+		return insumo;
 	}
 
-	public void setFechaEntrega(LocalDate fechaEntrega) {
-		this.fechaEntrega = fechaEntrega;
+	public void setInsumo(Insumo insumo) {
+		this.insumo = insumo;
 	}
 
-	public TipoDistribucion getTipoDistribucion() {
-		return tipoDistribucion;
+	public Integer getCantidad() {
+		return cantidad;
 	}
 
-	public void setTipoDistribucion(TipoDistribucion tipoDistribucion) {
-		this.tipoDistribucion = tipoDistribucion;
+	public void setCantidad(Integer cantidad) {
+		this.cantidad = cantidad;
 	}
 
+	public Distribucion getDistribucion() {
+		return distribucion;
+	}
+
+	public void setDistribucion(Distribucion distribucion) {
+		this.distribucion = distribucion;
+	}
 }

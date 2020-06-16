@@ -24,12 +24,7 @@ public class ServicioDistribucionDetalleImpl implements ServicioDistribucionDeta
 	}
 
 	@Override
-	public List<DistribucionDetalle> totalDistribucionesPorTipo() {
-		return repositorioDistribucionDetalle.totalDistribucionesPorTipo();
-	}
-
-	@Override
-	public DistribucionDetalle obtenerDistribucionDetallerPorId(Integer id) {
-		return repositorioDistribucionDetalle.getById(id);
+	public List<DistribucionDetalle> obtenerDistribucionDetallerPorDistribucionId(Long id) {
+		return repositorioDistribucionDetalle.obtenerPorDistribucionId(id);
 	}
 }

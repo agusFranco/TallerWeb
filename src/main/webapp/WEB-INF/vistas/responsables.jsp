@@ -2,6 +2,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<c:set var="relativePath" value="${pageContext.request.contextPath}" />
+
 <t:layout>
 	<div class="row wrapper border-bottom white-bg page-heading">
 		<div class="col-lg-9">
@@ -43,4 +45,4 @@
 		</div>
 	</div>
 </t:layout>
-<script src="${pageContext.request.contextPath}/js/vistas/home.js"></script>
+<script src="${relativePath}/js/vistas/responsables.js"></script>

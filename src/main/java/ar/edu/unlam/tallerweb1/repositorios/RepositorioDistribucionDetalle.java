@@ -4,10 +4,9 @@ import java.util.List;
 
 import ar.edu.unlam.tallerweb1.modelo.DistribucionDetalle;
 
-public interface RepositorioDistribucionDetalle extends RepositorioBase<DistribucionDetalle, Integer> {
+public interface RepositorioDistribucionDetalle extends RepositorioBase<DistribucionDetalle, Long> {
 
-	void guardarFechaDeDistribucion(DistribucionDetalle distribucionDetalle);
+	void guardarDetalle(DistribucionDetalle detalle);
 
-	List<DistribucionDetalle> totalDistribucionesPorTipo();
-
+	List<DistribucionDetalle> obtenerPorDistribucionId(Long id);
 }

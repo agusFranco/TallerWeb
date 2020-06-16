@@ -1,11 +1,17 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Distribucion {
@@ -14,23 +20,17 @@ public class Distribucion {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	private Integer cantidad;
-
 	@ManyToOne
-	private Establecimiento establecimiento;
+	private TipoDistribucion tipoDistribucion;
 
-	@ManyToOne
-	private Insumo insumo;
-	// This happens because you have a collection in your entity, and that
-	// collection has one or more items which are not present in the database. By
-	// specifying the above options you tell hibernate to save them to the database
-	// when saving their parent.
-	@ManyToOne(cascade = CascadeType.ALL)
-	private DistribucionDetalle distribucionDetalle;
+	private LocalDate fechaDistribucion;
 
-	// Constructor vacío
+	private LocalDate fechaEntrega;
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<DistribucionDetalle> detalles;
+
 	public Distribucion() {
-
 	}
 
 	public Long getId() {
@@ -41,35 +41,44 @@ public class Distribucion {
 		this.id = id;
 	}
 
-	public Integer getCantidad() {
-		return cantidad;
+	public LocalDate getFechaDistribucion() {
+		return fechaDistribucion;
 	}
 
-	public void setCantidad(Integer cantidad) {
-		this.cantidad = cantidad;
+	public void setFechaDistribucion(LocalDate fechaDistribucion) {
+		this.fechaDistribucion = fechaDistribucion;
+		this.fechaEntrega = fechaDistribucion.plusWeeks(2);
 	}
 
-	public Establecimiento getEstablecimiento() {
-		return establecimiento;
+	public LocalDate getFechaEntrega() {
+		return fechaEntrega;
 	}
 
-	public void setEstablecimiento(Establecimiento establecimiento) {
-		this.establecimiento = establecimiento;
+	public void setFechaEntrega(LocalDate fechaEntrega) {
+		this.fechaEntrega = fechaEntrega;
 	}
 
-	public Insumo getInsumo() {
-		return insumo;
+	public TipoDistribucion getTipoDistribucion() {
+		return tipoDistribucion;
 	}
 
-	public void setInsumo(Insumo insumo) {
-		this.insumo = insumo;
+	public void setTipoDistribucion(TipoDistribucion tipoDistribucion) {
+		this.tipoDistribucion = tipoDistribucion;
 	}
 
-	public DistribucionDetalle getDistribucionDetalle() {
-		return distribucionDetalle;
+	public List<DistribucionDetalle> getDetalles() {
+		return detalles;
 	}
 
-	public void setDistribucionDetalle(DistribucionDetalle distribucionDetalle) {
-		this.distribucionDetalle = distribucionDetalle;
+	public void setDetalles(List<DistribucionDetalle> detalles) {
+		this.detalles = detalles;
+	}
+
+	public void addDetalle(DistribucionDetalle detalle) {
+		if (this.detalles == null) {
+			this.detalles = new ArrayList<DistribucionDetalle>();
+		}
+
+		this.detalles.add(detalle);
 	}
 }

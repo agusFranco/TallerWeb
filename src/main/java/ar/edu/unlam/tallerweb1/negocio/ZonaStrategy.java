@@ -17,7 +17,6 @@ public class ZonaStrategy implements Strategy {
 	private List<GrupoDeDistribucion> grupos;
 
 	public ZonaStrategy() {
-		this.grupos = new ArrayList<GrupoDeDistribucion>();
 	}
 
 	@Override
@@ -49,14 +48,14 @@ public class ZonaStrategy implements Strategy {
 		for (Establecimiento establecimiento : establecimientos) {
 			List<Insumo> insumosAsignados = new ArrayList<Insumo>();
 
+			// Obtengo Grupo
+			GrupoDeDistribucion grupo = this.obtenerGrupo(establecimiento);
+
 			for (Insumo itemInsumo : insumos) {
 				Insumo insumoTemporal = new Insumo();
 				insumoTemporal.setNombre(itemInsumo.getNombre());
 				insumoTemporal.setTipo(itemInsumo.getTipo());
 				insumoTemporal.setId(itemInsumo.getId());
-
-				// Obtengo Grupo
-				GrupoDeDistribucion grupo = this.obtenerGrupo(establecimiento);
 
 				// Seteo la cantidad de insumos en base al grupo
 				insumoTemporal.setCantidad(
@@ -94,6 +93,8 @@ public class ZonaStrategy implements Strategy {
 
 	// Metodo para definir los grupos.
 	private void definirGrupos() {
+		this.grupos = new ArrayList<GrupoDeDistribucion>();
+
 		// Defino los 4 grupos y los sumo a la lista
 		this.grupos.add(new GrupoDeDistribucion(0, 19, (float) 0.1));
 		this.grupos.add(new GrupoDeDistribucion(20, 49, (float) 0.2));

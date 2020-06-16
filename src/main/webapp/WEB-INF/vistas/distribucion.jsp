@@ -4,13 +4,8 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<style>
-.footable-details th {
-	font-weight: normal;
-	font-size: 13px;
-	line-height: 50px;
-}
-</style>
+<c:set var="relativePath" value="${pageContext.request.contextPath}" />
+
 <t:layout>
 	<div class="wrapper wrapper-content  animated fadeInRight">
 		<div class="row">
@@ -385,9 +380,4 @@
 		</div>
 	</div>
 </t:layout>
-<script src="${pageContext.request.contextPath}/js/vistas/distribucion.js"></script>
-<script type="text/javascript">
-	jQuery(function($) {
-		$('.tablez').footable();
-	});
-</script>
+<script src="${relativePath}/js/vistas/distribucion.js"></script>

@@ -2,6 +2,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<c:set var="relativePath" value="${pageContext.request.contextPath}" />
 
 <t:layout>
 	<div class="wrapper wrapper-content animated fadeInRight mb-5">
@@ -177,7 +178,7 @@
 	</div>
 </t:layout>
 
-<script src="${pageContext.request.contextPath}/js/vistas/home.js"></script>
+<script src="${relativePath}/js/vistas/home.js"></script>
 
 
 <script>

@@ -13,4 +13,8 @@ $(document).ready(function() {
 		buttons : [],
 		language : lenguaje
 	});
+	
+	jQuery(function($) {
+		$('.tablez').footable();
+	});
 });
