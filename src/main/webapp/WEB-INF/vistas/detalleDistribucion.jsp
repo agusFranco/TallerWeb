@@ -9,7 +9,7 @@
 <t:layout>
 	<div class="wrapper wrapper-content  animated fadeInRight">
 		<div class="row">
-			<div class="col-sm-12">
+			<div class="col-sm-6">
 				<div class="ibox">
 					<div class="ibox-content">
 						<h2>

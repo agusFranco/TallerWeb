@@ -3,6 +3,7 @@ package ar.edu.unlam.tallerweb1.repositorios;
 import java.util.List;
 import java.util.Map;
 
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Projections;
@@ -35,7 +36,10 @@ public class RepositorioDistribucionImpl extends RepositorioBaseImpl<Distribucio
 
 		Distribucion distribucion = session.find(Distribucion.class, id);
 
-		distribucion.getDetalles().size();
+		if (distribucion != null) {
+			// Get Lazy Model
+			Hibernate.initialize(distribucion.getDetalles());
+		}
 
 		return distribucion;
 	}
