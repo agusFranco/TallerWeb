@@ -1,7 +1,5 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -135,9 +133,20 @@ public class DistribucionControlador {
 		List<Distribucion> distribuciones = servicioDistribucion.obtenerDistribuciones();
 		modelo.put("distribuciones", distribuciones);
 
-		ArrayList<Distribucion> cantidadPorTipo = (ArrayList<Distribucion>) servicioDistribucion
-				.totalDistribucionesPorTipo();
-		modelo.put("cantidadPorTipo", cantidadPorTipo);
+		modelo.put("cantidadPorZona",
+				distribuciones.stream().filter(c -> "Zona".equals(c.getTipoDistribucion().getNombre())).count());
+
+		modelo.put("cantidadPorCapacidad", distribuciones.stream()
+				.filter(c -> "Capacidad Total".equals(c.getTipoDistribucion().getNombre())).count());
+
+		modelo.put("cantidadPorOcupacion",
+				distribuciones.stream().filter(c -> "Ocupacion".equals(c.getTipoDistribucion().getNombre())).count());
+
+		modelo.put("cantidadPorEquitativo",
+				distribuciones.stream().filter(c -> "Equitativa".equals(c.getTipoDistribucion().getNombre())).count());
+
+		modelo.put("cantidadPorCombinada",
+				distribuciones.stream().filter(c -> "Combinada".equals(c.getTipoDistribucion().getNombre())).count());
 
 		return modelo;
 	}

@@ -63,36 +63,33 @@
 				// Stocked horizontal bar
 
 				new Chartist.Bar('#ct-chart4', {
-					labels : [ 'Equitativa','Combinada','Capacidad','Ocupacion','Zona'],
-					series : [ [ 
-					<c:forEach items="${cantidadPorTipo}" var="item">
-						${item[1]},
-					</c:forEach> ] ]
-				
+					labels : [ 'Equitativa', 'Combinada', 'Capacidad',
+							'Ocupacion', 'Zona' ],
+					series : [ [${cantidadPorEquitativo},${cantidadPorCombinada},${cantidadPorCapacidad},${cantidadPorOcupacion},${cantidadPorZona} ] ]
 				}, {
 					seriesBarDistance : 1,
 					reverseData : true,
 					horizontalBars : true,
 					axisY : {
 						offset : 70
+					},
+					axisX : {
+						// The offset of the chart drawing area to the border of the container
+						offset : 30,
+						// Position where labels are placed. Can be set to `start` or `end` where `start` is equivalent to left or top on vertical axis and `end` is equivalent to right or bottom on horizontal axis.
+						position : 'end',
+						// Allows you to correct label positioning on this axis by positive or negative x and y offset.
+						labelOffset : {
+							x : 0,
+							y : 0
+						},
+						// If labels should be shown or not
+						showLabel : true,
+						// If the axis grid should be drawn or not
+						showGrid : true,
+						// Use only integer values (whole numbers) for the scale steps
+						onlyInteger : true
 					}
-				,
-				axisX: {
-				      // The offset of the chart drawing area to the border of the container
-				      offset: 30,
-				      // Position where labels are placed. Can be set to `start` or `end` where `start` is equivalent to left or top on vertical axis and `end` is equivalent to right or bottom on horizontal axis.
-				      position: 'end',
-				      // Allows you to correct label positioning on this axis by positive or negative x and y offset.
-				      labelOffset: {
-				        x: 0,
-				        y: 0
-				      },
-				      // If labels should be shown or not
-				      showLabel: true,
-				      // If the axis grid should be drawn or not
-				      showGrid: true,
-				      // Use only integer values (whole numbers) for the scale steps
-				      onlyInteger: true
-				    }});
+				});
 			});
 </script>
