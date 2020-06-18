@@ -22,9 +22,6 @@ public class DistribucionDetalle {
 
 	private Integer cantidad;
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	private Distribucion distribucion;
-
 	public DistribucionDetalle() {
 	}
 
@@ -60,11 +57,4 @@ public class DistribucionDetalle {
 		this.cantidad = cantidad;
 	}
 
-	public Distribucion getDistribucion() {
-		return distribucion;
-	}
-
-	public void setDistribucion(Distribucion distribucion) {
-		this.distribucion = distribucion;
-	}
 }
