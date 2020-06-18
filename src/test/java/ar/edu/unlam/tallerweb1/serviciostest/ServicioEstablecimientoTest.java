@@ -22,7 +22,9 @@ public class ServicioEstablecimientoTest extends SpringTest {
 		RepositorioEstablecimiento servicioEstablecimientoDao = mock(RepositorioEstablecimiento.class);
 		List<Establecimiento> lista = new ArrayList<Establecimiento>();
 		when(servicioEstablecimientoDao.getAll()).thenReturn(lista);
-		lista.add(new Establecimiento());
+		Establecimiento establec = new Establecimiento();
+		establec.setOcupacion(1000);
+		lista.add(establec);
 		
 		//Ejecucion
 		ServicioEstablecimientoImpl servicioEstablecimiento = new ServicioEstablecimientoImpl(servicioEstablecimientoDao);

@@ -19,9 +19,9 @@ public class ResponsableControladorTest {
 		//Preperacion
 		ServicioResponsable servicioResponsable = mock(ServicioResponsable.class);
 		ServicioEstablecimiento servicioEstablecimiento = mock(ServicioEstablecimiento.class);
-		ResponsableControlador controladorResponsable = new ResponsableControlador(servicioResponsable, servicioEstablecimiento);
-		
+
 		//Ejecucion
+		ResponsableControlador controladorResponsable = new ResponsableControlador(servicioResponsable, servicioEstablecimiento);
 		ModelAndView modelAndView = controladorResponsable.responsables();
 		
 		//Validacion
