@@ -20,19 +20,24 @@ public class ServicioEstablecimientoTest extends SpringTest {
 	public void elServicioEstablecimientoMayorOcupacionMeDevuelveUnEstablecimientoSolo() {
 		//Preparacion
 		RepositorioEstablecimiento servicioEstablecimientoDao = mock(RepositorioEstablecimiento.class);
+		
 		List<Establecimiento> lista = new ArrayList<Establecimiento>();
-		when(servicioEstablecimientoDao.getAll()).thenReturn(lista);
-		Establecimiento establec = new Establecimiento();
-		establec.setOcupacion(1000);
-		lista.add(establec);
+		Establecimiento establec1 = new Establecimiento();
+		Establecimiento establec2 = new Establecimiento();
+		establec1.setOcupacion(1000);
+		establec2.setOcupacion(2000);
+		lista.add(establec1);
+		lista.add(establec2);
 		
 		//Ejecucion
 		ServicioEstablecimientoImpl servicioEstablecimiento = new ServicioEstablecimientoImpl(servicioEstablecimientoDao);
+		when(servicioEstablecimientoDao.getAll()).thenReturn(lista);
 		Establecimiento unicoEstablecimientoDevuelto = servicioEstablecimiento.establecimientoMayorOcupacion();
 		unicoEstablecimientoDevuelto.setNombre("Establecimiento con mayor capacidad");
 		
 		//Validacion
 		assertThat(unicoEstablecimientoDevuelto).isNotNull();
+		assertThat(unicoEstablecimientoDevuelto).isInstanceOf(Establecimiento.class);
 	}
 
 }

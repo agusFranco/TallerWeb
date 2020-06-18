@@ -70,6 +70,8 @@ public class ServicioInsumoImpl implements ServicioInsumo {
 				insumoAsignado.setNombre(itemInsumo.getNombre());
 				insumoAsignado.setTipo(itemInsumo.getTipo());
 				insumoAsignado.setCantidad((int) itemInsumo.getCantidad() / cantidadEstablec);
+				
+				//Aca es donde cambio que se lo asigne al que me vino por parametro
 				if (itemEstablec.getId() == establecimiento.getId()) {
 					Integer InsumoASumar = insumoAsignado.getCantidad();
 					int InsumoRestante = itemInsumo.getCantidad() % cantidadEstablec;
