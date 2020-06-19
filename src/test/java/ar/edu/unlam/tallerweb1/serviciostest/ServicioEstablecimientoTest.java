@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.serviciostest;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -38,6 +39,7 @@ public class ServicioEstablecimientoTest extends SpringTest {
 		//Validacion
 		assertThat(unicoEstablecimientoDevuelto).isNotNull();
 		assertThat(unicoEstablecimientoDevuelto).isInstanceOf(Establecimiento.class);
+		assertTrue(unicoEstablecimientoDevuelto.getOcupacion().equals(2000));
 	}
 
 }
