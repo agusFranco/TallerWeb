@@ -22,6 +22,7 @@ import ar.edu.unlam.tallerweb1.modelo.Distribucion;
 import ar.edu.unlam.tallerweb1.modelo.DistribucionDetalle;
 import ar.edu.unlam.tallerweb1.modelo.Establecimiento;
 import ar.edu.unlam.tallerweb1.modelo.Insumo;
+import ar.edu.unlam.tallerweb1.negocio.EquitativoStrategy;
 import ar.edu.unlam.tallerweb1.servicios.ServicioDistribucion;
 import ar.edu.unlam.tallerweb1.servicios.ServicioDistribucionDetalle;
 import ar.edu.unlam.tallerweb1.servicios.ServicioEstablecimiento;
@@ -65,8 +66,11 @@ public class DistribucionControlador {
 	public ModelAndView cambiarInsumos(@ModelAttribute("establecimiento") Establecimiento establecimiento) {
 		ModelMap modelo = new ModelMap();
 
-		Map<Establecimiento, List<Insumo>> distribucionCambiada = servicioInsumo
-				.cambiarDeEstablecInsumosSobrantes(establecimiento);
+		List<Establecimiento> establecimientos = servicioEstablecimiento.obtenerTodos();
+		List<Insumo> insumos = servicioInsumo.obtenerTodos();
+		
+		EquitativoStrategy strategyEquitativo = new EquitativoStrategy();
+		Map<Establecimiento, List<Insumo>> distribucionCambiada = strategyEquitativo.cambiarEstablecInsumosRestantes(establecimientos, insumos, establecimiento);
 		modelo.put("MapaDistribuido", distribucionCambiada);
 
 		// Sera el que mas prioridad tiene porque es el que selecciona y envia solo el
@@ -80,7 +84,6 @@ public class DistribucionControlador {
 
 		// Fines presentativos.
 		modelo.put("estrategia", TipoDeStrategy.EQUITATIVO.getTipo());
-
 		return new ModelAndView("distribucion", modelo);
 	}
 

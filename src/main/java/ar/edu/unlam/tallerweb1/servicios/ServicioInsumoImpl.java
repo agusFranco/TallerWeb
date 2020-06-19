@@ -52,35 +52,4 @@ public class ServicioInsumoImpl implements ServicioInsumo {
 		return insumosSobrantes;
 	}
 
-	@Override
-	public Map<Establecimiento, List<Insumo>> cambiarDeEstablecInsumosSobrantes(Establecimiento establecimiento) {
-		List<Establecimiento> establecimientos = servicioEstablecimientoDao.getAll();
-		List<Insumo> insumos = servicioInsumoDao.getAll();
-		Map<Establecimiento, List<Insumo>> asignacion = new HashMap<Establecimiento, List<Insumo>>();
-		Integer totalInsumos = 0;
-		for (Insumo item : insumos) {
-			totalInsumos = totalInsumos + item.getCantidad();
-		}
-		Integer cantidadEstablec = establecimientos.size();
-		for (Establecimiento itemEstablec : establecimientos) {
-			itemEstablec.setPrioridad((float) 1);
-			List<Insumo> insumosAsignados = new ArrayList<Insumo>();
-			for (Insumo itemInsumo : insumos) {
-				Insumo insumoAsignado = new Insumo();
-				insumoAsignado.setNombre(itemInsumo.getNombre());
-				insumoAsignado.setTipo(itemInsumo.getTipo());
-				insumoAsignado.setCantidad((int) itemInsumo.getCantidad() / cantidadEstablec);
-				
-				//Aca es donde cambio que se lo asigne al que me vino por parametro
-				if (itemEstablec.getId() == establecimiento.getId()) {
-					Integer InsumoASumar = insumoAsignado.getCantidad();
-					int InsumoRestante = itemInsumo.getCantidad() % cantidadEstablec;
-					insumoAsignado.setCantidad(InsumoASumar + InsumoRestante);
-				}
-				insumosAsignados.add(insumoAsignado);
-			}
-			asignacion.put(itemEstablec, insumosAsignados);
-		}
-		return asignacion;
-	}
 }

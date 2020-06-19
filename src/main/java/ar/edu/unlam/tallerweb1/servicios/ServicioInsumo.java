@@ -15,5 +15,4 @@ public interface ServicioInsumo {
 
 	Long insumosSobrantes();
 	
-	Map<Establecimiento, List<Insumo>> cambiarDeEstablecInsumosSobrantes(Establecimiento establecimiento);
 }
