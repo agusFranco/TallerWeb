@@ -5,6 +5,7 @@ TRUNCATE TABLE `establecimiento`;
 TRUNCATE TABLE `zona`;
 TRUNCATE TABLE `insumo`;
 TRUNCATE TABLE `responsable`;
+TRUNCATE TABLE `tipoDistribucion`;
 SET FOREIGN_KEY_CHECKS = 1;
 
 INSERT INTO `zona` (`id`,`nombre`,`puntaje`) VALUES 

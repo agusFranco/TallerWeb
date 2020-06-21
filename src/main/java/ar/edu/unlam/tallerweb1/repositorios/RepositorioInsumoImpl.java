@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import ar.edu.unlam.tallerweb1.modelo.Insumo;
 
 @Repository("repositorioInsumo")
-public class RepositorioInsumoImpl extends RepositorioBaseImpl<Insumo, Integer> implements RepositorioInsumo {
+public class RepositorioInsumoImpl extends RepositorioBaseImpl<Insumo, Long> implements RepositorioInsumo {
 
 	@Autowired
 	public RepositorioInsumoImpl(SessionFactory sessionFactory) {

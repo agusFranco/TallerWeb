@@ -42,6 +42,7 @@
 							<li id="distribucionLink"><a aria-expanded="false" role="button" href="${relativePath}/distribucion"> Distribución </a></li>
 							<li id="historialDistribucionesLink"><a aria-expanded="false" role="button" href="${relativePath}/historialDistribuciones"> Historial </a></li>
 							<li id="responsablesLink"><a aria-expanded="false" role="button" href="${relativePath}/responsables"> Responsables </a></li>
+							<li id="donacionLink"><a aria-expanded="false" role="button" href="${relativePath}/donacion"> Donaciones </a></li>
 						</ul>
 						<ul class="nav navbar-top-links navbar-right">
 							<li><a href="login.html"> <i class="fa fa-sign-out"></i> Cerrar sesión
@@ -91,6 +92,9 @@
 
 		if (currentUrl.includes('historialDistribuciones')) {
 			$("#historialDistribucionesLink").addClass('active');
+		}
+		if (currentUrl.includes('donacion')) {
+			$("#donacionLink").addClass('active');
 		}
 	};
 

@@ -28,13 +28,11 @@ public class Insumo {
 
 
 	public Insumo(Long id, String nombre, String tipo, Integer cantidad, Float precioUnidad) {
-		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.tipo = tipo;
 		this.cantidad = cantidad;
 		this.precioUnidad = precioUnidad;
-		this.pxq = (float)this.precioUnidad * (float)this.cantidad;
 	}
 
 
@@ -79,7 +77,7 @@ public class Insumo {
 
 
 	public Float getPxq() {
-		return pxq;
+		return (float)this.precioUnidad * (float)this.cantidad;
 	}
 
 

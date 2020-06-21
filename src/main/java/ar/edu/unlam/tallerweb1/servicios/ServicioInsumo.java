@@ -15,4 +15,9 @@ public interface ServicioInsumo {
 
 	Long insumosSobrantes();
 	
+	Insumo obtenerPorId(Long id);
+	
+	void actualizarInsumo(Insumo insumo,String cantidad) throws Exception;
+	
+	Map<Insumo,Integer> recibirDonaciones();
 }
