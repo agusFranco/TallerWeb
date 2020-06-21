@@ -17,6 +17,7 @@
 <link href="${relativePath}/css/template/style.css" rel="stylesheet">
 <link href="${relativePath}/css/footable/footable.core.css" rel="stylesheet">
 <link href="${relativePath}/css/fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
 <!-- Gráficos -->
 <link href="${relativePath}/css/chartist/chartist-custom.css" rel="stylesheet">
 <script type="text/javascript">
@@ -43,6 +44,7 @@
 							<li id="historialDistribucionesLink"><a aria-expanded="false" role="button" href="${relativePath}/historialDistribuciones"> Historial </a></li>
 							<li id="responsablesLink"><a aria-expanded="false" role="button" href="${relativePath}/responsables"> Responsables </a></li>
 							<li id="donacionLink"><a aria-expanded="false" role="button" href="${relativePath}/donacion"> Donaciones </a></li>
+							<li id="responsablesLink"><a aria-expanded="false" role="button" href="${relativePath}/mapa"> Mapa </a></li>
 						</ul>
 						<ul class="nav navbar-top-links navbar-right">
 							<li><a href="login.html"> <i class="fa fa-sign-out"></i> Cerrar sesión
@@ -74,6 +76,8 @@
 <script src="${relativePath}/js/template/plugins/dataTables/datatables.min.js"></script>
 <script src="${relativePath}/js/template/app/inspinia.js"></script>
 <script src="${relativePath}/js/template/plugins/footable/footable.js"></script>
+
+
 <!-- Gráficos -->
 <script src="${relativePath}/js/chartist/chartist.js"></script>
 <script type="text/javascript">
