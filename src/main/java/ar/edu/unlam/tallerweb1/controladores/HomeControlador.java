@@ -2,6 +2,11 @@ package ar.edu.unlam.tallerweb1.controladores;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -25,6 +30,10 @@ public class HomeControlador {
 
 	private final ServicioEstablecimiento servicioEstablecimiento;
 	private final ServicioInsumo servicioInsumo;
+	
+	@Inject
+	private HttpServletRequest request;
+	
 
 	@Autowired
 	public HomeControlador(ServicioEstablecimiento servicioEstablecimiento, ServicioInsumo servicioInsumo) {
@@ -36,14 +45,25 @@ public class HomeControlador {
 	public void initBinder(WebDataBinder dataBinder) {
 		dataBinder.registerCustomEditor(TipoDeStrategy.class, new StringToTipoDeStrategy());
 	}
+	
+	public boolean verificarSesionActiva() {
+		return request.getSession().getAttribute("usuario") != null ? true : false;
+	}
 
 	@RequestMapping(path = "/", method = RequestMethod.GET)
 	public ModelAndView inicio() {
+		
+		if(!this.verificarSesionActiva()) return new ModelAndView("redirect:/login");
+		
+		
 		return new ModelAndView("redirect:/home");
+
 	}
 
 	@RequestMapping(path = "/home", method = RequestMethod.GET)
 	public ModelAndView irAHome() {
+		if(!this.verificarSesionActiva()) return new ModelAndView("redirect:/login");
+		
 		// Busco el modelo default y le paso la estrategia default
 		ModelMap modelo = this.obtenerModeloDeHome(TipoDeStrategy.COMBINADO);
 		return new ModelAndView("home", modelo);
@@ -53,6 +73,8 @@ public class HomeControlador {
 	// Busca el modelo default / Ejecuta la Prioridad
 	@RequestMapping(path = "/home", method = RequestMethod.POST)
 	public ModelAndView homeCalcularPrioridad(@ModelAttribute("strategy") TipoDeStrategy strategy) {
+		if(!this.verificarSesionActiva()) return new ModelAndView("redirect:/login");
+		
 		// Busco el modelo default y le paso la prioridad
 		ModelMap modelo = this.obtenerModeloDeHome(strategy);
 		return new ModelAndView("home", modelo);
@@ -60,6 +82,7 @@ public class HomeControlador {
 
 	@RequestMapping(path = "/404", method = RequestMethod.GET)
 	public ModelAndView irA404() {
+		if(!this.verificarSesionActiva()) return new ModelAndView("redirect:/login");
 		return new ModelAndView("404");
 	}
 

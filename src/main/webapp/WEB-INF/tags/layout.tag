@@ -44,10 +44,10 @@
 							<li id="historialDistribucionesLink"><a aria-expanded="false" role="button" href="${relativePath}/historialDistribuciones"> Historial </a></li>
 							<li id="responsablesLink"><a aria-expanded="false" role="button" href="${relativePath}/responsables"> Responsables </a></li>
 							<li id="donacionLink"><a aria-expanded="false" role="button" href="${relativePath}/donacion"> Donaciones </a></li>
-							<li id="responsablesLink"><a aria-expanded="false" role="button" href="${relativePath}/mapa"> Mapa </a></li>
+							<li id="mapaLink"><a aria-expanded="false" role="button" href="${relativePath}/mapa"> Mapa </a></li>
 						</ul>
 						<ul class="nav navbar-top-links navbar-right">
-							<li><a href="login.html"> <i class="fa fa-sign-out"></i> Cerrar sesión
+							<li><a href="./logout"> <i class="fa fa-sign-out"></i> Cerrar sesión
 							</a></li>
 						</ul>
 					</div>
@@ -99,6 +99,9 @@
 		}
 		if (currentUrl.includes('donacion')) {
 			$("#donacionLink").addClass('active');
+		}
+		if (currentUrl.includes('mapa')) {
+			$("#mapaLink").addClass('active');
 		}
 	};
 
