@@ -59,8 +59,8 @@
 							<li id="responsablesLink"><a aria-expanded="false"
 								role="button" href="${relativePath}/responsables">
 									Responsables </a></li>
-							<li id="donacionLink"><a aria-expanded="false" role="button"
-								href="${relativePath}/donacion"> Donaciones </a></li>
+							<li id="donacionesLink"><a aria-expanded="false" role="button"
+								href="${relativePath}/donaciones"> Donaciones </a></li>
 							<li id="mapaLink"><a aria-expanded="false" role="button"
 								href="${relativePath}/mapa"> Mapa </a></li>
 						</ul>
@@ -124,8 +124,8 @@
 		if (currentUrl.includes('historialDistribuciones')) {
 			$("#historialDistribucionesLink").addClass('active');
 		}
-		if (currentUrl.includes('donacion')) {
-			$("#donacionLink").addClass('active');
+		if (currentUrl.includes('donaciones')) {
+			$("#donacionesLink").addClass('active');
 		}
 		if (currentUrl.includes('mapa')) {
 			$("#mapaLink").addClass('active');

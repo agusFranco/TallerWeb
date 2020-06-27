@@ -45,4 +45,14 @@ public class ServicioLoginImpl implements ServicioLogin {
 	public void cerrarSesion() {
 		this.request.getSession().invalidate();
 	}
+
+	@Override
+	public String[] intentoIngresarSinPermisos(String msg) {
+		String[] sinAutorizacion = new String[2];
+		if(msg != null) {
+			sinAutorizacion[0] ="Sin Autorización para acceder";
+			sinAutorizacion[1] ="danger";
+		}
+		return sinAutorizacion;
+	}
 }

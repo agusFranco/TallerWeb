@@ -12,4 +12,6 @@ public interface ServicioLogin {
 	void IniciarsesionDesarrollo();
 	
 	void cerrarSesion();
+	
+	String[] intentoIngresarSinPermisos(String msg);
 }

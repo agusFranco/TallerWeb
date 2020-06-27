@@ -30,12 +30,12 @@ public class DonacionController {
 		this.servicioInsumo = servicioInsumo;
 	}
 
-	@RequestMapping(path = "/donacion", method = RequestMethod.GET)
+	@RequestMapping(path = "/donaciones", method = RequestMethod.GET)
 	public ModelAndView donacion() {
 		if(!servicioLogin.verificarSesionActiva()) return new ModelAndView("redirect:/login?msg=1");	
 		
 		ModelMap modelo = this.obtenerModelo();
-		return new ModelAndView("donacion", modelo);
+		return new ModelAndView("donaciones", modelo);
 	}
 
 	@RequestMapping(path = "/cargar-donacion", method = RequestMethod.POST)
@@ -57,7 +57,7 @@ public class DonacionController {
 		ModelMap modelo = this.obtenerModelo();
 		modelo.put("msg", msg);
 
-		return new ModelAndView("donacion", modelo);
+		return new ModelAndView("donaciones", modelo);
 	}
 
 	@RequestMapping(path = "/recibir-donacion", method = RequestMethod.POST)
@@ -79,7 +79,7 @@ public class DonacionController {
 		ModelMap modelo = this.obtenerModelo();
 		modelo.put("msg", msg);
 		
-		return new ModelAndView("donacion", modelo);
+		return new ModelAndView("donaciones", modelo);
 	}
 	
 	// Obtiene los datos por default

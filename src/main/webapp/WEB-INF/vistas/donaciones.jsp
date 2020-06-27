@@ -7,8 +7,7 @@
 <c:set var="relativePath" value="${pageContext.request.contextPath}" />
 
 <t:layout>
-	<div class="wrapper wrapper-content animated fadeInRight">
-
+	<div class=" container-fluid wrapper wrapper-content animated fadeInRight">
 		<c:choose>
 			<c:when test="${not empty msg}">
 				<div class="alert alert-${msg[1]} alert-dismissable">
@@ -58,8 +57,6 @@
 			</div>
 		</div>
 
-
-
 		<div class="col-sm-3">
 			<div class="ibox">
 				<div class="ibox-title">
@@ -84,9 +81,10 @@
 									class="form-control" placeholder="Ingrese cantidad" min="0" />
 							</div>
 							<div class="input-group">
-								<button type="submit" class="btn btn-primary font-weight-bold">Confirmar
-									donación <i class="fa fa-check"></i></button>
-									
+								<button type="submit" class="btn btn-primary font-weight-bold">
+									Confirmar donación <i class="fa fa-check"></i>
+								</button>
+
 							</div>
 						</form:form>
 					</div>
@@ -124,9 +122,10 @@
 													<input type="hidden" name="id" value="${item.key.id}">
 													<input type="hidden" name="cantidad" value="${item.value}">
 													<div class="input-group">
-														<button type="Submit" class="btn btn-primary">Recibir
-															donación <i class="fa fa-hand-paper-o" aria-hidden="true"></i>
-															</button>
+														<button type="Submit" class="btn btn-primary">
+															Recibir donación <i class="fa fa-hand-paper-o"
+																aria-hidden="true"></i>
+														</button>
 													</div>
 												</form:form></td>
 										</tr>

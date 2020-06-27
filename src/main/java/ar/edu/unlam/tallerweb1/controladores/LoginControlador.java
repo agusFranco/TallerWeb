@@ -42,11 +42,8 @@ public class LoginControlador {
 		modelo.put("usuario", usuario);
 		// Se va a la vista login (el nombre completo de la lista se resuelve utilizando
 		// el view resolver definido en el archivo spring-servlet.xml) y se envian los datos a la misma dentro del modelo
-		
-		String[] sinAutorizacion = new String[2];
-		sinAutorizacion[0] = (msg != null) ? "Sin Autorización para acceder" : "";
-		sinAutorizacion[1] = (msg != null) ? "danger" : "";
-		modelo.put("msg", sinAutorizacion);  
+
+		modelo.put("msg", servicioLogin.intentoIngresarSinPermisos(msg));  
 		return new ModelAndView("login", modelo);
 	}
 
