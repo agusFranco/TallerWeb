@@ -39,17 +39,16 @@ public class DistribucionControlador {
 	private final ServicioInsumo servicioInsumo;
 	private final ServicioDistribucion servicioDistribucion;
 	private final ServicioDistribucionDetalle servicioDistribucionDetalle;
-
-	@Inject
 	private ServicioLogin servicioLogin;
 	
 	@Autowired
 	public DistribucionControlador(ServicioEstablecimiento servicioEstablecimiento, ServicioInsumo servicioInsumo,
-			ServicioDistribucion servicioDistribucion, ServicioDistribucionDetalle servicioDistribucionDetalle) {
+			ServicioDistribucion servicioDistribucion, ServicioDistribucionDetalle servicioDistribucionDetalle,ServicioLogin servicioLogin) {
 		this.servicioEstablecimiento = servicioEstablecimiento;
 		this.servicioInsumo = servicioInsumo;
 		this.servicioDistribucion = servicioDistribucion;
 		this.servicioDistribucionDetalle = servicioDistribucionDetalle;
+		this.servicioLogin = servicioLogin;
 	}
 
 	@InitBinder

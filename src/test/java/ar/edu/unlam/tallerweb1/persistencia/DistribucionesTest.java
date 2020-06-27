@@ -27,7 +27,7 @@ public class DistribucionesTest extends SpringTest {
 	@Test
 	@Transactional
 	@Rollback
-	public void validarDistribución_x_Ocupacion() {
+	public void validarDistribucion_x_Ocupacion() {
 
 //		Preparación
 		RepositorioEstablecimiento repo = new RepositorioEstablecimientoImpl(session().getSessionFactory());

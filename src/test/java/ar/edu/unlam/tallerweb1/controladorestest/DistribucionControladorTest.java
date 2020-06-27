@@ -22,6 +22,7 @@ import ar.edu.unlam.tallerweb1.modelo.Insumo;
 import ar.edu.unlam.tallerweb1.modelo.Zona;
 import ar.edu.unlam.tallerweb1.servicios.ServicioEstablecimiento;
 import ar.edu.unlam.tallerweb1.servicios.ServicioInsumo;
+import ar.edu.unlam.tallerweb1.servicios.ServicioLogin;
 import ar.edu.unlam.tallerweb1.servicios.ServicioDistribucion;
 import ar.edu.unlam.tallerweb1.servicios.ServicioDistribucionDetalle;
 
@@ -32,14 +33,16 @@ public class DistribucionControladorTest{
 	@Test
 	public void meRedireccionaALaPaginaDeDistribucion() {
 		// Preperacion
+		ServicioLogin servicioLogin = mock(ServicioLogin.class);
 		ServicioInsumo servicioInsumo = mock(ServicioInsumo.class);
 		ServicioEstablecimiento servicioEstablecimiento = mock(ServicioEstablecimiento.class);
 		ServicioDistribucion servicioDistribucion = mock(ServicioDistribucion.class);
 		ServicioDistribucionDetalle servicioDistribucionDetalle = mock(ServicioDistribucionDetalle.class);
 
 		DistribucionControlador distribucionControlador = new DistribucionControlador(servicioEstablecimiento,
-				servicioInsumo, servicioDistribucion, servicioDistribucionDetalle);
-
+				servicioInsumo, servicioDistribucion, servicioDistribucionDetalle,servicioLogin);
+		when(servicioLogin.verificarSesionActiva()).thenReturn(true);
+		
 		// Ejecucion
 		ModelAndView modelAndView = distribucionControlador.irADistribucion();
 
@@ -50,12 +53,13 @@ public class DistribucionControladorTest{
 	@Test
 	public void distribuyeLosInsumosPorStrategy() {
 		// Preperacion
+		ServicioLogin servicioLogin = mock(ServicioLogin.class);
 		ServicioInsumo servicioInsumo = mock(ServicioInsumo.class);
 		ServicioEstablecimiento servicioEstablecimiento = mock(ServicioEstablecimiento.class);
 		ServicioDistribucion servicioDistribucion = mock(ServicioDistribucion.class);
 		ServicioDistribucionDetalle servicioDistribucionDetalle = mock(ServicioDistribucionDetalle.class);
 		DistribucionControlador distribucionControlador = new DistribucionControlador(servicioEstablecimiento,
-				servicioInsumo, servicioDistribucion, servicioDistribucionDetalle);
+				servicioInsumo, servicioDistribucion, servicioDistribucionDetalle,servicioLogin);
 		TipoDeStrategy str = mock(TipoDeStrategy.class);
 		
 		// simulacion de objetos
@@ -94,7 +98,8 @@ public class DistribucionControladorTest{
 		when(servicioInsumo.insumosSobrantes()).thenReturn((long) 1);
 		when(servicioEstablecimiento.establecimientoMayorOcupacion()).thenReturn(establecimientos.get(0));
 		when(str.distribuirInsumos(establecimientos, insumos)).thenReturn(distribucion);
-
+		when(servicioLogin.verificarSesionActiva()).thenReturn(true);
+		
 		// Ejecucion
 		ModelAndView modelAndView = distribucionControlador.calcularDistribucion(str);
 		ModelMap model = modelAndView.getModelMap();

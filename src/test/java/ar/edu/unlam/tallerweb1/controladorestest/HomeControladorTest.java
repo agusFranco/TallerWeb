@@ -17,17 +17,20 @@ import ar.edu.unlam.tallerweb1.controladores.HomeControlador;
 import ar.edu.unlam.tallerweb1.modelo.Establecimiento;
 import ar.edu.unlam.tallerweb1.servicios.ServicioEstablecimiento;
 import ar.edu.unlam.tallerweb1.servicios.ServicioInsumo;
+import ar.edu.unlam.tallerweb1.servicios.ServicioLogin;
 
 public class HomeControladorTest {
 
 	@Test
 	public void inicioMeRedireccionaALaVistaHome() {
 		// Preparacion
+		ServicioLogin servicioLogin = mock(ServicioLogin.class);
 		ServicioInsumo servicioInsumo = mock(ServicioInsumo.class);
 		ServicioEstablecimiento servicioEstablecimiento = mock(ServicioEstablecimiento.class);
 
-		HomeControlador homeControlador = new HomeControlador(servicioEstablecimiento, servicioInsumo);
-
+		HomeControlador homeControlador = new HomeControlador(servicioEstablecimiento, servicioInsumo,servicioLogin);
+		when(servicioLogin.verificarSesionActiva()).thenReturn(true);
+		
 		// Ejecucion
 		ModelAndView modelAndView = homeControlador.inicio();
 
@@ -38,11 +41,13 @@ public class HomeControladorTest {
 	@Test
 	public void homeMeLlevaALaVistaHome() {
 		// Preparacion
+		ServicioLogin servicioLogin = mock(ServicioLogin.class);
 		ServicioInsumo servicioInsumo = mock(ServicioInsumo.class);
 		ServicioEstablecimiento servicioEstablecimiento = mock(ServicioEstablecimiento.class);
 
-		HomeControlador homeControlador = new HomeControlador(servicioEstablecimiento, servicioInsumo);
-
+		HomeControlador homeControlador = new HomeControlador(servicioEstablecimiento, servicioInsumo,servicioLogin);
+		when(servicioLogin.verificarSesionActiva()).thenReturn(true);
+		
 		// Ejecucion
 		ModelAndView modelAndView = homeControlador.irAHome();
 
@@ -53,14 +58,16 @@ public class HomeControladorTest {
 	@Test
 	public void homeMeLlenaElModeloCorrectamente() {
 		// Preparacion
+		ServicioLogin servicioLogin = mock(ServicioLogin.class);
 		ServicioInsumo servicioInsumo = mock(ServicioInsumo.class);
 		ServicioEstablecimiento servicioEstablecimiento = mock(ServicioEstablecimiento.class);
 
+		when(servicioLogin.verificarSesionActiva()).thenReturn(true);
 		List<Establecimiento> establecimientos = new ArrayList<>();
 
 		when(servicioEstablecimiento.obtenerTodos()).thenReturn(establecimientos);
-
-		HomeControlador homeControlador = new HomeControlador(servicioEstablecimiento, servicioInsumo);
+		
+		HomeControlador homeControlador = new HomeControlador(servicioEstablecimiento, servicioInsumo,servicioLogin);
 
 		// Ejecucion
 		ModelAndView modelAndView = homeControlador.irAHome();
@@ -81,11 +88,13 @@ public class HomeControladorTest {
 	@Test
 	public void calcularPrioridadPorStrategyDevuelveFiltroActivo() {
 		// Preparacion
+		ServicioLogin servicioLogin = mock(ServicioLogin.class);
 		ServicioInsumo servicioInsumo = mock(ServicioInsumo.class);
 		ServicioEstablecimiento servicioEstablecimiento = mock(ServicioEstablecimiento.class);
 
-		HomeControlador homeControlador = new HomeControlador(servicioEstablecimiento, servicioInsumo);
-
+		HomeControlador homeControlador = new HomeControlador(servicioEstablecimiento, servicioInsumo,servicioLogin);
+		when(servicioLogin.verificarSesionActiva()).thenReturn(true);
+		
 		// Ejecucion
 		ModelAndView modelAndView = homeControlador.homeCalcularPrioridad(TipoDeStrategy.ZONA);
 		ModelMap modelMap = modelAndView.getModelMap();

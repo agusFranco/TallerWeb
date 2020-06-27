@@ -37,12 +37,12 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioLogin;
 public class MapaControlador {
 
 	private final ServicioEstablecimiento servicioEstablecimiento;
-	@Inject
 	private ServicioLogin servicioLogin;
 	
 	@Autowired
-	public MapaControlador(ServicioEstablecimiento servicioEstablecimiento) {
+	public MapaControlador(ServicioEstablecimiento servicioEstablecimiento,ServicioLogin servicioLogin) {
 		this.servicioEstablecimiento = servicioEstablecimiento;
+		this.servicioLogin = servicioLogin;
 	}
 
 	@RequestMapping(path = "/mapa", method = RequestMethod.GET)

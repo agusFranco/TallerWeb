@@ -31,14 +31,13 @@ public class HomeControlador {
 
 	private final ServicioEstablecimiento servicioEstablecimiento;
 	private final ServicioInsumo servicioInsumo;
-	
-	@Inject
 	private ServicioLogin servicioLogin;
 	
 	@Autowired
-	public HomeControlador(ServicioEstablecimiento servicioEstablecimiento, ServicioInsumo servicioInsumo) {
+	public HomeControlador(ServicioEstablecimiento servicioEstablecimiento, ServicioInsumo servicioInsumo,ServicioLogin servicioLogin) {
 		this.servicioEstablecimiento = servicioEstablecimiento;
 		this.servicioInsumo = servicioInsumo;
+		this.servicioLogin = servicioLogin;
 	}
 
 	@InitBinder

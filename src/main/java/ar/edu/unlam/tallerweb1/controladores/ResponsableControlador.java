@@ -21,16 +21,16 @@ public class ResponsableControlador {
 
 	private final ServicioResponsable servicioResponsable;
 	private final ServicioEstablecimiento servicioEstablecimiento;
-
-	@Inject
 	private ServicioLogin servicioLogin;
+	
 	
 	@Autowired
 	public ResponsableControlador(ServicioResponsable servicioResponsable,
-			ServicioEstablecimiento servicioEstablecimiento) {
+			ServicioEstablecimiento servicioEstablecimiento,ServicioLogin servicioLogin) {
 		super();
 		this.servicioResponsable = servicioResponsable;
 		this.servicioEstablecimiento = servicioEstablecimiento;
+		this.servicioLogin = servicioLogin;
 	}
 
 	@RequestMapping(path = "/responsables", method = RequestMethod.GET)

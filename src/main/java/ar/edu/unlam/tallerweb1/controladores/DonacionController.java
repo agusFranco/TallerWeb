@@ -21,13 +21,12 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioLogin;
 @Controller
 public class DonacionController {
 	private final ServicioInsumo servicioInsumo;
-
-	@Inject
 	private ServicioLogin servicioLogin;
 	
 	@Autowired
-	public DonacionController(ServicioInsumo servicioInsumo) {
+	public DonacionController(ServicioInsumo servicioInsumo,ServicioLogin servicioLogin) {
 		this.servicioInsumo = servicioInsumo;
+		this.servicioLogin = servicioLogin;
 	}
 
 	@RequestMapping(path = "/donaciones", method = RequestMethod.GET)
