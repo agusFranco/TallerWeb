@@ -6,4 +6,10 @@ import ar.edu.unlam.tallerweb1.modelo.Usuario;
 public interface ServicioLogin {
 
 	Usuario consultarUsuario(Usuario usuario);
+	
+	boolean verificarSesionActiva();
+	
+	void IniciarsesionDesarrollo();
+	
+	void cerrarSesion();
 }

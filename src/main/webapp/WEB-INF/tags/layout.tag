@@ -1,6 +1,7 @@
 <%@tag description="Overall Page template" pageEncoding="UTF-8"%>
 <%@attribute name="header" fragment="true"%>
 <%@attribute name="footer" fragment="true"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -11,15 +12,21 @@
 
 <c:set var="relativePath" value="${pageContext.request.contextPath}" />
 
-<link href="${relativePath}/css/template/bootstrap.min.css" rel="stylesheet">
-<link href="${relativePath}/css/template/datatables.min.css" rel="stylesheet">
+<link href="${relativePath}/css/template/bootstrap.min.css"
+	rel="stylesheet">
+<link href="${relativePath}/css/template/datatables.min.css"
+	rel="stylesheet">
 <link href="${relativePath}/css/template/animate.css" rel="stylesheet">
 <link href="${relativePath}/css/template/style.css" rel="stylesheet">
-<link href="${relativePath}/css/footable/footable.core.css" rel="stylesheet">
-<link href="${relativePath}/css/fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+<link href="${relativePath}/css/footable/footable.core.css"
+	rel="stylesheet">
+<link
+	href="${relativePath}/css/fonts/font-awesome/css/font-awesome.min.css"
+	rel="stylesheet">
 
 <!-- Gráficos -->
-<link href="${relativePath}/css/chartist/chartist-custom.css" rel="stylesheet">
+<link href="${relativePath}/css/chartist/chartist-custom.css"
+	rel="stylesheet">
 <script type="text/javascript">
 	<c:set var="url"
 	value="${requestScope['javax.servlet.forward.request_uri']}" />
@@ -32,23 +39,40 @@
 			<div id="page-header" class="row border-bottom white-bg">
 				<nav class="navbar navbar-static-top" role="navigation">
 					<div class="navbar-header">
-						<button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
+						<button aria-controls="navbar" aria-expanded="false"
+							data-target="#navbar" data-toggle="collapse"
+							class="navbar-toggle collapsed" type="button">
 							<i class="fa fa-reorder"></i>
 						</button>
 						<a href="./home" class="navbar-brand">DIMAR</a>
 					</div>
 					<div class="navbar-collapse collapse" id="navbar">
 						<ul class="nav navbar-nav">
-							<li id="inicioLink"><a aria-expanded="false" role="button" href="${relativePath}/home"> Inicio </a></li>
-							<li id="distribucionLink"><a aria-expanded="false" role="button" href="${relativePath}/distribucion"> Distribución </a></li>
-							<li id="historialDistribucionesLink"><a aria-expanded="false" role="button" href="${relativePath}/historialDistribuciones"> Historial </a></li>
-							<li id="responsablesLink"><a aria-expanded="false" role="button" href="${relativePath}/responsables"> Responsables </a></li>
-							<li id="donacionLink"><a aria-expanded="false" role="button" href="${relativePath}/donacion"> Donaciones </a></li>
-							<li id="mapaLink"><a aria-expanded="false" role="button" href="${relativePath}/mapa"> Mapa </a></li>
+							<li id="inicioLink"><a aria-expanded="false" role="button"
+								href="${relativePath}/home"> Inicio </a></li>
+							<li id="distribucionLink"><a aria-expanded="false"
+								role="button" href="${relativePath}/distribucion">
+									Distribución </a></li>
+							<li id="historialDistribucionesLink"><a
+								aria-expanded="false" role="button"
+								href="${relativePath}/historialDistribuciones"> Historial </a></li>
+							<li id="responsablesLink"><a aria-expanded="false"
+								role="button" href="${relativePath}/responsables">
+									Responsables </a></li>
+							<li id="donacionLink"><a aria-expanded="false" role="button"
+								href="${relativePath}/donacion"> Donaciones </a></li>
+							<li id="mapaLink"><a aria-expanded="false" role="button"
+								href="${relativePath}/mapa"> Mapa </a></li>
 						</ul>
 						<ul class="nav navbar-top-links navbar-right">
-							<li><a href="./logout"> <i class="fa fa-sign-out"></i> Cerrar sesión
-							</a></li>
+
+							<form:form action="/TallerWeb/logout" method="POST" >
+								<button type="submit" class="btn btn-danger btn-block">
+									<i class="fa fa-sign-out"></i> Cerrar sesión
+								</button>
+
+							</form:form>
+
 						</ul>
 					</div>
 				</nav>
@@ -70,10 +94,13 @@
 </body>
 <script src="${relativePath}/js/template/jquery-3.1.1.min.js"></script>
 <script src="${relativePath}/js/template/bootstrap.min.js"></script>
-<script src="${relativePath}/js/template/plugins/metisMenu/metisMenu.min.js"></script>
+<script
+	src="${relativePath}/js/template/plugins/metisMenu/metisMenu.min.js"></script>
 <script src="${relativePath}/js/template/plugins/pace/pace.min.js"></script>
-<script src="${relativePath}/js/template/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="${relativePath}/js/template/plugins/dataTables/datatables.min.js"></script>
+<script
+	src="${relativePath}/js/template/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script
+	src="${relativePath}/js/template/plugins/dataTables/datatables.min.js"></script>
 <script src="${relativePath}/js/template/app/inspinia.js"></script>
 <script src="${relativePath}/js/template/plugins/footable/footable.js"></script>
 

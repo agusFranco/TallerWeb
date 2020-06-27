@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -27,6 +30,7 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioDistribucion;
 import ar.edu.unlam.tallerweb1.servicios.ServicioDistribucionDetalle;
 import ar.edu.unlam.tallerweb1.servicios.ServicioEstablecimiento;
 import ar.edu.unlam.tallerweb1.servicios.ServicioInsumo;
+import ar.edu.unlam.tallerweb1.servicios.ServicioLogin;
 
 @Controller()
 public class DistribucionControlador {
@@ -36,6 +40,9 @@ public class DistribucionControlador {
 	private final ServicioDistribucion servicioDistribucion;
 	private final ServicioDistribucionDetalle servicioDistribucionDetalle;
 
+	@Inject
+	private ServicioLogin servicioLogin;
+	
 	@Autowired
 	public DistribucionControlador(ServicioEstablecimiento servicioEstablecimiento, ServicioInsumo servicioInsumo,
 			ServicioDistribucion servicioDistribucion, ServicioDistribucionDetalle servicioDistribucionDetalle) {
@@ -50,20 +57,25 @@ public class DistribucionControlador {
 		dataBinder.registerCustomEditor(TipoDeStrategy.class, new StringToTipoDeStrategy());
 	}
 
+	
 	@RequestMapping(path = "/distribucion", method = RequestMethod.GET)
 	public ModelAndView irADistribucion() {
+		if(!servicioLogin.verificarSesionActiva()) return new ModelAndView("redirect:/login?msg=1");
 		ModelMap modelo = this.obtenerModeloDeDistribucion(TipoDeStrategy.ZONA);
 		return new ModelAndView("distribucion", modelo);
 	}
 
 	@RequestMapping(path = "/distribucion", method = RequestMethod.POST)
 	public ModelAndView calcularDistribucion(@ModelAttribute("strategy") TipoDeStrategy strategy) {
+		if(!servicioLogin.verificarSesionActiva()) return new ModelAndView("redirect:/login?msg=1");
 		ModelMap modelo = this.obtenerModeloDeDistribucion(strategy);
 		return new ModelAndView("distribucion", modelo);
 	}
 
 	@RequestMapping(path = "/cambiarInsumos", method = RequestMethod.POST)
 	public ModelAndView cambiarInsumos(@ModelAttribute("establecimiento") Establecimiento establecimiento) {
+		if(!servicioLogin.verificarSesionActiva()) return new ModelAndView("redirect:/login?msg=1");
+		
 		ModelMap modelo = new ModelMap();
 
 		List<Establecimiento> establecimientos = servicioEstablecimiento.obtenerTodos();
@@ -89,7 +101,8 @@ public class DistribucionControlador {
 
 	@RequestMapping(path = "/confirmarDistribucion", method = RequestMethod.POST)
 	public RedirectView confirmarDistribucion(@ModelAttribute("strategy") TipoDeStrategy strategy) {
-
+		if(!servicioLogin.verificarSesionActiva()) return new RedirectView("redirect:/login?msg=1");	
+		
 		List<Establecimiento> establecimientos = servicioEstablecimiento.obtenerTodos();
 		List<Insumo> insumos = servicioInsumo.obtenerTodos();
 
@@ -106,12 +119,16 @@ public class DistribucionControlador {
 
 	@RequestMapping(path = "/historialDistribuciones", method = RequestMethod.GET)
 	public ModelAndView historialDistribuciones() {
+		if(!servicioLogin.verificarSesionActiva()) return new ModelAndView("redirect:/login?msg=1");
+		
 		ModelMap modelo = this.obtenerModeloDeHistorial();
 		return new ModelAndView("historialDistribuciones", modelo);
 	}
 
 	@RequestMapping(path = "/distribucion/{id}", method = RequestMethod.GET)
 	public ModelAndView detalleDeDistribucion(@PathVariable("id") Long id) {
+		if(!servicioLogin.verificarSesionActiva()) return new ModelAndView("redirect:/login?msg=1");
+		
 		ModelMap modelo = new ModelMap();
 
 		Distribucion distribucion = this.servicioDistribucion.obtenerConDetallesPorId(id);

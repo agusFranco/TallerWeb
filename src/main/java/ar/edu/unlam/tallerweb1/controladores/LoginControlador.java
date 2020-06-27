@@ -1,14 +1,15 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
@@ -17,15 +18,11 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioLogin;
 @Controller
 public class LoginControlador {
 
-	// La anotacion @Autowired indica a Spring que se debe utilizar el contructor
-	// como mecanismo de inyeccion de dependencias,
-	// es decir, que lo parametros del mismo deben ser un bean de spring y el
-	// framewrok automaticamente pasa como parametro
+	// La anotacion @Autowired indica a Spring que se debe utilizar el contructor  como mecanismo de inyeccion de dependencias,
+	// es decir, que lo parametros del mismo deben ser un bean de spring y el framewrok automaticamente pasa como parametro
 	// el bean correspondiente, en este caso, un objeto de una clase que implemente
-	// la interface ServicioLogin,
-	// dicha clase debe estar anotada como @Service o @Repository y debe estar en un
-	// paquete de los indicados en
-	// applicationContext.xml
+	// la interface ServicioLogin, dicha clase debe estar anotada como @Service o @Repository y debe estar en un
+	// paquete de los indicados en applicationContext.xml
 	private ServicioLogin servicioLogin;
 
 	@Autowired
@@ -35,32 +32,32 @@ public class LoginControlador {
 
 	// Este metodo escucha la URL localhost:8080/NOMBRE_APP/login si la misma es
 	// invocada por metodo http GET
-	@RequestMapping("/login")
-	public ModelAndView irALogin() {
+	@RequestMapping(value = {"/login"}, method = RequestMethod.GET)
+	public ModelAndView irALogin(@RequestParam(value = "msg", required=false) String msg) {
 
 		ModelMap modelo = new ModelMap();
-		// Se agrega al modelo un objeto del tipo Usuario con key 'usuario' para que el
-		// mismo sea asociado
+		// Se agrega al modelo un objeto del tipo Usuario con key 'usuario' para que el mismo sea asociado
 		// al model attribute del form que esta definido en la vista 'login'
 		Usuario usuario = new Usuario();
 		modelo.put("usuario", usuario);
 		// Se va a la vista login (el nombre completo de la lista se resuelve utilizando
-		// el view resolver definido en el archivo spring-servlet.xml)
-		// y se envian los datos a la misma dentro del modelo
+		// el view resolver definido en el archivo spring-servlet.xml) y se envian los datos a la misma dentro del modelo
+		
+		String[] sinAutorizacion = new String[2];
+		sinAutorizacion[0] = (msg != null) ? "Sin Autorización para acceder" : "";
+		sinAutorizacion[1] = (msg != null) ? "danger" : "";
+		modelo.put("msg", sinAutorizacion);  
 		return new ModelAndView("login", modelo);
 	}
 
-	// Este metodo escucha la URL validar-login siempre y cuando se invoque con
-	// metodo http POST
+	// Este metodo escucha la URL validar-login siempre y cuando se invoque con metodo http POST
 	// El metodo recibe un objeto Usuario el que tiene los datos ingresados en el
-	// form correspondiente y se corresponde con el modelAttribute definido en el
-	// tag form:form
+	// form correspondiente y se corresponde con el modelAttribute definido en el tag form:form
 	@RequestMapping(path = "/validar-login", method = RequestMethod.POST)
 	public ModelAndView validarLogin(@ModelAttribute("usuario") Usuario usuario, HttpServletRequest request) {
 		ModelMap model = new ModelMap();
 
-		// invoca el metodo consultarUsuario del servicio y hace un redirect a la URL
-		// /home, esto es, en lugar de enviar a una vista
+		// invoca el metodo consultarUsuario del servicio y hace un redirect a la URL /home, esto es, en lugar de enviar a una vista
 		// hace una llamada a otro action a traves de la URL correspondiente a esta
 		Usuario usuarioBuscado = servicioLogin.consultarUsuario(usuario);
 		if (usuarioBuscado != null) {
@@ -74,14 +71,28 @@ public class LoginControlador {
 		}
 		return new ModelAndView("login", model);
 	}
-	
-	@RequestMapping("/logout")
+
+	@RequestMapping(path = "/logout", method = RequestMethod.POST)
 	public ModelAndView logout(HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		session.invalidate();
+		servicioLogin.cerrarSesion();
+		
 		ModelMap model = new ModelMap();
 		Usuario usuario = new Usuario();
-		model.put("usuario",usuario);
+		model.put("usuario", usuario);
+
+		String[] msg = new String[2];
+		msg[0]=("Ha cerrado la sesión correctamente");
+		msg[1]=("success");
+		model.put("msg", msg);
+
 		return new ModelAndView("login", model);
 	}
+	
+	@RequestMapping(path = "/IniciarsesionDesarrollo", method = RequestMethod.POST)
+	public ModelAndView IniciarsesionDesarrollo() {
+		servicioLogin.IniciarsesionDesarrollo();
+		return new ModelAndView("redirect:home");
+	}
+
+	
 }

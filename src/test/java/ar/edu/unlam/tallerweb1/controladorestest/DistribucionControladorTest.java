@@ -9,6 +9,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -22,7 +25,9 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioInsumo;
 import ar.edu.unlam.tallerweb1.servicios.ServicioDistribucion;
 import ar.edu.unlam.tallerweb1.servicios.ServicioDistribucionDetalle;
 
-public class DistribucionControladorTest {
+@RunWith(PowerMockRunner.class)
+@PrepareForTest(fullyQualifiedNames = "ar.edu.unlam.tallerweb1.*")
+public class DistribucionControladorTest{
 
 	@Test
 	public void meRedireccionaALaPaginaDeDistribucion() {
@@ -51,7 +56,8 @@ public class DistribucionControladorTest {
 		ServicioDistribucionDetalle servicioDistribucionDetalle = mock(ServicioDistribucionDetalle.class);
 		DistribucionControlador distribucionControlador = new DistribucionControlador(servicioEstablecimiento,
 				servicioInsumo, servicioDistribucion, servicioDistribucionDetalle);
-
+		TipoDeStrategy str = mock(TipoDeStrategy.class);
+		
 		// simulacion de objetos
 		List<Establecimiento> establecimientos = new ArrayList<Establecimiento>();
 
@@ -87,16 +93,16 @@ public class DistribucionControladorTest {
 		when(servicioInsumo.obtenerTodos()).thenReturn(insumos);
 		when(servicioInsumo.insumosSobrantes()).thenReturn((long) 1);
 		when(servicioEstablecimiento.establecimientoMayorOcupacion()).thenReturn(establecimientos.get(0));
-		// when(strategy.distribuirInsumos(establecimientos,
-		// insumos)).thenReturn(distribucion);
+		when(str.distribuirInsumos(establecimientos, insumos)).thenReturn(distribucion);
 
 		// Ejecucion
-		ModelAndView modelAndView = distribucionControlador.calcularDistribucion(strategy);
+		ModelAndView modelAndView = distribucionControlador.calcularDistribucion(str);
 		ModelMap model = modelAndView.getModelMap();
 
 		System.out.println(modelAndView);
 
 		// Validacion
+		assertThat(model.get("MapaDistribuido")).isSameAs(distribucion);
 		assertThat(model.get("establecimiento")).isNotNull();
 		assertThat(model.get("insumosSobrantes")).isNotNull();
 		assertThat(model.get("establecMayorOcupacion")).isNotNull();

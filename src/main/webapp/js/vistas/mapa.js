@@ -1,5 +1,19 @@
 $(document).ready(function() {
 	
+	 console.log(responseObject);
+	
+	  $.ajax({
+		  type : "GET",
+		  contentType : "application/json",
+		  url: "./getString", 
+		  success: function(result) {
+			  console.log(result);
+		  },
+		  error : function(e) {
+			  console.log("ERROR: ", e);
+		  }
+	  });
+
 	$('.grilla-dataTable').DataTable({
 		pageLength : 10,
 		responsive : true,
@@ -12,80 +26,74 @@ $(document).ready(function() {
 		$('.tablez').footable();
 	});
 	
+	var establecimientos = [
+	      [-34.6583809,-58.5238157],
+	      [-35.1115177,-63.8804189],
+	      [-36.2635267,-48.8411682],
+	      [-40.0377772,-58.5294707]
+	    ];
+	
+	var imgValues = {
+			'0':'def',
+			'1':'def',
+			'2':'def',
+			'3':'def',
+	}
+	
+	
+	var zonasValues = {
+	          "AR-Z": 'Nivel1',
+	          "AR-B": 'Nivel2',
+	          "AR-M": 'Nivel3',
+	          "AR-N": 'Nivel4'
+	}
 	
 	$(function(){
-		  new jvm.Map({
+		  new jvm.Map(
+		   {
 		    container: $('#map'),
 		    map: 'ar_mill',
-		    markers: [
-		      [10, 10],
-		    ],
+		    markers: establecimientos,
 		    series: {
 		      markers: [{
 		        attribute: 'fill',
-		        scale: ['#C8EEFF', '#0071A4'],
-		        normalizeFunction: 'polynomial',
-		        values: [0, 10, 100, 1000],
-		        legend: {
-		          vertical: true
-		        }
+		        scale: ['#000000', '#000000'],
+		        normalizeFunction: 'polynomial'
 		      },{
 		        attribute: 'image',
 		        scale: {
-		          bank: '/img/icon-bank.png',
-		          factory: '/img/icon-factory.png'
+		          def: './img/hospital2.png'
 		        },
-		        values: {
-		          '4': 'bank',
-		          '5': 'factory'
-		        },
-		        legend: {
-		          horizontal: true,
-		          cssClass: 'jvectormap-legend-icons',
-		          title: 'ricardo ford'
-		        }
+		        values: imgValues
 		      }],
 		      regions: [{
 		        scale: {
-		          caos: '#ff0000',
-		          green: '#00ff00',
-		          blue: '#0000ff',
-		          yellow: '#ffff00'
+		          Nivel1: '#ffffff',
+		          Nivel2: '#ff7b5a',
+		          Nivel3: '#ff5232',
+		          Nivel4: '#ff0000'
 		        },
 		        attribute: 'fill',
-		        values: {
-		          "AR-Z": 'caos',
-		          "AR-B": 'blue',
-		          "AR-M": 'green',
-		          "AR-N": 'yellow'
-		        },
+		        values: zonasValues,
 		        legend: {
+		        	vertical:true,
 		          horizontal: true,
-		          title: 'Color'
-		        }
-		      },{
-		        scale: {
-		          redGreen: '/img/bg-red-green.png',
-		          yellowBlue: '/img/bg-yellow-blue.png'
-		        },
-		        values: {
-		          "US-TX": 'redGreen',
-		          "US-CA": 'yellowBlue'
-		        },
-		        attribute: 'fill',
-		        legend: {
-		          horizontal: true,
-		          cssClass: 'jvectormap-legend-bg',
-		          title: 'Pattern',
-		          labelRender: function(v){
-		            return {
-		              redGreen: 'low',
-		              yellowBlue: 'high'
-		            }[v];
-		          }
+		          title: 'Riesgo por zona'
 		        }
 		      }]
-		    }
+		    },
+	      onMarkerTipShow: function(event, label, index){
+	          label.html(
+	            '<b>aa</b><br/>'+
+	            '<b>Population: </b>dasda</br>'+
+	            '<b>Unemployment rate: </b>asd'
+	          );
+	        },
+        onRegionTipShow: function(event, label, code){
+        	  label.html(
+        	    '<b>'+label.html()+'</b></br>'+'<b>Unemployment rate: </b>'+data.states[val][code]+'%'
+        	  );
+        	}
 		  });
 		});
 	

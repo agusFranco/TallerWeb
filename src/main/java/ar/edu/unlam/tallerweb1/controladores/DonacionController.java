@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.inject.Inject;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -14,11 +16,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.modelo.Insumo;
 import ar.edu.unlam.tallerweb1.servicios.ServicioInsumo;
+import ar.edu.unlam.tallerweb1.servicios.ServicioLogin;
 
 @Controller
 public class DonacionController {
 	private final ServicioInsumo servicioInsumo;
 
+	@Inject
+	private ServicioLogin servicioLogin;
+	
 	@Autowired
 	public DonacionController(ServicioInsumo servicioInsumo) {
 		this.servicioInsumo = servicioInsumo;
@@ -26,12 +32,16 @@ public class DonacionController {
 
 	@RequestMapping(path = "/donacion", method = RequestMethod.GET)
 	public ModelAndView donacion() {
+		if(!servicioLogin.verificarSesionActiva()) return new ModelAndView("redirect:/login?msg=1");	
+		
 		ModelMap modelo = this.obtenerModelo();
 		return new ModelAndView("donacion", modelo);
 	}
 
 	@RequestMapping(path = "/cargar-donacion", method = RequestMethod.POST)
 	public ModelAndView enviarDonacion(@ModelAttribute("insumo") Insumo insumo, String cantidad) {
+		if(!servicioLogin.verificarSesionActiva()) return new ModelAndView("redirect:/login?msg=1");
+		
 		ArrayList<String> msg= new ArrayList<String>();
 		
 		Insumo insumoAModificar = servicioInsumo.obtenerPorId(insumo.getId());
@@ -52,6 +62,8 @@ public class DonacionController {
 
 	@RequestMapping(path = "/recibir-donacion", method = RequestMethod.POST)
 	public ModelAndView recibirDonacion(@ModelAttribute("insumo") Insumo insumo, String cantidad) {
+		if(!servicioLogin.verificarSesionActiva()) return new ModelAndView("redirect:/login?msg=1");
+		
 		ArrayList<String> msg= new ArrayList<String>();
 		
 		Insumo insumoAModificar = servicioInsumo.obtenerPorId(insumo.getId());
