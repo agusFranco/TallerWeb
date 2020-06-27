@@ -3,11 +3,13 @@ package ar.edu.unlam.tallerweb1.servicios;
 import java.util.Comparator;
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ar.edu.unlam.tallerweb1.modelo.Establecimiento;
+import ar.edu.unlam.tallerweb1.modelo.Insumo;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioEstablecimiento;
 
 @Service("servicioEstablecimiento")
@@ -29,7 +31,13 @@ public class ServicioEstablecimientoImpl implements ServicioEstablecimiento {
 
 	@Override
 	public List<Establecimiento> obtenerTodos() {
-		return servicioEstablecimientoDao.getAll();
+		List<Establecimiento> establecimientos = servicioEstablecimientoDao.getAll();
+		for (Establecimiento est : establecimientos) {
+			if (est.getZona() != null) {			
+				Hibernate.initialize(est.getZona().getProvincias());
+			}
+		}
+		return establecimientos;
 	}
 
 	@Override

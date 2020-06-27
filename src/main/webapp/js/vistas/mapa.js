@@ -1,13 +1,88 @@
 $(document).ready(function() {
 	
-	 console.log(responseObject);
-	
 	  $.ajax({
 		  type : "GET",
 		  contentType : "application/json",
-		  url: "./getString", 
-		  success: function(result) {
-			  console.log(result);
+		  url: "./getData", 
+		  success: function(data) {
+			  console.log(data);
+			  
+			  var objeto = "{";
+			  for (z = 0; z < data.length; z++) {
+				  var plength = data[z].zona.provincias.length;
+				  for (p = 0; p < plength; p++) {
+						objeto += '"' + data[z].zona.provincias[p].codigo + '":"' +  data[z].zona.puntaje + '",'; 
+					}
+			  	}
+			  objeto = objeto.replace(/,\s*$/, "");
+			  objeto += "}";
+			  console.log(objeto);
+				  
+			  console.log(JSON.parse(objeto));
+			 
+			  
+			  var arrEstablecimientos = data.map(function(h){
+				  return {name: h.nombre, latLng:  [Number(h.ubicacion.split(",")[0]), Number(h.ubicacion.split(",")[1]) ]} 
+			  });
+
+				$(function(){
+					  new jvm.Map(
+					   {
+					    container: $('#map'),
+					    map: 'ar_mill',
+					    markers: arrEstablecimientos,
+					    series: {
+					      markers: [{
+					        attribute: 'fill',
+					        scale: ['#000000', '#000000'],
+					        normalizeFunction: 'polynomial'
+					      },{
+					        attribute: 'image',
+					        scale: {
+					          def: './img/hospital2.png'
+					        },
+					        values: data.reduce(function(p, c, i){ p[i] = 'def'; return p }, {}),
+					      }],
+					      regions: [{
+					        scale: {
+					          "0":  '#ffffff',
+					          "10": '#F9EBEA',
+					          "20": '#F2D7D5',
+					          "30": '#E6B0AA',
+					          "40": '#EC7063',
+					          "50": '#CD6155',
+					          "60": '#C0392B',
+					          "70": '#A93226',
+					          "80": '#922B21',
+					          "90": '#7B241C',
+					          "100":'#641E16'
+					        },
+					        attribute: 'fill',
+					        values: JSON.parse(objeto),
+					        legend: {
+					        	vertical:true,
+					          horizontal: true,
+					          title: 'Riesgo por puntaje'
+					        }
+					      }]
+					    },
+				      onMarkerTipShow: function(event, label, index){
+				          label.html(
+				                  '<b>'+data[index].nombre+'</b><br/>'+
+				                  '<b>Capacidad: </b>'+data[index].capacidad+'</br>'+
+				                  '<b>Ocupacion: </b>'+data[index].ocupacion+'</br>'+
+				                  '<b>Responsable: </b>'+data[index].responsable.apellido + ',' +data[index].responsable.nombre +'</br>'+
+				                  '<b>Zona: </b>'+data[index].zona.nombre+'</br>'
+				                );
+				        },
+			        onRegionTipShow: function(event, label, code){
+			        	  label.html(
+			        	    '<b>'+label.html()+'</b></br>'
+			        	  );
+			        	}
+					  });
+					});
+				
 		  },
 		  error : function(e) {
 			  console.log("ERROR: ", e);
@@ -26,76 +101,14 @@ $(document).ready(function() {
 		$('.tablez').footable();
 	});
 	
-	var establecimientos = [
-	      [-34.6583809,-58.5238157],
-	      [-35.1115177,-63.8804189],
-	      [-36.2635267,-48.8411682],
-	      [-40.0377772,-58.5294707]
-	    ];
-	
-	var imgValues = {
-			'0':'def',
-			'1':'def',
-			'2':'def',
-			'3':'def',
-	}
 	
 	
 	var zonasValues = {
-	          "AR-Z": 'Nivel1',
-	          "AR-B": 'Nivel2',
-	          "AR-M": 'Nivel3',
-	          "AR-N": 'Nivel4'
+	          "AR-Z": '0',
+	          "AR-B": '10',
+	          "AR-M": '100',
+	          "AR-N": '30'
 	}
-	
-	$(function(){
-		  new jvm.Map(
-		   {
-		    container: $('#map'),
-		    map: 'ar_mill',
-		    markers: establecimientos,
-		    series: {
-		      markers: [{
-		        attribute: 'fill',
-		        scale: ['#000000', '#000000'],
-		        normalizeFunction: 'polynomial'
-		      },{
-		        attribute: 'image',
-		        scale: {
-		          def: './img/hospital2.png'
-		        },
-		        values: imgValues
-		      }],
-		      regions: [{
-		        scale: {
-		          Nivel1: '#ffffff',
-		          Nivel2: '#ff7b5a',
-		          Nivel3: '#ff5232',
-		          Nivel4: '#ff0000'
-		        },
-		        attribute: 'fill',
-		        values: zonasValues,
-		        legend: {
-		        	vertical:true,
-		          horizontal: true,
-		          title: 'Riesgo por zona'
-		        }
-		      }]
-		    },
-	      onMarkerTipShow: function(event, label, index){
-	          label.html(
-	            '<b>aa</b><br/>'+
-	            '<b>Population: </b>dasda</br>'+
-	            '<b>Unemployment rate: </b>asd'
-	          );
-	        },
-        onRegionTipShow: function(event, label, code){
-        	  label.html(
-        	    '<b>'+label.html()+'</b></br>'+'<b>Unemployment rate: </b>'+data.states[val][code]+'%'
-        	  );
-        	}
-		  });
-		});
-	
+
 });
 

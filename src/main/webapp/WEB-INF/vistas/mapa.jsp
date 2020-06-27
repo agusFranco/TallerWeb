@@ -95,4 +95,3 @@ image {
   <script src="./js/jvectormap/jquery-jvectormap.js"></script>
   <script src="./js/jvectormap/jquery-jvectormap-ar-mill.js"></script>
   <script src="${relativePath}/js/vistas/mapa.js"></script>
-<script type="text/javascript">      var responseObject= ${establecimientos};  </script> 

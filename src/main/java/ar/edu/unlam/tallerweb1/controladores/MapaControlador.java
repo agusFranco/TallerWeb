@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -53,15 +55,16 @@ public class MapaControlador {
 		return new ModelAndView("mapa", modelo);
 	}
 	
-	@RequestMapping(path = "/getData", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Establecimiento> obtenerJSONMapa() {
-		return servicioEstablecimiento.obtenerTodos();
+	@RequestMapping(path = "/getData", method = RequestMethod.GET)
+	public @ResponseBody List<Establecimiento> obtenerJSONMapa() {
+		List<Establecimiento> establecimientos = new ArrayList<Establecimiento>();
+		try {
+			establecimientos = servicioEstablecimiento.obtenerTodos();		
+		}
+		catch (Exception ex) {
+			
+		}
+		return establecimientos;
 	}
-
-	@RequestMapping(path = "/getString",method = RequestMethod.GET)
-    public String getString()
-    {
-        return JSONObject.quote("Hello World");
-    }
 	
 }
