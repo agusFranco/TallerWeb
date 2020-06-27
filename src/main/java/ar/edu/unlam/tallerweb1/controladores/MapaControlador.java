@@ -51,7 +51,6 @@ public class MapaControlador {
 	public ModelAndView irAMapa() {
 		if(!servicioLogin.verificarSesionActiva()) return new ModelAndView("redirect:/login?msg=1");
 		ModelMap modelo = new ModelMap();
-		modelo.put("establecimientos", servicioEstablecimiento.obtenerTodos());
 		return new ModelAndView("mapa", modelo);
 	}
 	
