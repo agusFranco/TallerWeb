@@ -59,7 +59,8 @@ public class MapaControlador {
 	}
 
 	@RequestMapping(path = "/getString",method = RequestMethod.GET)
-    public String getString() {
+    public String getString()
+    {
         return JSONObject.quote("Hello World");
     }
 	
