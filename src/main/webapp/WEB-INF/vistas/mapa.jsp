@@ -32,6 +32,11 @@
 	margin-bottom:-40px;
 }
 
+image {
+	max-width: 10px;
+    max-height: 10px;
+}
+
 </style>
 
 
@@ -90,3 +95,4 @@
   <script src="./js/jvectormap/jquery-jvectormap.js"></script>
   <script src="./js/jvectormap/jquery-jvectormap-ar-mill.js"></script>
   <script src="${relativePath}/js/vistas/mapa.js"></script>
+<script type="text/javascript">      var responseObject= ${establecimientos};  </script> 
