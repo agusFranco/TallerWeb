@@ -119,7 +119,7 @@
 											<td>${item.value}</td>
 											<td><form:form action="recibir-donacion" method="POST"
 													modelAtributte="insumo" commandName="insumo">
-													<input type="hidden" name="id" value="${item.key.id}">
+													<input type="hidden" name="id" value="${item.key.id} ">
 													<input type="hidden" name="cantidad" value="${item.value}">
 													<div class="input-group">
 														<button type="Submit" class="btn btn-primary">
