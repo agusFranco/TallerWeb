@@ -9,6 +9,7 @@ TRUNCATE TABLE `insumo`;
 TRUNCATE TABLE `provincia`;
 TRUNCATE TABLE `responsable`;
 TRUNCATE TABLE `tipoDistribucion`;
+TRUNCATE TABLE `estadodistribucion`;
 SET FOREIGN_KEY_CHECKS = 1;
 
 INSERT INTO `zona` (`id`,`nombre`,`puntaje`) VALUES 
@@ -17,7 +18,6 @@ INSERT INTO `zona` (`id`,`nombre`,`puntaje`) VALUES
 (3,"ZONA C", 50),
 (4,"ZONA D", 30),
 (5,"ZONA E", 10);
-
 
 INSERT INTO `provincia` (`id`,`codigo`,`nombre`) VALUES 
 (1,"AR-Z", "Santa Cruz"),
@@ -45,13 +45,11 @@ INSERT INTO `provincia` (`id`,`codigo`,`nombre`) VALUES
 (23,"AR-C", "Ciudad de Buenos Aires"),
 (24,"AR-A", "Salta");
 
-
 INSERT INTO `zona_provincia` (`Zona_id`,`provincias_id`) VALUES
 (1,2),(1,3),(1,1),(1,4),(1,5),(1,6),(1,7),(1,8),(1,9),(1,10),
 (2,11),(2,12),(2,13),(2,14),(2,15),(2,16),(2,17),
 (3,18),(3,19),(3,20),(3,21),
 (4,22),(4,23),(4,24);
-
 
 INSERT INTO `tipodistribucion` (`id`,`nombre`) VALUES
 (1,'Combinada'),
@@ -60,7 +58,14 @@ INSERT INTO `tipodistribucion` (`id`,`nombre`) VALUES
 (4,'Zona'),
 (5,'Equitativa');
 
-
+INSERT INTO `estadodistribucion` (`id`,`descripcion`) VALUES
+(1,'Pendiente de Revision'),
+(2,'Pendiente de Coordinacion'),
+(3,'Entrega Coordinada'),
+(4,'Entregado'),
+(5,'Problema en Revision'),
+(6,'Problema en Coordinacion'),
+(7,'Problema en Entrega');
 
 INSERT INTO `responsable` (`id`,`nombre`,`apellido`,`edad`,`titulo`,`zona_id`) VALUES 
 (1,"Enric","Montoya",45,"Título de Médico Especialista",1),
@@ -73,7 +78,6 @@ INSERT INTO `responsable` (`id`,`nombre`,`apellido`,`edad`,`titulo`,`zona_id`) V
 (8,"Alberto","Ibañez",56,"Jefe de Hospital",4),
 (9,"Omar","Fernandez",67,"Título de Médico Especialista",4),
 (10,"Jose","Alonso",78,"Rector de Hospital",5);
-
 
 INSERT INTO `establecimiento` (`id`,`capacidad`,`ocupacion`,`nombre`,`responsable_id`,`ubicacion`,`zona_id`) VALUES 
 (1,1000,500,"Centro Médico ALBOR",1,"-32.6583809,-58.5238157", 1),

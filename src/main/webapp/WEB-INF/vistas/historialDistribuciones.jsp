@@ -32,9 +32,28 @@
 							<tbody>
 								<c:forEach items="${distribuciones}" var="item">
 									<tr>
-										<td><span class="label label-primary">Generado</span></td>
-										<td><i class="fa fa-clock-o"></i> &nbsp;${item.fechaDistribucion}</td>
-										<td><i class="fa fa-clock-o"></i> &nbsp;${item.fechaEntrega}</td>
+										<td><c:choose>
+												<c:when test="${item.estado.getId() == 1}">
+													<span class="label label-warning">${item.estado.getDescripcion()}</span>
+												</c:when>
+												<c:when test="${item.estado.getId() == 2}">
+													<span class="label label-info">${item.estado.getDescripcion()}</span>
+												</c:when>
+												<c:when test="${item.estado.getId() == 3}">
+													<span class="label label-primary">${item.estado.getDescripcion()}</span>
+												</c:when>
+												<c:when test="${item.estado.getId() == 4}">
+													<span class="label label-success">${item.estado.getDescripcion()}</span>
+												</c:when>
+												<c:when test="${item.estado.getId() == 5}">
+													<span class="label label-danger">${item.estado.getDescripcion()}</span>
+												</c:when>
+												<c:when test="${item.estado.getId() == 6}">
+													<span class="label label-danger">${item.estado.getDescripcion()}</span>
+												</c:when>
+											</c:choose></td>
+										<td><i class="fa fa-clock-o"></i> &nbsp;${item.fechaSolicitud}</td>
+										<td><i class="fa fa-clock-o"></i> &nbsp;${item.fechaEntrega != null ? item.fechaEntrega : "Sin definir"}</td>
 										<td class="text-navy">${item.tipoDistribucion.nombre}&nbsp;<a href="${relativePath}/distribucion/${item.getId()}"><i class="fa fa-random"></i></a></td>
 									</tr>
 								</c:forEach>

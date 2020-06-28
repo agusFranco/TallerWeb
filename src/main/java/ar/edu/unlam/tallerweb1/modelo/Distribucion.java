@@ -23,7 +23,12 @@ public class Distribucion {
 	@ManyToOne
 	private TipoDistribucion tipoDistribucion;
 
-	private LocalDate fechaDistribucion;
+	@ManyToOne
+	private EstadoDistribucion estado;
+
+	private LocalDate fechaSolicitud;
+
+	private LocalDate fechaRevision;
 
 	private LocalDate fechaEntrega;
 
@@ -41,13 +46,12 @@ public class Distribucion {
 		this.id = id;
 	}
 
-	public LocalDate getFechaDistribucion() {
-		return fechaDistribucion;
+	public LocalDate getFechaSolicitud() {
+		return fechaSolicitud;
 	}
 
-	public void setFechaDistribucion(LocalDate fechaDistribucion) {
-		this.fechaDistribucion = fechaDistribucion;
-		this.fechaEntrega = fechaDistribucion.plusWeeks(2);
+	public void setFechaSolicitud(LocalDate fechaSolicitud) {
+		this.fechaSolicitud = fechaSolicitud;
 	}
 
 	public LocalDate getFechaEntrega() {
@@ -81,4 +85,21 @@ public class Distribucion {
 
 		this.detalles.add(detalle);
 	}
+
+	public EstadoDistribucion getEstado() {
+		return estado;
+	}
+
+	public void setEstado(EstadoDistribucion estado) {
+		this.estado = estado;
+	}
+
+	public LocalDate getFechaRevision() {
+		return fechaRevision;
+	}
+
+	public void setFechaRevision(LocalDate fechaRevision) {
+		this.fechaRevision = fechaRevision;
+	}
+
 }

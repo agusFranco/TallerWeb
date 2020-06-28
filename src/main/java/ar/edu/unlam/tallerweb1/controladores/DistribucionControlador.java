@@ -4,9 +4,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -19,11 +16,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import ar.edu.unlam.tallerweb1.comun.enums.TipoDeEstadoDistribucion;
 import ar.edu.unlam.tallerweb1.comun.enums.TipoDeStrategy;
 import ar.edu.unlam.tallerweb1.configuracion.StringToTipoDeStrategy;
 import ar.edu.unlam.tallerweb1.modelo.Distribucion;
 import ar.edu.unlam.tallerweb1.modelo.DistribucionDetalle;
 import ar.edu.unlam.tallerweb1.modelo.Establecimiento;
+import ar.edu.unlam.tallerweb1.modelo.EstadoDistribucion;
+import ar.edu.unlam.tallerweb1.modelo.HistorialDistribucion;
 import ar.edu.unlam.tallerweb1.modelo.Insumo;
 import ar.edu.unlam.tallerweb1.negocio.EquitativoStrategy;
 import ar.edu.unlam.tallerweb1.servicios.ServicioDistribucion;
@@ -40,10 +40,11 @@ public class DistribucionControlador {
 	private final ServicioDistribucion servicioDistribucion;
 	private final ServicioDistribucionDetalle servicioDistribucionDetalle;
 	private ServicioLogin servicioLogin;
-	
+
 	@Autowired
 	public DistribucionControlador(ServicioEstablecimiento servicioEstablecimiento, ServicioInsumo servicioInsumo,
-			ServicioDistribucion servicioDistribucion, ServicioDistribucionDetalle servicioDistribucionDetalle,ServicioLogin servicioLogin) {
+			ServicioDistribucion servicioDistribucion, ServicioDistribucionDetalle servicioDistribucionDetalle,
+			ServicioLogin servicioLogin) {
 		this.servicioEstablecimiento = servicioEstablecimiento;
 		this.servicioInsumo = servicioInsumo;
 		this.servicioDistribucion = servicioDistribucion;
@@ -56,32 +57,35 @@ public class DistribucionControlador {
 		dataBinder.registerCustomEditor(TipoDeStrategy.class, new StringToTipoDeStrategy());
 	}
 
-	
 	@RequestMapping(path = "/distribucion", method = RequestMethod.GET)
 	public ModelAndView irADistribucion() {
-		if(!servicioLogin.verificarSesionActiva()) return new ModelAndView("redirect:/login?msg=1");
+		if (!servicioLogin.verificarSesionActiva())
+			return new ModelAndView("redirect:/login?msg=1");
 		ModelMap modelo = this.obtenerModeloDeDistribucion(TipoDeStrategy.ZONA);
 		return new ModelAndView("distribucion", modelo);
 	}
 
 	@RequestMapping(path = "/distribucion", method = RequestMethod.POST)
 	public ModelAndView calcularDistribucion(@ModelAttribute("strategy") TipoDeStrategy strategy) {
-		if(!servicioLogin.verificarSesionActiva()) return new ModelAndView("redirect:/login?msg=1");
+		if (!servicioLogin.verificarSesionActiva())
+			return new ModelAndView("redirect:/login?msg=1");
 		ModelMap modelo = this.obtenerModeloDeDistribucion(strategy);
 		return new ModelAndView("distribucion", modelo);
 	}
 
 	@RequestMapping(path = "/cambiarInsumos", method = RequestMethod.POST)
 	public ModelAndView cambiarInsumos(@ModelAttribute("establecimiento") Establecimiento establecimiento) {
-		if(!servicioLogin.verificarSesionActiva()) return new ModelAndView("redirect:/login?msg=1");
-		
+		if (!servicioLogin.verificarSesionActiva())
+			return new ModelAndView("redirect:/login?msg=1");
+
 		ModelMap modelo = new ModelMap();
 
 		List<Establecimiento> establecimientos = servicioEstablecimiento.obtenerTodos();
 		List<Insumo> insumos = servicioInsumo.obtenerTodos();
-		
+
 		EquitativoStrategy strategyEquitativo = new EquitativoStrategy();
-		Map<Establecimiento, List<Insumo>> distribucionCambiada = strategyEquitativo.cambiarEstablecInsumosRestantes(establecimientos, insumos, establecimiento);
+		Map<Establecimiento, List<Insumo>> distribucionCambiada = strategyEquitativo
+				.cambiarEstablecInsumosRestantes(establecimientos, insumos, establecimiento);
 		modelo.put("MapaDistribuido", distribucionCambiada);
 
 		// Sera el que mas prioridad tiene porque es el que selecciona y envia solo el
@@ -100,8 +104,9 @@ public class DistribucionControlador {
 
 	@RequestMapping(path = "/confirmarDistribucion", method = RequestMethod.POST)
 	public RedirectView confirmarDistribucion(@ModelAttribute("strategy") TipoDeStrategy strategy) {
-		if(!servicioLogin.verificarSesionActiva()) return new RedirectView("redirect:/login?msg=1");	
-		
+		if (!servicioLogin.verificarSesionActiva())
+			return new RedirectView("redirect:/login?msg=1");
+
 		List<Establecimiento> establecimientos = servicioEstablecimiento.obtenerTodos();
 		List<Insumo> insumos = servicioInsumo.obtenerTodos();
 
@@ -118,16 +123,18 @@ public class DistribucionControlador {
 
 	@RequestMapping(path = "/historialDistribuciones", method = RequestMethod.GET)
 	public ModelAndView historialDistribuciones() {
-		if(!servicioLogin.verificarSesionActiva()) return new ModelAndView("redirect:/login?msg=1");
-		
+		if (!servicioLogin.verificarSesionActiva())
+			return new ModelAndView("redirect:/login?msg=1");
+
 		ModelMap modelo = this.obtenerModeloDeHistorial();
 		return new ModelAndView("historialDistribuciones", modelo);
 	}
 
 	@RequestMapping(path = "/distribucion/{id}", method = RequestMethod.GET)
 	public ModelAndView detalleDeDistribucion(@PathVariable("id") Long id) {
-		if(!servicioLogin.verificarSesionActiva()) return new ModelAndView("redirect:/login?msg=1");
-		
+		if (!servicioLogin.verificarSesionActiva())
+			return new ModelAndView("redirect:/login?msg=1");
+
 		ModelMap modelo = new ModelMap();
 
 		Distribucion distribucion = this.servicioDistribucion.obtenerConDetallesPorId(id);
@@ -143,7 +150,30 @@ public class DistribucionControlador {
 
 		modelo.put("detalles", detalles);
 
+		List<HistorialDistribucion> historial = this.servicioDistribucion.obtenerHistorial(id);
+
+		modelo.put("historial", historial);
+
 		return new ModelAndView("detalleDistribucion", modelo);
+	}
+
+	@RequestMapping(path = "/distribucion/{id}/estado", method = RequestMethod.POST)
+	public RedirectView actualizarEstado(@PathVariable("id") Long id, @ModelAttribute("estado") Integer estado) {
+		if (!servicioLogin.verificarSesionActiva())
+			return new RedirectView("login?msg=1");
+
+		Distribucion distribucion = this.servicioDistribucion.obtenerPorId(id);
+
+		if (distribucion == null) {
+			return new RedirectView("404");
+		}
+
+		this.servicioDistribucion.actualizarEstado(distribucion, TipoDeEstadoDistribucion.valueOf(estado));
+
+		// Si no hago esto, me lleva un querystring
+		RedirectView rv = new RedirectView("/distribucion/" + id, true);
+		rv.setExposeModelAttributes(false);
+		return rv;
 	}
 
 	private ModelMap obtenerModeloDeHistorial() {

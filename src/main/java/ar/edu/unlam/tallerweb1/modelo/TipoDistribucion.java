@@ -32,6 +32,4 @@ public class TipoDistribucion {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	
-	
 }

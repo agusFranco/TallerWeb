@@ -1,3 +1,10 @@
+var actualizarEstado = function(estado) {
+	const form = $("#estadoForm");
+	const field = $("#estadoField");
+	field.val(estado);
+	form.submit();
+};
+
 $(document).ready(function() {
 	$('.grilla-dataTable').DataTable({
 		pageLength : 10,
