@@ -2,11 +2,6 @@ package ar.edu.unlam.tallerweb1.controladores;
 
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -15,10 +10,10 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.comun.enums.TipoDeStrategy;
+import ar.edu.unlam.tallerweb1.configuracion.Authorized;
 import ar.edu.unlam.tallerweb1.configuracion.StringToTipoDeStrategy;
 import ar.edu.unlam.tallerweb1.modelo.Establecimiento;
 import ar.edu.unlam.tallerweb1.modelo.Insumo;
@@ -26,15 +21,17 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioEstablecimiento;
 import ar.edu.unlam.tallerweb1.servicios.ServicioInsumo;
 import ar.edu.unlam.tallerweb1.servicios.ServicioLogin;
 
+@Authorized
 @Controller("/")
 public class HomeControlador {
 
 	private final ServicioEstablecimiento servicioEstablecimiento;
 	private final ServicioInsumo servicioInsumo;
 	private ServicioLogin servicioLogin;
-	
+
 	@Autowired
-	public HomeControlador(ServicioEstablecimiento servicioEstablecimiento, ServicioInsumo servicioInsumo,ServicioLogin servicioLogin) {
+	public HomeControlador(ServicioEstablecimiento servicioEstablecimiento, ServicioInsumo servicioInsumo,
+			ServicioLogin servicioLogin) {
 		this.servicioEstablecimiento = servicioEstablecimiento;
 		this.servicioInsumo = servicioInsumo;
 		this.servicioLogin = servicioLogin;
@@ -44,18 +41,14 @@ public class HomeControlador {
 	public void initBinder(WebDataBinder dataBinder) {
 		dataBinder.registerCustomEditor(TipoDeStrategy.class, new StringToTipoDeStrategy());
 	}
-	
 
 	@RequestMapping(path = "/", method = RequestMethod.GET)
-	public ModelAndView inicio() {		
-		if(!servicioLogin.verificarSesionActiva()) return new ModelAndView("redirect:/login?msg=1");		
+	public ModelAndView inicio() {
 		return new ModelAndView("redirect:/home");
 	}
 
 	@RequestMapping(path = "/home", method = RequestMethod.GET)
 	public ModelAndView irAHome() {
-		if(!servicioLogin.verificarSesionActiva()) return new ModelAndView("redirect:/login?msg=1");
-		
 		// Busco el modelo default y le paso la estrategia default
 		ModelMap modelo = this.obtenerModeloDeHome(TipoDeStrategy.COMBINADO);
 		return new ModelAndView("home", modelo);
@@ -65,16 +58,13 @@ public class HomeControlador {
 	// Busca el modelo default / Ejecuta la Prioridad
 	@RequestMapping(path = "/home", method = RequestMethod.POST)
 	public ModelAndView homeCalcularPrioridad(@ModelAttribute("strategy") TipoDeStrategy strategy) {
-		if(!servicioLogin.verificarSesionActiva()) return new ModelAndView("redirect:/login?msg=1");
-		
 		// Busco el modelo default y le paso la prioridad
 		ModelMap modelo = this.obtenerModeloDeHome(strategy);
 		return new ModelAndView("home", modelo);
 	}
 
 	@RequestMapping(path = "/404", method = RequestMethod.GET)
-	public ModelAndView irA404() {
-		if(!servicioLogin.verificarSesionActiva()) return new ModelAndView("redirect:/login?msg=1");
+	public ModelAndView irA404() {	
 		return new ModelAndView("404");
 	}
 

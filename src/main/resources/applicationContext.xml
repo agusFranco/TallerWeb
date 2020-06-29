@@ -1,10 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xmlns:tx="http://www.springframework.org/schema/tx"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx" xsi:schemaLocation="http://www.springframework.org/schema/beans
 						http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
 						http://www.springframework.org/schema/context
 						http://www.springframework.org/schema/context/spring-context-4.2.xsd
@@ -18,6 +13,10 @@
 	<!--Se indica que la configuracion del MVC se hará utilizanbdo anotaciones-->
 	<mvc:annotation-driven />
 
+	<mvc:interceptors>
+		<bean class="ar.edu.unlam.tallerweb1.configuracion.SessionInterceptor" />
+	</mvc:interceptors>
+
 	<!--Se indica que el transaction manager a utilizar en la capa de servicios es el bean declarado en hibernateContext.xml-->
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
@@ -26,7 +25,4 @@
 	<context:component-scan base-package="ar.edu.unlam.tallerweb1.controladores" />
 	<context:component-scan base-package="ar.edu.unlam.tallerweb1.repositorios" />
 	<context:component-scan base-package="ar.edu.unlam.tallerweb1.servicios" />
-	
-
 </beans>
-

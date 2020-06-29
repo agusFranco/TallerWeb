@@ -18,11 +18,11 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import ar.edu.unlam.tallerweb1.comun.enums.TipoDeEstadoDistribucion;
 import ar.edu.unlam.tallerweb1.comun.enums.TipoDeStrategy;
+import ar.edu.unlam.tallerweb1.configuracion.Authorized;
 import ar.edu.unlam.tallerweb1.configuracion.StringToTipoDeStrategy;
 import ar.edu.unlam.tallerweb1.modelo.Distribucion;
 import ar.edu.unlam.tallerweb1.modelo.DistribucionDetalle;
 import ar.edu.unlam.tallerweb1.modelo.Establecimiento;
-import ar.edu.unlam.tallerweb1.modelo.EstadoDistribucion;
 import ar.edu.unlam.tallerweb1.modelo.HistorialDistribucion;
 import ar.edu.unlam.tallerweb1.modelo.Insumo;
 import ar.edu.unlam.tallerweb1.negocio.EquitativoStrategy;
@@ -32,6 +32,7 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioEstablecimiento;
 import ar.edu.unlam.tallerweb1.servicios.ServicioInsumo;
 import ar.edu.unlam.tallerweb1.servicios.ServicioLogin;
 
+@Authorized
 @Controller()
 public class DistribucionControlador {
 
@@ -58,26 +59,19 @@ public class DistribucionControlador {
 	}
 
 	@RequestMapping(path = "/distribucion", method = RequestMethod.GET)
-	public ModelAndView irADistribucion() {
-		if (!servicioLogin.verificarSesionActiva())
-			return new ModelAndView("redirect:/login?msg=1");
+	public ModelAndView irADistribucion() {		
 		ModelMap modelo = this.obtenerModeloDeDistribucion(TipoDeStrategy.ZONA);
 		return new ModelAndView("distribucion", modelo);
 	}
 
 	@RequestMapping(path = "/distribucion", method = RequestMethod.POST)
-	public ModelAndView calcularDistribucion(@ModelAttribute("strategy") TipoDeStrategy strategy) {
-		if (!servicioLogin.verificarSesionActiva())
-			return new ModelAndView("redirect:/login?msg=1");
+	public ModelAndView calcularDistribucion(@ModelAttribute("strategy") TipoDeStrategy strategy) {	
 		ModelMap modelo = this.obtenerModeloDeDistribucion(strategy);
 		return new ModelAndView("distribucion", modelo);
 	}
 
 	@RequestMapping(path = "/cambiarInsumos", method = RequestMethod.POST)
-	public ModelAndView cambiarInsumos(@ModelAttribute("establecimiento") Establecimiento establecimiento) {
-		if (!servicioLogin.verificarSesionActiva())
-			return new ModelAndView("redirect:/login?msg=1");
-
+	public ModelAndView cambiarInsumos(@ModelAttribute("establecimiento") Establecimiento establecimiento) {	
 		ModelMap modelo = new ModelMap();
 
 		List<Establecimiento> establecimientos = servicioEstablecimiento.obtenerTodos();
@@ -104,9 +98,6 @@ public class DistribucionControlador {
 
 	@RequestMapping(path = "/confirmarDistribucion", method = RequestMethod.POST)
 	public RedirectView confirmarDistribucion(@ModelAttribute("strategy") TipoDeStrategy strategy) {
-		if (!servicioLogin.verificarSesionActiva())
-			return new RedirectView("redirect:/login?msg=1");
-
 		List<Establecimiento> establecimientos = servicioEstablecimiento.obtenerTodos();
 		List<Insumo> insumos = servicioInsumo.obtenerTodos();
 
@@ -122,19 +113,13 @@ public class DistribucionControlador {
 	}
 
 	@RequestMapping(path = "/historialDistribuciones", method = RequestMethod.GET)
-	public ModelAndView historialDistribuciones() {
-		if (!servicioLogin.verificarSesionActiva())
-			return new ModelAndView("redirect:/login?msg=1");
-
+	public ModelAndView historialDistribuciones() {		
 		ModelMap modelo = this.obtenerModeloDeHistorial();
 		return new ModelAndView("historialDistribuciones", modelo);
 	}
 
 	@RequestMapping(path = "/distribucion/{id}", method = RequestMethod.GET)
-	public ModelAndView detalleDeDistribucion(@PathVariable("id") Long id) {
-		if (!servicioLogin.verificarSesionActiva())
-			return new ModelAndView("redirect:/login?msg=1");
-
+	public ModelAndView detalleDeDistribucion(@PathVariable("id") Long id) {	
 		ModelMap modelo = new ModelMap();
 
 		Distribucion distribucion = this.servicioDistribucion.obtenerConDetallesPorId(id);
@@ -159,9 +144,6 @@ public class DistribucionControlador {
 
 	@RequestMapping(path = "/distribucion/{id}/estado", method = RequestMethod.POST)
 	public RedirectView actualizarEstado(@PathVariable("id") Long id, @ModelAttribute("estado") Integer estado) {
-		if (!servicioLogin.verificarSesionActiva())
-			return new RedirectView("login?msg=1");
-
 		Distribucion distribucion = this.servicioDistribucion.obtenerPorId(id);
 
 		if (distribucion == null) {
