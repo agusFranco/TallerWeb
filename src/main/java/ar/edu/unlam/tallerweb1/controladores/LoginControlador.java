@@ -38,14 +38,8 @@ public class LoginControlador {
 	public ModelAndView irALogin(@RequestParam(value = "msg", required = false) String msg) {
 
 		ModelMap modelo = new ModelMap();
-		// Se agrega al modelo un objeto del tipo Usuario con key 'usuario' para que el
-		// mismo sea asociado
-		// al model attribute del form que esta definido en la vista 'login'
 		Usuario usuario = new Usuario();
 		modelo.put("usuario", usuario);
-		// Se va a la vista login (el nombre completo de la lista se resuelve utilizando
-		// el view resolver definido en el archivo spring-servlet.xml) y se envian los
-		// datos a la misma dentro del modelo
 
 		modelo.put("msg", servicioLogin.intentoIngresarSinPermisos(msg));
 		return new ModelAndView("login", modelo);
@@ -60,9 +54,6 @@ public class LoginControlador {
 	public ModelAndView validarLogin(@ModelAttribute("usuario") Usuario usuario, HttpServletRequest request) {
 		ModelMap model = new ModelMap();
 
-		// invoca el metodo consultarUsuario del servicio y hace un redirect a la URL
-		// /home, esto es, en lugar de enviar a una vista
-		// hace una llamada a otro action a traves de la URL correspondiente a esta
 		Usuario usuarioBuscado = servicioLogin.consultarUsuario(usuario);
 		if (usuarioBuscado != null) {
 			request.getSession(true);

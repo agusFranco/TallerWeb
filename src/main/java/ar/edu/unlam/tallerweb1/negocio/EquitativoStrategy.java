@@ -64,7 +64,7 @@ public class EquitativoStrategy implements Strategy {
 					insumoAsignado.setCantidad(InsumoASumar+InsumoRestante);	
 				}
 				
-				// Si la distribucion equitativa tiene prioridad sobre uno de los establecimientos.
+				// Si la distribucion equitativa tiene prioridad sobre uno de los establecimientos es porque le seteo una prioridad de 2F
 				if(itemEstablec.getPrioridad() == 2F) {
 					Integer InsumoASumar = insumoAsignado.getCantidad();
 					int InsumoRestante = itemInsumo.getCantidad() % cantidadEstablec;		
